@@ -1,54 +1,226 @@
 <!DOCTYPE html>
-<html lang="es"> 
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio Contable 2026</title>
-    <link rel="stylesheet" href="style.css">
+    <title>📚 Mi Hub de Estudio Contable 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background: linear-gradient(135deg, #1a3c6e, #2a5f9e);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        header h1 { font-size: 2.2em; margin-bottom: 10px; }
+        header p { font-size: 1.1em; opacity: 0.9; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            border-left: 5px solid #1a3c6e;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 {
+            color: #1a3c6e;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        .card ul { list-style: none; padding: 0; }
+        .card ul li {
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95em;
+        }
+        .card ul li:last-child { border-bottom: none; }
+        .card ul li a {
+            color: #2a5f9e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .card ul li a:hover { text-decoration: underline; }
+        .badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            font-size: 0.7em;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-left: 8px;
+        }
+        .badge.urgente { background: #e67e22; }
+        .badge.verde { background: #27ae60; }
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            padding: 20px 0;
+            border-top: 1px solid #ddd;
+        }
+        .progreso {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .barra {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .barra-fill {
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            height: 100%;
+            width: 30%;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-size: 0.8em;
+            line-height: 20px;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.5em; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📊 Portafolio Contable - 2026</h1>
-        <p><span class="tag">Actualizado</span> <span class="tag">Colombia</span></p>
+<div class="container">
 
-        <h2>📌 Tarifas Clave 2026</h2>
-        <table>
-            <tr><th>Concepto</th><th>Valor / Tarifa</th></tr>
-            <tr><td>UVT (Unidad de Valor Tributario)</td><td><strong>$52.374</strong></td></tr>
-            <tr><td>Impuesto de Renta - Personas Jurídicas</td><td>35%</td></tr>
-            <tr><td>IVA General</td><td>19%</td></tr>
-            <tr><td>Retención en la fuente - Compras</td><td>2.5%</td></tr>
-            <tr><td>Retención en la fuente - Honorarios</td><td>11%</td></tr>
-            <tr><td>ICA - Bucaramanga (Industria)</td><td>~2.5‰ (0.25%)</td></tr>
-        </table>
+    <header>
+        <h1>📚 Mi Hub de Estudio Contable</h1>
+        <p>Filtros Partmo S.A.S. | Bucaramanga 2026</p>
+        <p style="font-size:0.9em; margin-top:8px;">🗓️ Días de estudio: <strong>10</strong> | 🎯 Meta: Ser experta en práctica contable</p>
+    </header>
 
-        <h2>📝 Asiento Contable: Compra de Materia Prima</h2>
-        <p><strong>Transacción:</strong> Compra de materia prima por $10.000.000 + IVA 19%</p>
-        <table>
-            <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-            <tr><td>1435</td><td>Mercancías no fabricadas</td><td>$10.000.000</td><td></td></tr>
-            <tr><td>2408</td><td>IVA descontable (19%)</td><td>$1.900.000</td><td></td></tr>
-            <tr><td>1110</td><td>Banco - Cuenta corriente</td><td></td><td>$11.900.000</td></tr>
-        </table>
+    <!-- Barra de progreso -->
+    <div class="progreso">
+        <h3>📊 Mi Progreso de Estudio</h3>
+        <div class="barra">
+            <div class="barra-fill" style="width: 30%;">30%</div>
+        </div>
+        <p style="margin-top:8px; font-size:0.9em; color:#555;">Día 3 de 10 | Faltan: 7 días</p>
+    </div>
 
-        <div class="nota">
-            <strong>📘 Nota contable:</strong> El IVA descontable se lleva a la cuenta 2408 y se compensa con el IVA generado en ventas.
+    <!-- Tarjetas principales -->
+    <div class="grid">
+
+        <div class="card">
+            <h3>📖 Temas de Estudio</h3>
+            <ul>
+                <li>✅ PUC y cuentas clave</li>
+                <li>✅ Tarifas 2026 (UVT, Renta, IVA)</li>
+                <li>🔄 Retención en la Fuente</li>
+                <li>⬜ Costos de producción</li>
+                <li>⬜ Nómina y parafiscales</li>
+                <li>⬜ Conciliaciones bancarias</li>
+            </ul>
         </div>
 
-        <h2>📆 Calendario Tributario 2026 (Enero - Marzo)</h2>
-        <table>
-            <tr><th>Fecha</th><th>Obligación</th></tr>
-            <tr><td>12 de enero</td><td>IVA bimestral (nov-dic 2025)</td></tr>
-            <tr><td>10 de febrero</td><td>Retención en la fuente - enero</td></tr>
-            <tr><td>12 de marzo</td><td>Renta - primer pago anticipado (personas jurídicas)</td></tr>
-        </table>
+        <div class="card">
+            <h3>📋 Guías Rápidas</h3>
+            <ul>
+                <li>📄 <a href="#">Tarifas Impuestos 2026</a> <span class="badge">Nuevo</span></li>
+                <li>📄 <a href="#">Asientos Contables Básicos</a></li>
+                <li>📄 <a href="#">Calendario Tributario</a></li>
+                <li>📄 <a href="#">PUC para manufactureras</a></li>
+            </ul>
+        </div>
 
-        <h2>⚙️ Simulador de Retención (básico)</h2>
-        <p>Próximamente: calcularás retención en la fuente con unos cuantos clics.</p>
+        <div class="card">
+            <h3>🧪 Ejercicios Prácticos</h3>
+            <ul>
+                <li>📝 Liquidar retención compras</li>
+                <li>📝 Declaración de IVA</li>
+                <li>📝 Cálculo de ICA</li>
+                <li>📝 Asiento de nómina</li>
+                <li>📝 Depreciación de activos</li>
+            </ul>
+        </div>
 
-        <div class="footer">
-            Creado para prácticas contables · 2026 · <a href="#">Subir al inicio</a>
+        <div class="card">
+            <h3>🔗 Enlaces Útiles</h3>
+            <ul>
+                <li>🔗 <a href="https://www.dian.gov.co" target="_blank">DIAN</a></li>
+                <li>🔗 <a href="https://www.ccbucaramanga.gov.co" target="_blank">Cámara de Comercio B/manga</a></li>
+                <li>🔗 <a href="#" target="_blank">Simulador de Retenciones</a> <span class="badge urgente">Pronto</span></li>
+                <li>🔗 <a href="#" target="_blank">Calendario DIAN 2026</a></li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>📅 Mi Horario de Estudio</h3>
+            <ul>
+                <li>🕗 8:00 - 9:30 → Teoría (PUC, NIIF)</li>
+                <li>🕙 10:00 - 12:00 → Ejercicios prácticos</li>
+                <li>🕒 2:00 - 4:00 → Impuestos y retenciones</li>
+                <li>🕓 4:30 - 6:00 → Simulaciones + revisión</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>📝 Notas Rápidas</h3>
+            <ul>
+                <li>💡 <strong>UVT 2026:</strong> $52.374</li>
+                <li>💡 <strong>Renta:</strong> 35%</li>
+                <li>💡 <strong>IVA:</strong> 19%</li>
+                <li>💡 <strong>Ret. Compras:</strong> 2.5% (desde jul)</li>
+                <li>💡 <strong>NIT Partmo:</strong> 900.994.125-1</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Sección extra: Logros -->
+    <div style="display:flex; flex-wrap:wrap; gap:15px; background:white; padding:20px; border-radius:12px; margin-bottom:30px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+        <div style="flex:1; min-width:150px; text-align:center;">
+            <div style="font-size:2em;">📘</div>
+            <div style="font-weight:bold;">3</div>
+            <div style="color:#888; font-size:0.9em;">Temas aprendidos</div>
+        </div>
+        <div style="flex:1; min-width:150px; text-align:center;">
+            <div style="font-size:2em;">✅</div>
+            <div style="font-weight:bold;">12</div>
+            <div style="color:#888; font-size:0.9em;">Ejercicios completados</div>
+        </div>
+        <div style="flex:1; min-width:150px; text-align:center;">
+            <div style="font-size:2em;">🎯</div>
+            <div style="font-weight:bold;">80%</div>
+            <div style="color:#888; font-size:0.9em;">Meta de preparación</div>
+        </div>
+        <div style="flex:1; min-width:150px; text-align:center;">
+            <div style="font-size:2em;">⏳</div>
+            <div style="font-weight:bold;">7</div>
+            <div style="color:#888; font-size:0.9em;">Días restantes</div>
         </div>
     </div>
+
+    <div class="footer">
+        🌟 Creado con dedicación para Filtros Partmo S.A.S. | Actualizado: Julio 2026
+    </div>
+
+</div>
 </body>
 </html>
