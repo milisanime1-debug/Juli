@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧮 Simuladores Contables - Mi Hub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 25px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    /* Tarjetas de simuladores */
+    .sim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .sim-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      border-top: 5px solid #1a3c6e;
+      transition: transform 0.2s;
+    }
+    .sim-card:hover { transform: translateY(-3px); }
+    .sim-card h3 {
+      color: #1a3c6e;
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sim-card .desc {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      border-left: 3px solid #ddd;
+      padding-left: 12px;
+    }
+    .sim-card label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: 10px;
+      margin-bottom: 3px;
+    }
+    .sim-card input, .sim-card select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border 0.2s;
+      background: #fafbfc;
+    }
+    .sim-card input:focus, .sim-card select:focus {
+      border-color: #1a3c6e;
+      outline: none;
+      background: white;
+    }
+    .sim-card .btn {
+      margin-top: 14px;
+      background: #1a3c6e;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      width: 100%;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .sim-card .btn:hover { background: #0f2a4a; }
+    .sim-card .btn.secondary { background: #28a745; }
+    .sim-card .btn.secondary:hover { background: #1e7e34; }
+
+    .result-box {
+      margin-top: 14px;
+      background: #eef4ff;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border-left: 5px solid #1a3c6e;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .result-box strong { color: #1a3c6e; }
+    .result-box .highlight { color: #c0392b; font-weight: 700; }
+
+    .footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+    }
+    .footer a { color: #1a3c6e; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      .sim-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 10px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="../index.html" class="back">⬅ Volver al inicio</a>
+
+  <h1>🧮 Simuladores Contables</h1>
+  <div class="subtitle">
+    Herramientas interactivas para practicar liquidaciones • <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- GRID DE SIMULADORES                                            -->
+  <!-- ============================================================ -->
+  <div class="sim-grid">
+
+    <!-- ========================================================== -->
+    <!-- 1. SIMULADOR: RETENCIÓN EN LA FUENTE (COMPRAS)              -->
+    <!-- ========================================================== -->
+    <div class="sim-card">
+      <h3>🛒 Retención en Compras</h3>
+      <div class="desc">
+        Calcula la retención que debes aplicar al comprar bienes o servicios.
+        Tarifa: <strong>2.5%</strong> (vigente desde julio 2026).
+      </div>
+
+      <label for="valorCompra">Valor de la compra (sin IVA):</label>
+      <input type="number" id="valorCompra" value="1000000" step="1000">
+
+      <label for="baseCompra">Base gravable:</label>
+      <select id="baseCompra">
+        <option value="si">Sí (incluye IVA en la base)</option>
+        <option value="no" selected>No (solo valor del bien/servicio)</option>
+      </select>
+
+      <button class="btn" onclick="calcularRetencionCompras()">Calcular Retención</button>
+      <button class="btn secondary" onclick="limpiarRetencionCompras()">Limpiar</button>
+
+      <div id="resultadoCompras" class="result-box" style="display:none;">
+        <!-- Se llena con JavaScript -->
+      </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- 2. SIMULADOR: RETENCIÓN HONORARIOS (persona jurídica)       -->
+    <!-- ========================================================== -->
+    <div class="sim-card">
+      <h3>🧑‍💼 Retención Honorarios</h3>
+      <div class="desc">
+        Calcula la retención por servicios profesionales a <strong>persona jurídica</strong>.
+        Tarifa: <strong>11%</strong> (vigente desde julio 2026).
+      </div>
+
+      <label for="valorHonorarios">Valor del honorario (sin IVA):</label>
+      <input type="number" id="valorHonorarios" value="500000" step="10000">
+
+      <button class="btn" onclick="calcularRetencionHonorarios()">Calcular Retención</button>
+      <button class="btn secondary" onclick="limpiarRetencionHonorarios()">Limpiar</button>
+
+      <div id="resultadoHonorarios" class="result-box" style="display:none;">
+        <!-- Se llena con JavaScript -->
+      </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- 3. SIMULADOR: IVA (19%)                                     -->
+    <!-- ========================================================== -->
+    <div class="sim-card">
+      <h3>🧾 IVA - Impuesto al Valor Agregado</h3>
+      <div class="desc">
+        Calcula el IVA al <strong>19%</strong> (tarifa general 2026).
+        Útil para facturar ventas o saber el IVA descontable en compras.
+      </div>
+
+      <label for="valorIVA">Valor base (sin IVA):</label>
+      <input type="number" id="valorIVA" value="2000000" step="10000">
+
+      <button class="btn" onclick="calcularIVA()">Calcular IVA</button>
+      <button class="btn secondary" onclick="limpiarIVA()">Limpiar</button>
+
+      <div id="resultadoIVA" class="result-box" style="display:none;">
+        <!-- Se llena con JavaScript -->
+      </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- 4. SIMULADOR: ICA - Bucaramanga (Industria)                 -->
+    <!-- ========================================================== -->
+    <div class="sim-card">
+      <h3>🏛️ ICA - Bucaramanga</h3>
+      <div class="desc">
+        Calcula el Impuesto de Industria y Comercio para <strong>actividad industrial</strong>
+        en Bucaramanga. Tarifa: <strong>2.5 por mil (2.5‰)</strong>.
+      </div>
+
+      <label for="ingresosICA">Ingresos brutos del período:</label>
+      <input type="number" id="ingresosICA" value="10000000" step="100000">
+
+      <label for="tarifaICA">Tarifa aplicable (‰):</label>
+      <input type="number" id="tarifaICA" value="2.5" step="0.1" min="0.1">
+
+      <button class="btn" onclick="calcularICA()">Calcular ICA</button>
+      <button class="btn secondary" onclick="limpiarICA()">Limpiar</button>
+
+      <div id="resultadoICA" class="result-box" style="display:none;">
+        <!-- Se llena con JavaScript -->
+      </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- 5. SIMULADOR: DEPRECIACIÓN LÍNEA RECTA                      -->
+    <!-- ========================================================== -->
+    <div class="sim-card">
+      <h3>⚙️ Depreciación Línea Recta</h3>
+      <div class="desc">
+        Calcula la depreciación anual y mensual de un activo fijo.
+        Método más usado en empresas manufactureras como Partmo.
+      </div>
+
+      <label for="valorActivo">Valor del activo ($):</label>
+      <input type="number" id="valorActivo" value="50000000" step="1000000">
+
+      <label for="valorResidual">Valor residual ($):</label>
+      <input type="number" id="valorResidual" value="5000000" step="100000">
+
+      <label for="vidaUtil">Vida útil (años):</label>
+      <input type="number" id="vidaUtil" value="10" step="1" min="1">
+
+      <button class="btn" onclick="calcularDepreciacion()">Calcular Depreciación</button>
+      <button class="btn secondary" onclick="limpiarDepreciacion()">Limpiar</button>
+
+      <div id="resultadoDepreciacion" class="result-box" style="display:none;">
+        <!-- Se llena con JavaScript -->
+      </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- 6. SIMULADOR: RENTA PERSONAS JURÍDICAS (35%)               -->
+    <!-- ========================================================== -->
+    <div class="sim-card">
+      <h3>📊 Renta Personas Jurídicas</h3>
+      <div class="desc">
+        Calcula el impuesto de renta a la tarifa general del <strong>35%</strong>
+        para el año gravable 2026.
+      </div>
+
+      <label for="utilidadRenta">Utilidad fiscal (ingresos - costos - deducciones):</label>
+      <input type="number" id="utilidadRenta" value="80000000" step="1000000">
+
+      <button class="btn" onclick="calcularRenta()">Calcular Renta</button>
+      <button class="btn secondary" onclick="limpiarRenta()">Limpiar</button>
+
+      <div id="resultadoRenta" class="result-box" style="display:none;">
+        <!-- Se llena con JavaScript -->
+      </div>
+    </div>
+
+  </div> <!-- fin sim-grid -->
+
+  <!-- ============================================================ -->
+  <!-- 7. SIMULADOR: LIQUIDACIÓN DE NÓMINA (integrado)              -->
+  <!-- ============================================================ -->
+  <div style="margin-top: 28px;">
+    <div class="sim-card" style="max-width: 700px; margin: 0 auto;">
+      <h3>👥 Liquidación de Nómina (básica)</h3>
+      <div class="desc">
+        Calcula el salario neto y los aportes a seguridad social de un empleado.
+        <strong>Valores UVT 2026: $52.374</strong>.
+      </div>
+
+      <label for="salarioBase">Salario base mensual ($):</label>
+      <input type="number" id="salarioBase" value="2500000" step="10000">
+
+      <label for="diasTrabajados">Días trabajados (en el mes):</label>
+      <input type="number" id="diasTrabajados" value="30" step="1" min="1" max="30">
+
+      <label for="auxilioTransporte">¿Aplica auxilio de transporte? (para salarios ≤ 2 SMMLV)</label>
+      <select id="auxilioTransporte">
+        <option value="si">Sí (aplica)</option>
+        <option value="no" selected>No (no aplica)</option>
+      </select>
+
+      <button class="btn" onclick="calcularNomina()">Calcular Nómina</button>
+      <button class="btn secondary" onclick="limpiarNomina()">Limpiar</button>
+
+      <div id="resultadoNomina" class="result-box" style="display:none;">
+        <!-- Se llena con JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER                                                        -->
+  <!-- ============================================================ -->
+  <div class="footer">
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander<br>
+    <a href="https://github.com/tu-usuario/tu-usuario.github.io" target="_blank">Ver código en GitHub</a>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT - TODOS LOS SIMULADORES                            -->
+<!-- ============================================================ -->
+<script>
+  // --------------------------------------------------------------
+  // 1. RETENCIÓN EN COMPRAS (2.5%)
+  // --------------------------------------------------------------
+  function calcularRetencionCompras() {
+    let valor = parseFloat(document.getElementById('valorCompra').value) || 0;
+    let baseIncluyeIVA = document.getElementById('baseCompra').value === 'si';
+    let base = valor;
+    let iva = 0;
+    if (baseIncluyeIVA) {
+      iva = valor * 0.19;
+      base = valor - iva;
+    }
+    let retencion = base * 0.025;
+    let totalPagar = valor + (baseIncluyeIVA ? 0 : valor * 0.19);
+
+    let resultado = document.getElementById('resultadoCompras');
+    resultado.style.display = 'block';
+    resultado.innerHTML = `
+      <strong>📋 Resumen:</strong><br>
+      Valor base: <strong>$${base.toLocaleString()}</strong><br>
+      IVA (19%): <strong>$${iva.toLocaleString()}</strong><br>
+      <strong>Retención (2.5%): <span class="highlight">$${retencion.toLocaleString()}</span></strong><br>
+      Total a pagar: $${totalPagar.toLocaleString()}
+    `;
+  }
+
+  function limpiarRetencionCompras() {
+    document.getElementById('valorCompra').value = '1000000';
+    document.getElementById('baseCompra').value = 'no';
+    document.getElementById('resultadoCompras').style.display = 'none';
+  }
+
+  // --------------------------------------------------------------
+  // 2. RETENCIÓN HONORARIOS (11%)
+  // --------------------------------------------------------------
+  function calcularRetencionHonorarios() {
+    let valor = parseFloat(document.getElementById('valorHonorarios').value) || 0;
+    let retencion = valor * 0.11;
+    let iva = valor * 0.19;
+    let total = valor + iva;
+
+    let resultado = document.getElementById('resultadoHonorarios');
+    resultado.style.display = 'block';
+    resultado.innerHTML = `
+      <strong>📋 Resumen:</strong><br>
+      Honorario base: <strong>$${valor.toLocaleString()}</strong><br>
+      IVA (19%): $${iva.toLocaleString()}<br>
+      <strong>Retención (11%): <span class="highlight">$${retencion.toLocaleString()}</span></strong><br>
+      Total con IVA: $${total.toLocaleString()}
+    `;
+  }
+
+  function limpiarRetencionHonorarios() {
+    document.getElementById('valorHonorarios').value = '500000';
+    document.getElementById('resultadoHonorarios').style.display = 'none';
+  }
+
+  // --------------------------------------------------------------
+  // 3. IVA (19%)
+  // --------------------------------------------------------------
+  function calcularIVA() {
+    let valor = parseFloat(document.getElementById('valorIVA').value) || 0;
+    let iva = valor * 0.19;
+    let total = valor + iva;
+
+    let resultado = document.getElementById('resultadoIVA');
+    resultado.style.display = 'block';
+    resultado.innerHTML = `
+      <strong>📋 Resumen:</strong><br>
+      Base: <strong>$${valor.toLocaleString()}</strong><br>
+      <strong>IVA (19%): <span class="highlight">$${iva.toLocaleString()}</span></strong><br>
+      Total con IVA: $${total.toLocaleString()}
+    `;
+  }
+
+  function limpiarIVA() {
+    document.getElementById('valorIVA').value = '2000000';
+    document.getElementById('resultadoIVA').style.display = 'none';
+  }
+
+  // --------------------------------------------------------------
+  // 4. ICA - BUCARAMANGA (2.5‰)
+  // --------------------------------------------------------------
+  function calcularICA() {
+    let ingresos = parseFloat(document.getElementById('ingresosICA').value) || 0;
+    let tarifa = parseFloat(document.getElementById('tarifaICA').value) || 0;
+    let ica = (ingresos * tarifa) / 1000;
+
+    let resultado = document.getElementById('resultadoICA');
+    resultado.style.display = 'block';
+    resultado.innerHTML = `
+      <strong>📋 Resumen:</strong><br>
+      Ingresos: <strong>$${ingresos.toLocaleString()}</strong><br>
+      Tarifa: <strong>${tarifa}‰</strong><br>
+      <strong>ICA a pagar: <span class="highlight">$${ica.toLocaleString()}</span></strong><br>
+      <small>📌 Para Bucaramanga, industria = 2.5‰</small>
+    `;
+  }
+
+  function limpiarICA() {
+    document.getElementById('ingresosICA').value = '10000000';
+    document.getElementById('tarifaICA').value = '2.5';
+    document.getElementById('resultadoICA').style.display = 'none';
+  }
+
+  // --------------------------------------------------------------
+  // 5. DEPRECIACIÓN LÍNEA RECTA
+  // --------------------------------------------------------------
+  function calcularDepreciacion() {
+    let valor = parseFloat(document.getElementById('valorActivo').value) || 0;
+    let residual = parseFloat(document.getElementById('valorResidual').value) || 0;
+    let vida = parseFloat(document.getElementById('vidaUtil').value) || 1;
+
+    let depreciable = valor - residual;
+    let anual = depreciable / vida;
+    let mensual = anual / 12;
+
+    let resultado = document.getElementById('resultadoDepreciacion');
+    resultado.style.display = 'block';
+    resultado.innerHTML = `
+      <strong>📋 Resumen:</strong><br>
+      Valor del activo: <strong>$${valor.toLocaleString()}</strong><br>
+      Valor residual: $${residual.toLocaleString()}<br>
+      Monto depreciable: $${depreciable.toLocaleString()}<br>
+      Vida útil: ${vida} años<br>
+      <strong>Depreciación anual: <span class="highlight">$${anual.toLocaleString()}</span></strong><br>
+      <strong>Depreciación mensual: <span class="highlight">$${mensual.toLocaleString()}</span></strong>
+    `;
+  }
+
+  function limpiarDepreciacion() {
+    document.getElementById('valorActivo').value = '50000000';
+    document.getElementById('valorResidual').value = '5000000';
+    document.getElementById('vidaUtil').value = '10';
+    document.getElementById('resultadoDepreciacion').style.display = 'none';
+  }
+
+  // --------------------------------------------------------------
+  // 6. RENTA PERSONAS JURÍDICAS (35%)
+  // --------------------------------------------------------------
+  function calcularRenta() {
+    let utilidad = parseFloat(document.getElementById('utilidadRenta').value) || 0;
+    let impuesto = utilidad * 0.35;
+
+    let resultado = document.getElementById('resultadoRenta');
+    resultado.style.display = 'block';
+    resultado.innerHTML = `
+      <strong>📋 Resumen:</strong><br>
+      Utilidad fiscal: <strong>$${utilidad.toLocaleString()}</strong><br>
+      Tarifa: <strong>35%</strong><br>
+      <strong>Impuesto de renta a pagar: <span class="highlight">$${impuesto.toLocaleString()}</span></strong>
+    `;
+  }
+
+  function limpiarRenta() {
+    document.getElementById('utilidadRenta').value = '80000000';
+    document.getElementById('resultadoRenta').style.display = 'none';
+  }
+
+  // --------------------------------------------------------------
+  // 7. LIQUIDACIÓN DE NÓMINA
+  // --------------------------------------------------------------
+  function calcularNomina() {
+    let salarioBase = parseFloat(document.getElementById('salarioBase').value) || 0;
+    let dias = parseInt(document.getElementById('diasTrabajados').value) || 30;
+    let auxilio = document.getElementById('auxilioTransporte').value === 'si';
+
+    // Salario proporcional
+    let salarioProporcional = (salarioBase / 30) * dias;
+
+    // Auxilio de transporte (2026: $162.000 aprox, pero lo calculamos proporcional)
+    let auxilioMensual = 162000; // valor aproximado 2026
+    let auxilioProporcional = 0;
+    if (auxilio && salarioBase <= (2 * 1300000)) { // 2 SMMLV aprox
+      auxilioProporcional = (auxilioMensual / 30) * dias;
+    }
+
+    // Deducciones (seguridad social: 8% salud + 12% pensión = 
