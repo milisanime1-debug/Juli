@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introducción a la Contabilidad - Mi Hub Contable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .back {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    .back-index {
+      background: #6c757d;
+    }
+    .back-index:hover { background: #5a6268; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.green { border-left-color: #28a745; background: #e8f5e9; }
+    .highlight.green strong { color: #28a745; }
+    .highlight.orange { border-left-color: #fd7e14; background: #fff3e0; }
+    .highlight.orange strong { color: #fd7e14; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .checklist {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 18px 24px;
+      margin: 16px 0;
+    }
+    .checklist li { list-style: none; padding: 4px 0; }
+    .checklist li::before {
+      content: "☐ ";
+      font-size: 1.2rem;
+      color: #1a3c6e;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid #e8ecf1;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .nav-btn.prev {
+      background: #e8ecf1;
+      color: #333;
+    }
+    .nav-btn.prev:hover { background: #d5d9e0; }
+    .nav-btn.next {
+      background: #1a3c6e;
+      color: white;
+    }
+    .nav-btn.next:hover { background: #0f2a4a; }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      .top-bar { flex-direction: column; align-items: stretch; }
+      .nav-buttons { flex-direction: column; }
+      .nav-btn { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Barra superior con botones -->
+  <div class="top-bar">
+    <div>
+      <a href="index.html" class="back">📚 Volver al plan</a>
+      <a href="../../index.html" class="back back-index">🏠 Inicio</a>
+    </div>
+    <span style="font-size:0.85rem; color:#888;">Tema 1 de 18</span>
+  </div>
+
+  <h1>📖 1. Introducción a la Contabilidad</h1>
+  <div class="subtitle">
+    Fundamentos, objetivos y aplicación en <strong>Filtros Partmo S.A.S.</strong>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. QUÉ ES LA CONTABILIDAD                   -->
+  <!-- ========================================== -->
+  <h2>¿Qué es la Contabilidad?</h2>
+  <p>
+    La contabilidad es el <strong>sistema de información</strong> que permite identificar, medir, registrar y comunicar
+    la situación financiera y los resultados de una empresa. Su propósito es tomar decisiones basadas en datos.
+  </p>
+  <div class="highlight">
+    <strong>📌 En pocas palabras:</strong> Es el "idioma de los negocios". Traduce las operaciones de la empresa a números
+    que todos entienden (dueños, inversionistas, bancos, DIAN, etc.).
+  </div>
+
+  <h3>📌 Objetivos principales</h3>
+  <ul>
+    <li><strong>Proveer información financiera</strong> útil para la toma de decisiones.</li>
+    <li><strong>Controlar</strong> los recursos de la empresa (activos, pasivos, patrimonio).</li>
+    <li><strong>Cumplir con obligaciones</strong> fiscales y legales (DIAN, Cámara de Comercio).</li>
+    <li><strong>Evaluar el desempeño</strong> de la empresa (utilidad, rentabilidad).</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 2. USUARIOS DE LA INFORMACIÓN              -->
+  <!-- ========================================== -->
+  <h2>¿Quiénes usan la información contable?</h2>
+  <table>
+    <tr><th>Usuario</th><th>¿Qué necesita saber?</th></tr>
+    <tr><td><strong>Dueños / Accionistas</strong></td><td>Si su inversión está generando utilidad.</td></tr>
+    <tr><td><strong>Gerencia / Administradores</strong></td><td>Tomar decisiones de compras, producción, inversiones.</td></tr>
+    <tr><td><strong>Bancos / Entidades financieras</strong></td><td>Capacidad de pago y nivel de endeudamiento.</td></tr>
+    <tr><td><strong>DIAN (Gobierno)</strong></td><td>Liquidar impuestos (Renta, IVA, ICA).</td></tr>
+    <tr><td><strong>Proveedores</strong></td><td>Si la empresa puede pagar sus deudas.</td></tr>
+    <tr><td><strong>Empleados</strong></td><td>Estabilidad laboral y prestaciones.</td></tr>
+  </table>
+
+  <div class="highlight green">
+    <strong>🏢 En Partmo:</strong> La información contable es clave para reportar a la matriz <strong>Donaldson Company Inc.</strong>
+    y para cumplir con las obligaciones tributarias en Colombia.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. CUALIDADES DE LA INFORMACIÓN            -->
+  <!-- ========================================== -->
+  <h2>Cualidades de la Información Contable</h2>
+  <p>Según el <strong>Marco Conceptual NIIF</strong>, la información debe tener estas características:</p>
+  <ul>
+    <li><strong>Relevancia:</strong> Que ayude a tomar decisiones.</li>
+    <li><strong>Representación fiel:</strong> Que refleje la realidad de la empresa.</li>
+    <li><strong>Comparabilidad:</strong> Que se pueda comparar con otros períodos o empresas.</li>
+    <li><strong>Verificabilidad:</strong> Que pueda ser comprobada por terceros.</li>
+    <li><strong>Oportunidad:</strong> Que esté disponible a tiempo.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 4. ECUACIÓN CONTABLE Y TIPOS DE EMPRESAS   -->
+  <!-- ========================================== -->
+  <h2>Ecuación Contable Fundamental</h2>
+  <div class="highlight" style="text-align:center; font-size:1.4rem; font-weight:bold;">
+    Activo = Pasivo + Patrimonio
+  </div>
+  <p>
+    Esta ecuación <strong>siempre debe cumplirse</strong>. Cada transacción afecta al menos dos cuentas.
+  </p>
+
+  <h3>📌 Tipos de empresas según su actividad</h3>
+  <table>
+    <tr><th>Tipo</th><th>Ejemplo</th></tr>
+    <tr><td><strong>Comercial</strong></td><td>Compra y vende productos (ej. supermercado).</td></tr>
+    <tr><td><strong>Manufacturera</strong></td><td>Transforma materia prima en productos (ej. <strong>Partmo</strong>).</td></tr>
+    <tr><td><strong>Servicios</strong></td><td>Ofrece servicios (ej. consultoría, transporte).</td></tr>
+  </table>
+  <div class="highlight orange">
+    <strong>🏭 Partmo es una empresa MANUFACTURERA</strong> (CIIU 2819). Esto implica manejar costos de producción, inventarios de materia prima y productos terminados.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. RAMAS DE LA CONTABILIDAD                -->
+  <!-- ========================================== -->
+  <h2>Ramas de la Contabilidad</h2>
+  <ul>
+    <li><strong>Contabilidad Financiera:</strong> Registra y reporta la situación de la empresa para externos (bancos, DIAN).</li>
+    <li><strong>Contabilidad de Costos:</strong> Calcula el costo de producir bienes o servicios (clave en Partmo).</li>
+    <li><strong>Contabilidad Administrativa:</strong> Para toma de decisiones internas (presupuestos, proyecciones).</li>
+    <li><strong>Contabilidad Fiscal:</strong> Enfocada en cumplir con obligaciones tributarias (Renta, IVA, ICA).</li>
+    <li><strong>Auditoría:</strong> Revisa y verifica que la información sea confiable.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 6. GLOSARIO BÁSICO                        -->
+  <!-- ========================================== -->
+  <h2>Glosario Básico</h2>
+  <table>
+    <tr><th>Término</th><th>Definición</th></tr>
+    <tr><td><strong>Activo</strong></td><td>Recursos que tiene la empresa (dinero, máquinas, mercancías).</td></tr>
+    <tr><td><strong>Pasivo</strong></td><td>Obligaciones o deudas (préstamos, proveedores).</td></tr>
+    <tr><td><strong>Patrimonio</strong></td><td>Aporte de los dueños + utilidades no repartidas.</td></tr>
+    <tr><td><strong>Ingresos</strong></td><td>Dinero que entra por ventas o servicios.</td></tr>
+    <tr><td><strong>Gastos</strong></td><td>Salidas de dinero para operar (arriendo, sueldos).</td></tr>
+    <tr><td><strong>Costo</strong></td><td>Inversión para producir o comprar lo que se vende.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 7. CHECKLIST DE ESTUDIO                    -->
+  <!-- ========================================== -->
+  <h2>📋 Checklist - ¿Qué debes saber de esta lección?</h2>
+  <div class="checklist">
+    <ul>
+      <li>Definir qué es la contabilidad y su objetivo.</li>
+      <li>Identificar los usuarios de la información contable.</li>
+      <li>Explicar la ecuación contable: Activo = Pasivo + Patrimonio.</li>
+      <li>Diferenciar entre empresas comerciales, manufactureras y de servicios.</li>
+      <li>Conocer las ramas de la contabilidad.</li>
+      <li>Entender cómo aplica esto en Partmo (manufacturera, costos, NIIF).</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 8. EJERCICIO PRÁCTICO                      -->
+  <!-- ========================================== -->
+  <h2>✍️ Ejercicio práctico</h2>
+  <div class="highlight">
+    <strong>Pregunta:</strong> Partmo compra acero por $15.000.000 para fabricar filtros. Paga $5.000.000 en efectivo y el resto a crédito.<br><br>
+    <strong>¿Qué cuentas se afectan?</strong><br>
+    💰 Activo (Materia prima) = +$15.000.000<br>
+    💰 Activo (Caja) = -$5.000.000<br>
+    💰 Pasivo (Proveedores) = +$10.000.000<br><br>
+    <em>¿Se cumple la ecuación? Activo (15M - 5M) = Pasivo (10M) + Patrimonio (0) → 10M = 10M ✅</em>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- BOTONES DE NAVEGACIÓN                      -->
+  <!-- ========================================== -->
+  <div class="nav-buttons">
+    <a href="#" class="nav-btn prev" style="opacity:0.5; cursor:default;">⬅ Anterior</a>
+    <a href="02-puc.html" class="nav-btn next">Siguiente: PUC ➡</a>
+  </div>
+
+  <div class="footer">
+    📌 Tema 1 de 18 • Plan de estudios de Contabilidad • Actualizado: Julio 2026
+  </div>
+
+</div>
+</body>
+  </html>
