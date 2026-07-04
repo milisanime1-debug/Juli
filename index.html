@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<head> 
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>📚 Mi Hub Contable - Partmo 2026</title>
@@ -31,12 +31,40 @@
       border-left: 4px solid #1a3c6e;
       padding-left: 16px;
     }
+    .subtitle strong { color: #1a3c6e; }
+
+    /* --- Barra de progreso (opcional) --- */
+    .progress-bar {
+      background: white;
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 24px;
+    }
+    .progress-bar .label {
+      font-weight: 600;
+      color: #1a3c6e;
+      font-size: 0.95rem;
+    }
+    .progress-bar .badge {
+      background: #e8ecf1;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #333;
+    }
+    .progress-bar .badge.done { background: #d4edda; color: #155724; }
+
     /* --- Grid de tarjetas --- */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 24px;
-      margin-top: 20px;
+      margin-top: 8px;
     }
     .card {
       background: white;
@@ -44,11 +72,11 @@
       padding: 24px 18px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       transition: transform 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-      border-bottom: 5px solid #1a3c6e;
       text-decoration: none;
       color: #1a1a1a;
       display: block;
+      border-bottom: 5px solid #1a3c6e;
+      cursor: pointer;
     }
     .card:hover {
       transform: translateY(-6px);
@@ -77,6 +105,13 @@
       border-top: 1px solid #ddd;
       padding-top: 20px;
     }
+    .footer a { color: #1a3c6e; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      .container { padding: 0 10px; }
+    }
   </style>
 </head>
 <body>
@@ -87,46 +122,57 @@
     Prácticas para <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026
   </div>
 
+  <!-- Barra de progreso (opcional) -->
+  <div class="progress-bar">
+    <span class="label">📊 Progreso:</span>
+    <span class="badge done">✅ Conceptos</span>
+    <span class="badge done">✅ Tarifas</span>
+    <span class="badge">⏳ Ejercicios</span>
+    <span class="badge">⏳ Calendario</span>
+    <span class="badge">⏳ Herramientas</span>
+    <span class="badge">⏳ Glosario</span>
+  </div>
+
   <!-- Grid de tarjetas -->
   <div class="grid">
 
     <!-- 1. EMPRESA -->
-    <a href="#" class="card">
+    <a href="paginas/empresa.html" class="card">
       <div class="icon">🏢</div>
       <h3>Empresa</h3>
       <p>Datos de Partmo: NIT, CIIU, tarifas ICA, estructura societaria y contexto local.</p>
     </a>
 
     <!-- 2. CONCEPTOS BÁSICOS -->
-    <a href="#" class="card">
+    <a href="paginas/conceptos.html" class="card">
       <div class="icon">📖</div>
       <h3>Conceptos Básicos</h3>
       <p>PUC, NIIF, principios contables, cuentas T, partida doble y glosario rápido.</p>
     </a>
 
     <!-- 3. TARIFAS 2026 -->
-    <a href="#" class="card">
+    <a href="paginas/tarifas.html" class="card">
       <div class="icon">💰</div>
       <h3>Tarifas 2026</h3>
       <p>UVT, Renta, IVA, Retenciones (compras, honorarios, nómina), ICA e Impuesto al Patrimonio.</p>
     </a>
 
     <!-- 4. EJERCICIOS -->
-    <a href="#" class="card">
+    <a href="paginas/ejercicios.html" class="card">
       <div class="icon">✍️</div>
       <h3>Ejercicios Prácticos</h3>
       <p>Asientos contables, liquidaciones de retenciones, conciliaciones bancarias y costos de producción.</p>
     </a>
 
     <!-- 5. CALENDARIO -->
-    <a href="#" class="card">
+    <a href="paginas/calendario.html" class="card">
       <div class="icon">📅</div>
       <h3>Calendario Tributario</h3>
       <p>Fechas clave 2026: Renta, IVA, ICA, Reteica, Información Exógena y sanciones.</p>
     </a>
 
     <!-- 6. HERRAMIENTAS -->
-    <a href="#" class="card">
+    <a href="paginas/herramientas.html" class="card">
       <div class="icon">🛠️</div>
       <h3>Herramientas</h3>
       <p>Excel contable (BUSCARV, TD), facturación electrónica, software (SAP/SIIGO/Odoo).</p>
@@ -140,7 +186,7 @@
     </a>
 
     <!-- 8. GLOSARIO -->
-    <a href="#" class="card">
+    <a href="paginas/glosario.html" class="card">
       <div class="icon">📝</div>
       <h3>Glosario Técnico</h3>
       <p>Definiciones clave: NIIF, CIF, UVT, RETEICA, Depreciación, Amortización, etc.</p>
@@ -149,7 +195,8 @@
   </div>
 
   <div class="footer">
-    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander<br>
+    <a href="https://github.com/tu-usuario/tu-usuario.github.io" target="_blank">Ver código en GitHub</a>
   </div>
 
 </div>
