@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUC - Plan Único de Cuentas - Mi Hub Contable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .back {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    .back-index {
+      background: #6c757d;
+    }
+    .back-index:hover { background: #5a6268; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.green { border-left-color: #28a745; background: #e8f5e9; }
+    .highlight.green strong { color: #28a745; }
+    .highlight.orange { border-left-color: #fd7e14; background: #fff3e0; }
+    .highlight.orange strong { color: #fd7e14; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .checklist {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 18px 24px;
+      margin: 16px 0;
+    }
+    .checklist li { list-style: none; padding: 4px 0; }
+    .checklist li::before {
+      content: "☐ ";
+      font-size: 1.2rem;
+      color: #1a3c6e;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid #e8ecf1;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .nav-btn.prev {
+      background: #e8ecf1;
+      color: #333;
+    }
+    .nav-btn.prev:hover { background: #d5d9e0; }
+    .nav-btn.next {
+      background: #1a3c6e;
+      color: white;
+    }
+    .nav-btn.next:hover { background: #0f2a4a; }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      .top-bar { flex-direction: column; align-items: stretch; }
+      .nav-buttons { flex-direction: column; }
+      .nav-btn { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Barra superior con botones -->
+  <div class="top-bar">
+    <div>
+      <a href="index.html" class="back">📚 Volver al plan</a>
+      <a href="../../index.html" class="back back-index">🏠 Inicio</a>
+    </div>
+    <span style="font-size:0.85rem; color:#888;">Tema 2 de 18</span>
+  </div>
+
+  <h1>📋 2. PUC - Plan Único de Cuentas</h1>
+  <div class="subtitle">
+    Estructura, clasificación y aplicación en <strong>Filtros Partmo S.A.S.</strong>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. QUÉ ES EL PUC                           -->
+  <!-- ========================================== -->
+  <h2>¿Qué es el PUC?</h2>
+  <p>
+    El <strong>Plan Único de Cuentas (PUC)</strong> es el catálogo oficial de cuentas que todas las empresas en Colombia
+    deben utilizar para registrar sus operaciones contables. Está regulado por el <strong>Decreto 2650 de 1993</strong>.
+  </p>
+  <div class="highlight">
+    <strong>📌 Objetivo:</strong> Uniformizar la contabilidad en el país para que la información sea comparable entre empresas
+    y útil para la DIAN, bancos y otros usuarios.
+  </div>
+
+  <h3>📌 Características del PUC</h3>
+  <ul>
+    <li><strong>Estructura jerárquica:</strong> 4 niveles (Clase → Grupo → Cuenta → Subcuenta).</li>
+    <li><strong>Flexible:</strong> Las empresas pueden <strong>adaptarlo</strong> a sus necesidades (ej. agregar subcuentas).</li>
+    <li><strong>Obligatorio:</strong> Todas las empresas deben usarlo, pero pueden hacer adaptaciones internas.</li>
+    <li><strong>Base para NIIF:</strong> Se usa como base, y sobre él se aplican los ajustes según NIIF.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 2. ESTRUCTURA DEL PUC (4 NIVELES)          -->
+  <!-- ========================================== -->
+  <h2>Estructura del PUC (4 niveles)</h2>
+  <table>
+    <tr><th>Nivel</th><th>Dígitos</th><th>Ejemplo</th><th>Descripción</th></tr>
+    <tr><td><strong>Clase</strong></td><td>1</td><td>1</td><td>Agrupación mayor (Activo, Pasivo, Patrimonio, etc.)</td></tr>
+    <tr><td><strong>Grupo</strong></td><td>2</td><td>11</td><td>Subdivisión dentro de la clase (ej. Disponible)</td></tr>
+    <tr><td><strong>Cuenta</strong></td><td>4</td><td>1105</td><td>Nivel operativo (ej. Caja)</td></tr>
+    <tr><td><strong>Subcuenta</strong></td><td>6</td><td>110505</td><td>Detalle adicional (ej. Caja general)</td></tr>
+  </table>
+
+  <div class="highlight green">
+    <strong>💡 En Partmo:</strong> Al ser una empresa grande y filial de Donaldson, tienen adaptaciones internas del PUC.
+    Pregunta en tu práctica si manejan subcuentas específicas para costos de producción.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. CLASES DEL PUC (RESUMEN)               -->
+  <!-- ========================================== -->
+  <h2>Clases del PUC</h2>
+  <p>El PUC tiene <strong>9 clases</strong>, cada una con un propósito específico:</p>
+  <table>
+    <tr><th>Clase</th><th>Nombre</th><th>Ejemplo de cuenta</th><th>¿Qué registra?</th></tr>
+    <tr><td><strong>1</strong></td><td>Activo</td><td>1105 Caja</td><td>Recursos de la empresa</td></tr>
+    <tr><td><strong>2</strong></td><td>Pasivo</td><td>2105 Obligaciones bancarias</td><td>Deudas y obligaciones</td></tr>
+    <tr><td><strong>3</strong></td><td>Patrimonio</td><td>3115 Capital social</td><td>Aportes de dueños y utilidades</td></tr>
+    <tr><td><strong>4</strong></td><td>Ingresos</td><td>4135 Comercio al por mayor</td><td>Ventas y otros ingresos</td></tr>
+    <tr><td><strong>5</strong></td><td>Gastos</td><td>5101 Sueldos y salarios</td><td>Gastos operativos (nómina, arriendo, etc.)</td></tr>
+    <tr><td><strong>6</strong></td><td>Costos de ventas</td><td>6135 Costo de mercancías vendidas</td><td>Costo de lo que se vende</td></tr>
+    <tr><td><strong>7</strong></td><td>Costos de producción</td><td>7101 Materia prima</td><td>Costos de fabricación (clave en Partmo)</td></tr>
+    <tr><td><strong>8</strong></td><td>Cuentas de orden deudoras</td><td>8101 Deudoras de control</td><td>Registros de control (ej. bienes en custodia)</td></tr>
+    <tr><td><strong>9</strong></td><td>Cuentas de orden acreedoras</td><td>9101 Acreedoras de control</td><td>Registros de control (ej. garantías)</td></tr>
+  </table>
+
+  <div class="highlight orange">
+    <strong>🏭 En Partmo (manufacturera):</strong> Las clases más usadas son <strong>1 (Activo)</strong> para inventarios,
+    <strong>5 (Gastos)</strong> para nómina y servicios, y <strong>7 (Costos de producción)</strong> para materia prima
+    y mano de obra.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4. CUENTAS MÁS USADAS EN PARTMO            -->
+  <!-- ========================================== -->
+  <h2>Cuentas más usadas en Partmo (ejemplos prácticos)</h2>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>¿Para qué sirve?</th></tr>
+    <tr><td><strong>1105</strong></td><td>Caja</td><td>Dinero en efectivo</td></tr>
+    <tr><td><strong>1110</strong></td><td>Bancos</td><td>Dinero en cuentas bancarias</td></tr>
+    <tr><td><strong>1435</strong></td><td>Mercancías no fabricadas</td><td>Materia prima (acero, fibras, polímeros)</td></tr>
+    <tr><td><strong>1516</strong></td><td>Productos en proceso</td><td>Filtros en producción (sin terminar)</td></tr>
+    <tr><td><strong>1520</strong></td><td>Productos terminados</td><td>Filtros listos para vender</td></tr>
+    <tr><td><strong>2205</strong></td><td>Proveedores</td><td>Deudas con proveedores de materia prima</td></tr>
+    <tr><td><strong>2408</strong></td><td>IVA descontable</td><td>IVA que la empresa paga en compras (se puede descontar)</td></tr>
+    <tr><td><strong>2404</strong></td><td>IVA generado</td><td>IVA que la empresa cobra en ventas</td></tr>
+    <tr><td><strong>5101</strong></td><td>Sueldos y salarios</td><td>Nómina de empleados</td></tr>
+    <tr><td><strong>7101</strong></td><td>Materia prima</td><td>Costo del acero y otros insumos</td></tr>
+    <tr><td><strong>7201</strong></td><td>Mano de obra directa</td><td>Salarios de operarios de producción</td></tr>
+    <tr><td><strong>7301</strong></td><td>CIF - Costos indirectos de fabricación</td><td>Arriendo de planta, servicios públicos, mantenimiento</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 5. ADAPTACIÓN DEL PUC A NIIF              -->
+  <!-- ========================================== -->
+  <h2>Adaptación del PUC a NIIF</h2>
+  <p>
+    Aunque el PUC es obligatorio, las empresas que aplican <strong>NIIF Plenas</strong> (como Partmo) deben hacer
+    <strong>adaptaciones internas</strong> para reflejar las normas internacionales. Esto incluye:
+  </p>
+  <ul>
+    <li><strong>Nuevas cuentas:</strong> Ej. "Activos por derecho de uso" (NIIF 16 - Arrendamientos).</li>
+    <li><strong>Cambios en nombres:</strong> "Costo de ventas" en lugar de "Costo de mercancías vendidas".</li>
+    <li><strong>Mediciones diferentes:</strong> Valor razonable, deterioro, etc.</li>
+  </ul>
+  <div class="highlight">
+    <strong>📌 Importante:</strong> No existe un "PUC NIIF" oficial. Cada empresa adapta su PUC según sus operaciones
+    y las normas que le aplican.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 6. EJERCICIO PRÁCTICO                      -->
+  <!-- ========================================== -->
+  <h2>✍️ Ejercicio práctico</h2>
+  <div class="highlight">
+    <strong>Pregunta:</strong> Partmo compra acero por $20.000.000 (IVA incluido 19%) a un proveedor. Paga $10.000.000
+    en efectivo y el resto a 30 días.<br><br>
+    <strong>¿Qué cuentas PUC se afectan y por cuánto?</strong>
+  </div>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>1435</td><td>Mercancías no fabricadas (Materia prima)</td><td>$16.806.722</td><td></td></tr>
+    <tr><td>2408</td><td>IVA descontable (19%)</td><td>$3.193.278</td><td></td></tr>
+    <tr><td>1105</td><td>Caja</td><td></td><td>$10.000.000</td></tr>
+    <tr><td>2205</td><td>Proveedores</td><td></td><td>$10.000.000</td></tr>
+  </table>
+  <p style="font-size:0.9rem; color:#555; margin-top:6px;">
+    <em>Nota: $20.000.000 / 1.19 = $16.806.722 (base) → IVA = $20.000.000 - $16.806.722 = $3.193.278</em>
+  </p>
+
+  <!-- ========================================== -->
+  <!-- 7. CHECKLIST DE ESTUDIO                    -->
+  <!-- ========================================== -->
+  <h2>📋 Checklist - ¿Qué debes saber de esta lección?</h2>
+  <div class="checklist">
+    <ul>
+      <li>Definir qué es el PUC y su objetivo.</li>
+      <li>Explicar la estructura de 4 niveles (Clase, Grupo, Cuenta, Subcuenta).</li>
+      <li>Identificar las 9 clases del PUC y su propósito.</li>
+      <li>Reconocer las cuentas más usadas en una empresa manufacturera (Partmo).</li>
+      <li>Entender cómo se adapta el PUC a NIIF.</li>
+      <li>Saber registrar una compra de materia prima en el PUC.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- BOTONES DE NAVEGACIÓN                      -->
+  <!-- ========================================== -->
+  <div class="nav-buttons">
+    <a href="01-introduccion.html" class="nav-btn prev">⬅ Anterior: Introducción</a>
+    <a href="03-partida-doble.html" class="nav-btn next">Siguiente: Partida Doble ➡</a>
+  </div>
+
+  <div class="footer">
+    📌 Tema 2 de 18 • Plan de estudios de Contabilidad • Actualizado: Julio 2026
+  </div>
+
+</div>
+</body>
+  </html>
