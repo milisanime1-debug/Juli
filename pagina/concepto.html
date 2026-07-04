@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conceptos Básicos - Mi Hub Contable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f9fafc;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 12px 18px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Botón volver -->
+  <a href="../index.html" class="back">⬅ Volver al inicio</a>
+
+  <h1>📖 Conceptos Básicos</h1>
+  <div class="subtitle">
+    Fundamentos contables aplicados a <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. PUC - PLAN ÚNICO DE CUENTAS              -->
+  <!-- ========================================== -->
+  <h2>1. PUC - Plan Único de Cuentas</h2>
+  <p>
+    El <strong>PUC</strong> es el catálogo de cuentas que toda empresa en Colombia debe usar para registrar sus operaciones.
+    Está regulado por el <strong>Decreto 2650 de 1993</strong>. Aunque las empresas pueden adaptarlo a NIIF, la estructura base es la misma.
+  </p>
+
+  <h3>📌 Estructura jerárquica (4 niveles)</h3>
+  <table>
+    <tr><th>Nivel</th><th>Dígitos</th><th>Ejemplo</th><th>Descripción</th></tr>
+    <tr><td><strong>Clase</strong></td><td>1</td><td>1</td><td>Activo</td></tr>
+    <tr><td><strong>Grupo</strong></td><td>2</td><td>11</td><td>Disponible</td></tr>
+    <tr><td><strong>Cuenta</strong></td><td>4</td><td>1105</td><td>Caja</td></tr>
+    <tr><td><strong>Subcuenta</strong></td><td>6</td><td>110505</td><td>Caja general</td></tr>
+  </table>
+
+  <h3>📌 Clases del PUC (resumen)</h3>
+  <table>
+    <tr><th>Clase</th><th>Nombre</th><th>Ejemplo</th></tr>
+    <tr><td>1</td><td>Activo</td><td>1105 Caja, 1110 Bancos, 1435 Materias primas</td></tr>
+    <tr><td>2</td><td>Pasivo</td><td>2105 Obligaciones bancarias, 2408 IVA descontable</td></tr>
+    <tr><td>3</td><td>Patrimonio</td><td>3115 Capital social, 3215 Utilidades retenidas</td></tr>
+    <tr><td>4</td><td>Ingresos</td><td>4135 Comercio al por mayor</td></tr>
+    <tr><td>5</td><td>Gastos</td><td>5101 Sueldos, 5110 Honorarios</td></tr>
+    <tr><td>6</td><td>Costos de ventas</td><td>6135 Costo de mercancías vendidas</td></tr>
+    <tr><td>7</td><td>Costos de producción</td><td>7101 Materia prima, 7201 Mano de obra</td></tr>
+    <tr><td>8</td><td>Cuentas de orden deudoras</td><td>8101 Deudoras de control</td></tr>
+    <tr><td>9</td><td>Cuentas de orden acreedoras</td><td>9101 Acreedoras de control</td></tr>
+  </table>
+
+  <div class="highlight">
+    <strong>💡 Para Partmo:</strong> Al ser una empresa <strong>manufacturera</strong>, las cuentas más usadas son del <strong>grupo 7 (Costos de producción)</strong> y las de inventarios (14, 15, 16).
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. NIIF - NORMAS INTERNACIONALES           -->
+  <!-- ========================================== -->
+  <h2>2. NIIF - Normas Internacionales de Información Financiera</h2>
+  <p>
+    En Colombia, las NIIF son obligatorias desde la <strong>Ley 1314 de 2009</strong>. Las empresas se clasifican en tres grupos:
+  </p>
+  <ul>
+    <li><strong>Grupo 1:</strong> Aplican <strong>NIIF Plenas</strong> (empresas cotizantes, grandes).</li>
+    <li><strong>Grupo 2:</strong> Aplican <strong>NIIF para PYMES</strong> (medianas).</li>
+    <li><strong>Grupo 3:</strong> Aplican <strong>Contabilidad Simplificada</strong> (microempresas).</li>
+  </ul>
+  <div class="highlight">
+    <strong>📌 Partmo:</strong> Por su tamaño (Grande, ~349 empleados) y ser filial de <strong>Donaldson Company Inc.</strong>, aplica <strong>NIIF Plenas</strong>.
+  </div>
+
+  <h3>📌 Enmiendas vigentes desde 2026</h3>
+  <ul>
+    <li><strong>NIIF 16</strong> - Arrendamientos (nuevos requerimientos de revelación).</li>
+    <li><strong>NIC 1</strong> - Presentación de estados financieros (clasificación de pasivos).</li>
+    <li><strong>NIC 7</strong> - Estado de flujos de efectivo.</li>
+    <li><strong>NIIF 7</strong> - Instrumentos financieros.</li>
+    <li><strong>NIC 12</strong> - Impuestos a las ganancias.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 3. PARTIDA DOBLE                           -->
+  <!-- ========================================== -->
+  <h2>3. Partida Doble</h2>
+  <p>
+    Es el principio fundamental de la contabilidad: <strong>"A todo débito corresponde un crédito"</strong>.
+    Siempre debe cumplirse la ecuación:
+  </p>
+  <div class="highlight" style="text-align:center; font-size:1.3rem; font-weight:bold;">
+    Activo = Pasivo + Patrimonio
+  </div>
+
+  <h3>📌 Reglas básicas</h3>
+  <table>
+    <tr><th>Cuenta</th><th>Debita (aumenta)</th><th>Acredita (disminuye)</th></tr>
+    <tr><td><strong>Activo</strong></td><td>💰 Débito</td><td>💰 Crédito</td></tr>
+    <tr><td><strong>Pasivo</strong></td><td>💰 Crédito</td><td>💰 Débito</td></tr>
+    <tr><td><strong>Patrimonio</strong></td><td>💰 Crédito</td><td>💰 Débito</td></tr>
+    <tr><td><strong>Ingresos</strong></td><td>💰 Crédito</td><td>💰 Débito</td></tr>
+    <tr><td><strong>Gastos / Costos</strong></td><td>💰 Débito</td><td>💰 Crédito</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 4. CUENTAS T                               -->
+  <!-- ========================================== -->
+  <h2>4. Cuentas T</h2>
+  <p>
+    Son una representación gráfica de una cuenta contable. Tienen forma de "T" y se usan para visualizar los movimientos débito y crédito.
+  </p>
+
+  <div style="display:flex; flex-wrap:wrap; gap:20px; margin:16px 0;">
+    <div style="background:#f4f6fa; padding:16px 24px; border-radius:10px; flex:1; min-width:180px;">
+      <div style="font-weight:bold; text-align:center; border-bottom:2px solid #1a3c6e; padding-bottom:6px;">Caja (1105)</div>
+      <div style="display:flex; justify-content:space-between; margin-top:8px;">
+        <div><strong>Débito</strong><br>10.000.000<br>5.000.000</div>
+        <div><strong>Crédito</strong><br>3.000.000<br>2.000.000</div>
+      </div>
+      <div style="border-top:2px solid #1a3c6e; margin-top:6px; padding-top:4px; text-align:right;">Saldo: <strong>10.000.000</strong></div>
+    </div>
+    <div style="background:#f4f6fa; padding:16px 24px; border-radius:10px; flex:1; min-width:180px;">
+      <div style="font-weight:bold; text-align:center; border-bottom:2px solid #1a3c6e; padding-bottom:6px;">Proveedores (2205)</div>
+      <div style="display:flex; justify-content:space-between; margin-top:8px;">
+        <div><strong>Débito</strong><br>2.000.000</div>
+        <div><strong>Crédito</strong><br>8.000.000<br>4.000.000</div>
+      </div>
+      <div style="border-top:2px solid #1a3c6e; margin-top:6px; padding-top:4px; text-align:right;">Saldo: <strong>10.000.000</strong></div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. DEPRECIACIÓN                           -->
+  <!-- ========================================== -->
+  <h2>5. Depreciación</h2>
+  <p>
+    Es la pérdida de valor de los activos fijos (maquinaria, vehículos, edificios) por uso o paso del tiempo.
+    En Partmo, aplica a <strong>maquinaria industrial</strong> y equipos de producción.
+  </p>
+  <div class="highlight">
+    <strong>📌 Fórmula básica (método línea recta):</strong><br>
+    <em>Depreciación anual = (Valor del activo - Valor residual) / Vida útil (años)</em>
+  </div>
+  <p><strong>Ejemplo:</strong> Una máquina de $50M, valor residual $5M, vida útil 10 años → Depreciación anual = ($50M - $5M) / 10 = <strong>$4.500.000/año</strong></p>
+
+  <!-- ========================================== -->
+  <!-- 6. COSTOS DE PRODUCCIÓN (para Partmo)     -->
+  <!-- ========================================== -->
+  <h2>6. Costos de Producción <span class="badge">¡Clave para Partmo!</span></h2>
+  <p>En una empresa manufacturera como Partmo, los costos se dividen en:</p>
+  <ul>
+    <li><strong>Materia prima (cuenta 7101):</strong> Materiales directos (ej. acero, fibras, polímeros).</li>
+    <li><strong>Mano de obra directa (cuenta 7201):</strong> Salarios de operarios de producción.</li>
+    <li><strong>Costos indirectos de fabricación - CIF (cuenta 7301):</strong> Arriendo de planta, servicios públicos, mantenimiento, supervisión.</li>
+  </ul>
+  <div class="highlight">
+    <strong>💡 En la práctica:</strong> Debes saber cómo se asignan los CIF a los productos (ej. por horas máquina o por unidades producidas).
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. GLOSARIO RÁPIDO                        -->
+  <!-- ========================================== -->
+  <h2>7. Glosario Rápido</h2>
+  <table>
+    <tr><th>Término</th><th>Definición</th></tr>
+    <tr><td><strong>UVT</strong></td><td>Unidad de Valor Tributario. Base para impuestos y sanciones. 2026 = $52.374.</td></tr>
+    <tr><td><strong>CIF</strong></td><td>Costos Indirectos de Fabricación. Gastos de producción no directos.</td></tr>
+    <tr><td><strong>RETEICA</strong></td><td>Retención en la fuente del ICA. Se aplica en municipios como Bucaramanga.</td></tr>
+    <tr><td><strong>NIIF</strong></td><td>Normas Internacionales de Información Financiera.</td></tr>
+    <tr><td><strong>Conciliación bancaria</strong></td><td>Comparación entre saldos contables y bancarios para identificar diferencias.</td></tr>
+    <tr><td><strong>Exógena</strong></td><td>Información que las empresas deben reportar a la DIAN sobre terceros.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 8. ¿CÓMO APLICAR EN PARTMO?               -->
+  <!-- ========================================== -->
+  <h2>8. ¿Cómo aplicar esto en Partmo?</h2>
+  <ul>
+    <li><strong>Revisa el PUC adaptado:</strong> Pregunta si tienen cuentas internas para costos.</li>
+    <li><strong>Identifica los CIF:</strong> ¿Cómo distribuyen los costos indirectos? (horas máquina, unidades).</li>
+    <li><strong>Depreciación de maquinaria:</strong> Calcula la depreciación mensual y verifica si está registrada.</li>
+    <li><strong>Partida doble en compras:</strong> Siempre revisa que débito = crédito en cada asiento.</li>
+  </ul>
+
+  <div class="footer">
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
+  </div>
+
+</div>
+</body>
+  </html>
