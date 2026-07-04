@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ciclo Contable - Mi Hub Contable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .back {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    .back-index {
+      background: #6c757d;
+    }
+    .back-index:hover { background: #5a6268; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.green { border-left-color: #28a745; background: #e8f5e9; }
+    .highlight.green strong { color: #28a745; }
+    .highlight.orange { border-left-color: #fd7e14; background: #fff3e0; }
+    .highlight.orange strong { color: #fd7e14; }
+    .highlight.purple { border-left-color: #6f42c1; background: #f3e8ff; }
+    .highlight.purple strong { color: #6f42c1; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .pasos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 16px 0;
+      justify-content: center;
+    }
+    .paso {
+      background: #f8f9fc;
+      border: 2px solid #e8ecf1;
+      border-radius: 12px;
+      padding: 14px 18px;
+      flex: 1;
+      min-width: 160px;
+      max-width: 220px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .paso:hover {
+      transform: translateY(-4px);
+      border-color: #1a3c6e;
+    }
+    .paso .numero {
+      background: #1a3c6e;
+      color: white;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+    .paso .nombre {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #1a3c6e;
+    }
+    .paso .desc {
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .flujo {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 16px 0;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    .flujo .arrow {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 4px;
+    }
+
+    .checklist {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 18px 24px;
+      margin: 16px 0;
+    }
+    .checklist li { list-style: none; padding: 4px 0; }
+    .checklist li::before {
+      content: "☐ ";
+      font-size: 1.2rem;
+      color: #1a3c6e;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid #e8ecf1;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .nav-btn.prev {
+      background: #e8ecf1;
+      color: #333;
+    }
+    .nav-btn.prev:hover { background: #d5d9e0; }
+    .nav-btn.next {
+      background: #1a3c6e;
+      color: white;
+    }
+    .nav-btn.next:hover { background: #0f2a4a; }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      .top-bar { flex-direction: column; align-items: stretch; }
+      .nav-buttons { flex-direction: column; }
+      .nav-btn { text-align: center; }
+      .paso { min-width: 130px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Barra superior con botones -->
+  <div class="top-bar">
+    <div>
+      <a href="index.html" class="back">📚 Volver al plan</a>
+      <a href="../../index.html" class="back back-index">🏠 Inicio</a>
+    </div>
+    <span style="font-size:0.85rem; color:#888;">Tema 4 de 18</span>
+  </div>
+
+  <h1>🔄 4. Ciclo Contable</h1>
+  <div class="subtitle">
+    El proceso paso a paso de la contabilidad en <strong>Filtros Partmo S.A.S.</strong>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. QUÉ ES EL CICLO CONTABLE                -->
+  <!-- ========================================== -->
+  <h2>¿Qué es el Ciclo Contable?</h2>
+  <p>
+    El <strong>ciclo contable</strong> es el proceso secuencial que sigue la contabilidad durante un período
+    (normalmente un año) para registrar, procesar y resumir la información financiera de una empresa.
+  </p>
+  <div class="highlight">
+    <strong>📌 Objetivo:</strong> Convertir las transacciones diarias en <strong>estados financieros</strong>
+    útiles para la toma de decisiones.
+  </div>
+
+  <h3>📌 Ciclo contable en Partmo</h3>
+  <div class="highlight green">
+    <strong>🏢 En Partmo:</strong> El ciclo contable se realiza <strong>mensualmente</strong> (cierres mensuales)
+    y <strong>anualmente</strong> (estados financieros para Donaldson Company Inc. y DIAN).
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. PASOS DEL CICLO CONTABLE (8 PASOS)     -->
+  <!-- ========================================== -->
+  <h2>Los 8 pasos del ciclo contable</h2>
+
+  <div class="flujo">
+    <span>📄 Transacción</span>
+    <span class="arrow"> → </span>
+    <span>📋 Comprobante</span>
+    <span class="arrow"> → </span>
+    <span>📖 Libro Diario</span>
+    <span class="arrow"> → </span>
+    <span>📊 Mayorización</span>
+    <span class="arrow"> → </span>
+    <span>⚖️ Balance de Prueba</span>
+    <span class="arrow"> → </span>
+    <span>📝 Ajustes</span>
+    <span class="arrow"> → </span>
+    <span>📊 Estados Financieros</span>
+    <span class="arrow"> → </span>
+    <span>🔒 Cierre</span>
+  </div>
+
+  <div class="pasos">
+    <!-- Paso 1 -->
+    <div class="paso">
+      <div class="numero">1</div>
+      <div class="nombre">Transacción</div>
+      <div class="desc">Ocurre un hecho económico (compra, venta, pago, etc.)</div>
+    </div>
+    <!-- Paso 2 -->
+    <div class="paso">
+      <div class="numero">2</div>
+      <div class="nombre">Comprobante</div>
+      <div class="desc">Se documenta la transacción (factura, recibo, etc.)</div>
+    </div>
+    <!-- Paso 3 -->
+    <div class="paso">
+      <div class="numero">3</div>
+      <div class="nombre">Libro Diario</div>
+      <div class="desc">Se registra en el diario (débito y crédito)</div>
+    </div>
+    <!-- Paso 4 -->
+    <div class="paso">
+      <div class="numero">4</div>
+      <div class="nombre">Mayorización</div>
+      <div class="desc">Se pasan los movimientos a las cuentas T (mayor)</div>
+    </div>
+    <!-- Paso 5 -->
+    <div class="paso">
+      <div class="numero">5</div>
+      <div class="nombre">Balance de Prueba</div>
+      <div class="desc">Se verifican sumas (débito = crédito)</div>
+    </div>
+    <!-- Paso 6 -->
+    <div class="paso">
+      <div class="numero">6</div>
+      <div class="nombre">Ajustes</div>
+      <div class="desc">Depreciaciones, provisiones, causaciones</div>
+    </div>
+    <!-- Paso 7 -->
+    <div class="paso">
+      <div class="numero">7</div>
+      <div class="nombre">Estados Financieros</div>
+      <div class="desc">Balance General, EERR, Flujo de Efectivo</div>
+    </div>
+    <!-- Paso 8 -->
+    <div class="paso">
+      <div class="numero">8</div>
+      <div class="nombre">Cierre</div>
+      <div class="desc">Se cierran cuentas de ingresos, gastos y costos</div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. DESGLOSE DE CADA PASO                  -->
+  <!-- ========================================== -->
+  <h2>Desglose de cada paso</h2>
+
+  <h3>1️⃣ Transacción</h3>
+  <p>
+    Es el <strong>hecho económico</strong> que da inicio al ciclo. Ejemplos en Partmo:
+  </p>
+  <ul>
+    <li>Compra de acero a un proveedor.</li>
+    <li>Venta de filtros a un cliente.</li>
+    <li>Pago de nómina a los operarios.</li>
+    <li>Pago de servicios públicos de la planta.</li>
+  </ul>
+
+  <h3>2️⃣ Comprobante</h3>
+  <p>
+    Es el <strong>documento soporte</strong> que respalda la transacción. Ejemplos:
+  </p>
+  <ul>
+    <li><strong>Factura de compra</strong> (proveedor de acero).</li>
+    <li><strong>Factura de venta</strong> (cliente).</li>
+    <li><strong>Comprobante de nómina</strong> (liquidación de sueldos).</li>
+    <li><strong>Recibo de caja</strong> (pagos en efectivo).</li>
+  </ul>
+
+  <h3>3️⃣ Libro Diario</h3>
+  <p>
+    Es el registro <strong>cronológico</strong> de todas las transacciones. Cada asiento incluye:
+  </p>
+  <ul>
+    <li>Fecha de la transacción.</li>
+    <li>Cuentas afectadas (débito y crédito).</li>
+    <li>Valor de la transacción.</li>
+    <li>Descripción breve.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>📌 Ejemplo de asiento en el libro diario (Partmo):</strong><br>
+    <em>Fecha: 15/07/2026</em><br>
+    <em>Cuentas:</em> 1435 Mercancías no fabricadas (Débito $15.000.000)<br>
+    <em>Cuentas:</em> 2408 IVA descontable (Débito $2.850.000)<br>
+    <em>Cuentas:</em> 1105 Caja (Crédito $5.000.000)<br>
+    <em>Cuentas:</em> 2205 Proveedores (Crédito $12.850.000)<br>
+    <em>Descripción:</em> Compra de acero a Proveedores XYZ S.A.
+  </div>
+
+  <h3>4️⃣ Mayorización (Libro Mayor)</h3>
+  <p>
+    Es el proceso de <strong>pasar los movimientos</strong> del libro diario a las <strong>cuentas T</strong>
+    (libro mayor). Aquí se acumulan todos los débitos y créditos de cada cuenta.
+  </p>
+
+  <h3>5️⃣ Balance de Prueba</h3>
+  <p>
+    Es un listado de <strong>todas las cuentas con sus saldos</strong> (débitos y créditos). Su objetivo es
+    <strong>verificar</strong> que la suma de los débitos sea igual a la suma de los créditos.
+  </p>
+  <div class="highlight green">
+    <strong>📌 Ejemplo resumido del Balance de Prueba de Partmo:</strong>
+  </div>
+  <table>
+    <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>1105</td><td>Caja</td><td>$12.000.000</td><td></td></tr>
+    <tr><td>1435</td><td>Mercancías no fabricadas</td><td>$45.000.000</td><td></td></tr>
+    <tr><td>2205</td><td>Proveedores</td><td></td><td>$32.850.000</td></tr>
+    <tr><td>4135</td><td>Comercio al por mayor</td><td></td><td>$80.000.000</td></tr>
+    <tr><td>5101</td><td>Sueldos y salarios</td><td>$25.000.000</td><td></td></tr>
+    <tr><td>... (más cuentas)</td><td></td><td>...</td><td>...</td></tr>
+    <tr><td style="font-weight:bold;">Totales</td><td></td><td style="font-weight:bold;">$200.000.000</td><td style="font-weight:bold;">$200.000.000</td></tr>
+  </table>
+
+  <h3>6️⃣ Ajustes</h3>
+  <p>
+    Son <strong>correcciones</strong> que se hacen al final del período para que la información sea precisa.
+    Incluyen:
+  </p>
+  <ul>
+    <li><strong>Depreciación</strong> de maquinaria (ej. máquina de producción).</li>
+    <li><strong>Causación de gastos</strong> (servicios públicos no facturados).</li>
+    <li><strong>Provisiones</strong> (ej. para obligaciones laborales).</li>
+    <li><strong>Ajustes por inflación</strong> (si aplica).</li>
+  </ul>
+
+  <div class="highlight orange">
+    <strong>🏭 En Partmo:</strong> Los ajustes más comunes son la <strong>depreciación de maquinaria</strong>
+    y la <strong>causación de costos de producción</strong> (servicios públicos de la planta).
+  </div>
+
+  <h3>7️⃣ Estados Financieros</h3>
+  <p>
+    Son los <strong>informes finales</strong> que resumen la situación de la empresa. Los principales son:
+  </p>
+  <ul>
+    <li><strong>Balance General</strong> (Activo, Pasivo, Patrimonio).</li>
+    <li><strong>Estado de Resultados</strong> (Ingresos, Gastos, Utilidad).</li>
+    <li><strong>Estado de Flujo de Efectivo</strong> (Entradas y salidas de efectivo).</li>
+    <li><strong>Estado de Cambios en el Patrimonio</strong> (Movimientos de capital).</li>
+  </ul>
+  <div class="highlight purple">
+    <strong>📌 En Partmo:</strong> Los estados financieros se reportan a la matriz <strong>Donaldson Company Inc.</strong>
+    y se presentan a la DIAN para el cumplimiento tributario.
+  </div>
+
+  <h3>8️⃣ Cierre</h3>
+  <p>
+    Es el último paso del ciclo. Consiste en <strong>cerrar</strong> las cuentas temporales (ingresos, gastos y costos)
+    y transferir su saldo a la cuenta de <strong>utilidad del ejercicio</strong> (parte del patrimonio).
+  </p>
+  <ul>
+    <li><strong>Cuentas temporales:</strong> Se "reinician" en cero para el siguiente período.</li>
+    <li><strong>Cuentas permanentes:</strong> (Activo, Pasivo, Patrimonio) mantienen su saldo.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 4. FRECUENCIA DEL CICLO EN PARTMO         -->
+  <!-- ========================================== -->
+  <h2>Frecuencia del ciclo contable en Partmo</h2>
+  <table>
+    <tr><th>Frecuencia</th><th>Actividades</th></tr>
+    <tr><td><strong>Diario</strong></td><td>Registro de transacciones (facturas, compras, ventas, pagos).</td></tr>
+    <tr><td><strong>Mensual</strong></td><td>Conciliaciones bancarias, ajustes (depreciación, causaciones), balances de prueba.</td></tr>
+    <tr><td><strong>Trimestral</strong></td><td>Reportes a la DIAN (IVA, Retenciones), informes a Donaldson.</td></tr>
+    <tr><td><strong>Anual</strong></td><td>Cierre contable, estados financieros completos, declaración de renta.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 5. EJERCICIO PRÁCTICO                      -->
+  <!-- ========================================== -->
+  <h2>✍️ Ejercicio práctico</h2>
+  <div class="highlight">
+    <strong>Pregunta:</strong> Partmo realiza las siguientes transacciones en julio 2026:<br><br>
+    <strong>1.</strong> Compra de acero por $10.000.000 + IVA, paga $4.000.000 en efectivo y el resto a crédito.<br>
+    <strong>2.</strong> Vende filtros por $6.000.000 + IVA al contado.<br>
+    <strong>3.</strong> Paga nómina de operarios por $2.500.000.<br><br>
+    <strong>Registra las transacciones en el libro diario e identifica qué pasos del ciclo contable se han completado.</strong>
+  </div>
+
+  <div style="background:#f8f9fc; border-radius:10px; padding:16px 20px; margin:16px 0; border:1px solid #e8ecf1;">
+    <h4 style="color:#1a3c6e; margin-bottom:8px;">💡 Solución</h4>
+    <p><strong>Transacción 1: Compra de acero</strong></p>
+    <table>
+      <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>1435</td><td>Mercancías no fabricadas</td><td>$10.000.000</td><td></td></tr>
+      <tr><td>2408</td><td>IVA descontable (19%)</td><td>$1.900.000</td><td></td></tr>
+      <tr><td>1105</td><td>Caja</td><td></td><td>$4.000.000</td></tr>
+      <tr><td>2205</td><td>Proveedores</td><td></td><td>$7.900.000</td></tr>
+    </table>
+    <p><strong>Transacción 2: Venta de filtros</strong></p>
+    <table>
+      <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>1105</td><td>Caja</td><td>$7.140.000</td><td></td></tr>
+      <tr><td>4135</td><td>Comercio al por mayor</td><td></td><td>$6.000.000</td></tr>
+      <tr><td>2404</td><td>IVA generado</td><td></td><td>$1.140.000</td></tr>
+    </table>
+    <p><strong>Transacción 3: Pago de nómina</strong></p>
+    <table>
+      <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>7201</td><td>Mano de obra directa</td><td>$2.500.000</td><td></td></tr>
+      <tr><td>1105</td><td>Caja</td><td></td><td>$2.500.000</td></tr>
+    </table>
+    <p style="font-size:0.9rem; color:#555; margin-top:8px;">
+      <strong>Pasos completados:</strong> 1 (Transacción), 2 (Comprobantes), 3 (Libro Diario).
+      Faltan los pasos 4 al 8 (mayorización, balance de prueba, ajustes, estados financieros, cierre).
+    </p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 6. CHECKLIST DE ESTUDIO                    -->
+  <!-- ========================================== -->
+  <h2>📋 Checklist - ¿Qué debes saber de esta lección?</h2>
+  <div class="checklist">
+    <ul>
+      <li>Definir qué es el ciclo contable y su objetivo.</li>
+      <li>Enumerar los 8 pasos del ciclo contable en orden.</li>
+      <li>Explicar en qué consiste cada paso (transacción, comprobante, diario, mayor, balance de prueba, ajustes, estados financieros, cierre).</li>
+      <li>Identificar qué documentos soporte se usan en cada paso.</li>
+      <li>Entender la frecuencia del ciclo contable en Partmo (diario, mensual, trimestral, anual).</li>
+      <li>Saber cómo se aplican los ajustes al final del período.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- BOTONES DE NAVEGACIÓN                      -->
+  <!-- ========================================== -->
+  <div class="nav-buttons">
+    <a href="03-partida-doble.html" class="nav-btn prev">⬅ Anterior: Partida Doble</a>
+    <a href="05-balance-general.html" class="nav-btn next">Siguiente: Balance General ➡</a>
+  </div>
+
+  <div class="footer">
+    📌 Tema 4 de 18 • Plan de estudios de Contabilidad • Actualizado: Julio 2026
+  </div>
+
+</div>
+</body>
+  </html>
