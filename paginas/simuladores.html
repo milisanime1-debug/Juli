@@ -3,21 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🧮 Simuladores Contables - Mi Hub</title>
+  <title>Simulador SAP - Módulo FI</title>
   <style>
+    /* ===== ESTILOS GENERALES ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f0f2f5;
-      padding: 25px 20px;
-    }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: #e8ecf1;
+      padding: 20px;
     }
     .back {
       display: inline-block;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       background: #1a3c6e;
       color: white;
       padding: 8px 20px;
@@ -29,502 +26,858 @@
     }
     .back:hover { background: #0f2a4a; }
 
-    h1 {
-      color: #1a3c6e;
-      font-size: 2.2rem;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .subtitle {
-      color: #555;
-      margin-bottom: 30px;
-      font-size: 1rem;
-      border-left: 4px solid #1a3c6e;
-      padding-left: 16px;
-    }
-    .subtitle strong { color: #1a3c6e; }
-
-    /* Tarjetas de simuladores */
-    .sim-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      margin-top: 10px;
-    }
-    .sim-card {
+    /* ===== CONTENEDOR PRINCIPAL ===== */
+    .sap-container {
+      max-width: 1300px;
+      margin: 0 auto;
       background: white;
-      border-radius: 16px;
-      padding: 24px 22px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
-      border-top: 5px solid #1a3c6e;
-      transition: transform 0.2s;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      overflow: hidden;
     }
-    .sim-card:hover { transform: translateY(-3px); }
-    .sim-card h3 {
-      color: #1a3c6e;
-      font-size: 1.25rem;
-      margin-bottom: 4px;
+
+    /* ===== BARRA SUPERIOR SAP ===== */
+    .sap-header {
+      background: linear-gradient(135deg, #003366, #1a4d7a);
+      color: white;
+      padding: 14px 28px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       gap: 10px;
     }
-    .sim-card .desc {
-      color: #666;
-      font-size: 0.9rem;
-      margin-bottom: 16px;
-      border-left: 3px solid #ddd;
-      padding-left: 12px;
+    .sap-header .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
-    .sim-card label {
-      display: block;
+    .sap-header .logo span { color: #ffd700; }
+    .sap-header .user {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+    .sap-header .user strong { opacity: 1; }
+
+    /* ===== MENÚ DE NAVEGACIÓN ===== */
+    .sap-menu {
+      background: #f4f6f9;
+      padding: 8px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      border-bottom: 2px solid #d0d7e2;
+    }
+    .sap-menu button {
+      background: transparent;
+      border: none;
+      padding: 10px 18px;
+      font-size: 0.85rem;
       font-weight: 600;
+      color: #1a3c6e;
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      transition: background 0.2s, color 0.2s;
+      font-family: inherit;
+    }
+    .sap-menu button:hover {
+      background: #e0e6ef;
+    }
+    .sap-menu button.active {
+      background: white;
+      color: #003366;
+      border-bottom: 3px solid #ffd700;
+    }
+
+    /* ===== CUERPO PRINCIPAL ===== */
+    .sap-body {
+      padding: 24px 28px 30px;
+      background: white;
+      min-height: 500px;
+    }
+
+    /* ===== SECCIONES (mostrar/ocultar) ===== */
+    .sap-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .sap-section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== TÍTULOS DE SECCIÓN ===== */
+    .sap-section h2 {
+      color: #003366;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .sap-section .sub {
+      color: #555;
       font-size: 0.9rem;
-      color: #333;
-      margin-top: 10px;
-      margin-bottom: 3px;
+      margin-bottom: 20px;
+      border-left: 3px solid #ffd700;
+      padding-left: 14px;
     }
-    .sim-card input, .sim-card select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border 0.2s;
+
+    /* ===== FORMULARIOS ===== */
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 20px;
+      margin-bottom: 16px;
+      align-items: flex-end;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 180px;
+    }
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #1a3c6e;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 4px;
+    }
+    .form-group input, .form-group select {
+      padding: 8px 12px;
+      border: 1.5px solid #d0d7e2;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
       background: #fafbfc;
+      transition: border-color 0.2s;
     }
-    .sim-card input:focus, .sim-card select:focus {
-      border-color: #1a3c6e;
+    .form-group input:focus, .form-group select:focus {
       outline: none;
+      border-color: #003366;
       background: white;
     }
-    .sim-card .btn {
-      margin-top: 14px;
-      background: #1a3c6e;
+    .form-group input[readonly] {
+      background: #eef1f5;
+      color: #1a3c6e;
+      font-weight: 600;
+    }
+
+    /* ===== BOTONES ===== */
+    .btn-sap {
+      background: #003366;
       color: white;
       border: none;
-      padding: 10px 0;
-      width: 100%;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1rem;
+      padding: 10px 28px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
+      font-family: inherit;
     }
-    .sim-card .btn:hover { background: #0f2a4a; }
-    .sim-card .btn.secondary { background: #28a745; }
-    .sim-card .btn.secondary:hover { background: #1e7e34; }
+    .btn-sap:hover { background: #002244; }
+    .btn-sap.secondary {
+      background: #6c7a8d;
+    }
+    .btn-sap.secondary:hover { background: #5a6879; }
+    .btn-sap.success {
+      background: #1e7e34;
+    }
+    .btn-sap.success:hover { background: #16662a; }
+    .btn-sap.danger {
+      background: #b02a37;
+    }
+    .btn-sap.danger:hover { background: #8f222c; }
 
-    .result-box {
-      margin-top: 14px;
-      background: #eef4ff;
-      padding: 14px 16px;
+    /* ===== TABLAS ===== */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0 20px;
+      border-radius: 8px;
+      border: 1px solid #e0e4eb;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th {
+      background: #e8ecf1;
+      color: #1a3c6e;
+      font-weight: 700;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 2px solid #d0d7e2;
+    }
+    td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+    .text-right { text-align: right; }
+    .text-center { text-align: center; }
+    .text-success { color: #1e7e34; font-weight: 600; }
+    .text-danger { color: #b02a37; font-weight: 600; }
+    .text-warning { color: #856404; font-weight: 600; }
+
+    /* ===== TARJETAS DE RESUMEN ===== */
+    .resumen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 16px 0 20px;
+    }
+    .resumen-card {
+      background: #f8f9fc;
       border-radius: 10px;
-      border-left: 5px solid #1a3c6e;
-      font-size: 0.95rem;
-      line-height: 1.7;
+      padding: 16px 18px;
+      border-left: 4px solid #003366;
     }
-    .result-box strong { color: #1a3c6e; }
-    .result-box .highlight { color: #c0392b; font-weight: 700; }
-
-    .footer {
-      margin-top: 50px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #888;
-      border-top: 1px solid #ddd;
-      padding-top: 20px;
+    .resumen-card .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: #6c7a8d;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
-    .footer a { color: #1a3c6e; text-decoration: none; }
-    .footer a:hover { text-decoration: underline; }
+    .resumen-card .value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1a3c6e;
+      margin-top: 2px;
+    }
+    .resumen-card .value.positive { color: #1e7e34; }
+    .resumen-card .value.negative { color: #b02a37; }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 1.6rem; }
-      .sim-grid { grid-template-columns: 1fr; }
-      .container { padding: 0 10px; }
+    /* ===== ALERTAS ===== */
+    .alert {
+      padding: 12px 18px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 0.9rem;
+      display: none;
+    }
+    .alert.show { display: block; }
+    .alert.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .alert.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .alert.info {
+      background: #cce5ff;
+      color: #004085;
+      border: 1px solid #b8daff;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 700px) {
+      .sap-header { flex-direction: column; align-items: flex-start; }
+      .sap-menu { flex-direction: column; }
+      .sap-menu button { border-radius: 4px; padding: 8px 14px; border-bottom: none; }
+      .sap-menu button.active { border-left: 4px solid #ffd700; border-bottom: none; }
+      .form-row { flex-direction: column; }
+      .form-group { flex: 1 1 100%; }
+      .resumen-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
-<div class="container">
 
+  <!-- Botón volver -->
   <a href="../index.html" class="back">⬅ Volver al inicio</a>
 
-  <h1>🧮 Simuladores Contables</h1>
-  <div class="subtitle">
-    Herramientas interactivas para practicar liquidaciones • <strong>Filtros Partmo S.A.S.</strong> • 2026
-  </div>
+  <!-- ===== CONTENEDOR SAP ===== -->
+  <div class="sap-container">
 
-  <!-- ============================================================ -->
-  <!-- GRID DE SIMULADORES                                            -->
-  <!-- ============================================================ -->
-  <div class="sim-grid">
-
-    <!-- ========================================================== -->
-    <!-- 1. SIMULADOR: RETENCIÓN EN LA FUENTE (COMPRAS)              -->
-    <!-- ========================================================== -->
-    <div class="sim-card">
-      <h3>🛒 Retención en Compras</h3>
-      <div class="desc">
-        Calcula la retención que debes aplicar al comprar bienes o servicios.
-        Tarifa: <strong>2.5%</strong> (vigente desde julio 2026).
-      </div>
-
-      <label for="valorCompra">Valor de la compra (sin IVA):</label>
-      <input type="number" id="valorCompra" value="1000000" step="1000">
-
-      <label for="baseCompra">Base gravable:</label>
-      <select id="baseCompra">
-        <option value="si">Sí (incluye IVA en la base)</option>
-        <option value="no" selected>No (solo valor del bien/servicio)</option>
-      </select>
-
-      <button class="btn" onclick="calcularRetencionCompras()">Calcular Retención</button>
-      <button class="btn secondary" onclick="limpiarRetencionCompras()">Limpiar</button>
-
-      <div id="resultadoCompras" class="result-box" style="display:none;">
-        <!-- Se llena con JavaScript -->
-      </div>
+    <!-- BARRA SUPERIOR -->
+    <div class="sap-header">
+      <div class="logo">📊 <span>SAP</span> Simulator • Módulo FI</div>
+      <div class="user">👤 Usuario: <strong>APRENDIZ_PRACTICA</strong> | Empresa: <strong>FILTROS PARTMO</strong></div>
     </div>
 
-    <!-- ========================================================== -->
-    <!-- 2. SIMULADOR: RETENCIÓN HONORARIOS (persona jurídica)       -->
-    <!-- ========================================================== -->
-    <div class="sim-card">
-      <h3>🧑‍💼 Retención Honorarios</h3>
-      <div class="desc">
-        Calcula la retención por servicios profesionales a <strong>persona jurídica</strong>.
-        Tarifa: <strong>11%</strong> (vigente desde julio 2026).
-      </div>
-
-      <label for="valorHonorarios">Valor del honorario (sin IVA):</label>
-      <input type="number" id="valorHonorarios" value="500000" step="10000">
-
-      <button class="btn" onclick="calcularRetencionHonorarios()">Calcular Retención</button>
-      <button class="btn secondary" onclick="limpiarRetencionHonorarios()">Limpiar</button>
-
-      <div id="resultadoHonorarios" class="result-box" style="display:none;">
-        <!-- Se llena con JavaScript -->
-      </div>
+    <!-- MENÚ -->
+    <div class="sap-menu">
+      <button class="active" data-section="asientos">📝 Registrar Asiento</button>
+      <button data-section="consulta">🔍 Consulta de Saldos</button>
+      <button data-section="reporte">📄 Reporte Mayor</button>
+      <button data-section="balance">⚖️ Balance de Prueba</button>
     </div>
 
-    <!-- ========================================================== -->
-    <!-- 3. SIMULADOR: IVA (19%)                                     -->
-    <!-- ========================================================== -->
-    <div class="sim-card">
-      <h3>🧾 IVA - Impuesto al Valor Agregado</h3>
-      <div class="desc">
-        Calcula el IVA al <strong>19%</strong> (tarifa general 2026).
-        Útil para facturar ventas o saber el IVA descontable en compras.
+    <!-- ===== CUERPO ===== -->
+    <div class="sap-body">
+
+      <!-- ========================================= -->
+      <!-- SECCIÓN 1: REGISTRAR ASIENTO              -->
+      <!-- ========================================= -->
+      <div id="section-asientos" class="sap-section active">
+
+        <h2>📝 Registrar Asiento Contable</h2>
+        <div class="sub">Simula el registro de una operación en el módulo FI de SAP</div>
+
+        <!-- Alertas -->
+        <div id="alert-asiento" class="alert"></div>
+
+        <!-- Formulario -->
+        <div class="form-row">
+          <div class="form-group">
+            <label>📅 Fecha</label>
+            <input type="date" id="fecha-asiento" value="2026-07-03">
+          </div>
+          <div class="form-group">
+            <label>📋 Tipo de Asiento</label>
+            <select id="tipo-asiento">
+              <option value="compras">Compra de materia prima</option>
+              <option value="ventas">Venta de filtros</option>
+              <option value="nomina">Pago de nómina</option>
+              <option value="gasto">Pago de gasto</option>
+              <option value="depreciacion">Depreciación</option>
+              <option value="personalizado">Personalizado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>💰 Cuenta Débito</label>
+            <select id="cuenta-debito">
+              <option value="1105">1105 - Caja</option>
+              <option value="1110">1110 - Bancos</option>
+              <option value="1435">1435 - Materias primas</option>
+              <option value="1515">1515 - Productos en proceso</option>
+              <option value="1615">1615 - Productos terminados</option>
+              <option value="5101">5101 - Sueldos y salarios</option>
+              <option value="5165">5165 - Depreciación</option>
+              <option value="5201">5201 - Gastos generales</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>💸 Cuenta Crédito</label>
+            <select id="cuenta-credito">
+              <option value="1110">1110 - Bancos</option>
+              <option value="1105">1105 - Caja</option>
+              <option value="2205">2205 - Proveedores</option>
+              <option value="2370">2370 - Aportes nómina por pagar</option>
+              <option value="2408">2408 - IVA descontable</option>
+              <option value="2404">2404 - IVA generado</option>
+              <option value="4135">4135 - Ventas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>💵 Valor ($)</label>
+            <input type="number" id="valor-asiento" value="10000000" step="1000">
+          </div>
+          <div class="form-group">
+            <label>📝 Concepto</label>
+            <input type="text" id="concepto-asiento" placeholder="Ej. Compra de acero" style="min-width:160px;">
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:4px;">
+          <button class="btn-sap" onclick="registrarAsiento()">✅ Registrar Asiento</button>
+          <button class="btn-sap secondary" onclick="limpiarFormulario()">🗑️ Limpiar</button>
+        </div>
+
+        <!-- Últimos asientos registrados -->
+        <h3 style="margin-top: 28px; color:#1a3c6e;">📋 Últimos Asientos Registrados</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Cuenta Débito</th>
+                <th>Cuenta Crédito</th>
+                <th class="text-right">Valor</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-asientos">
+              <tr><td colspan="6" class="text-center" style="color:#888;">No hay asientos registrados aún</td></tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
 
-      <label for="valorIVA">Valor base (sin IVA):</label>
-      <input type="number" id="valorIVA" value="2000000" step="10000">
+      <!-- ========================================= -->
+      <!-- SECCIÓN 2: CONSULTA DE SALDOS             -->
+      <!-- ========================================= -->
+      <div id="section-consulta" class="sap-section">
 
-      <button class="btn" onclick="calcularIVA()">Calcular IVA</button>
-      <button class="btn secondary" onclick="limpiarIVA()">Limpiar</button>
+        <h2>🔍 Consulta de Saldos</h2>
+        <div class="sub">Visualiza el saldo actual de cualquier cuenta contable</div>
 
-      <div id="resultadoIVA" class="result-box" style="display:none;">
-        <!-- Se llena con JavaScript -->
-      </div>
-    </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>📊 Seleccionar cuenta</label>
+            <select id="cuenta-consulta" onchange="consultarSaldo()">
+              <option value="1105">1105 - Caja</option>
+              <option value="1110">1110 - Bancos</option>
+              <option value="1435">1435 - Materias primas</option>
+              <option value="1515">1515 - Productos en proceso</option>
+              <option value="1615">1615 - Productos terminados</option>
+              <option value="2205">2205 - Proveedores</option>
+              <option value="2370">2370 - Aportes nómina por pagar</option>
+              <option value="2404">2404 - IVA generado</option>
+              <option value="2408">2408 - IVA descontable</option>
+              <option value="4135">4135 - Ventas</option>
+              <option value="5101">5101 - Sueldos y salarios</option>
+              <option value="5165">5165 - Depreciación</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>💰 Saldo Actual</label>
+            <input type="text" id="saldo-consulta" readonly style="font-size:1.2rem; font-weight:700;">
+          </div>
+        </div>
 
-    <!-- ========================================================== -->
-    <!-- 4. SIMULADOR: ICA - Bucaramanga (Industria)                 -->
-    <!-- ========================================================== -->
-    <div class="sim-card">
-      <h3>🏛️ ICA - Bucaramanga</h3>
-      <div class="desc">
-        Calcula el Impuesto de Industria y Comercio para <strong>actividad industrial</strong>
-        en Bucaramanga. Tarifa: <strong>2.5 por mil (2.5‰)</strong>.
-      </div>
+        <div id="detalle-consulta" style="margin-top:12px; font-size:0.9rem; color:#555;">
+          Selecciona una cuenta para ver su saldo.
+        </div>
 
-      <label for="ingresosICA">Ingresos brutos del período:</label>
-      <input type="number" id="ingresosICA" value="10000000" step="100000">
-
-      <label for="tarifaICA">Tarifa aplicable (‰):</label>
-      <input type="number" id="tarifaICA" value="2.5" step="0.1" min="0.1">
-
-      <button class="btn" onclick="calcularICA()">Calcular ICA</button>
-      <button class="btn secondary" onclick="limpiarICA()">Limpiar</button>
-
-      <div id="resultadoICA" class="result-box" style="display:none;">
-        <!-- Se llena con JavaScript -->
-      </div>
-    </div>
-
-    <!-- ========================================================== -->
-    <!-- 5. SIMULADOR: DEPRECIACIÓN LÍNEA RECTA                      -->
-    <!-- ========================================================== -->
-    <div class="sim-card">
-      <h3>⚙️ Depreciación Línea Recta</h3>
-      <div class="desc">
-        Calcula la depreciación anual y mensual de un activo fijo.
-        Método más usado en empresas manufactureras como Partmo.
+        <!-- Resumen de cuentas principales -->
+        <h3 style="margin-top: 28px; color:#1a3c6e;">📊 Resumen de Cuentas Principales</h3>
+        <div class="resumen-grid" id="resumen-cuentas">
+          <!-- Se llena con JavaScript -->
+        </div>
       </div>
 
-      <label for="valorActivo">Valor del activo ($):</label>
-      <input type="number" id="valorActivo" value="50000000" step="1000000">
+      <!-- ========================================= -->
+      <!-- SECCIÓN 3: REPORTE MAYOR                  -->
+      <!-- ========================================= -->
+      <div id="section-reporte" class="sap-section">
 
-      <label for="valorResidual">Valor residual ($):</label>
-      <input type="number" id="valorResidual" value="5000000" step="100000">
+        <h2>📄 Reporte Mayor</h2>
+        <div class="sub">Movimientos detallados por cuenta contable</div>
 
-      <label for="vidaUtil">Vida útil (años):</label>
-      <input type="number" id="vidaUtil" value="10" step="1" min="1">
+        <div class="form-row">
+          <div class="form-group">
+            <label>📊 Cuenta</label>
+            <select id="cuenta-reporte" onchange="generarReporte()">
+              <option value="1105">1105 - Caja</option>
+              <option value="1110">1110 - Bancos</option>
+              <option value="1435">1435 - Materias primas</option>
+              <option value="2205">2205 - Proveedores</option>
+              <option value="4135">4135 - Ventas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>📅 Desde</label>
+            <input type="date" id="reporte-desde" value="2026-07-01">
+          </div>
+          <div class="form-group">
+            <label>📅 Hasta</label>
+            <input type="date" id="reporte-hasta" value="2026-07-03">
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button class="btn-sap" onclick="generarReporte()">🔍 Generar</button>
+          </div>
+        </div>
 
-      <button class="btn" onclick="calcularDepreciacion()">Calcular Depreciación</button>
-      <button class="btn secondary" onclick="limpiarDepreciacion()">Limpiar</button>
-
-      <div id="resultadoDepreciacion" class="result-box" style="display:none;">
-        <!-- Se llena con JavaScript -->
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th># Asiento</th>
+                <th class="text-right">Débito</th>
+                <th class="text-right">Crédito</th>
+                <th class="text-right">Saldo</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-reporte">
+              <tr><td colspan="6" class="text-center" style="color:#888;">Selecciona una cuenta y genera el reporte</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
 
-    <!-- ========================================================== -->
-    <!-- 6. SIMULADOR: RENTA PERSONAS JURÍDICAS (35%)               -->
-    <!-- ========================================================== -->
-    <div class="sim-card">
-      <h3>📊 Renta Personas Jurídicas</h3>
-      <div class="desc">
-        Calcula el impuesto de renta a la tarifa general del <strong>35%</strong>
-        para el año gravable 2026.
+      <!-- ========================================= -->
+      <!-- SECCIÓN 4: BALANCE DE PRUEBA              -->
+      <!-- ========================================= -->
+      <div id="section-balance" class="sap-section">
+
+        <h2>⚖️ Balance de Prueba</h2>
+        <div class="sub">Verifica que la sumatoria de débitos = créditos (partida doble)</div>
+
+        <button class="btn-sap" onclick="generarBalance()">📊 Generar Balance</button>
+
+        <div id="balance-resultado" style="margin-top:16px;">
+          <div class="resumen-grid" id="balance-resumen">
+            <!-- Se llena con JS -->
+          </div>
+          <div class="table-wrap" style="margin-top:12px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Cuenta</th>
+                  <th class="text-right">Saldo Débito</th>
+                  <th class="text-right">Saldo Crédito</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-balance">
+                <tr><td colspan="4" class="text-center" style="color:#888;">Haz clic en "Generar Balance"</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
-      <label for="utilidadRenta">Utilidad fiscal (ingresos - costos - deducciones):</label>
-      <input type="number" id="utilidadRenta" value="80000000" step="1000000">
+    </div><!-- /sap-body -->
+  </div><!-- /sap-container -->
 
-      <button class="btn" onclick="calcularRenta()">Calcular Renta</button>
-      <button class="btn secondary" onclick="limpiarRenta()">Limpiar</button>
+  <!-- ========================================= -->
+  <!-- ===== JAVASCRIPT =====                    -->
+  <!-- ========================================= -->
+  <script>
+    // ============================================
+    // 1. BASE DE DATOS EN MEMORIA
+    // ============================================
+    const cuentas = {
+      '1105': { nombre: 'Caja', saldo: 15000000 },
+      '1110': { nombre: 'Bancos', saldo: 45000000 },
+      '1435': { nombre: 'Materias primas', saldo: 22000000 },
+      '1515': { nombre: 'Productos en proceso', saldo: 8000000 },
+      '1615': { nombre: 'Productos terminados', saldo: 12000000 },
+      '2205': { nombre: 'Proveedores', saldo: 18000000 },
+      '2370': { nombre: 'Aportes nómina por pagar', saldo: 5000000 },
+      '2404': { nombre: 'IVA generado', saldo: 9500000 },
+      '2408': { nombre: 'IVA descontable', saldo: 3800000 },
+      '4135': { nombre: 'Ventas', saldo: 65000000 },
+      '5101': { nombre: 'Sueldos y salarios', saldo: 28000000 },
+      '5165': { nombre: 'Depreciación', saldo: 4500000 },
+      '5201': { nombre: 'Gastos generales', saldo: 12000000 },
+    };
 
-      <div id="resultadoRenta" class="result-box" style="display:none;">
-        <!-- Se llena con JavaScript -->
-      </div>
-    </div>
+    let asientos = [];
+    let contadorAsientos = 0;
+    let siguienteNumero = 1;
 
-  </div> <!-- fin sim-grid -->
-
-  <!-- ============================================================ -->
-  <!-- 7. SIMULADOR: LIQUIDACIÓN DE NÓMINA (integrado)              -->
-  <!-- ============================================================ -->
-  <div style="margin-top: 28px;">
-    <div class="sim-card" style="max-width: 700px; margin: 0 auto;">
-      <h3>👥 Liquidación de Nómina (básica)</h3>
-      <div class="desc">
-        Calcula el salario neto y los aportes a seguridad social de un empleado.
-        <strong>Valores UVT 2026: $52.374</strong>.
-      </div>
-
-      <label for="salarioBase">Salario base mensual ($):</label>
-      <input type="number" id="salarioBase" value="2500000" step="10000">
-
-      <label for="diasTrabajados">Días trabajados (en el mes):</label>
-      <input type="number" id="diasTrabajados" value="30" step="1" min="1" max="30">
-
-      <label for="auxilioTransporte">¿Aplica auxilio de transporte? (para salarios ≤ 2 SMMLV)</label>
-      <select id="auxilioTransporte">
-        <option value="si">Sí (aplica)</option>
-        <option value="no" selected>No (no aplica)</option>
-      </select>
-
-      <button class="btn" onclick="calcularNomina()">Calcular Nómina</button>
-      <button class="btn secondary" onclick="limpiarNomina()">Limpiar</button>
-
-      <div id="resultadoNomina" class="result-box" style="display:none;">
-        <!-- Se llena con JavaScript -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ============================================================ -->
-  <!-- FOOTER                                                        -->
-  <!-- ============================================================ -->
-  <div class="footer">
-    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander<br>
-    <a href="https://github.com/tu-usuario/tu-usuario.github.io" target="_blank">Ver código en GitHub</a>
-  </div>
-
-</div>
-
-<!-- ============================================================ -->
-<!-- JAVASCRIPT - TODOS LOS SIMULADORES                            -->
-<!-- ============================================================ -->
-<script>
-  // --------------------------------------------------------------
-  // 1. RETENCIÓN EN COMPRAS (2.5%)
-  // --------------------------------------------------------------
-  function calcularRetencionCompras() {
-    let valor = parseFloat(document.getElementById('valorCompra').value) || 0;
-    let baseIncluyeIVA = document.getElementById('baseCompra').value === 'si';
-    let base = valor;
-    let iva = 0;
-    if (baseIncluyeIVA) {
-      iva = valor * 0.19;
-      base = valor - iva;
-    }
-    let retencion = base * 0.025;
-    let totalPagar = valor + (baseIncluyeIVA ? 0 : valor * 0.19);
-
-    let resultado = document.getElementById('resultadoCompras');
-    resultado.style.display = 'block';
-    resultado.innerHTML = `
-      <strong>📋 Resumen:</strong><br>
-      Valor base: <strong>$${base.toLocaleString()}</strong><br>
-      IVA (19%): <strong>$${iva.toLocaleString()}</strong><br>
-      <strong>Retención (2.5%): <span class="highlight">$${retencion.toLocaleString()}</span></strong><br>
-      Total a pagar: $${totalPagar.toLocaleString()}
-    `;
-  }
-
-  function limpiarRetencionCompras() {
-    document.getElementById('valorCompra').value = '1000000';
-    document.getElementById('baseCompra').value = 'no';
-    document.getElementById('resultadoCompras').style.display = 'none';
-  }
-
-  // --------------------------------------------------------------
-  // 2. RETENCIÓN HONORARIOS (11%)
-  // --------------------------------------------------------------
-  function calcularRetencionHonorarios() {
-    let valor = parseFloat(document.getElementById('valorHonorarios').value) || 0;
-    let retencion = valor * 0.11;
-    let iva = valor * 0.19;
-    let total = valor + iva;
-
-    let resultado = document.getElementById('resultadoHonorarios');
-    resultado.style.display = 'block';
-    resultado.innerHTML = `
-      <strong>📋 Resumen:</strong><br>
-      Honorario base: <strong>$${valor.toLocaleString()}</strong><br>
-      IVA (19%): $${iva.toLocaleString()}<br>
-      <strong>Retención (11%): <span class="highlight">$${retencion.toLocaleString()}</span></strong><br>
-      Total con IVA: $${total.toLocaleString()}
-    `;
-  }
-
-  function limpiarRetencionHonorarios() {
-    document.getElementById('valorHonorarios').value = '500000';
-    document.getElementById('resultadoHonorarios').style.display = 'none';
-  }
-
-  // --------------------------------------------------------------
-  // 3. IVA (19%)
-  // --------------------------------------------------------------
-  function calcularIVA() {
-    let valor = parseFloat(document.getElementById('valorIVA').value) || 0;
-    let iva = valor * 0.19;
-    let total = valor + iva;
-
-    let resultado = document.getElementById('resultadoIVA');
-    resultado.style.display = 'block';
-    resultado.innerHTML = `
-      <strong>📋 Resumen:</strong><br>
-      Base: <strong>$${valor.toLocaleString()}</strong><br>
-      <strong>IVA (19%): <span class="highlight">$${iva.toLocaleString()}</span></strong><br>
-      Total con IVA: $${total.toLocaleString()}
-    `;
-  }
-
-  function limpiarIVA() {
-    document.getElementById('valorIVA').value = '2000000';
-    document.getElementById('resultadoIVA').style.display = 'none';
-  }
-
-  // --------------------------------------------------------------
-  // 4. ICA - BUCARAMANGA (2.5‰)
-  // --------------------------------------------------------------
-  function calcularICA() {
-    let ingresos = parseFloat(document.getElementById('ingresosICA').value) || 0;
-    let tarifa = parseFloat(document.getElementById('tarifaICA').value) || 0;
-    let ica = (ingresos * tarifa) / 1000;
-
-    let resultado = document.getElementById('resultadoICA');
-    resultado.style.display = 'block';
-    resultado.innerHTML = `
-      <strong>📋 Resumen:</strong><br>
-      Ingresos: <strong>$${ingresos.toLocaleString()}</strong><br>
-      Tarifa: <strong>${tarifa}‰</strong><br>
-      <strong>ICA a pagar: <span class="highlight">$${ica.toLocaleString()}</span></strong><br>
-      <small>📌 Para Bucaramanga, industria = 2.5‰</small>
-    `;
-  }
-
-  function limpiarICA() {
-    document.getElementById('ingresosICA').value = '10000000';
-    document.getElementById('tarifaICA').value = '2.5';
-    document.getElementById('resultadoICA').style.display = 'none';
-  }
-
-  // --------------------------------------------------------------
-  // 5. DEPRECIACIÓN LÍNEA RECTA
-  // --------------------------------------------------------------
-  function calcularDepreciacion() {
-    let valor = parseFloat(document.getElementById('valorActivo').value) || 0;
-    let residual = parseFloat(document.getElementById('valorResidual').value) || 0;
-    let vida = parseFloat(document.getElementById('vidaUtil').value) || 1;
-
-    let depreciable = valor - residual;
-    let anual = depreciable / vida;
-    let mensual = anual / 12;
-
-    let resultado = document.getElementById('resultadoDepreciacion');
-    resultado.style.display = 'block';
-    resultado.innerHTML = `
-      <strong>📋 Resumen:</strong><br>
-      Valor del activo: <strong>$${valor.toLocaleString()}</strong><br>
-      Valor residual: $${residual.toLocaleString()}<br>
-      Monto depreciable: $${depreciable.toLocaleString()}<br>
-      Vida útil: ${vida} años<br>
-      <strong>Depreciación anual: <span class="highlight">$${anual.toLocaleString()}</span></strong><br>
-      <strong>Depreciación mensual: <span class="highlight">$${mensual.toLocaleString()}</span></strong>
-    `;
-  }
-
-  function limpiarDepreciacion() {
-    document.getElementById('valorActivo').value = '50000000';
-    document.getElementById('valorResidual').value = '5000000';
-    document.getElementById('vidaUtil').value = '10';
-    document.getElementById('resultadoDepreciacion').style.display = 'none';
-  }
-
-  // --------------------------------------------------------------
-  // 6. RENTA PERSONAS JURÍDICAS (35%)
-  // --------------------------------------------------------------
-  function calcularRenta() {
-    let utilidad = parseFloat(document.getElementById('utilidadRenta').value) || 0;
-    let impuesto = utilidad * 0.35;
-
-    let resultado = document.getElementById('resultadoRenta');
-    resultado.style.display = 'block';
-    resultado.innerHTML = `
-      <strong>📋 Resumen:</strong><br>
-      Utilidad fiscal: <strong>$${utilidad.toLocaleString()}</strong><br>
-      Tarifa: <strong>35%</strong><br>
-      <strong>Impuesto de renta a pagar: <span class="highlight">$${impuesto.toLocaleString()}</span></strong>
-    `;
-  }
-
-  function limpiarRenta() {
-    document.getElementById('utilidadRenta').value = '80000000';
-    document.getElementById('resultadoRenta').style.display = 'none';
-  }
-
-  // --------------------------------------------------------------
-  // 7. LIQUIDACIÓN DE NÓMINA
-  // --------------------------------------------------------------
-  function calcularNomina() {
-    let salarioBase = parseFloat(document.getElementById('salarioBase').value) || 0;
-    let dias = parseInt(document.getElementById('diasTrabajados').value) || 30;
-    let auxilio = document.getElementById('auxilioTransporte').value === 'si';
-
-    // Salario proporcional
-    let salarioProporcional = (salarioBase / 30) * dias;
-
-    // Auxilio de transporte (2026: $162.000 aprox, pero lo calculamos proporcional)
-    let auxilioMensual = 162000; // valor aproximado 2026
-    let auxilioProporcional = 0;
-    if (auxilio && salarioBase <= (2 * 1300000)) { // 2 SMMLV aprox
-      auxilioProporcional = (auxilioMensual / 30) * dias;
+    // ============================================
+    // 2. NOMBRES DE CUENTAS PARA SELECTS
+    // ============================================
+    function getNombreCuenta(codigo) {
+      return cuentas[codigo] ? cuentas[codigo].nombre : codigo;
     }
 
-    // Deducciones (seguridad social: 8% salud + 12% pensión = 
+    function getCuentaCompleta(codigo) {
+      return cuentas[codigo] ? `${codigo} - ${cuentas[codigo].nombre}` : codigo;
+    }
+
+    // ============================================
+    // 3. MENÚ - CAMBIAR SECCIÓN
+    // ============================================
+    document.querySelectorAll('.sap-menu button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.sap-menu button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const sectionId = this.dataset.section;
+        document.querySelectorAll('.sap-section').forEach(s => s.classList.remove('active'));
+        document.getElementById(`section-${sectionId}`).classList.add('active');
+      });
+    });
+
+============================================
+    // 4. REGISTRAR ASIENTO
+    // ============================================
+    function registrarAsiento() {
+      const fecha = document.getElementById('fecha-asiento').value;
+      const tipo = document.getElementById('tipo-asiento').value;
+      const cuentaDebito = document.getElementById('cuenta-debito').value;
+      const cuentaCredito = document.getElementById('cuenta-credito').value;
+      let valor = parseFloat(document.getElementById('valor-asiento').value);
+      let concepto = document.getElementById('concepto-asiento').value.trim();
+
+      // Validaciones
+      if (!fecha) { mostrarAlerta('asiento', 'Selecciona una fecha válida.', 'error'); return; }
+      if (isNaN(valor) || valor <= 0) { mostrarAlerta('asiento', 'Ingresa un valor mayor a 0.', 'error'); return; }
+      if (cuentaDebito === cuentaCredito) { mostrarAlerta('asiento', 'La cuenta débito y crédito no pueden ser la misma.', 'error'); return; }
+
+      // Si es un tipo predefinido, auto-completar concepto
+      if (concepto === '' || tipo !== 'personalizado') {
+        const tipos = {
+          'compras': 'Compra de materia prima',
+          'ventas': 'Venta de filtros',
+          'nomina': 'Pago de nómina',
+          'gasto': 'Pago de gasto',
+          'depreciacion': 'Registro de depreciación',
+          'personalizado': concepto || 'Asiento manual'
+        };
+        concepto = tipos[tipo] || concepto;
+      }
+
+      // Registrar el asiento
+      const asiento = {
+        numero: siguienteNumero++,
+        fecha: fecha,
+        concepto: concepto,
+        cuentaDebito: cuentaDebito,
+        cuentaCredito: cuentaCredito,
+        valor: valor,
+        tipo: tipo
+      };
+
+      asientos.push(asiento);
+
+      // Actualizar saldos
+      cuentas[cuentaDebito].saldo += valor;
+      cuentas[cuentaCredito].saldo -= valor;
+
+      // Mostrar éxito
+      mostrarAlerta('asiento', `✅ Asiento #${asiento.numero} registrado correctamente por $${formatearNumero(valor)}`, 'success');
+
+      // Actualizar tablas
+      actualizarTablaAsientos();
+      actualizarResumenCuentas();
+      limpiarFormulario();
+
+      // Si estamos en consulta o balance, actualizar
+      consultarSaldo();
+    }
+
+    function actualizarTablaAsientos() {
+      const tbody = document.getElementById('tabla-asientos');
+      if (asientos.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center" style="color:#888;">No hay asientos registrados aún</td></tr>';
+        return;
+      }
+
+      // Mostrar últimos 10 (más recientes primero)
+      const ultimos = [...asientos].reverse().slice(0, 10);
+      tbody.innerHTML = ultimos.map((a, i) => `
+        <tr>
+          <td>${a.numero}</td>
+          <td>${a.fecha}</td>
+          <td>${a.concepto}</td>
+          <td>${getCuentaCompleta(a.cuentaDebito)}</td>
+          <td>${getCuentaCompleta(a.cuentaCredito)}</td>
+          <td class="text-right">$${formatearNumero(a.valor)}</td>
+        </tr>
+      `).join('');
+    }
+
+    // ============================================
+    // 5. CONSULTA DE SALDOS
+    // ============================================
+    function consultarSaldo() {
+      const codigo = document.getElementById('cuenta-consulta').value;
+      const cuenta = cuentas[codigo];
+      if (!cuenta) {
+        document.getElementById('saldo-consulta').value = 'Cuenta no encontrada';
+        document.getElementById('detalle-consulta').textContent = 'Cuenta no válida.';
+        return;
+      }
+      document.getElementById('saldo-consulta').value = `$${formatearNumero(cuenta.saldo)}`;
+      document.getElementById('detalle-consulta').innerHTML = `
+        <strong>${codigo}</strong> - ${cuenta.nombre}<br>
+        <span style="color:${cuenta.saldo >= 0 ? '#1e7e34' : '#b02a37'};">
+          Saldo: ${cuenta.saldo >= 0 ? 'Deudor' : 'Acreedor'} 
+          (${cuenta.saldo >= 0 ? '+' : ''}$${formatearNumero(Math.abs(cuenta.saldo))})
+        </span>
+      `;
+    }
+
+    function actualizarResumenCuentas() {
+      const grid = document.getElementById('resumen-cuentas');
+      const principales = ['1105', '1110', '1435', '2205', '4135', '5101'];
+      grid.innerHTML = principales.map(cod => {
+        const c = cuentas[cod];
+        if (!c) return '';
+        return `
+          <div class="resumen-card">
+            <div class="label">${cod}</div>
+            <div class="value ${c.saldo >= 0 ? 'positive' : 'negative'}">
+              $${formatearNumero(c.saldo)}
+            </div>
+            <div style="font-size:0.7rem; color:#888;">${c.nombre}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ============================================
+    // 6. REPORTE MAYOR
+    // ============================================
+    function generarReporte() {
+      const codigo = document.getElementById('cuenta-reporte').value;
+      const desde = document.getElementById('reporte-desde').value;
+      const hasta = document.getElementById('reporte-hasta').value;
+      const tbody = document.getElementById('tabla-reporte');
+
+      if (!desde || !hasta) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center" style="color:#888;">Selecciona un rango de fechas.</td></tr>';
+        return;
+      }
+
+      const movimientos = asientos.filter(a => {
+        return (a.cuentaDebito === codigo || a.cuentaCredito === codigo) &&
+               a.fecha >= desde && a.fecha <= hasta;
+      });
+
+      if (movimientos.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center" style="color:#888;">No hay movimientos para ${getCuentaCompleta(codigo)} en este periodo.</td></tr>`;
+        return;
+      }
+
+      let saldo = 0;
+      let html = '';
+      movimientos.sort((a,b) => a.fecha.localeCompare(b.fecha) || a.numero - b.numero);
+      movimientos.forEach(a => {
+        const esDebito = a.cuentaDebito === codigo;
+        const monto = a.valor;
+        if (esDebito) saldo += monto;
+        else saldo -= monto;
+        html += `
+          <tr>
+            <td>${a.fecha}</td>
+            <td>${a.concepto}</td>
+            <td>#${a.numero}</td>
+            <td class="text-right">${esDebito ? `$${formatearNumero(monto)}` : ''}</td>
+            <td class="text-right">${!esDebito ? `$${formatearNumero(monto)}` : ''}</td>
+            <td class="text-right"><strong>$${formatearNumero(saldo)}</strong></td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    // ============================================
+    // 7. BALANCE DE PRUEBA
+    // ============================================
+    function generarBalance() {
+      const tbody = document.getElementById('tabla-balance');
+      const resumen = document.getElementById('balance-resumen');
+
+      let totalDebito = 0;
+      let totalCredito = 0;
+      let html = '';
+
+      Object.keys(cuentas).forEach(cod => {
+        const c = cuentas[cod];
+        const saldo = c.saldo;
+        if (saldo === 0) return;
+        const esDeudor = saldo > 0;
+        const monto = Math.abs(saldo);
+        if (esDeudor) totalDebito += monto;
+        else totalCredito += monto;
+
+        html += `
+          <tr>
+            <td>${cod}</td>
+            <td>${c.nombre}</td>
+            <td class="text-right">${esDeudor ? `$${formatearNumero(monto)}` : ''}</td>
+            <td class="text-right">${!esDeudor ? `$${formatearNumero(monto)}` : ''}</td>
+          </tr>
+        `;
+      });
+
+      // Totales
+      html += `
+        <tr style="font-weight:700; background:#e8ecf1;">
+          <td colspan="2" style="text-align:right;">TOTALES</td>
+          <td class="text-right">$${formatearNumero(totalDebito)}</td>
+          <td class="text-right">$${formatearNumero(totalCredito)}</td>
+        </tr>
+      `;
+
+      tbody.innerHTML = html;
+
+      // Resumen
+      resumen.innerHTML = `
+        <div class="resumen-card" style="border-left-color:#1e7e34;">
+          <div class="label">Total Débitos</div>
+          <div class="value positive">$${formatearNumero(totalDebito)}</div>
+        </div>
+        <div class="resumen-card" style="border-left-color:#b02a37;">
+          <div class="label">Total Créditos</div>
+          <div class="value negative">$${formatearNumero(totalCredito)}</div>
+        </div>
+        <div class="resumen-card" style="border-left-color:#003366;">
+          <div class="label">Diferencia</div>
+          <div class="value ${Math.abs(totalDebito - totalCredito) < 1 ? '' : 'negative'}" style="color:${Math.abs(totalDebito - totalCredito) < 1 ? '#1e7e34' : '#b02a37'};">
+            ${Math.abs(totalDebito - totalCredito) < 1 ? '✅ Balanceado' : `⚠️ Diferencia: $${formatearNumero(Math.abs(totalDebito - totalCredito))}`}
+          </div>
+        </div>
+      `;
+    }
+
+    // ============================================
+    // 8. UTILIDADES
+    // ============================================
+    function formatearNumero(num) {
+      return num.toLocaleString('es-CO');
+    }
+
+    function mostrarAlerta(section, mensaje, tipo) {
+      const alertEl = document.getElementById(`alert-${section}`);
+      if (!alertEl) return;
+      alertEl.className = `alert ${tipo} show`;
+      alertEl.textContent = mensaje;
+      setTimeout(() => {
+        alertEl.classList.remove('show');
+      }, 5000);
+    }
+
+    function limpiarFormulario() {
+      document.getElementById('valor-asiento').value = '10000000';
+      document.getElementById('concepto-asiento').value = '';
+      document.getElementById('tipo-asiento').value = 'personalizado';
+      // No limpiar fecha ni cuentas para facilitar registro rápido
+    }
+
+    // ============================================
+    // 9. INICIALIZAR AL CARGAR LA PÁGINA
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cargar algunos asientos de ejemplo para que el simulador no esté vacío
+      const ejemplos = [
+        { fecha: '2026-07-01', concepto: 'Compra inicial de acero', cuentaDebito: '1435', cuentaCredito: '2205', valor: 8000000 },
+        { fecha: '2026-07-01', concepto: 'Venta de filtros modelo X', cuentaDebito: '1105', cuentaCredito: '4135', valor: 5000000 },
+        { fecha: '2026-07-02', concepto: 'Pago de nómina quincena', cuentaDebito: '5101', cuentaCredito: '1110', valor: 12000000 },
+        { fecha: '2026-07-02', concepto: 'Depreciación maquinaria', cuentaDebito: '5165', cuentaCredito: '1110', valor: 1500000 },
+        { fecha: '2026-07-03', concepto: 'Compra de filtros para inventario', cuentaDebito: '1435', cuentaCredito: '2205', valor: 3500000 },
+      ];
+
+      ejemplos.forEach(e => {
+        const asiento = {
+          numero: siguienteNumero++,
+          fecha: e.fecha,
+          concepto: e.concepto,
+          cuentaDebito: e.cuentaDebito,
+          cuentaCredito: e.cuentaCredito,
+          valor: e.valor,
+          tipo: 'ejemplo'
+        };
+        asientos.push(asiento);
+        cuentas[e.cuentaDebito].saldo += e.valor;
+        cuentas[e.cuentaCredito].saldo -= e.valor;
+      });
+
+      // Actualizar todas las vistas
+      actualizarTablaAsientos();
+      actualizarResumenCuentas();
+      consultarSaldo();
+      generarReporte();
+      generarBalance();
+
+      // Establecer fecha actual en los campos
+      const hoy = new Date().toISOString().split('T')[0];
+      document.querySelectorAll('input[type="date"]').forEach(el => {
+        if (!el.value) el.value = hoy;
+      });
+
+      console.log('✅ Simulador SAP iniciado correctamente');
+      console.log(`📊 ${asientos.length} asientos cargados`);
+    });
+  </script>
+</body>
+</html>
