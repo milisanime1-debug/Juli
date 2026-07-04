@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herramientas - Mi Hub Contable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f9fafc;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 12px 18px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+    .badge.green { background: #28a745; }
+    .badge.orange { background: #fd7e14; }
+    .badge.blue { background: #007bff; }
+    .card-herramienta {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 16px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .card-herramienta h4 {
+      color: #1a3c6e;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Botón volver -->
+  <a href="../index.html" class="back">⬅ Volver al inicio</a>
+
+  <h1>🛠️ Herramientas</h1>
+  <div class="subtitle">
+    Recursos prácticos para el día a día contable en <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. EXCEL CONTABLE                          -->
+  <!-- ========================================== -->
+  <h2>1. 📊 Excel Contable</h2>
+  <p>
+    Excel es tu mejor aliado. Dominar estas funciones te hará más rápida y eficiente:
+  </p>
+
+  <h3>⭐ Funciones imprescindibles</h3>
+  <table>
+    <tr><th>Función</th><th>¿Qué hace?</th><th>Ejemplo</th></tr>
+    <tr><td><strong>BUSCARV</strong></td><td>Busca un valor en una tabla y devuelve otro de la misma fila</td><td>=BUSCARV(A2; inventarios!A:B; 2; 0)</td></tr>
+    <tr><td><strong>SUMAR.SI</strong></td><td>Suma valores que cumplen un criterio</td><td>=SUMAR.SI(A:A; "Compras"; B:B)</td></tr>
+    <tr><td><strong>SI</strong></td><td>Evalúa una condición y devuelve un resultado</td><td>=SI(B2>1000000; "Aplica retención"; "No aplica")</td></tr>
+    <tr><td><strong>CONCATENAR / UNIRCADENAS</strong></td><td>Une texto de varias celdas</td><td>=CONCATENAR(A2; " "; B2)</td></tr>
+    <tr><td><strong>FECHA</strong></td><td>Construye una fecha</td><td>=FECHA(2026;7;1)</td></tr>
+    <tr><td><strong>Tablas Dinámicas</strong></td><td>Resumen y análisis de datos</td><td>Agrupar ventas por mes o por cliente</td></tr>
+  </table>
+
+  <div class="highlight">
+    <strong>💡 Tip:</strong> Aprende <strong>Ctrl + ;</strong> para fecha actual y <strong>F4</strong> para fijar celdas ($A$1). Te ahorrarán mucho tiempo.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. FACTURACIÓN ELECTRÓNICA                -->
+  <!-- ========================================== -->
+  <h2>2. 📄 Facturación Electrónica</h2>
+  <p>
+    En Colombia, la <strong>facturación electrónica</strong> es obligatoria desde 2019. Debes conocer:
+  </p>
+  <ul>
+    <li><strong>DIAN</strong>: La entidad que regula y valida las facturas.</li>
+    <li><strong>Adquiriente y vendedor</strong>: Datos completos (NIT, nombre, dirección).</li>
+    <li><strong>Números de resolución</strong>: Rango autorizado por la DIAN para cada tipo de documento.</li>
+    <li><strong>Código QR</strong>: Se genera automáticamente y permite validar la factura.</li>
+    <li><strong>XML</strong>: El formato técnico que se envía a la DIAN.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>📌 En Partmo:</strong> Pregunta qué software usan para facturación. Debes saber cómo anular una factura, cómo hacer una nota crédito y cómo reportar errores.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. SOFTWARE CONTABLE                       -->
+  <!-- ========================================== -->
+  <h2>3. 💻 Software Contable</h2>
+  <p>
+    En empresas como Partmo, es común usar alguno de estos sistemas. Infórmate sobre cuál usan y busca tutoriales básicos en YouTube:
+  </p>
+
+  <div class="card-herramienta">
+    <h4>📌 SAP <span class="badge blue">Multinacional</span></h4>
+    <p>Usado por grandes empresas y filiales de grupos internacionales. Tiene módulos de finanzas (FI), controlling (CO), ventas (SD) y compras (MM).</p>
+    <p><strong>Tip:</strong> Aprende las transacciones básicas: <strong>FB50</strong> (asientos contables), <strong>FS10</strong> (saldos de cuentas), <strong>FBL3N</strong> (lista de movimientos).</p>
+  </div>
+
+  <div class="card-herramienta">
+    <h4>📌 SIIGO <span class="badge green">Popular en Colombia</span></h4>
+    <p>Software contable y financiero muy usado en medianas y grandes empresas colombianas. Incluye módulos de contabilidad, facturación, inventarios y nómina.</p>
+    <p><strong>Tip:</strong> Familiarízate con el módulo de <strong>contabilidad</strong> y <strong>facturación electrónica</strong>.</p>
+  </div>
+
+  <div class="card-herramienta">
+    <h4>📌 Odoo <span class="badge orange">Open Source</span></h4>
+    <p>ERP de código abierto con módulos contables. Es flexible y permite personalizaciones. Algunas empresas lo usan por su bajo costo.</p>
+    <p><strong>Tip:</strong> Busca tutoriales de <strong>Odoo Accounting</strong> en YouTube.</p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4. PLANTILLAS Y FORMATOS                  -->
+  <!-- ========================================== -->
+  <h2>4. 📝 Plantillas y Formatos</h2>
+  <p>
+    Estas son las plantillas que más usarás en tu práctica. Puedes crear las tuyas propias en Excel:
+  </p>
+  <ul>
+    <li><strong>Conciliación bancaria</strong>: Compara saldo contable vs. extracto bancario.</li>
+    <li><strong>Liquidación de retenciones</strong>: Calcula RTE en compras, honorarios y arrendamientos.</li>
+    <li><strong>Depreciación de activos fijos</strong>: Tabla con costo, vida útil, depreciación anual y acumulada.</li>
+    <li><strong>Costos de producción</strong>: Distribución de materia prima, mano de obra y CIF.</li>
+    <li><strong>Asientos contables diarios</strong>: Formato con fecha, cuenta, débito, crédito y descripción.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 5. RECURSOS DIGITALES                     -->
+  <!-- ========================================== -->
+  <h2>5. 🌐 Recursos Digitales Útiles</h2>
+  <ul>
+    <li><strong><a href="https://www.dian.gov.co" target="_blank">DIAN</a></strong>: Consulta calendario tributario, resoluciones y conceptos.</li>
+    <li><strong><a href="https://www.camaradirecta.com" target="_blank">Cámara de Comercio</a></strong>: Consulta de empresas, certificados y trámites.</li>
+    <li><strong><a href="https://www.youtube.com/results?search_query=contabilidad+basica+colombia" target="_blank">YouTube</a></strong>: Busca canales como <em>"Contabilidad Fácil"</em>, <em>"Tributando Colombia"</em> o <em>"NIIF Colombia"</em>.</li>
+    <li><strong><a href="https://www.gerencie.com" target="_blank">Gerencie.com</a></strong>: Artículos prácticos sobre contabilidad y tributación en Colombia.</li>
+    <li><strong><a href="https://www.actualicese.com" target="_blank">Actualícese</a></strong>: Noticias y actualizaciones tributarias.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 6. CONSEJOS PARA TU PRÁCTICA              -->
+  <!-- ========================================== -->
+  <h2>6. 🎯 Consejos para tu Práctica en Partmo</h2>
+  <ul>
+    <li><strong>Pregunta sin miedo</strong>: Es mejor preguntar dos veces que cometer un error.</li>
+    <li><strong>Lleva un cuaderno</strong>: Anota los pasos de cada proceso (tu "manual de usuario").</li>
+    <li><strong>Revisa las retenciones</strong>: Verifica que las tarifas aplicadas sean las correctas (2.5% compras, 11% honorarios).</li>
+    <li><strong>Organiza tus archivos</strong>: Usa carpetas claras en el computador y en los sistemas de la empresa.</li>
+    <li><strong>Pide feedback</strong>: Al final de cada semana, pregunta cómo vas y qué puedes mejorar.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>💡 Recuerda:</strong> La contabilidad se aprende haciendo. Con cada tarea te volverás más rápida y segura.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. CHEAT SHEET (Resumen rápido)           -->
+  <!-- ========================================== -->
+  <h2>7. 📋 Cheat Sheet (Resumen Rápido)</h2>
+  <table>
+    <tr><th>Concepto</th><th>Fórmula / Dato</th></tr>
+    <tr><td>UVT 2026</td><td><strong>$52.374</strong></td></tr>
+    <tr><td>Renta Personas Jurídicas</td><td><strong>35%</strong></td></tr>
+    <tr><td>IVA general</td><td><strong>19%</strong></td></tr>
+    <tr><td>Retención compras</td><td><strong>2.5%</strong></td></tr>
+    <tr><td>Retención honorarios</td><td><strong>11%</strong></td></tr>
+    <tr><td>ICA industria (Bucaramanga)</td><td><strong>~2.5‰</strong></td></tr>
+    <tr><td>Depreciación línea recta</td><td>(Costo - Residual) / Vida útil</td></tr>
+    <tr><td>Conciliación bancaria</td><td>Saldo contable +/- diferencias = Saldo banco</td></tr>
+  </table>
+
+  <div class="footer">
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
+  </div>
+
+</div>
+</body>
+  </html>
