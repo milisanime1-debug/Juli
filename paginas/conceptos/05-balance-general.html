@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balance General (Extenso) - Mi Hub Contable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 40px 45px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .back {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    .back-index {
+      background: #6c757d;
+    }
+    .back-index:hover { background: #5a6268; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.4rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 1.05rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.7rem;
+      margin-top: 40px;
+      margin-bottom: 14px;
+      border-bottom: 3px solid #1a3c6e;
+      padding-bottom: 10px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.25rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #1a3c6e;
+      font-size: 1.05rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    ul, ol {
+      padding-left: 28px;
+      margin: 10px 0 18px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 5px solid #1a3c6e;
+      padding: 16px 22px;
+      border-radius: 6px;
+      margin: 16px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.green { border-left-color: #28a745; background: #e8f5e9; }
+    .highlight.green strong { color: #28a745; }
+    .highlight.orange { border-left-color: #fd7e14; background: #fff3e0; }
+    .highlight.orange strong { color: #fd7e14; }
+    .highlight.purple { border-left-color: #6f42c1; background: #f3e8ff; }
+    .highlight.purple strong { color: #6f42c1; }
+    .highlight.red { border-left-color: #dc3545; background: #fde8ea; }
+    .highlight.red strong { color: #dc3545; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 22px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .balance-container {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 16px 0;
+      border: 2px solid #1a3c6e;
+    }
+    .balance-container .titulo-balance {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1a3c6e;
+      border-bottom: 2px solid #1a3c6e;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+    .balance-container .seccion {
+      font-weight: 700;
+      color: #1a3c6e;
+      margin-top: 10px;
+      padding: 4px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .balance-container .cuenta {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0 4px 20px;
+      font-size: 0.95rem;
+    }
+    .balance-container .cuenta.sub {
+      padding-left: 40px;
+    }
+    .balance-container .total {
+      font-weight: 700;
+      border-top: 2px solid #1a3c6e;
+      padding-top: 6px;
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .checklist {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 20px 28px;
+      margin: 16px 0;
+    }
+    .checklist li { list-style: none; padding: 6px 0; }
+    .checklist li::before {
+      content: "☐ ";
+      font-size: 1.3rem;
+      color: #1a3c6e;
+    }
+
+    .ejemplo-asiento {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 16px 22px;
+      margin: 14px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .ejemplo-asiento .titulo-ej {
+      font-weight: 700;
+      color: #1a3c6e;
+      margin-bottom: 6px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 45px;
+      padding-top: 25px;
+      border-top: 2px solid #e8ecf1;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.1s;
+      font-size: 1rem;
+    }
+    .nav-btn.prev {
+      background: #e8ecf1;
+      color: #333;
+    }
+    .nav-btn.prev:hover { background: #d5d9e0; }
+    .nav-btn.next {
+      background: #1a3c6e;
+      color: white;
+    }
+    .nav-btn.next:hover { background: #0f2a4a; }
+    .nav-btn:active { transform: scale(0.97); }
+
+    .footer {
+      margin-top: 35px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 22px;
+    }
+
+    @media (max-width: 650px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.8rem; }
+      .top-bar { flex-direction: column; align-items: stretch; }
+      .nav-buttons { flex-direction: column; }
+      .nav-btn { text-align: center; }
+      .balance-container .cuenta { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Barra superior con botones -->
+  <div class="top-bar">
+    <div>
+      <a href="index.html" class="back">📚 Volver al plan</a>
+      <a href="../../index.html" class="back back-index">🏠 Inicio</a>
+    </div>
+    <span style="font-size:0.85rem; color:#888;">Tema 5 de 18</span>
+  </div>
+
+  <h1>📊 5. Balance General (Estado de Situación Financiera)</h1>
+  <div class="subtitle">
+    Estructura, clasificación y análisis aplicado a <strong>Filtros Partmo S.A.S.</strong>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. INTRODUCCIÓN                            -->
+  <!-- ========================================== -->
+  <h2>1. ¿Qué es el Balance General?</h2>
+  <p>
+    El <strong>Balance General</strong> (también llamado <strong>Estado de Situación Financiera</strong>)
+    es uno de los <strong>estados financieros principales</strong>. Muestra la <strong>situación económica
+    y financiera</strong> de una empresa en una <strong>fecha específica</strong> (ej. 31 de diciembre de 2026).
+  </p>
+  <div class="highlight">
+    <strong>📌 Objetivo:</strong> Responder a la pregunta fundamental:
+    <em>"¿Qué tiene la empresa (activos), qué debe (pasivos) y cuánto es de los dueños (patrimonio)?"</em>
+  </div>
+
+  <h3>📌 La ecuación contable en el Balance General</h3>
+  <div style="background:#1a3c6e; color:white; padding:16px 20px; border-radius:10px; text-align:center; font-size:1.5rem; font-weight:bold; margin:16px 0;">
+    Activo = Pasivo + Patrimonio
+  </div>
+  <p>
+    Esta ecuación <strong>siempre debe cumplirse</strong>. Si el Balance General no cumple esta igualdad,
+    significa que hay errores en los registros contables.
+  </p>
+
+  <div class="highlight green">
+    <strong>🏢 En Partmo:</strong> El Balance General se prepara <strong>mensualmente</strong> para la gerencia
+    y <strong>anualmente</strong> para presentar a <strong>Donaldson Company Inc.</strong> y a la <strong>DIAN</strong>.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. ESTRUCTURA DEL BALANCE GENERAL          -->
+  <!-- ========================================== -->
+  <h2>2. Estructura del Balance General</h2>
+  <p>
+    El Balance General se divide en <strong>3 grandes grupos</strong>:
+  </p>
+
+  <h3>🔹 2.1 Activo</h3>
+  <p>
+    Son los <strong>recursos económicos</strong> que posee la empresa. Representan <strong>beneficios futuros</strong>
+    que la empresa espera recibir.
+  </p>
+  <h4>📌 Clasificación del Activo:</h4>
+  <table>
+    <tr><th>Categoría</th><th>Descripción</th><th>Ejemplos en Partmo</th></tr>
+    <tr><td><strong>Activo Corriente (Corto Plazo)</strong></td><td>Recursos que se espera convertir en efectivo o consumir en <strong>menos de 1 año</strong>.</td><td>Caja, Bancos, Clientes, Inventarios (materia prima, productos en proceso, productos terminados).</td></tr>
+    <tr><td><strong>Activo No Corriente (Largo Plazo)</strong></td><td>Recursos que la empresa mantiene por <strong>más de 1 año</strong>.</td><td>Maquinaria, Edificios, Equipos de oficina, Patentes, Derechos de uso (NIIF 16).</td></tr>
+  </table>
+
+  <h4>📌 Ejemplos de Activos en Partmo:</h4>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Clasificación</th><th>¿Qué representa?</th></tr>
+    <tr><td>1105</td><td>Caja</td><td>Activo Corriente</td><td>Efectivo en caja.</td></tr>
+    <tr><td>1110</td><td>Bancos</td><td>Activo Corriente</td><td>Dinero en cuentas bancarias.</td></tr>
+    <tr><td>1305</td><td>Clientes</td><td>Activo Corriente</td><td>Ventas a crédito pendientes de cobro.</td></tr>
+    <tr><td>1435</td><td>Mercancías no fabricadas</td><td>Activo Corriente</td><td>Materia prima (acero, fibras, polímeros).</td></tr>
+    <tr><td>1516</td><td>Productos en proceso</td><td>Activo Corriente</td><td>Filtros en producción.</td></tr>
+    <tr><td>1520</td><td>Productos terminados</td><td>Activo Corriente</td><td>Filtros listos para vender.</td></tr>
+    <tr><td>1604</td><td>Maquinaria (neto)</td><td>Activo No Corriente</td><td>Máquinas de producción (valor neto).</td></tr>
+    <tr><td>1605</td><td>Edificios</td><td>Activo No Corriente</td><td>Planta de producción y oficinas.</td></tr>
+  </table>
+
+  <h3>🔹 2.2 Pasivo</h3>
+  <p>
+    Son las <strong>obligaciones económicas</strong> de la empresa. Representan <strong>deudas</strong> que la empresa
+    debe pagar en el futuro.
+  </p>
+  <h4>📌 Clasificación del Pasivo:</h4>
+  <table>
+    <tr><th>Categoría</th><th>Descripción</th><th>Ejemplos en Partmo</th></tr>
+    <tr><td><strong>Pasivo Corriente (Corto Plazo)</strong></td><td>Obligaciones que deben pagarse en <strong>menos de 1 año</strong>.</td><td>Proveedores, IVA por pagar, Retenciones por pagar, Obligaciones laborales (cesantías, primas).</td></tr>
+    <tr><td><strong>Pasivo No Corriente (Largo Plazo)</strong></td><td>Obligaciones que deben pagarse en <strong>más de 1 año</strong>.</td><td>Préstamos bancarios a largo plazo, Obligaciones financieras.</td></tr>
+  </table>
+
+  <h4>📌 Ejemplos de Pasivos en Partmo:</h4>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Clasificación</th><th>¿Qué representa?</th></tr>
+    <tr><td>2205</td><td>Proveedores</td><td>Pasivo Corriente</td><td>Deudas con proveedores de materia prima.</td></tr>
+    <tr><td>2404</td><td>IVA generado</td><td>Pasivo Corriente</td><td>IVA cobrado en ventas, pendiente de pago.</td></tr>
+    <tr><td>2408</td><td>IVA descontable</td><td>Activo (no pasivo)</td><td>IVA pagado en compras, se puede descontar.</td></tr>
+    <tr><td>2390</td><td>Retenciones por pagar</td><td>Pasivo Corriente</td><td>Retenciones practicadas a proveedores.</td></tr>
+    <tr><td>2505</td><td>Obligaciones laborales</td><td>Pasivo Corriente</td><td>Cesantías, primas, vacaciones.</td></tr>
+    <tr><td>2105</td><td>Préstamos bancarios (LP)</td><td>Pasivo No Corriente</td><td>Préstamos a más de 1 año.</td></tr>
+  </table>
+
+  <h3>🔹 2.3 Patrimonio</h3>
+  <p>
+    Es la <strong>participación de los dueños</strong> en la empresa. Se calcula como:
+  </p>
+  <div style="background:#f8f9fc; padding:12px 18px; border-radius:8px; text-align:center; font-size:1.2rem; font-weight:bold; border:1px solid #1a3c6e;">
+    Patrimonio = Activo - Pasivo
+  </div>
+  <h4>📌 Componentes del Patrimonio:</h4>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Descripción</th></tr>
+    <tr><td>3105</td><td>Capital social</td><td>Aportes iniciales de los dueños.</td></tr>
+    <tr><td>3115</td><td>Reservas</td><td>Ganancias retenidas por la empresa.</td></tr>
+    <tr><td>3215</td><td>Utilidad del ejercicio</td><td>Ganancia o pérdida del período actual.</td></tr>
+    <tr><td>3220</td><td>Utilidades retenidas</td><td>Ganancias de años anteriores no repartidas.</td></tr>
+  </table>
+  <div class="highlight orange">
+    <strong>🏢 En Partmo:</strong> El patrimonio incluye el <strong>capital social</strong> de los accionistas
+    y las <strong>utilidades retenidas</strong> que se han acumulado a lo largo de los años.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. EJEMPLO COMPLETO DE BALANCE GENERAL    -->
+  <!-- ========================================== -->
+  <h2>3. Ejemplo: Balance General de Partmo</h2>
+  <p>
+    A continuación, se presenta un Balance General <strong>resumido</strong> de <strong>Filtros Partmo S.A.S.</strong>
+    al <strong>31 de agosto de 2026</strong>.
+  </p>
+
+  <div class="balance-container">
+    <div class="titulo-balance">FILTROS PARTMO S.A.S.<br>Balance General - 31 de agosto de 2026</div>
+
+    <!-- ACTIVO -->
+    <div class="seccion">ACTIVO</div>
+    <div style="font-weight:600; color:#1a3c6e; margin-top:8px;">Activo Corriente</div>
+    <div class="cuenta"><span>Efectivo y equivalentes (Caja + Bancos)</span><span>$22.400.000</span></div>
+    <div class="cuenta"><span>Clientes (cuentas por cobrar)</span><span>$2.950.000</span></div>
+    <div class="cuenta"><span>Inventarios</span></div>
+    <div class="cuenta sub"><span>- Materia prima</span><span>$19.000.000</span></div>
+    <div class="cuenta sub"><span>- Productos en proceso</span><span>$12.500.000</span></div>
+    <div class="cuenta sub"><span>- Productos terminados</span><span>$18.300.000</span></div>
+    <div class="cuenta"><span>Total Activo Corriente</span><span style="font-weight:700;">$75.150.000</span></div>
+
+    <div style="font-weight:600; color:#1a3c6e; margin-top:12px;">Activo No Corriente</div>
+    <div class="cuenta"><span>Maquinaria (neto de depreciación)</span><span>$45.625.000</span></div>
+    <div class="cuenta"><span>Edificios (neto de depreciación)</span><span>$80.000.000</span></div>
+    <div class="cuenta"><span>Total Activo No Corriente</span><span style="font-weight:700;">$125.625.000</span></div>
+
+    <div class="total"><span>TOTAL ACTIVO</span><span style="font-weight:700;">$200.775.000</span></div>
+
+    <!-- PASIVO -->
+    <div class="seccion" style="margin-top:16px;">PASIVO</div>
+    <div style="font-weight:600; color:#1a3c6e; margin-top:8px;">Pasivo Corriente</div>
+    <div class="cuenta"><span>Proveedores</span><span>$16.280.000</span></div>
+    <div class="cuenta"><span>IVA por pagar</span><span>$1.900.000</span></div>
+    <div class="cuenta"><span>Retenciones por pagar</span><span>$850.000</span></div>
+    <div class="cuenta"><span>Obligaciones laborales</span><span>$3.200.000</span></div>
+    <div class="cuenta"><span>Total Pasivo Corriente</span><span style="font-weight:700;">$22.230.000</span></div>
+
+    <div style="font-weight:600; color:#1a3c6e; margin-top:12px;">Pasivo No Corriente</div>
+    <div class="cuenta"><span>Préstamos bancarios (largo plazo)</span><span>$35.000.000</span></div>
+    <div class="cuenta"><span>Total Pasivo No Corriente</span><span style="font-weight:700;">$35.000.000</span></div>
+
+    <div class="total"><span>TOTAL PASIVO</span><span style="font-weight:700;">$57.230.000</span></div>
+
+    <!-- PATRIMONIO -->
+    <div class="seccion" style="margin-top:16px;">PATRIMONIO</div>
+    <div class="cuenta"><span>Capital social</span><span>$120.000.000</span></div>
+    <div class="cuenta"><span>Reservas</span><span>$15.000.000</span></div>
+    <div class="cuenta"><span>Utilidad del ejercicio (agosto 2026)</span><span>$8.545.000</span></div>
+    <div class="cuenta"><span>Total Patrimonio</span><span style="font-weight:700;">$143.545.000</span></div>
+
+    <div class="total"><span>TOTAL PASIVO + PATRIMONIO</span><span style="font-weight:700;">$200.775.000</span></div>
+
+    <div style="text-align:center; margin-top:12px; font-size:0.9rem; color:#555; border-top:1px solid #ddd; padding-top:8px;">
+      <em>Verificación: Activo ($200.775.000) = Pasivo ($57.230.000) + Patrimonio ($143.545.000) ✅</em>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4. ANÁLISIS DEL BALANCE GENERAL           -->
+  <!-- ========================================== -->
+  <h2>4. Análisis del Balance General</h2>
+  <p>
+    El Balance General no solo muestra números; permite <strong>analizar la situación financiera</strong>
+    de la empresa. Aquí hay algunos indicadores clave:
+  </p>
+
+  <h3>📌 Ratios Financieros (del ejemplo de Partmo)</h3>
+  <table>
+    <tr><th>Ratio</th><th>Fórmula</th><th>Resultado</th><th>Interpretación</th></tr>
+    <tr><td><strong>Liquidez Corriente</strong></td><td>Activo Corriente / Pasivo Corriente</td><td>$75.150.000 / $22.230.000 = <strong>3.38</strong></td><td>La empresa tiene $3.38 por cada $1 de deuda a corto plazo. Excelente liquidez.</td></tr>
+    <tr><td><strong>Endeudamiento</strong></td><td>Pasivo Total / Activo Total</td><td>$57.230.000 / $200.775.000 = <strong>28.5%</strong></td><td>Solo el 28.5% de los activos están financiados con deuda. Bajo endeudamiento.</td></tr>
+    <tr><td><strong>Patrimonio / Activo</strong></td><td>Patrimonio / Activo Total</td><td>$143.545.000 / $200.775.000 = <strong>71.5%</strong></td><td>El 71.5% de los activos son de los dueños. Empresa financieramente sólida.</td></tr>
+  </table>
+
+  <div class="highlight green">
+    <strong>📌 Interpretación para Partmo:</strong><br>
+    <ul>
+      <li><strong>Liquidez alta:</strong> Partmo tiene suficiente efectivo y activos a corto plazo para pagar sus deudas inmediatas.</li>
+      <li><strong>Bajo endeudamiento:</strong> La empresa no depende excesivamente de préstamos bancarios.</li>
+      <li><strong>Sólido patrimonio:</strong> Los dueños tienen una participación mayoritaria, lo que da estabilidad.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. DIFERENCIAS CLAVE: ACTIVO VS PASIVO    -->
+  <!-- ========================================== -->
+  <h2>5. Diferencias Clave en el Balance General</h2>
+  <table>
+    <tr><th>Aspecto</th><th>Activo</th><th>Pasivo</th></tr>
+    <tr><td><strong>Definición</strong></td><td>Recursos que la empresa controla.</td><td>Obligaciones que la empresa debe pagar.</td></tr>
+    <tr><td><strong>Beneficio</strong></td><td>Generan beneficios futuros.</td><td>Representan salidas de efectivo futuras.</td></tr>
+    <tr><td><strong>Clasificación</strong></td><td>Corriente (≤1 año) y No Corriente (>1 año).</td><td>Corriente (≤1 año) y No Corriente (>1 año).</td></tr>
+    <tr><td><strong>Ejemplo</strong></td><td>Materia prima, maquinaria, efectivo.</td><td>Proveedores, préstamos, obligaciones laborales.</td></tr>
+    <tr><td><strong>Ecuación</strong></td><td>Activo = Pasivo + Patrimonio</td><td>Pasivo = Activo - Patrimonio</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 6. EJERCICIO PRÁCTICO                      -->
+  <!-- ========================================== -->
+  <h2>6. ✍️ Ejercicio Práctico</h2>
+  <div class="highlight orange">
+    <strong>🧠 Situación:</strong> Partmo tiene los siguientes saldos al 30 de septiembre de 2026:<br><br>
+    <table>
+      <tr><th>Cuenta</th><th>Saldo</th></tr>
+      <tr><td>Caja</td><td>$8.000.000 (Débito)</td></tr>
+      <tr><td>Bancos</td><td>$25.000.000 (Débito)</td></tr>
+      <tr><td>Clientes</td><td>$6.500.000 (Débito)</td></tr>
+      <tr><td>Materia prima</td><td>$22.000.000 (Débito)</td></tr>
+      <tr><td>Productos en proceso</td><td>$14.000.000 (Débito)</td></tr>
+      <tr><td>Productos terminados</td><td>$20.000.000 (Débito)</td></tr>
+      <tr><td>Maquinaria (neto)</td><td>$48.000.000 (Débito)</td></tr>
+      <tr><td>Edificios (neto)</td><td>$85.000.000 (Débito)</td></tr>
+      <tr><td>Proveedores</td><td>$18.000.000 (Crédito)</td></tr>
+      <tr><td>IVA por pagar</td><td>$2.500.000 (Crédito)</td></tr>
+      <tr><td>Obligaciones laborales</td><td>$4.000.000 (Crédito)</td></tr>
+      <tr><td>Préstamos bancarios (LP)</td><td>$30.000.000 (Crédito)</td></tr>
+      <tr><td>Capital social</td><td>$120.000.000 (Crédito)</td></tr>
+      <tr><td>Reservas</td><td>$15.000.000 (Crédito)</td></tr>
+      <tr><td>Utilidad del ejercicio</td><td>$39.000.000 (Crédito)</td></tr>
+    </table>
+    <br>
+    <strong>Construye el Balance General y calcula:</strong><br>
+    - Total Activo<br>
+    - Total Pasivo<br>
+    - Total Patrimonio<br>
+    - Ratio de Liquidez Corriente<br>
+    - Ratio de Endeudamiento
+  </div>
+
+  <h4>📌 Solución</h4>
+  <div class="balance-container">
+    <div class="titulo-balance">FILTROS PARTMO S.A.S.<br>Balance General - 30 de septiembre de 2026</div>
+
+    <div class="seccion">ACTIVO</div>
+    <div style="font-weight:600; color:#1a3c6e; margin-top:8px;">Activo Corriente</div>
+    <div class="cuenta"><span>Efectivo y equivalentes (Caja + Bancos)</span><span>$33.000.000</span></div>
+    <div class="cuenta"><span>Clientes</span><span>$6.500.000</span></div>
+    <div class="cuenta"><span>Inventarios</span></div>
+    <div class="cuenta sub"><span>- Materia prima</span><span>$22.000.000</span></div>
+    <div class="cuenta sub"><span>- Productos en proceso</span><span>$14.000.000</span></div>
+    <div class="cuenta sub"><span>- Productos terminados</span><span>$20.000.000</span></div>
+    <div class="cuenta"><span>Total Activo Corriente</span><span style="font-weight:700;">$95.500.000</span></div>
+
+    <div style="font-weight:600; color:#1a3c6e; margin-top:12px;">Activo No Corriente</div>
+    <div class="cuenta"><span>Maquinaria (neto)</span><span>$48.000.000</span></div>
+    <div class="cuenta"><span>Edificios (neto)</span><span>$85.000.000</span></div>
+    <div class="cuenta"><span>Total Activo No Corriente</span><span style="font-weight:700;">$133.000.000</span></div>
+
+    <div class="total"><span>TOTAL ACTIVO</span><span style="font-weight:700;">$228.500.000</span></div>
+
+    <div class="seccion" style="margin-top:16px;">PASIVO</div>
+    <div style="font-weight:600; color:#1a3c6e; margin-top:8px;">Pasivo Corriente</div>
+    <div class="cuenta"><span>Proveedores</span><span>$18.000.000</span></div>
+    <div class="cuenta"><span>IVA por pagar</span><span>$2.500.000</span></div>
+    <div class="cuenta"><span>Obligaciones laborales</span><span>$4.000.000</span></div>
+    <div class="cuenta"><span>Total Pasivo Corriente</span><span style="font-weight:700;">$24.500.000</span></div>
+
+    <div style="font-weight:600; color:#1a3c6e; margin-top:12px;">Pasivo No Corriente</div>
+    <div class="cuenta"><span>Préstamos bancarios</span><span>$30.000.000</span></div>
+    <div class="cuenta"><span>Total Pasivo No Corriente</span><span style="font-weight:700;">$30.000.000</span></div>
+
+    <div class="total"><span>TOTAL PASIVO</span><span style="font-weight:700;">$54.500.000</span></div>
+
+    <div class="seccion" style="margin-top:16px;">PATRIMONIO</div>
+    <div class="cuenta"><span>Capital social</span><span>$120.000.000</span></div>
+    <div class="cuenta"><span>Reservas</span><span>$15.000.000</span></div>
+    <div class="cuenta"><span>Utilidad del ejercicio</span><span>$39.000.000</span></div>
+        <div class="cuenta"><span>Total Patrimonio</span><span style="font-weight:700;">$174.000.000</span></div>
+
+    <div class="total"><span>TOTAL PASIVO + PATRIMONIO</span><span style="font-weight:700;">$228.500.000</span></div>
+
+    <div style="text-align:center; margin-top:12px; font-size:0.9rem; color:#555; border-top:1px solid #ddd; padding-top:8px;">
+      <em>Verificación: Activo ($228.500.000) = Pasivo ($54.500.000) + Patrimonio ($174.000.000) ✅</em>
+    </div>
+  </div>
+
+  <h4>📌 Cálculo de Ratios Financieros</h4>
+  <table>
+    <tr><th>Ratio</th><th>Fórmula</th><th>Cálculo</th><th>Resultado</th></tr>
+    <tr><td><strong>Liquidez Corriente</strong></td><td>Activo Corriente / Pasivo Corriente</td><td>$95.500.000 / $24.500.000</td><td><strong>3.90</strong></td></tr>
+    <tr><td><strong>Endeudamiento</strong></td><td>Pasivo Total / Activo Total</td><td>$54.500.000 / $228.500.000</td><td><strong>23.9%</strong></td></tr>
+    <tr><td><strong>Patrimonio / Activo</strong></td><td>Patrimonio / Activo Total</td><td>$174.000.000 / $228.500.000</td><td><strong>76.1%</strong></td></tr>
+  </table>
+
+  <div class="highlight green">
+    <strong>📌 Interpretación:</strong><br>
+    <ul>
+      <li><strong>Liquidez Corriente (3.90):</strong> Partmo tiene $3.90 por cada $1 de deuda a corto plazo. <strong>Excelente</strong> capacidad de pago.</li>
+      <li><strong>Endeudamiento (23.9%):</strong> Solo el 23.9% de los activos están financiados con deuda. <strong>Muy bajo</strong> endeudamiento.</li>
+      <li><strong>Patrimonio (76.1%):</strong> Los dueños financian más del 75% de los activos. <strong>Gran solidez</strong> financiera.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. DIFERENCIAS ENTRE BALANCE GENERAL Y     -->
+  <!--    ESTADO DE RESULTADOS                    -->
+  <!-- ========================================== -->
+  <h2>7. Diferencias Clave: Balance General vs. Estado de Resultados</h2>
+  <table>
+    <tr><th>Aspecto</th><th>Balance General</th><th>Estado de Resultados</th></tr>
+    <tr><td><strong>¿Qué muestra?</strong></td><td>Situación financiera en una fecha específica.</td><td>Rentabilidad en un período de tiempo.</td></tr>
+    <tr><td><strong>Ecuación</strong></td><td>Activo = Pasivo + Patrimonio</td><td>Ingresos - Gastos = Utilidad Neta</td></tr>
+    <tr><td><strong>Frecuencia</strong></td><td>Se presenta al cierre de cada período (mensual, anual).</td><td>Se presenta al cierre de cada período (mensual, anual).</td></tr>
+    <tr><td><strong>Cuentas que incluye</strong></td><td>Activo, Pasivo, Patrimonio (cuentas permanentes).</td><td>Ingresos, Gastos, Costos (cuentas temporales).</td></tr>
+    <tr><td><strong>Ejemplo</strong></td><td>Caja, Bancos, Proveedores, Capital.</td><td>Ventas, Sueldos, Depreciación, Utilidad.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 8. CHECKLIST DE ESTUDIO                    -->
+  <!-- ========================================== -->
+  <h2>8. 📋 Checklist - ¿Qué debes saber de esta lección?</h2>
+  <div class="checklist">
+    <ul>
+      <li>Definir qué es el Balance General y su objetivo.</li>
+      <li>Explicar la ecuación contable: Activo = Pasivo + Patrimonio.</li>
+      <li>Clasificar las cuentas en Activo Corriente y No Corriente.</li>
+      <li>Clasificar las cuentas en Pasivo Corriente y No Corriente.</li>
+      <li>Identificar los componentes del Patrimonio (Capital, Reservas, Utilidades).</li>
+      <li>Construir un Balance General a partir de saldos contables.</li>
+      <li>Verificar que el Balance General cumpla la ecuación contable.</li>
+      <li>Calcular ratios financieros básicos: Liquidez Corriente y Endeudamiento.</li>
+      <li>Interpretar los ratios y evaluar la situación financiera de Partmo.</li>
+      <li>Diferenciar el Balance General del Estado de Resultados.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 9. ERRORES COMUNES EN EL BALANCE GENERAL   -->
+  <!-- ========================================== -->
+  <h2>9. Errores Comunes al Preparar el Balance General</h2>
+  <table>
+    <tr><th>Error</th><th>Consecuencia</th><th>Cómo evitarlo</th></tr>
+    <tr><td><strong>No cuadra la ecuación</strong></td><td>El Balance no es válido.</td><td>Verificar que Activo = Pasivo + Patrimonio.</td></tr>
+    <tr><td><strong>Clasificar mal Activo/Pasivo</strong></td><td>Ratio de liquidez incorrecto.</td><td>Conocer las definiciones de Corto y Largo Plazo.</td></tr>
+    <tr><td><strong>No incluir todas las cuentas</strong></td><td>Información incompleta.</td><td>Seguir el PUC y verificar el Balance de Prueba.</td></tr>
+    <tr><td><strong>No actualizar ajustes</strong></td><td>Saldos desactualizados.</td><td>Realizar ajustes antes de preparar el Balance.</td></tr>
+    <tr><td><strong>No presentar correctamente</strong></td><td>Rechazo por parte de auditores.</td><td>Usar formatos estándar y seguir las NIIF.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 10. RESUMEN Y COMENTARIOS FINALES          -->
+  <!-- ========================================== -->
+  <h2>10. 📌 Resumen Final</h2>
+  <div class="highlight purple">
+    <strong>Puntos clave del Balance General:</strong>
+    <ul>
+      <li>Es el <strong>estado financiero más importante</strong> para evaluar la situación de la empresa.</li>
+      <li>Se basa en la ecuación: <strong>Activo = Pasivo + Patrimonio</strong>.</li>
+      <li>Los <strong>activos</strong> son recursos, los <strong>pasivos</strong> son deudas y el <strong>patrimonio</strong> es la participación de los dueños.</li>
+      <li>Se usa para calcular <strong>indicadores de liquidez, endeudamiento y solidez</strong>.</li>
+      <li>En Partmo, es clave para reportar a <strong>Donaldson Company Inc.</strong> y a la DIAN.</li>
+      <li><strong>Todo contador debe saber</strong> construirlo, leerlo e interpretarlo correctamente.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- BOTONES DE NAVEGACIÓN                      -->
+  <!-- ========================================== -->
+  <div class="nav-buttons">
+    <a href="04-ciclo-contable.html" class="nav-btn prev">⬅ Anterior: Ciclo Contable</a>
+    <a href="06-estado-resultados.html" class="nav-btn next">Siguiente: Estado de Resultados ➡</a>
+  </div>
+
+  <div class="footer">
+    📌 Tema 5 de 18 • Plan de estudios de Contabilidad • Actualizado: Julio 2026<br>
+    <em>Versión extensa con explicaciones detalladas, ejemplos y ejercicios prácticos.</em>
+  </div>
+
+</div>
+</body>
+</html>
