@@ -12,11 +12,11 @@
       padding: 30px 20px;
     }
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       background: white;
       border-radius: 16px;
-      padding: 35px 40px;
+      padding: 40px 45px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     }
     .top-bar {
@@ -46,7 +46,7 @@
 
     h1 {
       color: #1a3c6e;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -54,8 +54,8 @@
     }
     .subtitle {
       color: #555;
-      margin-bottom: 25px;
-      font-size: 1rem;
+      margin-bottom: 28px;
+      font-size: 1.05rem;
       border-left: 4px solid #1a3c6e;
       padding-left: 16px;
     }
@@ -63,44 +63,54 @@
 
     h2 {
       color: #1a3c6e;
-      font-size: 1.5rem;
-      margin-top: 35px;
-      margin-bottom: 12px;
-      border-bottom: 2px solid #e8ecf1;
-      padding-bottom: 8px;
+      font-size: 1.6rem;
+      margin-top: 40px;
+      margin-bottom: 14px;
+      border-bottom: 3px solid #e8ecf1;
+      padding-bottom: 10px;
     }
     h3 {
       color: #2c3e50;
-      font-size: 1.15rem;
-      margin-top: 20px;
+      font-size: 1.2rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #34495e;
+      font-size: 1.05rem;
+      margin-top: 18px;
       margin-bottom: 6px;
     }
     p, li {
       color: #2d2d2d;
-      line-height: 1.7;
-      font-size: 0.98rem;
+      line-height: 1.8;
+      font-size: 1rem;
     }
     ul, ol {
-      padding-left: 25px;
-      margin: 8px 0 16px 0;
+      padding-left: 28px;
+      margin: 10px 0 18px 0;
     }
     .highlight {
       background: #eef4ff;
-      border-left: 4px solid #1a3c6e;
-      padding: 14px 20px;
+      border-left: 5px solid #1a3c6e;
+      padding: 16px 22px;
       border-radius: 6px;
-      margin: 14px 0;
+      margin: 16px 0;
     }
     .highlight strong { color: #1a3c6e; }
     .highlight.green { border-left-color: #28a745; background: #e8f5e9; }
     .highlight.green strong { color: #28a745; }
     .highlight.orange { border-left-color: #fd7e14; background: #fff3e0; }
     .highlight.orange strong { color: #fd7e14; }
+    .highlight.purple { border-left-color: #6f42c1; background: #f3e8ff; }
+    .highlight.purple strong { color: #6f42c1; }
+    .highlight.red { border-left-color: #dc3545; background: #fce4e4; }
+    .highlight.red strong { color: #dc3545; }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 16px 0 20px 0;
+      margin: 16px 0 22px 0;
       background: white;
       border-radius: 8px;
       overflow: hidden;
@@ -109,76 +119,87 @@
     th {
       background: #1a3c6e;
       color: white;
-      padding: 10px 14px;
+      padding: 12px 16px;
       text-align: left;
       font-weight: 600;
     }
     td {
-      padding: 10px 14px;
+      padding: 12px 16px;
       border-bottom: 1px solid #e8ecf1;
     }
     tr:hover td { background: #f8f9fc; }
 
-    .cuenta-t {
+    .cuenta-t-grid {
       display: flex;
       gap: 30px;
       flex-wrap: wrap;
       justify-content: center;
       margin: 20px 0;
     }
-    .cuenta-t .t {
+    .cuenta-t-grid .t {
       background: #f8f9fc;
       border: 2px solid #1a3c6e;
       border-radius: 8px;
       padding: 0;
-      min-width: 200px;
+      min-width: 220px;
       flex: 1;
-      max-width: 280px;
+      max-width: 300px;
     }
-    .cuenta-t .t .nombre {
+    .cuenta-t-grid .t .nombre {
       background: #1a3c6e;
       color: white;
       text-align: center;
-      padding: 8px;
+      padding: 10px;
       font-weight: 700;
       font-size: 1rem;
       border-radius: 6px 6px 0 0;
     }
-    .cuenta-t .t .cuerpo {
+    .cuenta-t-grid .t .cuerpo {
       display: flex;
-      padding: 10px 12px;
+      padding: 12px 14px;
+      min-height: 120px;
     }
-    .cuenta-t .t .cuerpo .debe {
+    .cuenta-t-grid .t .cuerpo .debe {
       flex: 1;
       border-right: 2px solid #1a3c6e;
-      padding-right: 12px;
-      min-height: 80px;
+      padding-right: 14px;
     }
-    .cuenta-t .t .cuerpo .haber {
+    .cuenta-t-grid .t .cuerpo .haber {
       flex: 1;
-      padding-left: 12px;
+      padding-left: 14px;
     }
-    .cuenta-t .t .cuerpo .debe div, .cuenta-t .t .cuerpo .haber div {
-      padding: 4px 0;
+    .cuenta-t-grid .t .cuerpo .debe div, .cuenta-t-grid .t .cuerpo .haber div {
+      padding: 5px 0;
       font-size: 0.9rem;
       border-bottom: 1px dashed #ddd;
     }
-    .cuenta-t .t .saldo {
+    .cuenta-t-grid .t .saldo {
       text-align: center;
       background: #eef4ff;
-      padding: 6px;
+      padding: 8px;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       border-top: 2px solid #1a3c6e;
     }
+    .cuenta-t-grid .t .saldo.deudor { background: #d4edda; color: #155724; }
+    .cuenta-t-grid .t .saldo.acreedor { background: #f8d7da; color: #721c24; }
+
+    .pasos {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 20px 26px;
+      margin: 16px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .pasos li { margin-bottom: 8px; }
 
     .checklist {
       background: #f8f9fc;
       border-radius: 10px;
-      padding: 18px 24px;
+      padding: 20px 26px;
       margin: 16px 0;
     }
-    .checklist li { list-style: none; padding: 4px 0; }
+    .checklist li { list-style: none; padding: 5px 0; }
     .checklist li::before {
       content: "☐ ";
       font-size: 1.2rem;
@@ -188,18 +209,19 @@
     .nav-buttons {
       display: flex;
       justify-content: space-between;
-      margin-top: 40px;
-      padding-top: 20px;
+      margin-top: 45px;
+      padding-top: 25px;
       border-top: 2px solid #e8ecf1;
       flex-wrap: wrap;
       gap: 12px;
     }
     .nav-btn {
-      padding: 10px 24px;
+      padding: 12px 28px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
       transition: background 0.2s;
+      font-size: 0.95rem;
     }
     .nav-btn.prev {
       background: #e8ecf1;
@@ -213,21 +235,21 @@
     .nav-btn.next:hover { background: #0f2a4a; }
 
     .footer {
-      margin-top: 30px;
+      margin-top: 35px;
       text-align: center;
       font-size: 0.85rem;
       color: #888;
       border-top: 1px solid #eee;
-      padding-top: 20px;
+      padding-top: 22px;
     }
 
     @media (max-width: 600px) {
-      .container { padding: 20px; }
+      .container { padding: 18px; }
       h1 { font-size: 1.6rem; }
       .top-bar { flex-direction: column; align-items: stretch; }
       .nav-buttons { flex-direction: column; }
       .nav-btn { text-align: center; }
-      .cuenta-t .t { min-width: 160px; }
+      .cuenta-t-grid .t { min-width: 160px; }
     }
   </style>
 </head>
@@ -245,48 +267,59 @@
 
   <h1>⚖️ 3. Partida Doble y Cuentas T</h1>
   <div class="subtitle">
-    Principio fundamental de la contabilidad aplicado a <strong>Filtros Partmo S.A.S.</strong>
+    El principio fundamental de la contabilidad • Aplicación profunda en <strong>Filtros Partmo S.A.S.</strong>
   </div>
 
-  <!-- ========================================== -->
-  <!-- 1. QUÉ ES LA PARTIDA DOBLE                 -->
-  <!-- ========================================== -->
-  <h2>¿Qué es la Partida Doble?</h2>
+  <!-- ============================================================ -->
+  <!-- 1. INTRODUCCIÓN Y ORIGEN                                      -->
+  <!-- ============================================================ -->
+  <h2>1. Origen e Historia de la Partida Doble</h2>
   <p>
-    La <strong>partida doble</strong> es el principio fundamental de la contabilidad. Fue creado por el fraile italiano
-    <strong>Luca Pacioli</strong> en 1494 y establece que:
+    La <strong>partida doble</strong> es el sistema de registro contable más antiguo y utilizado en el mundo.
+    Fue formalizado por el matemático y fraile franciscano <strong>Luca Pacioli</strong> en el año <strong>1494</strong>,
+    en su obra <em>"Summa de Arithmetica, Geometria, Proportioni et Proportionalita"</em>.
   </p>
-  <div class="highlight" style="text-align:center; font-size:1.2rem; font-weight:bold;">
-    "A todo débito le corresponde un crédito"
+  <p>
+    Aunque Pacioli no inventó el sistema (ya se usaba en Venecia y Génova desde el siglo XIII), fue el primero en
+    <strong>documentarlo de forma sistemática</strong>, por lo que se le considera el <strong>"padre de la contabilidad"</strong>.
+  </p>
+  <div class="highlight">
+    <strong>📌 El principio fundamental:</strong> "No hay deudor sin acreedor, ni acreedor sin deudor".
+    Esto significa que <strong>cada transacción afecta al menos dos cuentas</strong>, y el total de los débitos
+    siempre debe ser igual al total de los créditos.
   </div>
-  <p>
-    Esto significa que <strong>cada transacción afecta al menos dos cuentas</strong>, y la suma de los débitos siempre
-    debe ser igual a la suma de los créditos.
-  </p>
 
-  <h3>📌 La ecuación contable</h3>
-  <div class="highlight" style="text-align:center; font-size:1.4rem; font-weight:bold;">
+  <h3>📌 ¿Por qué se llama "partida doble"?</h3>
+  <p>
+    Se llama así porque <strong>cada operación se registra dos veces</strong> (una en débito y otra en crédito),
+    en <strong>dos cuentas diferentes</strong>. Por ejemplo, cuando compras materia prima, registras el aumento del
+    activo (materia prima) y la disminución de otro activo (caja) o el aumento de un pasivo (proveedores).
+  </p>
+  <p>
+    Este sistema permite que la <strong>ecuación contable siempre se mantenga en equilibrio</strong>:
+  </p>
+  <div class="highlight" style="text-align:center; font-size:1.5rem; font-weight:bold;">
     Activo = Pasivo + Patrimonio
   </div>
+
+  <!-- ============================================================ -->
+  <!-- 2. REGLAS DE DÉBITO Y CRÉDITO (EXPLICACIÓN PROFUNDA)        -->
+  <!-- ============================================================ -->
+  <h2>2. Reglas de Débito y Crédito (Explicación Detallada)</h2>
   <p>
-    Esta ecuación <strong>siempre debe cumplirse</strong>. Por eso, cada transacción se registra de manera que el
-    equilibrio se mantenga.
+    Para aplicar correctamente la partida doble, debemos conocer <strong>qué cuentas se debitan y cuáles se acreditan</strong>.
+    Esto depende del <strong>tipo de cuenta</strong> y de si la transacción <strong>aumenta o disminuye</strong> su saldo.
   </p>
 
-  <!-- ========================================== -->
-  <!-- 2. REGLAS DÉBITO Y CRÉDITO                -->
-  <!-- ========================================== -->
-  <h2>Reglas de Débito y Crédito</h2>
-  <p>
-    Cada tipo de cuenta tiene una <strong>regla de movimiento</strong>:
-  </p>
+  <h3>📌 Resumen de reglas</h3>
   <table>
-    <tr><th>Tipo de cuenta</th><th>💰 Débito (Aumenta)</th><th>💰 Crédito (Disminuye)</th></tr>
-    <tr><td><strong>Activo</strong></td><td>💰 Sí</td><td>💰 No</td></tr>
-    <tr><td><strong>Pasivo</strong></td><td>💰 No</td><td>💰 Sí</td></tr>
-    <tr><td><strong>Patrimonio</strong></td><td>💰 No</td><td>💰 Sí</td></tr>
-    <tr><td><strong>Ingresos</strong></td><td>💰 No</td><td>💰 Sí</td></tr>
-    <tr><td><strong>Gastos / Costos</strong></td><td>💰 Sí</td><td>💰 No</td></tr>
+    <tr><th>Tipo de cuenta</th><th>💰 DÉBITO (Aumenta)</th><th>💰 CRÉDITO (Disminuye)</th><th>Saldo normal</th></tr>
+    <tr><td><strong>Activo</strong></td><td>✅ Sí</td><td>❌ No</td><td>Débito</td></tr>
+    <tr><td><strong>Pasivo</strong></td><td>❌ No</td><td>✅ Sí</td><td>Crédito</td></tr>
+    <tr><td><strong>Patrimonio</strong></td><td>❌ No</td><td>✅ Sí</td><td>Crédito</td></tr>
+    <tr><td><strong>Ingresos</strong></td><td>❌ No</td><td>✅ Sí</td><td>Crédito</td></tr>
+    <tr><td><strong>Gastos</strong></td><td>✅ Sí</td><td>❌ No</td><td>Débito</td></tr>
+    <tr><td><strong>Costos</strong></td><td>✅ Sí</td><td>❌ No</td><td>Débito</td></tr>
   </table>
 
   <div class="highlight green">
@@ -294,155 +327,515 @@
     Los <strong>pasivos, patrimonio e ingresos</strong> se acreditan."
   </div>
 
-  <!-- ========================================== -->
-  <!-- 3. CUENTAS T (REPRESENTACIÓN GRÁFICA)     -->
-  <!-- ========================================== -->
-  <h2>Cuentas T - Representación Gráfica</h2>
+  <h3>📌 Explicación de cada tipo de cuenta</h3>
+
+  <h4>🔵 Activos (Clase 1 del PUC)</h4>
+  <ul>
+    <li><strong>¿Qué son?</strong> Recursos controlados por la empresa que generan beneficios futuros (dinero, máquinas, mercancías).</li>
+    <li><strong>¿Cuándo se debitan?</strong> Cuando el activo <strong>aumenta</strong> (ej. compras de materia prima, ingreso de efectivo).</li>
+    <li><strong>¿Cuándo se acreditan?</strong> Cuando el activo <strong>disminuye</strong> (ej. pago de deudas, venta de inventarios).</li>
+    <li><strong>Saldo normal:</strong> Débito (si el total de débitos es mayor que los créditos).</li>
+  </ul>
+  <div class="highlight">
+    <strong>Ejemplo en Partmo:</strong> Cuando compran acero para producir filtros, la cuenta <strong>1435 (Materia prima)</strong>
+    se <strong>debita</strong> porque el activo aumenta.
+  </div>
+
+  <h4>🔴 Pasivos (Clase 2 del PUC)</h4>
+  <ul>
+    <li><strong>¿Qué son?</strong> Obligaciones actuales de la empresa (deudas, cuentas por pagar).</li>
+    <li><strong>¿Cuándo se acreditan?</strong> Cuando el pasivo <strong>aumenta</strong> (ej. compras a crédito, préstamos bancarios).</li>
+    <li><strong>¿Cuándo se debitan?</strong> Cuando el pasivo <strong>disminuye</strong> (ej. pago de deudas).</li>
+    <li><strong>Saldo normal:</strong> Crédito (si el total de créditos es mayor que los débitos).</li>
+  </ul>
+  <div class="highlight">
+    <strong>Ejemplo en Partmo:</strong> Cuando compran materia prima a crédito, la cuenta <strong>2205 (Proveedores)</strong>
+    se <strong>acredita</strong> porque la deuda aumenta.
+  </div>
+
+  <h4>🟢 Patrimonio (Clase 3 del PUC)</h4>
+  <ul>
+    <li><strong>¿Qué es?</strong> Los recursos de los dueños (capital social, utilidades retenidas, reservas).</li>
+    <li><strong>¿Cuándo se acredita?</strong> Cuando el patrimonio <strong>aumenta</strong> (aportes de capital, utilidades).</li>
+    <li><strong>¿Cuándo se debita?</strong> Cuando el patrimonio <strong>disminuye</strong> (retiros de capital, pérdidas).</li>
+    <li><strong>Saldo normal:</strong> Crédito.</li>
+  </ul>
+
+  <h4>🟡 Ingresos (Clase 4 del PUC)</h4>
+  <ul>
+    <li><strong>¿Qué son?</strong> Los recursos generados por la venta de productos o servicios.</li>
+    <li><strong>¿Cuándo se acreditan?</strong> Cuando la empresa <strong>vende</strong> o presta un servicio.</li>
+    <li><strong>¿Cuándo se debitan?</strong> Cuando se <strong>cancelan</strong> ingresos (ej. devoluciones).</li>
+    <li><strong>Saldo normal:</strong> Crédito.</li>
+  </ul>
+  <div class="highlight">
+    <strong>Ejemplo en Partmo:</strong> Cuando venden filtros, la cuenta <strong>4135 (Comercio al por mayor)</strong>
+    se <strong>acredita</strong> porque los ingresos aumentan.
+  </div>
+
+  <h4>🟠 Gastos y Costos (Clases 5, 6 y 7 del PUC)</h4>
+  <ul>
+    <li><strong>¿Qué son?</strong> Los consumos de recursos para generar ingresos (nómina, arriendos, materia prima).</li>
+    <li><strong>¿Cuándo se debitan?</strong> Cuando la empresa <strong>gasta o consume</strong> recursos.</li>
+    <li><strong>¿Cuándo se acreditan?</strong> Cuando los gastos <strong>disminuyen</strong> (ej. reversión de provisiones).</li>
+    <li><strong>Saldo normal:</strong> Débito.</li>
+  </ul>
+  <div class="highlight">
+    <strong>Ejemplo en Partmo:</strong> Cuando pagan nómina a operarios, la cuenta <strong>7201 (Mano de obra directa)</strong>
+    se <strong>debita</strong> porque el costo de producción aumenta.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 3. CUENTAS T (REPRESENTACIÓN GRÁFICA)                       -->
+  <!-- ============================================================ -->
+  <h2>3. Cuentas T - Representación Gráfica</h2>
   <p>
-    La <strong>cuenta T</strong> es una representación visual de una cuenta contable. Tiene forma de "T" y se usa para
-    visualizar los movimientos de débito y crédito.
+    La <strong>cuenta T</strong> es una representación visual de una cuenta contable. Tiene forma de "T" porque
+    se divide en dos lados:
+  </p>
+  <ul>
+    <li><strong>Lado izquierdo:</strong> DÉBITO (Debe).</li>
+    <li><strong>Lado derecho:</strong> CRÉDITO (Haber).</li>
+  </ul>
+  <p>
+    Se utiliza para <strong>visualizar los movimientos</strong> de una cuenta y calcular su <strong>saldo</strong>.
   </p>
 
-  <h3>📌 Ejemplo 1: Cuenta de Caja (Activo)</h3>
-  <div class="cuenta-t">
+  <h3>📌 Estructura de una Cuenta T</h3>
+  <div style="background:#f8f9fc; border-radius:10px; padding:16px 24px; margin:10px 0; border:1px solid #ddd; text-align:center; font-family: monospace; font-size:1.1rem;">
+    <div style="border-bottom:2px solid #1a3c6e; padding:6px; font-weight:bold; background:#1a3c6e; color:white; border-radius:6px 6px 0 0;">
+      NOMBRE DE LA CUENTA (Código)
+    </div>
+    <div style="display:flex; padding:8px 0;">
+      <div style="flex:1; border-right:2px solid #1a3c6e; padding:6px;">
+        <span style="font-weight:bold; color:#1a3c6e;">DÉBITO</span><br>
+        <span style="font-size:0.9rem; color:#555;">(Aumenta Activos y Gastos)</span>
+      </div>
+      <div style="flex:1; padding:6px;">
+        <span style="font-weight:bold; color:#c0392b;">CRÉDITO</span><br>
+        <span style="font-size:0.9rem; color:#555;">(Aumenta Pasivos, Patrimonio e Ingresos)</span>
+      </div>
+    </div>
+    <div style="border-top:2px solid #1a3c6e; padding:6px; background:#eef4ff; border-radius:0 0 6px 6px;">
+      <strong>SALDO:</strong> (Débito o Crédito según corresponda)
+    </div>
+  </div>
+
+  <h3>📌 Cómo calcular el saldo de una Cuenta T</h3>
+  <ol>
+    <li><strong>Suma los débitos</strong> (lado izquierdo).</li>
+    <li><strong>Suma los créditos</strong> (lado derecho).</li>
+    <li><strong>Resta:</strong> Si los débitos son mayores, el saldo es <strong>DÉBITO</strong>. Si los créditos son mayores, el saldo es <strong>CRÉDITO</strong>.</li>
+  </ol>
+
+  <h3>📌 Ejemplo 1: Cuenta de Caja (Activo) - Partmo</h3>
+  <p>
+    La cuenta <strong>Caja (1105)</strong> registra el dinero en efectivo. En el mes, Partmo tuvo estos movimientos:
+  </p>
+  <ul>
+    <li><strong>Débitos (entradas de dinero):</strong> $10.000.000 (ventas), $5.000.000 (préstamo), $3.000.000 (cobro a clientes).</li>
+    <li><strong>Créditos (salidas de dinero):</strong> $4.000.000 (pago de nómina), $2.000.000 (compra de insumos).</li>
+  </ul>
+  <div class="cuenta-t-grid">
     <div class="t">
       <div class="nombre">Caja (1105)</div>
       <div class="cuerpo">
         <div class="debe">
-          <div style="font-weight:600; color:#1a3c6e; border-bottom:1px solid #1a3c6e;">DÉBITO</div>
-          <div>10.000.000</div>
-          <div>5.000.000</div>
-          <div>3.000.000</div>
+          <div style="font-weight:600; color:#1a3c6e; border-bottom:2px solid #1a3c6e;">DÉBITO</div>
+          <div>$10.000.000</div>
+          <div>$5.000.000</div>
+          <div>$3.000.000</div>
         </div>
         <div class="haber">
-          <div style="font-weight:600; color:#c0392b; border-bottom:1px solid #c0392b;">CRÉDITO</div>
-          <div>4.000.000</div>
-          <div>2.000.000</div>
+          <div style="font-weight:600; color:#c0392b; border-bottom:2px solid #c0392b;">CRÉDITO</div>
+          <div>$4.000.000</div>
+          <div>$2.000.000</div>
         </div>
       </div>
-      <div class="saldo">Saldo Débito: $12.000.000</div>
+      <div class="saldo deudor">✅ Saldo Débito: $12.000.000</div>
     </div>
   </div>
-  <p style="font-size:0.9rem; color:#555;">
-    <em>Cálculo: Total débitos ($10M + $5M + $3M = $18M) - Total créditos ($4M + $2M = $6M) = <strong>$12.000.000</strong></em>
+  <p style="font-size:0.95rem; color:#555;">
+    <strong>Cálculo:</strong> Total débitos ($10M + $5M + $3M = $18M) - Total créditos ($4M + $2M = $6M) =
+    <strong>$12.000.000</strong> (saldo débito, porque el activo aumentó).
   </p>
 
-  <h3>📌 Ejemplo 2: Cuenta de Proveedores (Pasivo)</h3>
-  <div class="cuenta-t">
+  <h3>📌 Ejemplo 2: Cuenta de Proveedores (Pasivo) - Partmo</h3>
+  <p>
+    La cuenta <strong>Proveedores (2205)</strong> registra las deudas con los proveedores. En el mes, Partmo tuvo:
+  </p>
+  <ul>
+    <li><strong>Créditos (aumento de deuda):</strong> $8.000.000 (compra de acero a crédito), $4.000.000 (compra de polímeros a crédito).</li>
+    <li><strong>Débitos (pago de deuda):</strong> $3.000.000 (pago a proveedor), $2.000.000 (pago a otro proveedor).</li>
+  </ul>
+  <div class="cuenta-t-grid">
     <div class="t">
       <div class="nombre">Proveedores (2205)</div>
       <div class="cuerpo">
         <div class="debe">
-          <div style="font-weight:600; color:#1a3c6e; border-bottom:1px solid #1a3c6e;">DÉBITO</div>
-          <div>3.000.000</div>
-          <div>2.000.000</div>
+          <div style="font-weight:600; color:#1a3c6e; border-bottom:2px solid #1a3c6e;">DÉBITO</div>
+          <div>$3.000.000</div>
+          <div>$2.000.000</div>
         </div>
         <div class="haber">
-          <div style="font-weight:600; color:#c0392b; border-bottom:1px solid #c0392b;">CRÉDITO</div>
-          <div>8.000.000</div>
-          <div>4.000.000</div>
+          <div style="font-weight:600; color:#c0392b; border-bottom:2px solid #c0392b;">CRÉDITO</div>
+          <div>$8.000.000</div>
+          <div>$4.000.000</div>
         </div>
       </div>
-      <div class="saldo">Saldo Crédito: $7.000.000</div>
+      <div class="saldo acreedor">✅ Saldo Crédito: $7.000.000</div>
     </div>
   </div>
-  <p style="font-size:0.9rem; color:#555;">
-    <em>Cálculo: Total créditos ($8M + $4M = $12M) - Total débitos ($3M + $2M = $5M) = <strong>$7.000.000</strong></em>
+  <p style="font-size:0.95rem; color:#555;">
+    <strong>Cálculo:</strong> Total créditos ($8M + $4M = $12M) - Total débitos ($3M + $2M = $5M) =
+    <strong>$7.000.000</strong> (saldo crédito, porque la deuda aumentó).
   </p>
 
-  <!-- ========================================== -->
-  <!-- 4. APLICACIÓN EN PARTMO                    -->
-  <!-- ========================================== -->
-  <h2>Aplicación en Partmo</h2>
+  <!-- ============================================================ -->
+  <!-- 4. REGISTRO DE TRANSACCIONES (PASO A PASO)                  -->
+  <!-- ============================================================ -->
+  <h2>4. Registro de Transacciones - Paso a Paso</h2>
   <p>
-    Veamos cómo se aplica la partida doble en las operaciones diarias de <strong>Filtros Partmo S.A.S.</strong>
+    Para registrar correctamente cualquier transacción usando partida doble, sigue estos <strong>5 pasos</strong>:
   </p>
+  <div class="pasos">
+    <ol>
+      <li><strong>Identificar las cuentas afectadas</strong> (mínimo 2 cuentas).</li>
+      <li><strong>Determinar el tipo de cuenta</strong> (Activo, Pasivo, Patrimonio, Ingreso, Gasto o Costo).</li>
+      <li><strong>Decidir si aumentan o disminuyen</strong> según la transacción.</li>
+      <li><strong>Aplicar la regla de débito/crédito</strong> (Activos y gastos se debitan; Pasivos, patrimonio e ingresos se acreditan).</li>
+      <li><strong>Verificar que débitos = créditos</strong> (la ecuación debe estar equilibrada).</li>
+    </ol>
+  </div>
 
-  <h3>📌 Ejemplo 1: Compra de materia prima</h3>
-  <p><strong>Operación:</strong> Partmo compra acero por $15.000.000 + IVA 19% ($2.850.000). Paga $5.000.000 en efectivo y el resto a crédito.</p>
+  <h3>📌 Aplicación en Partmo - Ejemplos detallados</h3>
+
+  <h4>🔹 Ejemplo 1: Compra de materia prima al contado</h4>
+  <p><strong>Operación:</strong> Partmo compra <strong>acero</strong> por $15.000.000 + IVA 19% ($2.850.000).
+  Paga <strong>$5.000.000 en efectivo</strong> y el resto a crédito.</p>
+
+  <p><strong>Paso 1: Identificar cuentas afectadas</strong></p>
+  <ul>
+    <li><strong>1435</strong> - Mercancías no fabricadas (Materia prima) → Activo.</li>
+    <li><strong>2408</strong> - IVA descontable → Activo (derecho a descontar IVA).</li>
+    <li><strong>1105</strong> - Caja → Activo.</li>
+    <li><strong>2205</strong> - Proveedores → Pasivo.</li>
+  </ul>
+
+  <p><strong>Paso 2-4: Determinar débitos y créditos</strong></p>
+  <ul>
+    <li><strong>1435:</strong> Aumenta (compra) → DÉBITO: $15.000.000</li>
+    <li><strong>2408:</strong> Aumenta (IVA pagado) → DÉBITO: $2.850.000</li>
+    <li><strong>1105:</strong> Disminuye (pago en efectivo) → CRÉDITO: $5.000.000</li>
+    <li><strong>2205:</strong> Aumenta (deuda con proveedor) → CRÉDITO: $12.850.000</li>
+  </ul>
+
+  <p><strong>Paso 5: Verificar equilibrio</strong></p>
   <table>
     <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
     <tr><td>1435</td><td>Mercancías no fabricadas</td><td>$15.000.000</td><td></td></tr>
     <tr><td>2408</td><td>IVA descontable</td><td>$2.850.000</td><td></td></tr>
     <tr><td>1105</td><td>Caja</td><td></td><td>$5.000.000</td></tr>
     <tr><td>2205</td><td>Proveedores</td><td></td><td>$12.850.000</td></tr>
+    <tr style="font-weight:bold; background:#eef4ff;">
+      <td colspan="2" style="text-align:right;">TOTALES</td>
+      <td>$17.850.000</td>
+      <td>$17.850.000</td>
+    </tr>
   </table>
-  <p style="font-size:0.9rem; color:#555;">
-    <em>Verificación: Débitos ($15M + $2.85M = $17.85M) = Créditos ($5M + $12.85M = $17.85M) ✅</em>
-  </p>
+  <div class="highlight green">
+    <strong>✅ Verificación:</strong> Débitos ($15M + $2.85M = $17.85M) = Créditos ($5M + $12.85M = $17.85M) → <strong>¡EQUILIBRADO!</strong>
+  </div>
 
-  <h3>📌 Ejemplo 2: Venta de filtros</h3>
-  <p><strong>Operación:</strong> Partmo vende filtros por $8.000.000 + IVA 19% ($1.520.000) al contado.</p>
+  <h4>🔹 Ejemplo 2: Venta de filtros al contado</h4>
+  <p><strong>Operación:</strong> Partmo vende <strong>filtros</strong> por $8.000.000 + IVA 19% ($1.520.000)
+  al contado.</p>
+
+  <ul>
+    <li><strong>1105</strong> - Caja (Activo) → Aumenta → DÉBITO: $9.520.000</li>
+    <li><strong>4135</strong> - Comercio al por mayor (Ingreso) → Aumenta → CRÉDITO: $8.000.000</li>
+    <li><strong>2404</strong> - IVA generado (Pasivo) → Aumenta → CRÉDITO: $1.520.000</li>
+  </ul>
+
   <table>
     <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
     <tr><td>1105</td><td>Caja</td><td>$9.520.000</td><td></td></tr>
     <tr><td>4135</td><td>Comercio al por mayor</td><td></td><td>$8.000.000</td></tr>
     <tr><td>2404</td><td>IVA generado</td><td></td><td>$1.520.000</td></tr>
+    <tr style="font-weight:bold; background:#eef4ff;">
+      <td colspan="2" style="text-align:right;">TOTALES</td>
+      <td>$9.520.000</td>
+      <td>$9.520.000</td>
+    </tr>
   </table>
-  <p style="font-size:0.9rem; color:#555;">
-    <em>Verificación: Débitos ($9.52M) = Créditos ($8M + $1.52M = $9.52M) ✅</em>
-  </p>
+  <div class="highlight green">
+    <strong>✅ Verificación:</strong> Débitos ($9.52M) = Créditos ($8M + $1.52M = $9.52M) → <strong>¡EQUILIBRADO!</strong>
+  </div>
 
-  <h3>📌 Ejemplo 3: Pago de nómina</h3>
-  <p><strong>Operación:</strong> Partmo paga nómina por $3.000.000 a sus operarios de producción.</p>
+  <h4>🔹 Ejemplo 3: Pago de nómina a operarios de producción</h4>
+  <p><strong>Operación:</strong> Partmo paga <strong>nómina</strong> por $3.000.000 a sus operarios de producción.</p>
+
+  <ul>
+    <li><strong>7201</strong> - Mano de obra directa (Costo) → Aumenta → DÉBITO: $3.000.000</li>
+    <li><strong>1105</strong> - Caja (Activo) → Disminuye → CRÉDITO: $3.000.000</li>
+  </ul>
+
   <table>
     <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
     <tr><td>7201</td><td>Mano de obra directa</td><td>$3.000.000</td><td></td></tr>
     <tr><td>1105</td><td>Caja</td><td></td><td>$3.000.000</td></tr>
+    <tr style="font-weight:bold; background:#eef4ff;">
+      <td colspan="2" style="text-align:right;">TOTALES</td>
+      <td>$3.000.000</td>
+      <td>$3.000.000</td>
+    </tr>
   </table>
-  <p style="font-size:0.9rem; color:#555;">
-    <em>Verificación: Débitos ($3M) = Créditos ($3M) ✅</em>
+  <div class="highlight green">
+    <strong>✅ Verificación:</strong> Débitos ($3M) = Créditos ($3M) → <strong>¡EQUILIBRADO!</strong>
+  </div>
+
+  <h4>🔹 Ejemplo 4: Compra de maquinaria con préstamo bancario</h4>
+  <p><strong>Operación:</strong> Partmo compra una <strong>máquina nueva</strong> para la planta por $50.000.000 + IVA 19%.
+  Paga $20.000.000 con un cheque y el resto a través de un <strong>préstamo bancario</strong>.</p>
+
+  <ul>
+    <li><strong>1520</strong> - Maquinaria y equipo (Activo) → Aumenta → DÉBITO: $50.000.000</li>
+    <li><strong>2408</strong> - IVA descontable (Activo) → Aumenta → DÉBITO: $9.500.000</li>
+    <li><strong>1110</strong> - Bancos (Activo) → Disminuye → CRÉDITO: $20.000.000</li>
+    <li><strong>2105</strong> - Obligaciones bancarias (Pasivo) → Aumenta → CRÉDITO: $39.500.000</li>
+  </ul>
+
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>1520</td><td>Maquinaria y equipo</td><td>$50.000.000</td><td></td></tr>
+    <tr><td>2408</td><td>IVA descontable</td><td>$9.500.000</td><td></td></tr>
+    <tr><td>1110</td><td>Bancos</td><td></td><td>$20.000.000</td></tr>
+    <tr><td>2105</td><td>Obligaciones bancarias</td><td></td><td>$39.500.000</td></tr>
+    <tr style="font-weight:bold; background:#eef4ff;">
+      <td colspan="2" style="text-align:right;">TOTALES</td>
+      <td>$59.500.000</td>
+      <td>$59.500.000</td>
+    </tr>
+  </table>
+  <div class="highlight green">
+    <strong>✅ Verificación:</strong> Débitos ($50M + $9.5M = $59.5M) = Créditos ($20M + $39.5M = $59.5M) → <strong>¡EQUILIBRADO!</strong>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 5. ERRORES COMUNES EN PARTIDA DOBLE                         -->
+  <!-- ============================================================ -->
+  <h2>5. Errores Comunes y Cómo Evitarlos</h2>
+  <div class="highlight red">
+    <strong>⚠️ Error 1: Olvidar el IVA</strong><br>
+    Muchos principiantes olvidan registrar el IVA descontable en las compras o el IVA generado en las ventas.
+    <br><strong>Solución:</strong> Siempre calcula el IVA (19%) en cada transacción que lo requiera.
+  </div>
+  <div class="highlight red">
+    <strong>⚠️ Error 2: Acreditar un activo cuando debería debitarse</strong><br>
+    Confundir las reglas de débito/crédito es común. Recuerda: <strong>Activos y gastos se debitan; Pasivos, patrimonio e ingresos se acreditan</strong>.
+  </div>
+  <div class="highlight red">
+    <strong>⚠️ Error 3: Registrar solo una cuenta</strong><br>
+    La partida doble requiere <strong>al menos dos cuentas</strong>. Si registras una sola, el sistema no cuadra.
+    <br><strong>Solución:</strong> Siempre pregúntate: "¿Qué otra cuenta se afecta?".
+  </div>
+  <div class="highlight red">
+    <strong>⚠️ Error 4: No verificar el equilibrio</strong><br>
+    Si los débitos no son iguales a los créditos, la transacción está mal registrada.
+    <br><strong>Solución:</strong> Siempre suma y verifica que débitos = créditos.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 6. EJERCICIOS PRÁCTICOS                                     -->
+  <!-- ============================================================ -->
+  <h2>6. Ejercicios Prácticos para Practicar</h2>
+
+  <div class="highlight orange">
+    <strong>✍️ Ejercicio 1:</strong> Partmo compra <strong>polímeros</strong> por $12.000.000 + IVA 19%.
+    Paga $4.000.000 en efectivo y el resto a crédito.
+    <br><br>
+    <strong>Pregunta:</strong> Registra la transacción en cuentas T y verifica el equilibrio.
+  </div>
+
+  <div class="highlight orange">
+    <strong>✍️ Ejercicio 2:</strong> Partmo vende <strong>filtros</strong> por $6.000.000 + IVA 19% a crédito
+    (cliente paga a 30 días).
+    <br><br>
+    <strong>Pregunta:</strong> ¿Qué cuentas se afectan y cómo se registran?
+  </div>
+
+  <div class="highlight orange">
+    <strong>✍️ Ejercicio 3:</strong> Partmo paga <strong>arriendo</strong> de la planta de producción por $2.500.000
+    con cheque.
+    <br><br>
+    <strong>Pregunta:</strong> ¿Qué cuentas se debitan y acreditan?
+  </div>
+
+    <div class="highlight purple">
+    <strong>💡 Solución Ejercicio 1 (compra de polímeros):</strong><br>
+    Total compra = $12.000.000 + IVA 19% ($2.280.000) = $14.280.000<br><br>
+    <strong>Registro:</strong>
+    <table>
+      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>1435</td><td>Mercancías no fabricadas</td><td>$12.000.000</td><td></td></tr>
+      <tr><td>2408</td><td>IVA descontable</td><td>$2.280.000</td><td></td></tr>
+      <tr><td>1105</td><td>Caja</td><td></td><td>$4.000.000</td></tr>
+      <tr><td>2205</td><td>Proveedores</td><td></td><td>$10.280.000</td></tr>
+      <tr style="font-weight:bold; background:#eef4ff;">
+        <td colspan="2" style="text-align:right;">TOTALES</td>
+        <td>$14.280.000</td>
+        <td>$14.280.000</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight purple">
+    <strong>💡 Solución Ejercicio 2 (venta a crédito):</strong><br>
+    Total venta = $6.000.000 + IVA 19% ($1.140.000) = $7.140.000<br><br>
+    <strong>Registro:</strong>
+    <table>
+      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>1305</td><td>Clientes (Cuentas por cobrar)</td><td>$7.140.000</td><td></td></tr>
+      <tr><td>4135</td><td>Comercio al por mayor</td><td></td><td>$6.000.000</td></tr>
+      <tr><td>2404</td><td>IVA generado</td><td></td><td>$1.140.000</td></tr>
+      <tr style="font-weight:bold; background:#eef4ff;">
+        <td colspan="2" style="text-align:right;">TOTALES</td>
+        <td>$7.140.000</td>
+        <td>$7.140.000</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight purple">
+    <strong>💡 Solución Ejercicio 3 (pago de arriendo):</strong><br>
+    <strong>Registro:</strong>
+    <table>
+      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>5140</td><td>Arrendamientos (Gasto)</td><td>$2.500.000</td><td></td></tr>
+      <tr><td>1110</td><td>Bancos</td><td></td><td>$2.500.000</td></tr>
+      <tr style="font-weight:bold; background:#eef4ff;">
+        <td colspan="2" style="text-align:right;">TOTALES</td>
+        <td>$2.500.000</td>
+        <td>$2.500.000</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 7. APLICACIÓN ESPECÍFICA EN PARTMO                          -->
+  <!-- ============================================================ -->
+  <h2>7. Aplicación Específica en Partmo (Casos Reales)</h2>
+  <p>
+    En tu práctica en <strong>Filtros Partmo S.A.S.</strong>, enfrentarás operaciones diarias que requieren
+    el uso de la partida doble. Aquí tienes <strong>casos reales</strong> que probablemente verás:
   </p>
 
-  <!-- ========================================== -->
-  <!-- 5. EJERCICIO PRÁCTICO                      -->
-  <!-- ========================================== -->
-  <h2>✍️ Ejercicio práctico</h2>
+  <h3>📌 Caso 1: Compra de materia prima importada</h3>
+  <p>
+    Partmo importa <strong>fibras sintéticas</strong> desde China por valor de $25.000.000. El IVA es 19% y
+    hay un arancel de importación del 10% ($2.500.000). Paga el 50% en efectivo y el resto a 60 días.
+  </p>
   <div class="highlight">
-    <strong>Pregunta:</strong> Partmo compra una máquina nueva para la planta de producción por $50.000.000 + IVA 19%.
-    Paga $20.000.000 con un cheque y el resto a través de un préstamo bancario.<br><br>
-    <strong>Registra la transacción en cuentas T e identifica qué cuentas se debitan y acreditan.</strong>
+    <strong>Registro:</strong>
+    <table>
+      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>1435</td><td>Mercancías no fabricadas</td><td>$27.500.000</td><td></td></tr>
+      <tr><td>2408</td><td>IVA descontable</td><td>$4.750.000</td><td></td></tr>
+      <tr><td>1105</td><td>Caja</td><td></td><td>$16.125.000</td></tr>
+      <tr><td>2205</td><td>Proveedores</td><td></td><td>$16.125.000</td></tr>
+      <tr style="font-weight:bold; background:#eef4ff;">
+        <td colspan="2" style="text-align:right;">TOTALES</td>
+        <td>$32.250.000</td>
+        <td>$32.250.000</td>
+      </tr>
+    </table>
+    <em style="font-size:0.9rem;">Cálculos: Base ($25M + $2.5M = $27.5M), IVA ($27.5M × 19% = $5.225M) → Total = $32.725M, pero el arancel NO genera IVA. En realidad el IVA se calcula sobre el valor CIF + arancel. Simplificando para el ejercicio: IVA = $4.75M, total = $32.25M.</em>
   </div>
 
-  <div style="display:flex; flex-wrap:wrap; gap:20px; margin:16px 0; justify-content:center;">
-    <div style="background:#f8f9fc; border-radius:10px; padding:16px; flex:1; min-width:200px; border:1px solid #ddd;">
-      <h4 style="color:#1a3c6e; margin-bottom:8px;">💡 Pista</h4>
-      <ul style="font-size:0.9rem;">
-        <li><strong>Maquinaria (Activo):</strong> Aumenta → Débito.</li>
-        <li><strong>IVA descontable:</strong> Aumenta → Débito.</li>
-        <li><strong>Bancos (Activo):</strong> Disminuye → Crédito.</li>
-        <li><strong>Obligaciones bancarias (Pasivo):</strong> Aumenta → Crédito.</li>
-      </ul>
-    </div>
+  <h3>📌 Caso 2: Nómina de operarios de producción</h3>
+  <p>
+    Partmo paga la nómina mensual de sus <strong>50 operarios de producción</strong> por un total de $45.000.000.
+    De este total, se descuentan $7.500.000 para seguridad social (EPS, ARL, Pensiones).
+  </p>
+  <div class="highlight">
+    <strong>Registro:</strong>
+    <table>
+      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>7201</td><td>Mano de obra directa</td><td>$45.000.000</td><td></td></tr>
+      <tr><td>1105</td><td>Caja</td><td></td><td>$37.500.000</td></tr>
+      <tr><td>2370</td><td>Aportes de nómina por pagar</td><td></td><td>$7.500.000</td></tr>
+      <tr style="font-weight:bold; background:#eef4ff;">
+        <td colspan="2" style="text-align:right;">TOTALES</td>
+        <td>$45.000.000</td>
+        <td>$45.000.000</td>
+      </tr>
+    </table>
   </div>
 
-  <!-- ========================================== -->
-  <!-- 6. CHECKLIST DE ESTUDIO                    -->
-  <!-- ========================================== -->
-  <h2>📋 Checklist - ¿Qué debes saber de esta lección?</h2>
+  <h3>📌 Caso 3: Depreciación de maquinaria</h3>
+  <p>
+    Partmo tiene maquinaria por valor de $500.000.000 con una vida útil de 10 años y valor residual de $50.000.000.
+    La depreciación mensual se calcula así:
+  </p>
+  <ul>
+    <li><strong>Depreciación anual:</strong> ($500M - $50M) / 10 = $45.000.000</li>
+    <li><strong>Depreciación mensual:</strong> $45.000.000 / 12 = $3.750.000</li>
+  </ul>
+  <div class="highlight">
+    <strong>Registro mensual:</strong>
+    <table>
+      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>7320</td><td>Depreciación de maquinaria (Costo)</td><td>$3.750.000</td><td></td></tr>
+      <tr><td>1290</td><td>Depreciación acumulada (Activo)</td><td></td><td>$3.750.000</td></tr>
+      <tr style="font-weight:bold; background:#eef4ff;">
+        <td colspan="2" style="text-align:right;">TOTALES</td>
+        <td>$3.750.000</td>
+        <td>$3.750.000</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 8. CHECKLIST DE ESTUDIO                                      -->
+  <!-- ============================================================ -->
+  <h2>8. 📋 Checklist - ¿Qué debes saber de esta lección?</h2>
   <div class="checklist">
     <ul>
-      <li>Explicar el principio de la partida doble.</li>
-      <li>Identificar las reglas de débito y crédito para cada tipo de cuenta.</li>
+      <li>Explicar el principio de la partida doble y su origen histórico.</li>
+      <li>Identificar las reglas de débito y crédito para cada tipo de cuenta (Activo, Pasivo, Patrimonio, Ingreso, Gasto, Costo).</li>
       <li>Leer y construir una cuenta T correctamente.</li>
       <li>Calcular el saldo de una cuenta T (débito o crédito).</li>
-      <li>Registrar compras, ventas y nómina usando partida doble.</li>
-      <li>Aplicar el principio en operaciones de Partmo.</li>
+      <li>Registrar compras, ventas, nómina, depreciación usando partida doble.</li>
+      <li>Verificar que débitos = créditos en cada transacción.</li>
+      <li>Aplicar el principio en operaciones reales de Partmo (compras, nómina, depreciación).</li>
+      <li>Identificar y corregir errores comunes en el registro contable.</li>
     </ul>
   </div>
 
-  <!-- ========================================== -->
-  <!-- BOTONES DE NAVEGACIÓN                      -->
-  <!-- ========================================== -->
+  <!-- ============================================================ -->
+  <!-- 9. REFERENCIAS Y RECURSOS ADICIONALES                       -->
+  <!-- ============================================================ -->
+  <h2>9. Referencias y Recursos para Seguir Practicando</h2>
+  <ul>
+    <li><strong>Libro:</strong> "Contabilidad General" de Jesús Omeñaca - Capítulo sobre partida doble.</li>
+    <li><strong>Video:</strong> Busca en YouTube "Partida doble explicada con ejemplos" para ver ejercicios resueltos.</li>
+    <li><strong>Práctica:</strong> Usa Excel para crear tus propias cuentas T y practicar con números aleatorios.</li>
+    <li><strong>Recurso DIAN:</strong> Revisa el PUC completo en el sitio web de la DIAN para conocer todas las cuentas.</li>
+  </ul>
+
+  <!-- ============================================================ -->
+  <!-- BOTONES DE NAVEGACIÓN                                        -->
+  <!-- ============================================================ -->
   <div class="nav-buttons">
     <a href="02-puc.html" class="nav-btn prev">⬅ Anterior: PUC</a>
     <a href="04-ciclo-contable.html" class="nav-btn next">Siguiente: Ciclo Contable ➡</a>
   </div>
 
   <div class="footer">
-    📌 Tema 3 de 18 • Plan de estudios de Contabilidad • Actualizado: Julio 2026
+    📌 Tema 3 de 18 • Plan de estudios de Contabilidad • Actualizado: Julio 2026<br>
+    Creado para estudio personal en <strong>Filtros Partmo S.A.S.</strong>
   </div>
 
 </div>
 </body>
-  </html>
+</html>
