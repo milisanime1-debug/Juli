@@ -12,11 +12,11 @@
       padding: 30px 20px;
     }
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       background: white;
       border-radius: 16px;
-      padding: 35px 40px;
+      padding: 40px 50px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     }
     .top-bar {
@@ -46,7 +46,7 @@
 
     h1 {
       color: #1a3c6e;
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -54,8 +54,8 @@
     }
     .subtitle {
       color: #555;
-      margin-bottom: 25px;
-      font-size: 1rem;
+      margin-bottom: 30px;
+      font-size: 1.05rem;
       border-left: 4px solid #1a3c6e;
       padding-left: 16px;
     }
@@ -63,44 +63,54 @@
 
     h2 {
       color: #1a3c6e;
-      font-size: 1.5rem;
-      margin-top: 35px;
-      margin-bottom: 12px;
-      border-bottom: 2px solid #e8ecf1;
-      padding-bottom: 8px;
+      font-size: 1.6rem;
+      margin-top: 40px;
+      margin-bottom: 14px;
+      border-bottom: 3px solid #e8ecf1;
+      padding-bottom: 10px;
     }
     h3 {
       color: #2c3e50;
-      font-size: 1.15rem;
-      margin-top: 20px;
+      font-size: 1.2rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #34495e;
+      font-size: 1.05rem;
+      margin-top: 18px;
       margin-bottom: 6px;
     }
     p, li {
       color: #2d2d2d;
-      line-height: 1.7;
-      font-size: 0.98rem;
+      line-height: 1.8;
+      font-size: 1rem;
     }
     ul, ol {
-      padding-left: 25px;
-      margin: 8px 0 16px 0;
+      padding-left: 28px;
+      margin: 10px 0 18px 0;
     }
     .highlight {
       background: #eef4ff;
-      border-left: 4px solid #1a3c6e;
-      padding: 14px 20px;
+      border-left: 5px solid #1a3c6e;
+      padding: 16px 22px;
       border-radius: 6px;
-      margin: 14px 0;
+      margin: 16px 0;
     }
     .highlight strong { color: #1a3c6e; }
     .highlight.green { border-left-color: #28a745; background: #e8f5e9; }
     .highlight.green strong { color: #28a745; }
     .highlight.orange { border-left-color: #fd7e14; background: #fff3e0; }
     .highlight.orange strong { color: #fd7e14; }
+    .highlight.purple { border-left-color: #6f42c1; background: #f3e8ff; }
+    .highlight.purple strong { color: #6f42c1; }
+    .highlight.red { border-left-color: #dc3545; background: #fce4e6; }
+    .highlight.red strong { color: #dc3545; }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 16px 0 20px 0;
+      margin: 16px 0 22px 0;
       background: white;
       border-radius: 8px;
       overflow: hidden;
@@ -109,12 +119,12 @@
     th {
       background: #1a3c6e;
       color: white;
-      padding: 10px 14px;
+      padding: 12px 16px;
       text-align: left;
       font-weight: 600;
     }
     td {
-      padding: 10px 14px;
+      padding: 12px 16px;
       border-bottom: 1px solid #e8ecf1;
     }
     tr:hover td { background: #f8f9fc; }
@@ -122,27 +132,43 @@
     .checklist {
       background: #f8f9fc;
       border-radius: 10px;
-      padding: 18px 24px;
-      margin: 16px 0;
+      padding: 20px 28px;
+      margin: 18px 0;
     }
-    .checklist li { list-style: none; padding: 4px 0; }
+    .checklist li { list-style: none; padding: 6px 0; }
     .checklist li::before {
       content: "☐ ";
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #1a3c6e;
+    }
+
+    .ejercicio {
+      background: #faf3e0;
+      border-radius: 10px;
+      padding: 20px 28px;
+      margin: 18px 0;
+      border: 1px solid #f0d8b0;
+    }
+    .ejercicio h4 { color: #8d6e3f; margin-top: 0; }
+    .ejercicio .solucion {
+      background: white;
+      padding: 14px 20px;
+      border-radius: 8px;
+      margin-top: 12px;
+      border: 1px dashed #ccc;
     }
 
     .nav-buttons {
       display: flex;
       justify-content: space-between;
-      margin-top: 40px;
-      padding-top: 20px;
+      margin-top: 45px;
+      padding-top: 25px;
       border-top: 2px solid #e8ecf1;
       flex-wrap: wrap;
       gap: 12px;
     }
     .nav-btn {
-      padding: 10px 24px;
+      padding: 10px 28px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
@@ -160,7 +186,7 @@
     .nav-btn.next:hover { background: #0f2a4a; }
 
     .footer {
-      margin-top: 30px;
+      margin-top: 35px;
       text-align: center;
       font-size: 0.85rem;
       color: #888;
@@ -191,103 +217,243 @@
 
   <h1>📖 1. Introducción a la Contabilidad</h1>
   <div class="subtitle">
-    Fundamentos, objetivos y aplicación en <strong>Filtros Partmo S.A.S.</strong>
+    Fundamentos, objetivos, historia, usuarios y aplicación en <strong>Filtros Partmo S.A.S.</strong>
   </div>
 
   <!-- ========================================== -->
   <!-- 1. QUÉ ES LA CONTABILIDAD                   -->
   <!-- ========================================== -->
-  <h2>¿Qué es la Contabilidad?</h2>
+  <h2>1. ¿Qué es la Contabilidad?</h2>
   <p>
-    La contabilidad es el <strong>sistema de información</strong> que permite identificar, medir, registrar y comunicar
-    la situación financiera y los resultados de una empresa. Su propósito es tomar decisiones basadas en datos.
+    La <strong>contabilidad</strong> es un <strong>sistema de información</strong> que permite <strong>identificar</strong>,
+    <strong>medir</strong>, <strong>registrar</strong> y <strong>comunicar</strong> la situación financiera y los resultados
+    de una organización. Su propósito fundamental es <strong>proveer datos útiles</strong> para la toma de decisiones
+    económicas.
   </p>
+  <p>
+    En términos más sencillos, la contabilidad es el <strong>"idioma de los negocios"</strong>. Traduce todas las operaciones
+    de una empresa (compras, ventas, pagos, cobros, inversiones, etc.) a un lenguaje universal que cualquier persona
+    con conocimientos financieros puede entender: números y reportes estructurados.
+  </p>
+
   <div class="highlight">
-    <strong>📌 En pocas palabras:</strong> Es el "idioma de los negocios". Traduce las operaciones de la empresa a números
-    que todos entienden (dueños, inversionistas, bancos, DIAN, etc.).
+    <strong>📌 Definición formal (según el Marco Conceptual NIIF):</strong><br>
+    "La contabilidad es el proceso de identificar, medir y comunicar información económica para permitir juicios
+    y decisiones informadas por parte de los usuarios de la información."
   </div>
 
-  <h3>📌 Objetivos principales</h3>
+  <h3>📌 ¿Por qué es importante la contabilidad?</h3>
   <ul>
-    <li><strong>Proveer información financiera</strong> útil para la toma de decisiones.</li>
-    <li><strong>Controlar</strong> los recursos de la empresa (activos, pasivos, patrimonio).</li>
-    <li><strong>Cumplir con obligaciones</strong> fiscales y legales (DIAN, Cámara de Comercio).</li>
-    <li><strong>Evaluar el desempeño</strong> de la empresa (utilidad, rentabilidad).</li>
+    <li><strong>Permite tomar decisiones:</strong> ¿Compro más materia prima? ¿Contrato más personal? ¿Invierto en nueva maquinaria?</li>
+    <li><strong>Controla los recursos:</strong> Saber cuánto dinero tengo, cuánto debo y cuánto me deben.</li>
+    <li><strong>Mide el desempeño:</strong> ¿La empresa está generando utilidad o pérdidas?</li>
+    <li><strong>Cumple obligaciones legales:</strong> Declaración de impuestos (Renta, IVA, ICA), informes a la DIAN.</li>
+    <li><strong>Atrae inversionistas y financiamiento:</strong> Los bancos y accionistas exigen estados financieros confiables.</li>
   </ul>
 
   <!-- ========================================== -->
-  <!-- 2. USUARIOS DE LA INFORMACIÓN              -->
+  <!-- 2. HISTORIA DE LA CONTABILIDAD              -->
   <!-- ========================================== -->
-  <h2>¿Quiénes usan la información contable?</h2>
+  <h2>2. Breve Historia de la Contabilidad</h2>
+  <p>
+    La contabilidad existe desde que el ser humano comenzó a comerciar. Aquí un resumen de su evolución:
+  </p>
+  <ul>
+    <li><strong>🔹 Antigüedad (4.000 a.C.):</strong> En Mesopotamia y Egipto ya se registraban transacciones en tablillas de arcilla.</li>
+    <li><strong>🔹 Roma y Grecia:</strong> Usaban registros contables para administrar el comercio y los impuestos.</li>
+    <li><strong>🔹 1494 - Fray Luca Pacioli:</strong> Publicó el método de <strong>"Partida Doble"</strong> en su libro
+      <em>"Summa de Arithmetica"</em>. Es considerado el "padre de la contabilidad moderna".</li>
+    <li><strong>🔹 Siglo XIX - Revolución Industrial:</strong> Nace la contabilidad de costos para calcular el costo de producción.</li>
+    <li><strong>🔹 Siglo XX:</strong> Aparecen los estándares internacionales y las NIIF (Normas Internacionales de Información Financiera).</li>
+    <li><strong>🔹 Siglo XXI:</strong> Contabilidad digital, facturación electrónica, inteligencia artificial y automatización.</li>
+  </ul>
+  <div class="highlight purple">
+    <strong>📌 Dato curioso:</strong> En Colombia, la contabilidad moderna se regula desde la <strong>Ley 145 de 1960</strong>
+    y hoy está alineada con las <strong>NIIF</strong> desde la <strong>Ley 1314 de 2009</strong>.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. OBJETIVOS DE LA CONTABILIDAD             -->
+  <!-- ========================================== -->
+  <h2>3. Objetivos de la Contabilidad</h2>
+  <p>
+    Según el <strong>Marco Conceptual NIIF</strong>, el objetivo principal de la contabilidad financiera es:
+  </p>
+  <div class="highlight">
+    <strong>"Proporcionar información financiera sobre la entidad que sea útil a los usuarios existentes y potenciales
+    para la toma de decisiones sobre el suministro de recursos a la entidad."</strong>
+  </div>
+  <p>Este objetivo se desglosa en varios propósitos específicos:</p>
+
+  <h3>🔹 Objetivos específicos</h3>
+  <ul>
+    <li><strong>Registrar todas las operaciones:</strong> Cada transacción debe quedar documentada y registrada en los libros contables.</li>
+    <li><strong>Determinar la situación financiera:</strong> Mostrar qué tiene la empresa (activos), qué debe (pasivos) y qué le pertenece a los dueños (patrimonio).</li>
+    <li><strong>Calcular el resultado del período:</strong> Saber si la empresa generó utilidad o pérdida en un tiempo determinado.</li>
+    <li><strong>Controlar los recursos:</strong> Evitar robos, pérdidas o mal uso de los activos.</li>
+    <li><strong>Facilitar la toma de decisiones:</strong> Gerencia, inversionistas y acreedores usan la información para decidir.</li>
+    <li><strong>Cumplir con obligaciones fiscales:</strong> Liquidar y pagar impuestos correctamente.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 4. USUARIOS DE LA INFORMACIÓN CONTABLE      -->
+  <!-- ========================================== -->
+  <h2>4. Usuarios de la Información Contable</h2>
+  <p>
+    La información contable no es solo para el contador. Muchas personas y entidades la necesitan para diferentes propósitos.
+  </p>
+
+  <h3>🔹 Usuarios internos (dentro de la empresa)</h3>
   <table>
-    <tr><th>Usuario</th><th>¿Qué necesita saber?</th></tr>
-    <tr><td><strong>Dueños / Accionistas</strong></td><td>Si su inversión está generando utilidad.</td></tr>
-    <tr><td><strong>Gerencia / Administradores</strong></td><td>Tomar decisiones de compras, producción, inversiones.</td></tr>
-    <tr><td><strong>Bancos / Entidades financieras</strong></td><td>Capacidad de pago y nivel de endeudamiento.</td></tr>
-    <tr><td><strong>DIAN (Gobierno)</strong></td><td>Liquidar impuestos (Renta, IVA, ICA).</td></tr>
-    <tr><td><strong>Proveedores</strong></td><td>Si la empresa puede pagar sus deudas.</td></tr>
-    <tr><td><strong>Empleados</strong></td><td>Estabilidad laboral y prestaciones.</td></tr>
+    <tr><th>Usuario</th><th>¿Qué necesita?</th><th>¿Para qué?</th></tr>
+    <tr><td><strong>Dueños / Accionistas</strong></td><td>Utilidades, rentabilidad, crecimiento</td><td>Saber si su inversión está generando frutos.</td></tr>
+    <tr><td><strong>Gerencia / Administradores</strong></td><td>Costos, ventas, presupuestos</td><td>Tomar decisiones operativas y estratégicas.</td></tr>
+    <tr><td><strong>Jefes de área (producción, ventas)</strong></td><td>Costos de producción, comisiones</td><td>Controlar sus presupuestos y metas.</td></tr>
+    <tr><td><strong>Empleados</strong></td><td>Estabilidad de la empresa</td><td>Saber si su empleo es seguro a largo plazo.</td></tr>
+  </table>
+
+  <h3>🔹 Usuarios externos (fuera de la empresa)</h3>
+  <table>
+    <tr><th>Usuario</th><th>¿Qué necesita?</th><th>¿Para qué?</th></tr>
+    <tr><td><strong>Bancos / Entidades financieras</strong></td><td>Capacidad de pago, nivel de endeudamiento</td><td>Decidir si otorgan un préstamo.</td></tr>
+    <tr><td><strong>DIAN (Gobierno)</strong></td><td>Ingresos, costos, impuestos</td><td>Liquidar impuestos de Renta, IVA, ICA.</td></tr>
+    <tr><td><strong>Proveedores</strong></td><td>Capacidad de pago</td><td>Decidir si venden a crédito a la empresa.</td></tr>
+    <tr><td><strong>Inversionistas potenciales</strong></td><td>Rentabilidad, proyecciones</td><td>Decidir si invierten en la empresa.</td></tr>
+    <tr><td><strong>Clientes</strong></td><td>Estabilidad de la empresa</td><td>Saber si la empresa podrá cumplir con garantías o servicios futuros.</td></tr>
+    <tr><td><strong>Auditores externos</strong></td><td>Veracidad de los estados financieros</td><td>Emitir una opinión sobre la confiabilidad de la información.</td></tr>
   </table>
 
   <div class="highlight green">
-    <strong>🏢 En Partmo:</strong> La información contable es clave para reportar a la matriz <strong>Donaldson Company Inc.</strong>
-    y para cumplir con las obligaciones tributarias en Colombia.
+    <strong>🏢 En Partmo:</strong> Además de los usuarios típicos, la información contable es clave para reportar a la matriz
+    <strong>Donaldson Company Inc.</strong> en Estados Unidos, que exige reportes bajo NIIF y estándares internacionales.
   </div>
 
   <!-- ========================================== -->
-  <!-- 3. CUALIDADES DE LA INFORMACIÓN            -->
+  <!-- 5. CUALIDADES DE LA INFORMACIÓN CONTABLE    -->
   <!-- ========================================== -->
-  <h2>Cualidades de la Información Contable</h2>
-  <p>Según el <strong>Marco Conceptual NIIF</strong>, la información debe tener estas características:</p>
+  <h2>5. Cualidades de la Información Contable</h2>
+  <p>
+    Para que la información contable sea realmente útil, debe cumplir con ciertas <strong>características cualitativas</strong>
+    definidas por el <strong>Marco Conceptual NIIF</strong>. Se dividen en <strong>fundamentales</strong> y
+    <strong>de mejora</strong>.
+  </p>
+
+  <h3>🔹 Características fundamentales</h3>
   <ul>
-    <li><strong>Relevancia:</strong> Que ayude a tomar decisiones.</li>
-    <li><strong>Representación fiel:</strong> Que refleje la realidad de la empresa.</li>
-    <li><strong>Comparabilidad:</strong> Que se pueda comparar con otros períodos o empresas.</li>
-    <li><strong>Verificabilidad:</strong> Que pueda ser comprobada por terceros.</li>
-    <li><strong>Oportunidad:</strong> Que esté disponible a tiempo.</li>
+    <li><strong>Relevancia:</strong> La información debe ser capaz de influir en las decisiones de los usuarios.
+      Si no cambia ninguna decisión, no es relevante.</li>
+    <li><strong>Representación fiel:</strong> La información debe reflejar la realidad económica de la empresa.
+      Sin errores, sin sesgos y completa.</li>
+  </ul>
+
+  <h3>🔹 Características de mejora</h3>
+  <ul>
+    <li><strong>Comparabilidad:</strong> La información debe poder compararse con otros períodos o con otras empresas.</li>
+    <li><strong>Verificabilidad:</strong> Diferentes expertos deben llegar a conclusiones similares al revisar la información.</li>
+    <li><strong>Oportunidad:</strong> La información debe estar disponible cuando los usuarios la necesitan.</li>
+    <li><strong>Comprensibilidad:</strong> La información debe ser clara y fácil de entender para los usuarios.</li>
   </ul>
 
   <!-- ========================================== -->
-  <!-- 4. ECUACIÓN CONTABLE Y TIPOS DE EMPRESAS   -->
+  <!-- 6. RAMAS DE LA CONTABILIDAD                 -->
   <!-- ========================================== -->
-  <h2>Ecuación Contable Fundamental</h2>
-  <div class="highlight" style="text-align:center; font-size:1.4rem; font-weight:bold;">
+  <h2>6. Ramas de la Contabilidad</h2>
+  <p>
+    La contabilidad es un campo muy amplio. Se divide en varias ramas según el enfoque y el usuario al que sirven.
+  </p>
+
+  <h3>🔹 Contabilidad Financiera</h3>
+  <ul>
+    <li><strong>Enfoque:</strong> Proporciona información a <strong>usuarios externos</strong> (bancos, DIAN, inversionistas).</li>
+    <li><strong>Producto:</strong> Estados financieros (Balance General, Estado de Resultados, Flujo de Efectivo).</li>
+    <li><strong>Normas:</strong> Se rige por las <strong>NIIF</strong> (Normas Internacionales de Información Financiera).</li>
+    <li><strong>Obligatoria:</strong> Todas las empresas en Colombia deben llevarla.</li>
+  </ul>
+
+  <h3>🔹 Contabilidad de Costos</h3>
+  <ul>
+    <li><strong>Enfoque:</strong> Calcula el costo de producir bienes o prestar servicios.</li>
+    <li><strong>Usuarios:</strong> Gerencia, producción, compras.</li>
+    <li><strong>Importancia:</strong> Permite fijar precios de venta, controlar gastos y mejorar la eficiencia.</li>
+    <li><strong>🏢 En Partmo:</strong> Es <strong>CRUCIAL</strong> porque la empresa fabrica filtros. Debe calcular costos de materia prima, mano de obra y CIF (costos indirectos de fabricación).</li>
+  </ul>
+
+  <h3>🔹 Contabilidad Administrativa (o Gerencial)</h3>
+  <ul>
+    <li><strong>Enfoque:</strong> Información para la <strong>toma de decisiones internas</strong>.</li>
+    <li><strong>Usuarios:</strong> Gerentes, directores, jefes de área.</li>
+    <li><strong>Producto:</strong> Presupuestos, proyecciones, análisis de rentabilidad, informes de gestión.</li>
+    <li><strong>No es obligatoria:</strong> Cada empresa decide cómo usarla.</li>
+  </ul>
+
+  <h3>🔹 Contabilidad Fiscal</h3>
+  <ul>
+    <li><strong>Enfoque:</strong> Cumplir con las <strong>obligaciones tributarias</strong> (impuestos).</li>
+    <li><strong>Usuarios:</strong> DIAN (nacional), Secretarías de Hacienda (municipal).</li>
+    <li><strong>Producto:</strong> Declaraciones de Renta, IVA, ICA, Reteica, Retención en la fuente.</li>
+    <li><strong>🏢 En Partmo:</strong> Debe declarar Renta (35%), IVA (19%), ICA (~2.5‰ en Bucaramanga) y retenciones.</li>
+  </ul>
+
+  <h3>🔹 Auditoría</h3>
+  <ul>
+    <li><strong>Enfoque:</strong> Revisar y verificar que la información contable sea <strong>confiable y correcta</strong>.</li>
+    <li><strong>Tipos:</strong> Auditoría externa (revisores fiscales), interna (control interno).</li>
+    <li><strong>🏢 En Partmo:</strong> Por ser filial de una multinacional, probablemente tiene auditorías internas y externas periódicas.</li>
+  </ul>
+
+  <div class="highlight orange">
+    <strong>📌 Resumen para Partmo:</strong> La empresa necesita las <strong>5 ramas</strong> porque es una empresa grande,
+    manufacturera, con obligaciones fiscales y parte de un grupo multinacional.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. ECUACIÓN CONTABLE Y TIPOS DE EMPRESAS    -->
+  <!-- ========================================== -->
+  <h2>7. Ecuación Contable Fundamental</h2>
+  <p>
+    La <strong>ecuación contable</strong> es la base de toda la contabilidad. Siempre debe cumplirse, después de cada transacción.
+  </p>
+  <div class="highlight" style="text-align:center; font-size:1.6rem; font-weight:bold;">
     Activo = Pasivo + Patrimonio
   </div>
   <p>
-    Esta ecuación <strong>siempre debe cumplirse</strong>. Cada transacción afecta al menos dos cuentas.
+    <strong>Activo:</strong> Todo lo que la empresa <em>posee</em> (dinero, mercancías, maquinaria, vehículos, edificios, cuentas por cobrar).<br>
+    <strong>Pasivo:</strong> Todo lo que la empresa <em>debe</em> (préstamos, cuentas por pagar a proveedores, impuestos por pagar).<br>
+    <strong>Patrimonio:</strong> La <em>diferencia</em> entre lo que tiene y lo que debe. Es lo que pertenece a los dueños (capital + utilidades acumuladas).
   </p>
 
-  <h3>📌 Tipos de empresas según su actividad</h3>
+  <h3>🔹 ¿Qué pasa si la ecuación no se cumple?</h3>
+  <p>
+    Si al sumar los activos no es igual a la suma de pasivos + patrimonio, significa que <strong>hay un error</strong> en los registros contables.
+    Alguien se equivocó al hacer un asiento, falta una cuenta o hay un valor mal registrado.
+  </p>
+
+  <h3>🔹 Ejemplo aplicado a Partmo</h3>
+  <div class="highlight green">
+    <strong>Ejemplo:</strong> Partmo tiene:<br>
+    🔹 Activos: $500.000.000 (maquinaria, inventarios, caja, bancos)<br>
+    🔹 Pasivos: $200.000.000 (préstamos bancarios, proveedores)<br>
+    🔹 Patrimonio: $300.000.000 (capital de los dueños + utilidades)<br><br>
+    <strong>Ecuación:</strong> $500.000.000 = $200.000.000 + $300.000.000 ✅
+  </div>
+
+  <h3>🔹 Tipos de empresas según su actividad</h3>
   <table>
-    <tr><th>Tipo</th><th>Ejemplo</th></tr>
-    <tr><td><strong>Comercial</strong></td><td>Compra y vende productos (ej. supermercado).</td></tr>
-    <tr><td><strong>Manufacturera</strong></td><td>Transforma materia prima en productos (ej. <strong>Partmo</strong>).</td></tr>
-    <tr><td><strong>Servicios</strong></td><td>Ofrece servicios (ej. consultoría, transporte).</td></tr>
+    <tr><th>Tipo</th><th>¿Qué hace?</th><th>Ejemplo</th></tr>
+    <tr><td><strong>Comercial</strong></td><td>Compra y vende productos sin transformarlos.</td><td>Supermercado, almacén de ropa.</td></tr>
+    <tr><td><strong>Manufacturera</strong></td><td>Transforma materia prima en productos terminados.</td><td><strong>Filtros Partmo</strong>, fábricas de calzado.</td></tr>
+    <tr><td><strong>Servicios</strong></td><td>Ofrece servicios intangibles.</td><td>Consultoría, transporte, educación.</td></tr>
   </table>
   <div class="highlight orange">
-    <strong>🏭 Partmo es una empresa MANUFACTURERA</strong> (CIIU 2819). Esto implica manejar costos de producción, inventarios de materia prima y productos terminados.
+    <strong>🏭 Partmo es MANUFACTURERA</strong> (CIIU 2819). Esto implica manejar <strong>costos de producción</strong>,
+    inventarios de materia prima, productos en proceso y productos terminados. Es clave para tu práctica.
   </div>
 
   <!-- ========================================== -->
-  <!-- 5. RAMAS DE LA CONTABILIDAD                -->
+  <!-- 8. GLOSARIO BÁSICO COMPLETO                -->
   <!-- ========================================== -->
-  <h2>Ramas de la Contabilidad</h2>
-  <ul>
-    <li><strong>Contabilidad Financiera:</strong> Registra y reporta la situación de la empresa para externos (bancos, DIAN).</li>
-    <li><strong>Contabilidad de Costos:</strong> Calcula el costo de producir bienes o servicios (clave en Partmo).</li>
-    <li><strong>Contabilidad Administrativa:</strong> Para toma de decisiones internas (presupuestos, proyecciones).</li>
-    <li><strong>Contabilidad Fiscal:</strong> Enfocada en cumplir con obligaciones tributarias (Renta, IVA, ICA).</li>
-    <li><strong>Auditoría:</strong> Revisa y verifica que la información sea confiable.</li>
-  </ul>
-
-  <!-- ========================================== -->
-  <!-- 6. GLOSARIO BÁSICO                        -->
-  <!-- ========================================== -->
-  <h2>Glosario Básico</h2>
-  <table>
-    <tr><th>Término</th><th>Definición</th></tr>
-    <tr><td><strong>Activo</strong></td><td>Recursos que tiene la empresa (dinero, máquinas, mercancías).</td></tr>
+  <h2>8. Glosario Básico de Contabilidad</h2>
+  <os que tiene la empresa (dinero, máquinas, mercancías).</td></tr>
     <tr><td><strong>Pasivo</strong></td><td>Obligaciones o deudas (préstamos, proveedores).</td></tr>
     <tr><td><strong>Patrimonio</strong></td><td>Aporte de los dueños + utilidades no repartidas.</td></tr>
     <tr><td><strong>Ingresos</strong></td><td>Dinero que entra por ventas o servicios.</td></tr>
