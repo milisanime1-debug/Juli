@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conciliaciones Bancarias - Mi Hub Contable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .warning strong { color: #856404; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+    .badge.green { background: #28a745; }
+    .badge.orange { background: #fd7e14; }
+    .badge.red { background: #dc3545; }
+    .example-box {
+      background: #f8f9fc;
+      border: 1px solid #e8ecf1;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 16px 0;
+    }
+    .example-box h4 {
+      color: #1a3c6e;
+      margin-bottom: 10px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 700px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="../ejercicios.html" class="back">⬅ Volver a Ejercicios</a>
+
+  <h1>🏦 Conciliaciones Bancarias</h1>
+  <div class="subtitle">
+    Guía completa para <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. QUÉ ES UNA CONCILIACIÓN BANCARIA        -->
+  <!-- ========================================== -->
+  <h2>1. ¿Qué es una Conciliación Bancaria?</h2>
+  <p>
+    Es el <strong>proceso de comparación</strong> entre los movimientos registrados en la <strong>cuenta contable de bancos</strong> (libros de la empresa) y el <strong>extracto bancario</strong> que envía el banco. El objetivo es identificar y corregir las diferencias para que ambos saldos coincidan.
+  </p>
+
+  <div class="highlight">
+    <strong>💡 En Partmo:</strong> La conciliación se hace <strong>mensualmente</strong> para todas las cuentas bancarias. Es una tarea clave porque permite detectar errores, fraudes o movimientos no registrados.
+  </div>
+
+  <h3>📌 ¿Por qué es importante?</h3>
+  <ul>
+    <li><strong>Control interno:</strong> Permite detectar errores en los registros contables.</li>
+    <li><strong>Prevención de fraudes:</strong> Identifica movimientos no autorizados.</li>
+    <li><strong>Flujo de caja:</strong> Conocer el saldo real disponible.</li>
+    <li><strong>Auditoría:</strong> Es un requisito para los estados financieros.</li>
+    <li><strong>Toma de decisiones:</strong> Información confiable para la gerencia.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 2. CAUSAS DE DIFERENCIAS                   -->
+  <!-- ========================================== -->
+  <h2>2. Causas de Diferencias entre Libros y Banco</h2>
+
+  <div class="grid-2">
+    <div class="example-box">
+      <h4 style="color:#1a3c6e;">📌 Diferencias por <strong>Tiempo</strong></h4>
+      <ul>
+        <li><strong>Cheques pendientes de cobro:</strong> La empresa registró el pago, pero el banco aún no lo ha debitado.</li>
+        <li><strong>Depósitos en tránsito:</strong> La empresa registró el ingreso, pero el banco aún no lo ha acreditado.</li>
+        <li><strong>Transferencias interbancarias:</strong> Tardan 1-2 días hábiles en reflejarse.</li>
+        <li><strong>Débitos automáticos:</strong> El banco debita antes de que la empresa se entere.</li>
+      </ul>
+    </div>
+    <div class="example-box">
+      <h4 style="color:#1a3c6e;">📌 Diferencias por <strong>Error</strong></h4>
+      <ul>
+        <li><strong>Errores contables:</strong> Digitar mal un valor, una fecha o una cuenta.</li>
+        <li><strong>Errores bancarios:</strong> El banco registra un cargo o abono incorrecto.</li>
+        <li><strong>Facturas no registradas:</strong> Pagos o cobros que no se contabilizaron.</li>
+        <li><strong>Comisiones bancarias:</strong> El banco cobra comisiones que la empresa desconoce.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warning">
+    <strong>⚠️ Atención:</strong> Las diferencias por <strong>tiempo</strong> son <em>normales</em> y se ajustan al mes siguiente. Las diferencias por <strong>error</strong> deben corregirse <em>inmediatamente</em>.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. PASOS PARA HACER UNA CONCILIACIÓN      -->
+  <!-- ========================================== -->
+  <h2>3. Pasos para una Conciliación Bancaria</h2>
+
+  <ol>
+    <li><strong>Obtener el extracto bancario</strong> del mes (formato PDF o Excel).</li>
+    <li><strong>Descargar el libro auxiliar de bancos</strong> del sistema contable (Dynamics).</li>
+    <li><strong>Marcar los movimientos coincidentes</strong> (fecha, valor y referencia iguales).</li>
+    <li><strong>Identificar los movimientos que aparecen en el banco pero no en los libros</strong> (ej. comisiones, intereses, débitos automáticos).</li>
+    <li><strong>Identificar los movimientos que aparecen en los libros pero no en el banco</strong> (ej. cheques pendientes, depósitos en tránsito).</li>
+    <li><strong>Registrar los ajustes necesarios</strong> en el sistema contable.</li>
+    <li><strong>Verificar que el saldo ajustado coincida</strong> con el saldo del banco.</li>
+    <li><strong>Documentar y archivar</strong> la conciliación para futuras auditorías.</li>
+  </ol>
+
+  <!-- ========================================== -->
+  <!-- 4. EJEMPLO PRÁCTICO - PARTMO              -->
+  <!-- ========================================== -->
+  <h2>4. Caso Práctico: Partmo S.A.S. - Julio 2026</h2>
+
+  <div class="example-box">
+    <h4>📋 Datos iniciales</h4>
+    <ul>
+      <li><strong>Cuenta Bancaria:</strong> Bancolombia - Cuenta Corriente N° 123-456789</li>
+      <li><strong>Saldo según libros (Dynamics):</strong> $45.280.000</li>
+      <li><strong>Saldo según extracto bancario:</strong> $51.430.000</li>
+      <li><strong>Diferencia inicial:</strong> $6.150.000</li>
+    </ul>
+  </div>
+
+  <h3>🔍 Paso 1: Identificar diferencias</h3>
+
+  <table>
+    <tr><th>Concepto</th><th>Libros (Dynamics)</th><th>Banco</th><th>Diferencia</th></tr>
+    <tr><td>Cheque N° 1005 a Proveedor A</td><td>$3.200.000</td><td>No aparece</td><td style="color:#dc3545;">-$3.200.000</td></tr>
+    <tr><td>Cheque N° 1007 a Proveedor B</td><td>$1.800.000</td><td>No aparece</td><td style="color:#dc3545;">-$1.800.000</td></tr>
+    <tr><td>Depósito del Cliente X (factura 1234)</td><td>No aparece</td><td>$5.800.000</td><td style="color:#28a745;">+$5.800.000</td></tr>
+    <tr><td>Comisión bancaria - Julio</td><td>No aparece</td><td>$150.000</td><td style="color:#28a745;">+$150.000</td></tr>
+    <tr><td>Intereses de cuenta de ahorros</td><td>No aparece</td><td>$40.000</td><td style="color:#28a745;">+$40.000</td></tr>
+    <tr><td>Error: Se digitó $500.000 en lugar de $50.000</td><td>$500.000</td><td>$50.000</td><td style="color:#dc3545;">-$450.000</td></tr>
+  </table>
+
+  <div class="highlight">
+    <strong>📌 Total diferencias identificadas:</strong><br>
+    • Cheques pendientes: -$5.000.000 (1005 + 1007)<br>
+    • Depósitos en tránsito: +$5.800.000<br>
+    • Comisiones e intereses: +$190.000<br>
+    • Error de digitación: -$450.000<br>
+    <strong>Total:</strong> -$5.000.000 + $5.800.000 + $190.000 - $450.000 = <strong>+$540.000</strong><br>
+    <em>Diferencia inicial: $6.150.000 → Diferencia ajustada: $540.000 ✅</em>
+  </div>
+
+  <h3>📝 Paso 2: Registrar ajustes en Dynamics</h3>
+
+  <table>
+    <tr><th>Fecha</th><th>Cuenta</th><th>Concepto</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>31/07/2026</td><td>5305 - Gastos bancarios</td><td>Comisión bancaria julio</td><td>$150.000</td><td></td></tr>
+    <tr><td>31/07/2026</td><td>1110 - Banco</td><td>Comisión bancaria julio</td><td></td><td>$150.000</td></tr>
+    <tr><td>31/07/2026</td><td>1110 - Banco</td><td>Intereses cuenta ahorros</td><td>$40.000</td><td></td></tr>
+    <tr><td>31/07/2026</td><td>4210 - Ingresos financieros</td><td>Intereses cuenta ahorros</td><td></td><td>$40.000</td></tr>
+    <tr><td>31/07/2026</td><td>1110 - Banco</td><td>Ajuste error digitación</td><td>$450.000</td><td></td></tr>
+    <tr><td>31/07/2026</td><td>1435 - Materias primas</td><td>Ajuste error digitación</td><td></td><td>$450.000</td></tr>
+  </table>
+
+  <h3>✅ Paso 3: Verificar saldos finales</h3>
+
+  <div class="grid-2">
+    <div class="example-box">
+      <h4>📊 Saldo ajustado en libros</h4>
+      <ul>
+        <li><strong>Saldo inicial (Dynamics):</strong> $45.280.000</li>
+        <li><strong>+ Depósito en tránsito:</strong> +$5.800.000</li>
+        <li><strong>- Cheques pendientes:</strong> -$5.000.000</li>
+        <li><strong>+ Ajustes registrados:</strong> +$640.000</li>
+        <li><strong>= Saldo ajustado:</strong> <strong>$46.720.000</strong></li>
+      </ul>
+    </div>
+    <div class="example-box">
+      <h4>🏦 Saldo según extracto</h4>
+      <ul>
+        <li><strong>Saldo según extracto:</strong> $51.430.000</li>
+        <li><strong>- Depósito en tránsito (no registrado):</strong> -$5.800.000</li>
+        <li><strong>+ Cheques pendientes (no debitados):</strong> +$5.000.000</li>
+        <li><strong>- Ajustes registrados:</strong> -$640.000</li>
+        <li><strong>= Saldo ajustado:</strong> <strong>$46.720.000</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight" style="text-align:center; font-size:1.1rem;">
+    ✅ <strong>¡Saldos coinciden!</strong> Libros ajustados = Banco ajustado = <strong>$46.720.000</strong>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. PLANTILLA PARA CONCILIACIÓN            -->
+  <!-- ========================================== -->
+  <h2>5. Plantilla para Conciliación Bancaria</h2>
+
+  <div class="example-box">
+    <h4>📋 Formato recomendado para Partmo</h4>
+    <table>
+      <tr><th colspan="2" style="text-align:center;">CONCILIACIÓN BANCARIA - MES DE _______</th></tr>
+      <tr><th colspan="2" style="text-align:center;">Cuenta: ___________________ Banco: ___________</th></tr>
+      <tr><td colspan="2"><strong>1. Saldo según libros (Dynamics)</strong></td></tr>
+      <tr><td>Saldo inicial (mes anterior)</td><td>$_______________</td></tr>
+      <tr><td>(+) Ingresos registrados</td><td>$_______________</td></tr>
+      <tr><td>(-) Egresos registrados</td><td>$_______________</td></tr>
+      <tr><td><strong>= Saldo según libros</strong></td><td><strong>$_______________</strong></td></tr>
+      <tr><td colspan="2"><strong>2. Ajustes a los libros</strong></td></tr>
+      <tr><td>(+) Ingresos no registrados (ej. intereses)</td><td>$_______________</td></tr>
+      <tr><td>(-) Gastos no registrados (ej. comisiones)</td><td>$_______________</td></tr>
+      <tr><td>(±) Correcciones de errores</td><td>$_______________</td></tr>
+      <tr><td><strong>= Saldo ajustado en libros</strong></td><td><strong>$_______________</strong></td></tr>
+      <tr><td colspan="2"><strong>3. Saldo según extracto bancario</strong></td></tr>
+      <tr><td>Saldo según extracto</td><td>$_______________</td></tr>
+      <tr><td colspan="2"><strong>4. Ajustes al extracto</strong></td></tr>
+      <tr><td>(-) Depósitos en tránsito</td><td>$_______________</td></tr>
+      <tr><td>(+) Cheques pendientes de cobro</td><td>$_______________</td></tr>
+      <tr><td><strong>= Saldo ajustado según banco</strong></td><td><strong>$_______________</strong></td></tr>
+      <tr><td colspan="2"><strong>✅ Diferencia final:</strong> $0.00 (debe ser $0)</td></tr>
+    </table>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 6. CONSEJOS PRÁCTICOS PARA PARTMO          -->
+  <!-- ========================================== -->
+  <h2>6. Consejos Prácticos para tu día a día</h2>
+
+  <ul>
+    <li><strong>💡 Organiza los documentos:</strong> Archiva los extractos bancarios y las conciliaciones en una carpeta digital por mes.</li>
+    <li><strong>💡 Usa filtros en Dynamics:</strong> Aprende a usar los filtros de fecha, valor y referencia para agilizar el cruce.</li>
+    <li><strong>💡 Prioriza las diferencias grandes:</strong> Empieza por los montos más altos, suelen ser los más críticos.</li>
+    <li><strong>💡 Comunica las diferencias:</strong> Si encuentras un error, repórtalo al jefe inmediato con soporte documental.</li>
+    <li><strong>💡 Automatiza lo que puedas:</strong> En Dynamics, configura las comisiones bancarias como plantillas para que se registren automáticamente.</li>
+    <li><strong>💡 Revisa los cheques pendientes:</strong> Si un cheque tiene más de 60 días sin cobrar, consulta al proveedor para que lo cobre o cancélalo.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>⚠️ Errores comunes que debes evitar:</strong>
+    <ul>
+      <li>No registrar las comisiones bancarias → causan diferencias permanentes.</li>
+      <li>Olvidar los depósitos en tránsito → el saldo en libros queda alto.</li>
+      <li>No ajustar errores de digitación → se arrastran mes a mes.</li>
+      <li>No documentar la conciliación → problemas en auditorías.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. PREGUNTAS FRECUENTES                    -->
+  <!-- ========================================== -->
+  <h2>7. Preguntas Frecuentes (FAQ)</h2>
+
+  <div class="example-box">
+    <h4>❓ ¿Qué hago si no encuentro una diferencia?</h4>
+    <p>Revisa mes a mes hacia atrás. Puede ser un error acumulado de meses anteriores. También verifica si hay transferencias entre cuentas que no se contabilizaron.</p>
+  </div>
+  <div class="example-box">
+    <h4>❓ ¿Cada cuánto debo hacer la conciliación?</h4>
+    <p>En Partmo se hace <strong>mensualmente</strong>, al cierre de cada mes. Pero es recomendable hacer un seguimiento <strong>semanal</strong> para detectar diferencias a tiempo.</p>
+  </div>
+  <div class="example-box">
+    <h4>❓ ¿Qué hago si el banco debita un valor que no reconoczco?</h4>
+    <p>Comunícate con el banco para pedir el soporte (copia del débito). Si es válido, regístralo. Si es un error bancario, solicita la reversión.</p>
+  </div>
+  <div class="example-box">
+    <h4>❓ ¿Cómo manejo los cheques que nunca se cobran?</h4>
+    <p>Después de 60-90 días, si no se cobran, debes hacer un <strong>ajuste</strong> reversando el gasto o creando una cuenta por pagar al proveedor.</p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 8. EJERCICIO PARA PRACTICAR               -->
+  <!-- ========================================== -->
+  <h2>8. 🧠 Ejercicio para Practicar</h2>
+
+  <div class="example-box">
+    <h4>📋 Tu turno: Concilia esta cuenta</h4>
+    <p><strong>Datos:</strong></p>
+    <ul>
+      <li><strong>Saldo en libros (Dynamics):</strong> $12.850.000</li>
+      <li><strong>Saldo en extracto bancario:</strong> $14.200.000</li>
+      <li><strong>Cheque N° 1020:</strong> $1.200.000 (no aparece en el banco)</li>
+      <li><strong>Cheque N° 1025:</strong> $650.000 (no aparece en el banco)</li>
+      <li><strong>Depósito del cliente Y:</strong> $2.800.000 (no aparece en libros)</li>
+      <li><strong>Comisión bancaria:</strong> $180.000 (no aparece en libros)</li>
+      <li><strong>Error de digitación:</strong> Se registró $350.000 en lugar de $35.000</li>
+    </ul>
+    <p style="margin-top: 10px;"><strong>📌 Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es la diferencia inicial?</li>
+      <li>¿Qué ajustes debes hacer en los libros?</li>
+      <li>¿Cuál es el saldo ajustado en libros?</li>
+      <li>¿Cuál es el saldo ajustado según banco?</li>
+      <li>¿Coinciden los saldos?</li>
+    </ol>
+    <details style="margin-top: 16px; background: #eef4ff; padding: 12px; border-radius: 8px;">
+      <summary style="font-weight: bold; cursor: pointer; color: #1a3c6e;">👉 Ver respuesta</summary>
+      <ol style="margin-top: 10px;">
+        <li><strong>Diferencia inicial:</strong> $14.200.000 - $12.850.000 = <strong>$1.350.000</strong></li>
+        <li><strong>Ajustes en libros:</strong>
+          <ul>
+            <li>+ Depósito en tránsito: +$2.800.000</li>
+            <li>- Comisión bancaria: -$180.000</li>
+            <li>- Error de digitación: -$315.000 (350.000 - 35.000)</li>
+          </ul>
+        </li>
+        <li><strong>Saldo ajustado en libros:</strong> $12.850.000 + $2.800.000 - $180.000 - $315.000 = <strong>$15.155.000</strong></li>
+        <li><strong>Saldo ajustado según banco:</strong> $14.200.000 - $2.800.000 + $1.200.000 + $650.000 + $180.000 + $315.000 = <strong>$15.155.000</strong></li>
+        <li><strong>✅ ¡Sí coinciden!</strong> Ambos saldos son $15.155.000</li>
+      </ol>
+    </details>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 9. RECURSOS ADICIONALES                    -->
+  <!-- ========================================== -->
+  <h2>9. Recursos Adicionales</h2>
+  <ul>
+    <li><strong>📄 Extracto bancario:</strong> Siempre descárgalo en Excel para facilitar el cruce.</li>
+    <li><strong>📊 Dynamics:</strong> Usa el módulo <strong>"Bank Reconciliation"</strong> para automatizar parte del proceso.</li>
+    <li><strong>📝 Plantilla en Excel:</strong> Crea tu propia plantilla con fórmulas de <strong>BUSCARV</strong> para cruzar movimientos.</li>
+    <li><strong>📚 Normativa:</strong> La conciliación bancaria es requerida por <strong>NIC 7 (Estado de Flujos de Efectivo)</strong>.</li>
+  </ul>
+
+  <div class="footer">
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
+  </div>
+
+</div>
+</body>
+</html>
