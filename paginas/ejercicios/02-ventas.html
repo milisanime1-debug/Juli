@@ -1,15 +1,11 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ejercicio 02 - Registro de Ventas en Dynamics</title>
+  <title>Ventas y Clientes - Ejercicios Prácticos</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
       background: #f0f2f5;
@@ -21,11 +17,11 @@
       background: white;
       border-radius: 16px;
       padding: 35px 40px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     }
     .back {
       display: inline-block;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       background: #1a3c6e;
       color: white;
       padding: 8px 20px;
@@ -35,12 +31,24 @@
       font-size: 0.95rem;
       transition: background 0.2s;
     }
-    .back:hover {
-      background: #0f2a4a;
+    .back:hover { background: #0f2a4a; }
+    .back-ejercicios {
+      display: inline-block;
+      margin-bottom: 20px;
+      margin-left: 10px;
+      background: #6c757d;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
     }
+    .back-ejercicios:hover { background: #5a6268; }
     h1 {
       color: #1a3c6e;
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -48,17 +56,15 @@
     }
     .subtitle {
       color: #555;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
       font-size: 1rem;
       border-left: 4px solid #1a3c6e;
       padding-left: 16px;
     }
-    .subtitle strong {
-      color: #1a3c6e;
-    }
+    .subtitle strong { color: #1a3c6e; }
     h2 {
       color: #1a3c6e;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       margin-top: 35px;
       margin-bottom: 12px;
       border-bottom: 2px solid #e8ecf1;
@@ -66,41 +72,41 @@
     }
     h3 {
       color: #2c3e50;
-      font-size: 1.1rem;
-      margin-top: 20px;
+      font-size: 1.15rem;
+      margin-top: 25px;
       margin-bottom: 8px;
     }
-    p,
-    li {
+    h4 {
+      color: #2c3e50;
+      font-size: 1rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
       color: #2d2d2d;
       line-height: 1.7;
       font-size: 0.98rem;
     }
-    ul,
-    ol {
+    ul, ol {
       padding-left: 25px;
       margin: 8px 0 16px 0;
     }
     .highlight {
       background: #eef4ff;
       border-left: 4px solid #1a3c6e;
-      padding: 14px 20px;
+      padding: 12px 18px;
       border-radius: 6px;
       margin: 14px 0;
     }
-    .highlight strong {
-      color: #1a3c6e;
-    }
+    .highlight strong { color: #1a3c6e; }
     .warning {
       background: #fff3cd;
       border-left: 4px solid #ffc107;
-      padding: 14px 20px;
+      padding: 12px 18px;
       border-radius: 6px;
       margin: 14px 0;
     }
-    .warning strong {
-      color: #856404;
-    }
+    .warning strong { color: #856404; }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -108,7 +114,7 @@
       background: white;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
     th {
       background: #1a3c6e;
@@ -121,62 +127,54 @@
       padding: 10px 14px;
       border-bottom: 1px solid #e8ecf1;
     }
-    tr:hover td {
-      background: #f8f9fc;
-    }
+    tr:hover td { background: #f8f9fc; }
     .badge {
       display: inline-block;
-      background: #1a3c6e;
-      color: white;
       font-size: 0.7rem;
-      padding: 2px 12px;
+      padding: 3px 12px;
       border-radius: 20px;
       font-weight: 600;
-      margin-left: 8px;
+      margin-left: 6px;
     }
-    .badge.green {
-      background: #28a745;
-    }
-    .badge.orange {
-      background: #fd7e14;
-    }
-    .badge.red {
-      background: #dc3545;
-    }
-    .ejercicio-practico {
+    .badge.daily { background: #d4edda; color: #155724; }
+    .badge.dian { background: #cce5ff; color: #004085; }
+    .badge.dynamics { background: #6c757d; color: white; }
+    .badge.important { background: #f8d7da; color: #721c24; }
+    .ejercicio-box {
       background: #f8f9fc;
       border: 2px dashed #1a3c6e;
       border-radius: 12px;
-      padding: 24px 28px;
-      margin: 24px 0;
+      padding: 20px 24px;
+      margin: 20px 0;
     }
-    .ejercicio-practico h3 {
-      margin-top: 0;
-      color: #1a3c6e;
-    }
-    .btn {
-      display: inline-block;
-      background: #28a745;
-      color: white;
-      padding: 10px 24px;
+    .ejercicio-box h3 { margin-top: 0; color: #1a3c6e; }
+    .solucion {
+      background: #e8f5e9;
       border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      margin-top: 10px;
-      transition: background 0.2s;
+      padding: 15px 20px;
+      margin: 12px 0;
+      display: none;
+    }
+    .solucion.visible { display: block; }
+    .btn-solucion {
+      background: #1a3c6e;
+      color: white;
       border: none;
+      padding: 6px 18px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 8px;
+      transition: background 0.2s;
     }
-    .btn:hover {
-      background: #218838;
+    .btn-solucion:hover { background: #0f2a4a; }
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 16px 0;
     }
-    .btn.secundario {
-      background: #6c757d;
-    }
-    .btn.secundario:hover {
-      background: #5a6268;
-    }
+    @media (max-width: 700px) { .grid-2col { grid-template-columns: 1fr; } }
     .footer {
       margin-top: 40px;
       text-align: center;
@@ -185,577 +183,552 @@
       border-top: 1px solid #eee;
       padding-top: 20px;
     }
-    .solucion {
-      background: #d4edda;
-      border-left: 4px solid #28a745;
-      padding: 16px 20px;
-      border-radius: 6px;
-      margin: 14px 0;
-      display: none;
-    }
-    .solucion.visible {
-      display: block;
-    }
-    .solucion strong {
-      color: #155724;
-    }
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
-      h1 {
-        font-size: 1.5rem;
-      }
-      table {
-        font-size: 0.85rem;
-      }
-      th,
-      td {
-        padding: 6px 10px;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
 
-    <a href="index.html" class="back">⬅ Volver a ejercicios</a>
-
-    <h1>💳 Ejercicio 02: Registro de Ventas</h1>
-    <div class="subtitle">
-      <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics • Bucaramanga, 2026
-    </div>
-
-    <!-- ========================================== -->
-    <!-- 1. OBJETIVO DEL EJERCICIO                  -->
-    <!-- ========================================== -->
-    <h2>🎯 Objetivo del Ejercicio</h2>
-    <p>
-      Aprender a <strong>registrar facturas de venta</strong> en el sistema <strong>Microsoft Dynamics</strong>,
-      aplicando los conceptos de:
-    </p>
-    <ul>
-      <li>Contabilización de ingresos (cuenta 4135).</li>
-      <li>Liquidación y registro de <strong>IVA generado</strong> (cuenta 2404).</li>
-      <li>Aplicación de <strong>retención en la fuente</strong> según el tipo de cliente.</li>
-      <li>Registro de <strong>costos de ventas</strong> (cuenta 6135).</li>
-      <li>Manejo de <strong>descuentos y bonificaciones</strong>.</li>
-    </ul>
-
-    <div class="highlight">
-      <strong>💡 Contexto:</strong> Partmo fabrica y vende filtros para motores a clientes nacionales
-      (grandes empresas, talleres y distribuidores). Las ventas pueden ser <strong>de contado</strong> o <strong>a crédito</strong>.
-    </div>
-
-    <!-- ========================================== -->
-    <!-- 2. ESQUEMA DEL PROCESO EN DYNAMICS         -->
-    <!-- ========================================== -->
-    <h2>📋 Proceso en Microsoft Dynamics</h2>
-    <h3>Pasos para registrar una venta</h3>
-    <ol>
-      <li><strong>Crear pedido de venta:</strong> Se ingresa el cliente, productos, cantidades y precios.</li>
-      <li><strong>Generar albarán (remisión):</strong> Confirma el despacho de mercancía.</li>
-      <li><strong>Facturar:</strong> El sistema genera la factura electrónica y la envía a la DIAN.</li>
-      <li><strong>Contabilizar:</strong> Dynamics genera automáticamente los asientos contables según la configuración.</li>
-      <li><strong>Registrar pago:</strong> Se aplica al cliente (si es de contado o parcial).</li>
-    </ol>
-
-    <div class="warning">
-      <strong>⚠️ Importante:</strong> Dynamics tiene <strong>plantillas de contabilización</strong> que asignan
-      automáticamente las cuentas contables según el tipo de cliente, producto y ubicación.
-      Debes <strong>revisar</strong> que los asientos generados sean correctos antes de confirmar.
-    </div>
-
-    <!-- ========================================== -->
-    <!-- 3. CUENTAS CONTABLES INVOLUCRADAS          -->
-    <!-- ========================================== -->
-    <h2>📊 Cuentas Contables Involucradas</h2>
-    <table>
-      <tr>
-        <th>Código PUC</th>
-        <th>Cuenta</th>
-        <th>Naturaleza</th>
-        <th>¿Cuándo se usa?</th>
-      </tr>
-      <tr>
-        <td><strong>4135</strong></td>
-        <td>Comercio al por mayor y al por menor</td>
-        <td>Crédito (Ingreso)</td>
-        <td>Venta de filtros y repuestos</td>
-      </tr>
-      <tr>
-        <td><strong>2404</strong></td>
-        <td>IVA generado (19%)</td>
-        <td>Crédito (Pasivo)</td>
-        <td>IVA cobrado al cliente</td>
-      </tr>
-      <tr>
-        <td><strong>1105 / 1110</strong></td>
-        <td>Caja / Bancos</td>
-        <td>Débito (Activo)</td>
-        <td>Pago de contado o recaudo</td>
-      </tr>
-      <tr>
-        <td><strong>1305</strong></td>
-        <td>Clientes nacionales</td>
-        <td>Débito (Activo)</td>
-        <td>Ventas a crédito</td>
-      </tr>
-      <tr>
-        <td><strong>6135</strong></td>
-        <td>Costo de ventas</td>
-        <td>Débito (Costo)</td>
-        <td>Registro del costo de los filtros vendidos</td>
-      </tr>
-      <tr>
-        <td><strong>1435</strong></td>
-        <td>Inventario de productos terminados</td>
-        <td>Crédito (Activo)</td>
-        <td>Salida de inventario por venta</td>
-      </tr>
-      <tr>
-        <td><strong>2365</strong></td>
-        <td>Retención en la fuente por pagar</td>
-        <td>Crédito (Pasivo)</td>
-        <td>Retención practicada al cliente (si aplica)</td>
-      </tr>
-      <tr>
-        <td><strong>2380</strong></td>
-        <td>Descuentos comerciales</td>
-        <td>Débito (Gasto)</td>
-        <td>Descuentos otorgados al cliente</td>
-      </tr>
-    </table>
-
-    <!-- ========================================== -->
-    <!-- 4. TIPOS DE VENTA Y SUS ASIENTOS           -->
-    <!-- ========================================== -->
-    <h2>📝 Tipos de Venta y sus Asientos</h2>
-
-    <!-- VENTA DE CONTADO -->
-    <h3>Venta de Contado</h3>
-    <p><strong>Ejemplo:</strong> Venta de 100 filtros a <strong>$50.000 c/u</strong> = $5.000.000 + IVA 19%.</p>
-    <div class="highlight">
-      <strong>Datos:</strong> Cliente paga de contado en efectivo. No aplica retención (cliente persona natural).
-    </div>
-    <table>
-      <tr>
-        <th>Código</th>
-        <th>Cuenta</th>
-        <th>Débito</th>
-        <th>Crédito</th>
-      </tr>
-      <tr>
-        <td>1105</td>
-        <td>Caja</td>
-        <td>$5.950.000</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4135</td>
-        <td>Comercio al por mayor</td>
-        <td></td>
-        <td>$5.000.000</td>
-      </tr>
-      <tr>
-        <td>2404</td>
-        <td>IVA generado (19%)</td>
-        <td></td>
-        <td>$950.000</td>
-      </tr>
-      <tr>
-        <td>6135</td>
-        <td>Costo de ventas</td>
-        <td>$3.200.000</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>1435</td>
-        <td>Inventario productos terminados</td>
-        <td></td>
-        <td>$3.200.000</td>
-      </tr>
-    </table>
-    <p><em><strong>Nota:</strong> El costo de ventas ($3.200.000) corresponde al costo de producción de los 100 filtros.</em></p>
-
-    <!-- VENTA A CRÉDITO CON RETENCIÓN -->
-    <h3>Venta a Crédito con Retención en la Fuente</h3>
-    <p><strong>Ejemplo:</strong> Venta de 200 filtros a <strong>$60.000 c/u</strong> = $12.000.000 + IVA 19%.
-      Cliente es <strong>persona jurídica</strong> (Gran Contribuyente), aplica <strong>retención del 2.5%</strong> sobre compras.</p>
-    <div class="highlight">
-      <strong>Cálculos:</strong><br>
-      Valor venta: $12.000.000<br>
-      IVA (19%): $2.280.000<br>
-      Total factura: $14.280.000<br>
-      Retención (2.5% sobre $12.000.000): $300.000<br>
-      <strong>Neto a pagar por cliente: $13.980.000</strong>
-    </div>
-    <table>
-      <tr>
-        <th>Código</th>
-        <th>Cuenta</th>
-        <th>Débito</th>
-        <th>Crédito</th>
-      </tr>
-      <tr>
-        <td>1305</td>
-        <td>Clientes nacionales</td>
-        <td>$13.980.000</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2365</td>
-        <td>Retención en la fuente por pagar</td>
-        <td></td>
-        <td>$300.000</td>
-      </tr>
-      <tr>
-        <td>4135</td>
-        <td>Comercio al por mayor</td>
-        <td></td>
-        <td>$12.000.000</td>
-      </tr>
-      <tr>
-        <td>2404</td>
-        <td>IVA generado (19%)</td>
-        <td></td>
-        <td>$2.280.000</td>
-      </tr>
-      <tr>
-        <td>6135</td>
-        <td>Costo de ventas</td>
-        <td>$7.500.000</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>1435</td>
-        <td>Inventario productos terminados</td>
-        <td></td>
-        <td>$7.500.000</td>
-      </tr>
-    </table>
-    <div class="warning">
-      <strong>⚠️ Recordatorio:</strong> La retención en la fuente <strong>no</strong> se aplica sobre el IVA,
-      solo sobre la base gravable ($12.000.000).
-    </div>
-
-    <!-- VENTA CON DESCUENTO -->
-    <h3>Venta con Descuento Comercial</h3>
-    <p><strong>Ejemplo:</strong> Venta de 50 filtros a <strong>$70.000 c/u</strong> = $3.500.000,
-      con <strong>descuento del 10%</strong> por volumen. IVA 19% sobre el valor con descuento.</p>
-    <div class="highlight">
-      <strong>Cálculos:</strong><br>
-      Valor bruto: $3.500.000<br>
-      Descuento (10%): $350.000<br>
-      Valor neto: $3.150.000<br>
-      IVA (19%): $598.500<br>
-      Total factura: $3.748.500
-    </div>
-    <table>
-      <tr>
-        <th>Código</th>
-        <th>Cuenta</th>
-        <th>Débito</th>
-        <th>Crédito</th>
-      </tr>
-      <tr>
-        <td>1305</td>
-        <td>Clientes nacionales</td>
-        <td>$3.748.500</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2380</td>
-        <td>Descuentos comerciales</td>
-        <td>$350.000</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4135</td>
-        <td>Comercio al por mayor</td>
-        <td></td>
-        <td>$3.150.000</td>
-      </tr>
-      <tr>
-        <td>2404</td>
-        <td>IVA generado (19%)</td>
-        <td></td>
-        <td>$598.500</td>
-      </tr>
-      <tr>
-        <td>6135</td>
-        <td>Costo de ventas</td>
-        <td>$1.750.000</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>1435</td>
-        <td>Inventario productos terminados</td>
-        <td></td>
-        <td>$1.750.000</td>
-      </tr>
-    </table>
-
-    <!-- ========================================== -->
-    <!-- 5. EJERCICIO PRÁCTICO                     -->
-    <!-- ========================================== -->
-    <h2>✍️ Ejercicio Práctico</h2>
-
-    <div class="ejercicio-practico">
-      <h3>📌 Caso: Ventas de Filtros Partmo</h3>
-      <p><strong>Datos del día:</strong></p>
-      <ul>
-        <li><strong>Venta 1:</strong> 300 filtros de aire a <strong>$45.000 c/u</strong> a <strong>Talleres El Motor S.A.</strong>
-          (NIT: 900.123.456-7, persona jurídica). Cliente paga <strong>30% de contado</strong> y el resto a 30 días.
-          Aplica retención del <strong>2.5%</strong> sobre compras.</li>
-        <li><strong>Venta 2:</strong> 150 filtros de aceite a <strong>$55.000 c/u</strong> a <strong>Distribuidora Autopartes Ltda.</strong>
-          (NIT: 800.987.654-3, persona jurídica). Venta <strong>a crédito</strong> a 60 días.
-          Cliente tiene <strong>descuento del 8%</strong> por fidelidad.
-          Aplica retención del <strong>2.5%</strong> sobre compras.</li>
-        <li><strong>Venta 3:</strong> 50 filtros de combustible a <strong>$80.000 c/u</strong> a <strong>Carlos Pérez</strong>
-          (CC: 12.345.678, persona natural). Venta <strong>de contado</strong> en efectivo.
-          <strong>No</strong> aplica retención.</li>
-      </ul>
-      <p><strong>Datos adicionales:</strong></p>
-      <ul>
-        <li>Costo de producción por filtro de aire: <strong>$28.000</strong></li>
-        <li>Costo de producción por filtro de aceite: <strong>$32.000</strong></li>
-        <li>Costo de producción por filtro de combustible: <strong>$45.000</strong></li>
-        <li>IVA general: <strong>19%</strong></li>
-      </ul>
-
-      <p style="margin-top:16px;"><strong>📝 Tu tarea:</strong></p>
-      <ol>
-        <li>Calcula el valor total de cada factura (incluyendo IVA, descuentos y retenciones).</li>
-        <li>Prepara los <strong>asientos contables</strong> completos para cada venta.</li>
-        <li>Identifica los <strong>movimientos en Dynamics</strong> (qué cuentas se afectan y con qué valores).</li>
-        <li>Responde: ¿Qué <strong>documentos</strong> se generan en el sistema para cada tipo de venta?</li>
-      </ol>
-
-      <button class="btn" onclick="mostrarSolucion()">📖 Mostrar solución</button>
-      <button class="btn secundario" onclick="ocultarSolucion()">Ocultar solución</button>
-
-      <div id="solucion" class="solucion">
-        <h3 style="margin-top:0;">✅ Solución</h3>
-
-        <h4>Venta 1: Talleres El Motor S.A.</h4>
-        <ul>
-          <li>Valor bruto: 300 × $45.000 = <strong>$13.500.000</strong></li>
-          <li>IVA (19%): $13.500.000 × 19% = <strong>$2.565.000</strong></li>
-          <li>Total factura: <strong>$16.065.000</strong></li>
-          <li>Retención (2.5% sobre $13.500.000): <strong>$337.500</strong></li>
-          <li>Pago de contado (30%): $16.065.000 × 30% = <strong>$4.819.500</strong></li>
-          <li>Saldo a crédito (70%): <strong>$11.245.500</strong></li>
-          <li>Costo de ventas: 300 × $28.000 = <strong>$8.400.000</strong></li>
-        </ul>
-        <table>
-          <tr>
-            <th>Código</th>
-            <th>Cuenta</th>
-            <th>Débito</th>
-            <th>Crédito</th>
-          </tr>
-          <tr>
-            <td>1105</td>
-            <td>Caja</td>
-            <td>$4.819.500</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1305</td>
-            <td>Clientes nacionales</td>
-            <td>$11.245.500</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2365</td>
-            <td>Retención en la fuente por pagar</td>
-            <td></td>
-            <td>$337.500</td>
-          </tr>
-          <tr>
-            <td>4135</td>
-            <td>Comercio al por mayor</td>
-            <td></td>
-            <td>$13.500.000</td>
-          </tr>
-          <tr>
-            <td>2404</td>
-            <td>IVA generado (19%)</td>
-            <td></td>
-            <td>$2.565.000</td>
-          </tr>
-          <tr>
-            <td>6135</td>
-            <td>Costo de ventas</td>
-            <td>$8.400.000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1435</td>
-            <td>Inventario productos terminados</td>
-            <td></td>
-            <td>$8.400.000</td>
-          </tr>
-        </table>
-
-        <h4>Venta 2: Distribuidora Autopartes Ltda.</h4>
-        <ul>
-          <li>Valor bruto: 150 × $55.000 = <strong>$8.250.000</strong></li>
-          <li>Descuento (8%): $8.250.000 × 8% = <strong>$660.000</strong></li>
-          <li>Valor neto: <strong>$7.590.000</strong></li>
-          <li>IVA (19% sobre $7.590.000): <strong>$1.442.100</strong></li>
-          <li>Total factura: <strong>$9.032.100</strong></li>
-          <li>Retención (2.5% sobre $7.590.000): <strong>$189.750</strong></li>
-          <li>Saldo a crédito: $9.032.100 - $189.750 = <strong>$8.842.350</strong></li>
-          <li>Costo de ventas: 150 × $32.000 = <strong>$4.800.000</strong></li>
-        </ul>
-        <table>
-          <tr>
-            <th>Código</th>
-            <th>Cuenta</th>
-            <th>Débito</th>
-            <th>Crédito</th>
-          </tr>
-          <tr>
-            <td>1305</td>
-            <td>Clientes nacionales</td>
-            <td>$8.842.350</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2365</td>
-            <td>Retención en la fuente por pagar</td>
-            <td></td>
-            <td>$189.750</td>
-          </tr>
-          <tr>
-            <td>2380</td>
-            <td>Descuentos comerciales</td>
-            <td>$660.000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>4135</td>
-            <td>Comercio al por mayor</td>
-            <td></td>
-            <td>$7.590.000</td>
-          </tr>
-          <tr>
-            <td>2404</td>
-            <td>IVA generado (19%)</td>
-            <td></td>
-            <td>$1.442.100</td>
-          </tr>
-          <tr>
-            <td>6135</td>
-            <td>Costo de ventas</td>
-            <td>$4.800.000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1435</td>
-            <td>Inventario productos terminados</td>
-            <td></td>
-            <td>$4.800.000</td>
-          </tr>
-        </table>
-
-        <h4>Venta 3: Carlos Pérez (Persona Natural)</h4>
-        <ul>
-          <li>Valor bruto: 50 × $80.000 = <strong>$4.000.000</strong></li>
-          <li>IVA (19%): $4.000.000 × 19% = <strong>$760.000</strong></li>
-          <li>Total factura: <strong>$4.760.000</strong></li>
-          <li><strong>No</strong> aplica retención (persona natural).</li>
-          <li>Costo de ventas: 50 × $45.000 = <strong>$2.250.000</strong></li>
-        </ul>
-        <table>
-          <tr>
-            <th>Código</th>
-            <th>Cuenta</th>
-            <th>Débito</th>
-            <th>Crédito</th>
-          </tr>
-          <tr>
-            <td>1105</td>
-            <td>Caja</td>
-            <td>$4.760.000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>4135</td>
-            <td>Comercio al por mayor</td>
-            <td></td>
-            <td>$4.000.000</td>
-          </tr>
-          <tr>
-            <td>2404</td>
-            <td>IVA generado (19%)</td>
-            <td></td>
-            <td>$760.000</td>
-          </tr>
-          <tr>
-            <td>6135</td>
-            <td>Costo de ventas</td>
-            <td>$2.250.000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1435</td>
-            <td>Inventario productos terminados</td>
-            <td></td>
-            <td>$2.250.000</td>
-          </tr>
-        </table>
-
-        <h4>📄 Documentos generados en Dynamics</h4>
-        <ul>
-          <li><strong>Venta 1:</strong> Pedido de venta → Albarán → Factura electrónica → Recibo de caja (por el 30%) → Cuenta por cobrar (70%).</li>
-          <li><strong>Venta 2:</strong> Pedido de venta → Albarán → Factura electrónica → Cuenta por cobrar (a 60 días).</li>
-          <li><strong>Venta 3:</strong> Pedido de venta → Albarán → Factura electrónica → Recibo de caja (pago completo).</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- 6. ERRORES COMUNES EN DYNAMICS             -->
-    <!-- ========================================== -->
-    <h2>⚠️ Errores Comunes en Dynamics</h2>
-    <ul>
-      <li><strong>No verificar la retención:</strong> Olvidar aplicar retención a clientes jurídicos.</li>
-      <li><strong>Confundir IVA con retención:</strong> La retención se calcula sobre la base gravable, no sobre el IVA.</li>
-      <li><strong>No registrar el costo de ventas:</strong> Dynamics lo hace automáticamente si está configurado, pero debes validar que el costo sea el correcto.</li>
-      <li><strong>Descuentos mal aplicados:</strong> Asegurar que el descuento se calcule ANTES del IVA.</li>
-      <li><strong>No reconciliar:</strong> Siempre revisa que el total del asiento cuadre (débito = crédito).</li>
-    </ul>
-
-    <!-- ========================================== -->
-    <!-- 7. PREGUNTAS CLAVE PARA LA ENTREVISTA      -->
-    <!-- ========================================== -->
-    <h2>💬 Preguntas Clave para tu Práctica</h2>
-    <ul>
-      <li><em>"¿Cómo maneja Dynamics los descuentos comerciales en las facturas?"</em></li>
-      <li><em>"¿Qué configuración de retención en la fuente tiene Partmo para sus clientes?"</em></li>
-      <li><em>"¿Cómo se genera el costo de ventas automáticamente en Dynamics?"</em></li>
-      <li><em>"¿Cómo se maneja la facturación electrónica en Dynamics para ventas sin inventario?"</em></li>
-    </ul>
-
-    <div class="footer">
-      📌 Ejercicio 02: Registro de Ventas • <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics<br>
-      Actualizado: Julio 2026 • Bucaramanga, Santander
-    </div>
-
+  <!-- Botones de navegación -->
+  <div>
+    <a href="../../index.html" class="back">⬅ Inicio</a>
+    <a href="../ejercicios.html" class="back-ejercicios">📋 Volver a Ejercicios</a>
   </div>
 
-  <script>
-    function mostrarSolucion() {
-      document.getElementById('solucion').classList.add('visible');
-    }
+  <h1>💳 Ventas y Clientes</h1>
+  <div class="subtitle">
+    Gestión de facturación, eventos DIAN y registro en <strong>Microsoft Dynamics</strong> • <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
 
-    function ocultarSolucion() {
-      document.getElementById('solucion').classList.remove('visible');
+  <!-- ========================================== -->
+  <!-- 1. MARCO TEÓRICO                           -->
+  <!-- ========================================== -->
+  <h2>1. Marco Teórico</h2>
+
+  <h3>📌 ¿Qué implica el área de Ventas en Partmo?</h3>
+  <p>
+    <strong>Filtros Partmo S.A.S.</strong> es una empresa <strong>manufacturera</strong> que fabrica filtros para motores.
+    Sus ventas pueden ser:
+  </p>
+  <ul>
+    <li><strong>Ventas nacionales</strong> → a distribuidores, talleres y clientes industriales en Colombia.</li>
+    <li><strong>Ventas internacionales</strong> → exportaciones a otros países (parte del grupo Donaldson).</li>
+    <li><strong>Ventas a empresas del grupo</strong> → transacciones entre compañías del mismo grupo empresarial.</li>
+  </ul>
+
+  <h3>📌 Documentos clave en el ciclo de ventas</h3>
+  <table>
+    <tr><th>Documento</th><th>Descripción</th><th>Responsable</th></tr>
+    <tr><td><strong>Cotización</strong></td><td>Oferta formal al cliente con precios y condiciones</td><td>Comercial</td></tr>
+    <tr><td><strong>Orden de Compra (OC)</strong></td><td>Documento del cliente autorizando la compra</td><td>Cliente</td></tr>
+    <tr><td><strong>Remisión / Guía</strong></td><td>Documento de despacho de mercancía</td><td>Logística</td></tr>
+    <tr><td><strong>Factura de Venta</strong></td><td>Documento tributario que soporta la venta (facturación electrónica)</td><td>Contabilidad / Facturación</td></tr>
+    <tr><td><strong>Certificado de Retención</strong></td><td>Documento que acredita la retención en la fuente practicada al cliente</td><td>Contabilidad</td></tr>
+  </table>
+
+  <div class="highlight">
+    <strong>💡 Importante:</strong> En Partmo, la <strong>facturación electrónica</strong> es obligatoria. Cada factura debe cumplir con los requisitos técnicos de la DIAN y ser reportada en tiempo real.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. FLUJO EN MICROSOFT DYNAMICS             -->
+  <!-- ========================================== -->
+  <h2>2. Flujo en Microsoft Dynamics</h2>
+
+  <h3>📌 Paso a paso para registrar una venta</h3>
+  <ol>
+    <li><strong>Crear Orden de Venta</strong> → Módulo <strong>"Sales Order"</strong>.</li>
+    <li><strong>Seleccionar cliente</strong> → Buscar por NIT o nombre.</li>
+    <li><strong>Agregar productos</strong> → Códigos de filtros, cantidades, precios.</li>
+    <li><strong>Generar Remisión</strong> → Módulo <strong>"Picking / Shipping"</strong>.</li>
+    <li><strong>Confirmar despacho</strong> → Actualiza inventario (cuenta 15).</li>
+    <li><strong>Crear Factura</strong> → Módulo <strong>"Sales Invoice"</strong>.</li>
+    <li><strong>Validar evento DIAN</strong> → Verificar que la factura fue aceptada por la DIAN.</li>
+    <li><strong>Contabilizar</strong> → El sistema genera automáticamente el asiento contable.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>⚠️ Ojo con:</strong> Las <strong>facturas ajenas a inventario</strong> (servicios, fletes, etc.) no afectan la cuenta 15 pero sí deben generar eventos DIAN. Debes monitorearlas manualmente.
+  </div>
+
+  <h3>📌 Asiento contable generado por Dynamics</h3>
+  <p><strong>Ejemplo:</strong> Venta de $10.000.000 + IVA 19% a crédito.</p>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>1305</td><td>Clientes</td><td>$11.900.000</td><td></td></tr>
+    <tr><td>4135</td><td>Comercio al por mayor</td><td></td><td>$10.000.000</td></tr>
+    <tr><td>2404</td><td>IVA generado (19%)</td><td></td><td>$1.900.000</td></tr>
+  </table>
+
+  <h3>📌 Costo de ventas (cuenta 6)</h3>
+  <p>Simultáneamente, Dynamics registra el costo de ventas:</p>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>6135</td><td>Costo de mercancías vendidas</td><td>$6.000.000</td><td></td></tr>
+    <tr><td>1435</td><td>Mercancías (Inventario)</td><td></td><td>$6.000.000</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 3. MONITOREO DIAN                          -->
+  <!-- ========================================== -->
+  <h2>3. Monitoreo de Eventos DIAN</h2>
+
+  <div class="highlight">
+    <strong>📌 ¿Qué es el monitoreo de eventos DIAN?</strong><br>
+    Es el proceso de verificar que las facturas electrónicas emitidas por Partmo hayan sido <strong>aceptadas</strong> por la DIAN y tengan su correspondiente <strong>CUFE</strong> (Código Único de Factura Electrónica).
+  </div>
+
+  <h3>📌 Tipos de facturas en Partmo</h3>
+  <table>
+    <tr><th>Tipo</th><th>¿Afecta inventario?</th><th>¿Genera evento DIAN?</th></tr>
+    <tr><td><strong>Venta de productos</strong></td><td>✅ Sí (cuenta 15)</td><td>✅ Sí</td></tr>
+    <tr><td><strong>Venta de servicios</strong></td><td>❌ No</td><td>✅ Sí</td></tr>
+    <tr><td><strong>Notas crédito</strong></td><td>✅ Sí (devuelve inventario)</td><td>✅ Sí</td></tr>
+    <tr><td><strong>Factura de exportación</strong></td><td>✅ Sí</td><td>✅ Sí (con requisitos especiales)</td></tr>
+  </table>
+
+  <h3>📌 Cómo monitorear en Dynamics</h3>
+  <ol>
+    <li>Ve al módulo <strong>"Electronic Invoicing"</strong>.</li>
+    <li>Filtra por <strong>facturas pendientes de validación</strong>.</li>
+    <li>Revisa el estado:
+      <ul>
+        <li><span style="color:green;">✅ Aceptada</span> → Todo bien.</li>
+        <li><span style="color:orange;">⚠️ En proceso</span> → Esperar o reintentar.</li>
+        <li><span style="color:red;">❌ Rechazada</span> → Corregir y reenviar.</li>
+      </ul>
+    </li>
+    <li>Descarga el <strong>XML</strong> y el <strong>PDF</strong> para archivo.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>⚠️ Atención:</strong> Las facturas <strong>ajenas a inventario</strong> (como fletes, servicios de mantenimiento) no aparecen en el módulo de inventario, pero <strong>sí deben validarse en la DIAN</strong>. Debes monitorearlas en el módulo de facturación general.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4. CERTIFICADOS DE RETENCIÓN              -->
+  <!-- ========================================== -->
+  <h2>4. Certificados de Retención</h2>
+
+  <p>
+    Cuando Partmo vende a un cliente que es <strong>agente retenedor</strong> (ej. grandes empresas, entidades públicas), el cliente practica una retención en la fuente y debe entregar a Partmo un <strong>certificado de retención</strong>.
+  </p>
+
+  <h3>📌 Envío electrónico de certificados</h3>
+  <ul>
+    <li><strong>Partmo recibe</strong> los certificados de retención de sus clientes.</li>
+    <li><strong>Partmo emite</strong> certificados de retención a sus proveedores.</li>
+    <li>El envío se hace por <strong>correo electrónico</strong> y se archiva en el sistema.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>💡 Tip:</strong> En Dynamics, puedes configurar el <strong>envío automático</strong> de certificados de retención al generar la factura. Pregunta si ya está configurado.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. EJERCICIOS PRÁCTICOS                    -->
+  <!-- ========================================== -->
+  <h2>5. Ejercicios Prácticos</h2>
+
+  <!-- EJERCICIO 1 -->
+  <div class="ejercicio-box">
+    <h3>📝 Ejercicio 1: Registro de venta de productos</h3>
+    <p>
+      <strong>Datos:</strong> Partmo vende <strong>1.000 filtros</strong> a <strong>Distribuidora La 80 S.A.S.</strong> (NIT 890.123.456-7) por un valor de <strong>$25.000.000</strong> + IVA 19%. El costo de producción es <strong>$15.000.000</strong>.
+    </p>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es el valor total de la factura?</li>
+      <li>Realiza el asiento contable en Dynamics.</li>
+      <li>Si el cliente paga de contado, ¿cómo cambia el asiento?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol1')">Ver solución</button>
+    <div id="sol1" class="solucion">
+      <p><strong>1. Valor total de la factura:</strong></p>
+      <p>$25.000.000 × 19% = $4.750.000 → Total = <strong>$29.750.000</strong></p>
+      <p><strong>2. Asiento contable (venta a crédito):</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1305</td><td>Clientes (Distribuidora La 80)</td><td>$29.750.000</td><td></td></tr>
+        <tr><td>4135</td><td>Comercio al por mayor</td><td></td><td>$25.000.000</td></tr>
+        <tr><td>2404</td><td>IVA generado</td><td></td><td>$4.750.000</td></tr>
+      </table>
+      <p><strong>3. Asiento de costo de ventas:</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>6135</td><td>Costo de ventas</td><td>$15.000.000</td><td></td></tr>
+        <tr><td>1435</td><td>Inventario de productos</td><td></td><td>$15.000.000</td></tr>
+      </table>
+      <p><strong>4. Si es de contado:</strong> Se debita <strong>1105 (Caja)</strong> o <strong>1110 (Bancos)</strong> en lugar de 1305 (Clientes).</p>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 2 -->
+  <div class="ejercicio-box">
+    <h3>📝 Ejercicio 2: Factura ajenas a inventario</h3>
+    <p>
+      <strong>Datos:</strong> Partmo factura <strong>servicios de consultoría técnica</strong> a <strong>Empresa de Energía de Bucaramanga</strong> por <strong>$8.000.000</strong> + IVA 19%.
+    </p>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Esta factura afecta el inventario (cuenta 15)?</li>
+      <li>¿Cómo se registra en Dynamics?</li>
+      <li>¿Qué debes monitorear en la DIAN?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol2')">Ver solución</button>
+    <div id="sol2" class="solucion">
+      <p><strong>1. NO afecta inventario</strong> → Es un servicio, no un producto.</p>
+      <p><strong>2. Asiento contable:</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1305</td><td>Clientes</td><td>$9.520.000</td><td></td></tr>
+        <tr><td>4815</td><td>Ingresos por servicios</td><td></td><td>$8.000.000</td></tr>
+        <tr><td>2404</td><td>IVA generado</td><td></td><td>$1.520.000</td></tr>
+      </table>
+      <p><strong>3. Monitoreo DIAN:</strong> Verificar que la factura sea aceptada por la DIAN, aunque no tenga inventario. Debes revisar el módulo de <strong>facturación general</strong>, no el de inventarios.</p>
+      <div class="warning">
+        <strong>⚠️ Importante:</strong> Este tipo de facturas suelen quedar fuera del control de inventario. <strong>Debes hacer seguimiento manual</strong> en el módulo de facturación electrónica.
+      </div>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 3 -->
+  <div class="ejercicio-box">
+    <h3>📝 Ejercicio 3: Certificado de retención</h3>
+    <p>
+      <strong>Datos:</strong> Partmo vendió a <strong>Constructora XYZ</strong> por $30.000.000. La constructora es agente retenedor y practicó una <strong>retención del 2.5%</strong> por compras.
+    </p>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuánto fue el valor retenido?</li>
+      <li>¿Cómo registra Partmo esta retención en contabilidad?</li>
+      <li>¿Qué debe hacer Partmo con el certificado de retención recibido?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol3')">Ver solución</button>
+    <div id="sol3" class="solucion">
+      <p><strong>1. Valor retenido:</strong> $30.000.000 × 2.5% = <strong>$750.000</strong></p>
+      <p><strong>2. Registro contable:</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1105</td><td>Caja / Bancos</td><td>$29.250.000</td><td></td></tr>
+        <tr><td>1355</td><td>Anticipo de impuestos (retención)</td><td>$750.000</td><td></td></tr>
+        <tr><td>4135</td><td>Ingresos por ventas</td><td></td><td>$30.000.000</td></tr>
+      </table>
+      <p><strong>3. Partmo debe:</strong></p>
+      <ul>
+        <li>Recibir el certificado de retención (físico o electrónico).</li>
+        <li>Almacenarlo en el sistema (Dynamics) asociado a la factura.</li>
+        <li>Usarlo para <strong>descontar</strong> la retención en la declaración de renta.</li>
+        <li><strong>No debe enviarlo</strong> (el certificado lo emite el cliente, no Partmo).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 4 -->
+  <div class="ejercicio-box">
+    <h3>📝 Ejercicio 4: Monitoreo de eventos DIAN</h3>
+    <p>
+      <strong>Datos:</strong> Emitiste una factura de venta de productos por $15.000.000. En el módulo de facturación electrónica de Dynamics, ves que el estado es <span style="color:red;">❌ Rechazada</span>.
+    </p>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Qué debes hacer primero?</li>
+      <li>¿Cuáles pueden ser las causas del rechazo?</li>
+      <li>¿Cuál es el procedimiento correcto?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol4')">Ver solución</button>
+    <div id="sol4" class="solucion">
+      <p><strong>1. Primero:</strong> Revisar el <strong>mensaje de error</strong> que devuelve la DIAN en el sistema.</p>
+      <p><strong>2. Causas comunes:</strong></p>
+      <ul>
+        <li>NIT del cliente incorrecto o no válido.</li>
+        <li>CUFE duplicado.</li>
+        <li>Formato XML con errores.</li>
+        <li>Certificado digital vencido.</li>
+        <li>La factura se envió fuera del plazo (más de 48 horas).</li>
+      </ul>
+      <p><strong>3. Procedimiento correcto:</strong></p>
+      <ol>
+        <li>Corregir el error en Dynamics.</li>
+        <li>Si la factura ya fue emitida al cliente, se debe <strong>anular</strong> y generar una <strong>nueva factura</strong> con un nuevo número.</li>
+        <li>Reenviar la nueva factura a la DIAN.</li>
+        <li>Verificar que ahora el estado sea <span style="color:green;">✅ Aceptada</span>.</li>
+        <li>Notificar al cliente el cambio.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- EJERCICIO 5 -->
+  <div class="ejercicio-box">
+    <h3>📝 Ejercicio 5: Caso completo - Venta + Retención + DIAN</h3>
+    <p>
+      <strong>Datos:</strong> Partmo vende <strong>500 filtros</strong> a <strong>PetroCol S.A.S.</strong> (NIT 900.123.456-7) por <strong>$18.000.000</strong> + IVA 19%. PetroCol es <strong>Gran Contribuyente</strong> y practica retención del <strong>2.5%</strong> sobre el valor de la venta (sin IVA).
+    </p>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>Valor total de la factura y valor retenido.</li>
+      <li>Asiento contable completo (venta, costo, retención).</li>
+      <li>¿Qué eventos DIAN debes monitorear?</li>
+      <li>¿Qué debes hacer con el certificado de retención?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol5')">Ver solución</button>
+    <div id="sol5" class="solucion">
+      <p><strong>1. Valores:</strong></p>
+      <ul>
+        <li>Base: $18.000.000</li>
+        <li>IVA 19%: $3.420.000</li>
+        <li>Total factura: <strong>$21.420.000</strong></li>
+        <li>Retención (2.5% sobre $18.000.000): <strong>$450.000</strong></li>
+        <li>Neto a cobrar: $21.420.000 - $450.000 = <strong>$20.970.000</strong></li>
+      </ul>
+      <p><strong>2. Asiento contable:</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1305</td><td>Clientes (PetroCol)</td><td>$20.970.000</td><td></td></tr>
+        <tr><td>1355</td><td>Retención en la fuente</td><td>$450.000</td><td></td></tr>
+        <tr><td>4135</td><td>Ventas</td><td></td><td>$18.000.000</td></tr>
+        <tr><td>2404</td><td>IVA generado</td><td></td><td>$3.420.000</td></tr>
+      </table>
+      <p><strong>Costo de ventas:</strong> (asumiendo costo unitario $18.000)</p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>6135</td><td>Costo de ventas</td><td>$9.000.000</td><td></td></tr>
+        <tr><td>1435</td><td>Inventario</td><td></td><td>$9.000.000</td></tr>
+      </table>
+      <p><strong>3. Eventos DIAN:</strong></p>
+      <ul>
+        <li>Verificar que la factura sea <span style="color:green;">✅ Aceptada</span> por la DIAN.</li>
+        <li>Confirmar que el CUFE esté válido.</li>
+        <li>Asegurar que la factura esté en el módulo de facturación electrónica.</li>
+      </ul>
+      <p><strong>4. Certificado de retención:</strong></p>
+      <ul>
+        <li><strong>Partmo NO emite</strong> el certificado (lo emite PetroCol como agente retenedor).</li>
+        <li><strong>Partmo recibe</strong> el certificado de PetroCol y lo archiva en Dynamics.</li>
+        <li>Se usa como soporte para descontar los $450.000 en la declaración de renta.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 6. CHECKLIST PARA EL DÍA A DÍA            -->
+  <!-- ========================================== -->
+  <h2>6. Checklist para tu día a día en Ventas</h2>
+
+  <div style="background: #f8f9fc; border-radius: 12px; padding: 20px 24px; margin: 16px 0;">
+    <table>
+      <tr><th style="width:40px;">✅</th><th>Tarea</th><th>Frecuencia</th></tr>
+      <tr><td>☐</td><td>Revisar facturas de venta pendientes en Dynamics</td><td>Diario</td></tr>
+      <tr><td>☐</td><td>Validar eventos DIAN de facturas emitidas</td><td>Diario</td></tr>
+      <tr><td>☐</td><td>Verificar facturas <strong>ajenas a inventario</strong> en el módulo DIAN</td><td>Diario</td></tr>
+      <tr><td>☐</td><td>Revisar que las facturas rechazadas sean corregidas</td><td>Diario</td></tr>
+      <tr><td>☐</td><td>Archivar certificados de retención recibidos</td><td>Semanal</td></tr>
+      <tr><td>☐</td><td>Conciliar ventas con ingresos bancarios</td><td>Semanal</td></tr>
+      <tr><td>☐</td><td>Generar reporte de ventas para contabilidad</td><td>Mensual</td></tr>
+      <tr><td>☐</td><td>Revisar que el costo de ventas coincida con el inventario</td><td>Mensual</td></tr>
+    </table>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. PREGUNTAS PARA HACER EN LA EMPRESA     -->
+  <!-- ========================================== -->
+  <h2>7. Preguntas para hacer en tu práctica</h2>
+  <ul>
+    <li>¿En qué módulo de Dynamics se registran las <strong>facturas ajenas a inventario</strong>?</li>
+    <li>¿Cómo se maneja la <strong>facturación electrónica</strong> en Partmo? ¿Es automática o manual?</li>
+    <li>¿Quién es el responsable de <strong>monitorear los eventos DIAN</strong> a diario?</li>
+    <li>¿Cómo se <strong>archivan los certificados de retención</strong> recibidos? ¿Físico o digital?</li>
+    <li>¿Qué hacer cuando un cliente <strong>no entrega</strong> el certificado de retención?</li>
+    <li>¿Cómo se manejan las <strong>ventas internacionales</strong> y sus requisitos DIAN?</li>
+  </ul>
+
+    <!-- ========================================== -->
+  <!-- 8. RECURSOS ADICIONALES                   -->
+  <!-- ========================================== -->
+  <h2>8. Recursos Adicionales</h2>
+
+  <h3>📌 Enlaces útiles</h3>
+  <ul>
+    <li><a href="https://www.dian.gov.co" target="_blank" style="color:#1a3c6e;">DIAN - Facturación Electrónica</a></li>
+    <li><a href="https://www.ccb.org.co" target="_blank" style="color:#1a3c6e;">Cámara de Comercio de Bucaramanga</a></li>
+    <li><a href="https://docs.microsoft.com/es-es/dynamics365/finance/" target="_blank" style="color:#1a3c6e;">Documentación Microsoft Dynamics 365 Finance</a></li>
+  </ul>
+
+  <h3>📌 Códigos PUC más usados en Ventas</h3>
+  <table>
+    <tr><th>Código</th><th>Cuenta</th><th>Descripción</th></tr>
+    <tr><td>1305</td><td>Clientes</td><td>Cuentas por cobrar a clientes</td></tr>
+    <tr><td>1355</td><td>Anticipo de impuestos</td><td>Retenciones practicadas por clientes</td></tr>
+    <tr><td>2404</td><td>IVA generado</td><td>Impuesto a las ventas causado</td></tr>
+    <tr><td>4135</td><td>Comercio al por mayor</td><td>Ingresos por venta de productos</td></tr>
+    <tr><td>4815</td><td>Ingresos por servicios</td><td>Ingresos por venta de servicios</td></tr>
+    <tr><td>6135</td><td>Costo de ventas</td><td>Costo de los productos vendidos</td></tr>
+    <tr><td>1435</td><td>Mercancías no fabricadas</td><td>Inventario de productos terminados</td></tr>
+  </table>
+
+  <h3>📌 Fórmulas rápidas</h3>
+  <div class="highlight">
+    <strong>📐 IVA:</strong> Base × 19%<br>
+    <strong>📐 Retención en la fuente (compras):</strong> Base × 2.5%<br>
+    <strong>📐 Utilidad bruta:</strong> Ingresos - Costo de ventas<br>
+    <strong>📐 Margen de contribución:</strong> (Ingresos - Costos variables) / Ingresos × 100
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 9. GLOSARIO DE TÉRMINOS                   -->
+  <!-- ========================================== -->
+  <h2>9. Glosario de Términos - Ventas</h2>
+  <table>
+    <tr><th>Término</th><th>Definición</th></tr>
+    <tr><td><strong>CUFE</strong></td><td>Código Único de Factura Electrónica. Identificador generado por la DIAN para cada factura válida.</td></tr>
+    <tr><td><strong>Evento DIAN</strong></td><td>Notificación que envía la DIAN en respuesta a una factura electrónica (aceptada, rechazada, en proceso).</td></tr>
+    <tr><td><strong>Factura ajenas a inventario</strong></td><td>Documentos que no afectan el inventario (servicios, fletes, consultorías).</td></tr>
+    <tr><td><strong>Agente retenedor</strong></td><td>Persona o empresa obligada a practicar retención en la fuente a sus proveedores.</td></tr>
+    <tr><td><strong>Certificado de retención</strong></td><td>Documento que acredita que se practicó una retención en la fuente.</td></tr>
+    <tr><td><strong>Gran Contribuyente</strong></td><td>Empresas con ingresos superiores a ciertos topes, con obligaciones tributarias especiales.</td></tr>
+    <tr><td><strong>Remisión / Guía</strong></td><td>Documento de despacho de mercancía, no es un título valor.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 10. ERRORES COMUNES Y CÓMO EVITARLOS      -->
+  <!-- ========================================== -->
+  <h2>10. Errores Comunes y Cómo Evitarlos</h2>
+
+  <div class="warning">
+    <strong>❌ Error 1:</strong> No monitorear las facturas ajenas a inventario.<br>
+    <strong>✅ Solución:</strong> Crear un checklist diario en Excel o en Dynamics para revisar estas facturas.
+  </div>
+
+  <div class="warning">
+    <strong>❌ Error 2:</strong> No verificar el estado DIAN de las facturas.<br>
+    <strong>✅ Solución:</strong> Revisar el módulo de facturación electrónica cada mañana y tarde.
+  </div>
+
+  <div class="warning">
+    <strong>❌ Error 3:</strong> No archivar los certificados de retención recibidos.<br>
+    <strong>✅ Solución:</strong> Crear una carpeta física o digital por cliente y mes.
+  </div>
+
+  <div class="warning">
+    <strong>❌ Error 4:</strong> Registrar el costo de ventas sin verificar el inventario.<br>
+    <strong>✅ Solución:</strong> Siempre revisar que la cuenta 15 (Inventarios) coincida con los movimientos físicos.
+  </div>
+
+  <div class="warning">
+    <strong>❌ Error 5:</strong> No conciliar ventas con ingresos bancarios.<br>
+    <strong>✅ Solución:</strong> Hacer conciliación semanal entre facturas emitidas y abonos recibidos.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 11. RESUMEN EJECUTIVO                     -->
+  <!-- ========================================== -->
+  <h2>11. Resumen Ejecutivo para tu Práctica</h2>
+
+  <div style="background: #1a3c6e; color: white; border-radius: 12px; padding: 20px 24px; margin: 16px 0;">
+    <h3 style="color: white; margin-top: 0;">🎯 Lo que debes saber hacer en Ventas</h3>
+    <ul style="color: white;">
+      <li><strong>Registrar facturas de venta</strong> en Microsoft Dynamics (módulo Sales Invoice).</li>
+      <li><strong>Monitorear eventos DIAN</strong> de todas las facturas (incluidas las ajenas a inventario).</li>
+      <li><strong>Recibir y archivar</strong> certificados de retención de clientes.</li>
+      <li><strong>Conciliar</strong> ventas con ingresos bancarios.</li>
+      <li><strong>Verificar</strong> que el costo de ventas (cuenta 6) coincida con el inventario (cuenta 15).</li>
+      <li><strong>Apoyar</strong> en la circularización de clientes (confirmación de saldos).</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 12. PREGUNTAS FRECUENTES EN ENTREVISTAS   -->
+  <!-- ========================================== -->
+  <h2>12. Preguntas Frecuentes en Entrevistas</h2>
+  <ul>
+    <li><strong>¿Cómo se registra una venta con retención en la fuente?</strong><br>
+    → Se debita el neto a cobrar y la retención, y se acredita la venta y el IVA.</li>
+    <li><strong>¿Qué hago si una factura es rechazada por la DIAN?</strong><br>
+    → Revisar el error, corregir, anular la factura y generar una nueva.</li>
+    <li><strong>¿Qué son las facturas ajenas a inventario?</strong><br>
+    → Son facturas por servicios o conceptos que no afectan el inventario físico.</li>
+    <li><strong>¿Cómo se controla la cuenta 15 (Inventarios)?</strong><br>
+    → Con el módulo de inventarios de Dynamics y conciliando con el área de producción.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 13. EJERCICIO BONUS (CASA)                -->
+  <!-- ========================================== -->
+  <h2>13. Ejercicio Bonus (para practicar en casa)</h2>
+
+  <div class="ejercicio-box">
+    <h3>🏠 Tarea para la casa</h3>
+    <p>
+      <strong>Datos:</strong> Partmo vende <strong>2.000 filtros</strong> a <strong>Talleres El Motor S.A.S.</strong> por <strong>$40.000.000</strong> + IVA 19%. El costo unitario de producción es <strong>$12.000</strong>. El cliente es agente retenedor y practica retención del <strong>2.5%</strong>.
+    </p>
+    <p><strong>Tareas:</strong></p>
+    <ol>
+      <li>Calcula el valor total de la factura.</li>
+      <li>Calcula el valor de la retención.</li>
+      <li>Realiza el asiento contable completo (venta + costo + retención).</li>
+      <li>Explica qué eventos DIAN debes monitorear.</li>
+      <li>¿Qué haces con el certificado de retención cuando lo recibes?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('solBonus')">Ver solución</button>
+    <div id="solBonus" class="solucion">
+      <p><strong>1. Total factura:</strong></p>
+      <ul>
+        <li>Base: $40.000.000</li>
+        <li>IVA 19%: $7.600.000</li>
+        <li><strong>Total: $47.600.000</strong></li>
+      </ul>
+      <p><strong>2. Retención:</strong> $40.000.000 × 2.5% = <strong>$1.000.000</strong></p>
+      <p><strong>3. Asiento contable:</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1305</td><td>Clientes</td><td>$46.600.000</td><td></td></tr>
+        <tr><td>1355</td><td>Retención en la fuente</td><td>$1.000.000</td><td></td></tr>
+        <tr><td>4135</td><td>Ventas</td><td></td><td>$40.000.000</td></tr>
+        <tr><td>2404</td><td>IVA generado</td><td></td><td>$7.600.000</td></tr>
+      </table>
+      <p><strong>Costo de ventas:</strong></p>
+      <ul>
+        <li>Costo total: 2.000 × $12.000 = <strong>$24.000.000</strong></li>
+      </ul>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>6135</td><td>Costo de ventas</td><td>$24.000.000</td><td></td></tr>
+        <tr><td>1435</td><td>Inventario</td><td></td><td>$24.000.000</td></tr>
+      </table>
+      <p><strong>4. Eventos DIAN:</strong></p>
+      <ul>
+        <li>Verificar que la factura sea <span style="color:green;">✅ Aceptada</span> por la DIAN.</li>
+        <li>Confirmar que el CUFE esté válido.</li>
+        <li>Revisar que la factura esté en el módulo de facturación electrónica.</li>
+      </ul>
+      <p><strong>5. Certificado de retención:</strong></p>
+      <ul>
+        <li>Recibirlo de Talleres El Motor.</li>
+        <li>Archivarlo en Dynamics asociado a la factura.</li>
+        <li>Usarlo para descontar $1.000.000 en la declaración de renta.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 14. SCRIPT PARA BOTONES (JavaScript)      -->
+  <!-- ========================================== -->
+  <script>
+    function toggleSolucion(id) {
+      var sol = document.getElementById(id);
+      if (sol.classList.contains('visible')) {
+        sol.classList.remove('visible');
+      } else {
+        sol.classList.add('visible');
+      }
     }
   </script>
 
+  <!-- Footer -->
+  <div class="footer">
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander<br>
+    <strong>Filtros Partmo S.A.S.</strong> - Prácticas Contables - Área de Ventas
+  </div>
+
+</div>
 </body>
 </html>
