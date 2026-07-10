@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provisiones y Depreciación - Mi Hub Contable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #2c3e50;
+      font-size: 1rem;
+      margin-top: 16px;
+      margin-bottom: 4px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.warning {
+      background: #fff3cd;
+      border-left-color: #ffc107;
+    }
+    .highlight.success {
+      background: #d4edda;
+      border-left-color: #28a745;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 0.95rem;
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+    .badge.fija { background: #28a745; }
+    .badge.variable { background: #ffc107; color: #333; }
+    .badge.mensual { background: #17a2b8; }
+    .badge.anual { background: #6f42c1; }
+    .formula {
+      background: #f8f9fc;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      margin: 10px 0;
+      border: 1px solid #e8ecf1;
+      text-align: center;
+    }
+    .ejemplo-box {
+      background: #f8f9fc;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .ejemplo-box .titulo {
+      font-weight: 700;
+      color: #1a3c6e;
+      margin-bottom: 6px;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    .nav-practica {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 10px 0;
+    }
+    .nav-practica a {
+      background: #e8ecf1;
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      color: #1a3c6e;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .nav-practica a:hover { background: #d0d7e6; }
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 6px 10px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Botón volver -->
+  <a href="../ejercicios.html" class="back">⬅ Volver a Ejercicios</a>
+
+  <h1>📊 Provisiones y Depreciación</h1>
+  <div class="subtitle">
+    Guía completa para <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics • 2026
+  </div>
+
+  <!-- Navegación rápida -->
+  <div class="nav-practica">
+    <a href="#introduccion">📌 Introducción</a>
+    <a href="#fijas">🔒 Provisiones Fijas</a>
+    <a href="#variables">📈 Provisiones Variables</a>
+    <a href="#depreciacion">🏗️ Depreciación</a>
+    <a href="#ejercicios">✍️ Ejercicios Prácticos</a>
+    <a href="#dynamics">💻 En Dynamics</a>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. INTRODUCCIÓN                            -->
+  <!-- ========================================== -->
+  <h2 id="introduccion">📌 1. Introducción a las Provisiones</h2>
+  <p>
+    Las <strong>provisiones</strong> son pasivos que se reconocen contablemente para cubrir obligaciones futuras
+    que son <strong>probables</strong> y cuyo monto puede estimarse razonablemente. En Partmo, las provisiones
+    son clave para reflejar la realidad económica de la empresa.
+  </p>
+
+  <div class="highlight">
+    <strong>📌 Principio contable aplicable:</strong> NIC 37 – Provisiones, Pasivos Contingentes y Activos Contingentes.<br>
+    <strong>Criterios:</strong> Obligación presente (legal o implícita), probable salida de recursos, y estimación fiable del monto.
+  </div>
+
+  <h3>📊 Clasificación según su periodicidad</h3>
+  <table>
+    <tr><th>Tipo</th><th>Frecuencia</th><th>Ejemplos en Partmo</th></tr>
+    <tr><td><strong>Fijas</strong> <span class="badge fija">Fija</span></td>
+        <td>Mensual (mismo valor)</td>
+        <td>Nómina, arriendos, seguros, servicios públicos (estimados)</td></tr>
+    <tr><td><strong>Variables</strong> <span class="badge variable">Variable</span></td>
+        <td>Mensual (valor cambiante)</td>
+        <td>Comisiones, bonos, indemnizaciones, litigios, mantenimiento</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 2. PROVISIONES FIJAS                       -->
+  <!-- ========================================== -->
+  <h2 id="fijas">🔒 2. Provisiones Fijas</h2>
+  <p>
+    Son aquellas cuyo monto es <strong>conocido y recurrente</strong> mes a mes. Se registran al inicio o durante el mes
+    y se pagan en el período siguiente.
+  </p>
+
+  <h3>📌 Ejemplos aplicados a Partmo</h3>
+
+  <!-- 2.1 Nómina -->
+  <h4>📝 2.1 Provisión de Nómina</h4>
+  <p>
+    En Partmo, la nómina se paga <strong>quincenal o mensualmente</strong>. Al cierre del mes, se debe provisionar
+    el valor de los días trabajados del último período.
+  </p>
+  <div class="ejemplo-box">
+    <div class="titulo">📋 Ejemplo: Provisión de nómina mensual</div>
+    <p><strong>Datos:</strong> Salarios del mes = $180.000.000, prestaciones sociales (29.5%) = $53.100.000, parafiscales (9%) = $16.200.000</p>
+    <p><strong>Total provisión:</strong> $180.000.000 + $53.100.000 + $16.200.000 = <strong>$249.300.000</strong></p>
+  </div>
+
+  <h4>📝 Asiento contable - Provisión de Nómina</h4>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5101</td><td>Sueldos y salarios</td><td>$180.000.000</td><td></td></tr>
+    <tr><td>5108</td><td>Prestaciones sociales</td><td>$53.100.000</td><td></td></tr>
+    <tr><td>5109</td><td>Aportes parafiscales</td><td>$16.200.000</td><td></td></tr>
+    <tr><td>2370</td><td>Nómina por pagar</td><td></td><td>$249.300.000</td></tr>
+  </table>
+
+  <!-- 2.2 Arriendos -->
+  <h4>🏢 2.2 Provisión de Arriendos</h4>
+  <p>
+    Partmo tiene su planta en el <strong>Parque Industrial 2</strong> de Bucaramanga. El arriendo se paga
+    mensualmente por adelantado, pero se provisiona para reflejar el gasto del mes.
+  </p>
+  <div class="ejemplo-box">
+    <div class="titulo">📋 Ejemplo: Arriendo mensual</div>
+    <p><strong>Valor arriendo:</strong> $25.000.000 + IVA (19%) = $29.750.000</p>
+  </div>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5110</td><td>Arrendamientos</td><td>$25.000.000</td><td></td></tr>
+    <tr><td>2408</td><td>IVA descontable</td><td>$4.750.000</td><td></td></tr>
+    <tr><td>2205</td><td>Proveedores</td><td></td><td>$29.750.000</td></tr>
+  </table>
+
+  <!-- 2.3 Servicios Públicos (estimados) -->
+  <h4>💡 2.3 Provisión de Servicios Públicos</h4>
+  <p>
+    Los servicios públicos (energía, agua, gas) se facturan después del mes consumido. Por eso, <strong>al cierre del mes</strong>
+    se debe hacer una provisión estimada.
+  </p>
+  <div class="highlight warning">
+    <strong>⚠️ Importante:</strong> En Partmo, la planta es <strong>intensiva en energía</strong> por la maquinaria industrial.
+    Debes revisar consumos históricos para estimar el valor.
+  </div>
+  <div class="ejemplo-box">
+    <div class="titulo">📋 Ejemplo: Provisión servicios públicos</div>
+    <p><strong>Valor estimado (basado en meses anteriores):</strong> $8.500.000</p>
+  </div>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5115</td><td>Servicios públicos</td><td>$8.500.000</td><td></td></tr>
+    <tr><td>2205</td><td>Proveedores</td><td></td><td>$8.500.000</td></tr>
+  </table>
+
+  <!-- 2.4 Seguros -->
+  <h4>🛡️ 2.4 Provisión de Seguros</h4>
+  <p>
+    La póliza de seguros de la planta y maquinaria se paga anualmente, pero se <strong>amortiza mensualmente</strong>
+    para reflejar el gasto del período.
+  </p>
+  <div class="ejemplo-box">
+    <div class="titulo">📋 Ejemplo: Amortización de seguro</div>
+    <p><strong>Póliza anual:</strong> $60.000.000 → <strong>Provisión mensual:</strong> $60.000.000 / 12 = $5.000.000</p>
+  </div>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5120</td><td>Seguros</td><td>$5.000.000</td><td></td></tr>
+    <tr><td>2205</td><td>Proveedores</td><td></td><td>$5.000.000</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 3. PROVISIONES VARIABLES                   -->
+  <!-- ========================================== -->
+  <h2 id="variables">📈 3. Provisiones Variables</h2>
+  <p>
+    Son aquellas cuyo monto <strong>cambia cada mes</strong> según el desempeño, producción o eventos específicos.
+  </p>
+
+  <!-- 3.1 Comisiones -->
+  <h4>💰 3.1 Provisión de Comisiones</h4>
+  <p>
+    El equipo de ventas de Partmo recibe comisiones sobre las ventas del mes. Se provisionan al cierre.
+  </p>
+  <div class="ejemplo-box">
+    <div class="titulo">📋 Ejemplo: Comisiones sobre ventas</div>
+    <p><strong>Ventas del mes:</strong> $850.000.000 • <strong>Comisión:</strong> 3% → <strong>Provisión:</strong> $25.500.000</p>
+  </div>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5105</td><td>Comisiones</td><td>$25.500.000</td><td></td></tr>
+    <tr><td>2370</td><td>Nómina por pagar</td><td></td><td>$25.500.000</td></tr>
+  </table>
+
+  <!-- 3.2 Bonos y primas -->
+  <h4>🎯 3.2 Provisión de Bonos y Primas</h4>
+  <p>
+    Bonos por cumplimiento de metas de producción o calidad. Se calculan al cierre del mes según indicadores.
+  </p>
+  <div class="ejemplo-box">
+    <div class="titulo">📋 Ejemplo: Bono de producción</div>
+    <p><strong>Producción del mes:</strong> 12.500 filtros • <strong>Meta:</strong> 10.000 • <strong>Bono:</strong> $2.500 por filtro extra → <strong>Provisión:</strong> $6.250.000</p>
+  </div>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5105</td><td>Bonos</td><td>$6.250.000</td><td></td></tr>
+    <tr><td>2370</td><td>Nómina por pagar</td><td></td><td>$6.250.000</td></tr>
+  </table>
+
+  <!-- 3.3 Mantenimiento -->
+  <h4>🔧 3.3 Provisión de Mantenimiento</h4>
+  <p>
+    La maquinaria industrial requiere mantenimientos preventivos y correctivos. Se debe provisionar según el plan de mantenimiento.
+  </p>
+  <div class="highlight">
+    <strong>📌 En Partmo:</strong> La maquinaria de filtración tiene mantenimientos programados cada 500 horas de operación.
+  </div>
+  <div class="ejemplo-box">
+    <div class="titulo">📋 Ejemplo: Mantenimiento de máquina</div>
+    <p><strong>Costo estimado de mantenimiento trimestral:</strong> $18.000.000 → <strong>Provisión mensual:</strong> $6.000.000</p>
+  </div>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5165</td><td>Mantenimiento y reparaciones</td><td>$6.000.000</td><td></td></tr>
+    <tr><td>2299</td><td>Otras cuentas por pagar</td><td></td><td>$6.000.000</td></tr>
+  </table>
+
+  <!-- 3.4 Indemnizaciones y litigios -->
+  <h4>⚖️ 3.4 Provisión de Indemnizaciones y Litigios</h4>
+  <p>
+    Partmo, como empresa grande, puede tener procesos laborales o demandas. Se debe provisionar según la probabilidad de pérdida.
+  </p>
+  <div class="highlight warning">
+    <strong>⚠️ Importante:</strong> Según NIC 37, solo se provisionan si la salida de recursos es <strong>probable</strong> (>50%).
+  </div>
+  <div class="ejemplo-box">
+    <div class="titulo">📋 Ejemplo: Litigio laboral</div>
+    <p><strong>Valor estimado de la demanda:</strong> $35.000.000 • <strong>Probabilidad de pérdida:</strong> 70% → <strong>Provisión:</strong> $24.500.000</p>
+  </div>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5170</td><td>Litigios y demandas</td><td>$24.500.000</td><td></td></tr>
+    <tr><td>2999</td><td>Otras provisiones</td><td></td><td>$24.500.000</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 4. DEPRECIACIÓN                            -->
+  <!-- ========================================== -->
+  <h2 id="depreciacion">🏗️ 4. Depreciación</h2>
+  <p>
+    La <strong>depreciación</strong> es la pérdida de valor de los activos fijos por uso, desgaste u obsolescencia.
+    En Partmo, los principales activos depreciables son:
+  </p>
+  <ul>
+    <li><strong>Maquinaria industrial</strong> (líneas de producción de filtros).</li>
+    <li><strong>Equipos de oficina</strong> (computadores, mobiliario).</li>
+    <li><strong>Vehículos</strong> (flota de reparto).</li>
+    <li><strong>Edificaciones</strong> (planta y oficinas).</li>
+  </ul>
+
+  <h3>📌 Métodos de depreciación</h3>
+  <ul>
+    <li><strong>Más común:</strong> <strong>Línea recta</strong> (mismo valor cada año).</li>
+    <li><strong>También se usa:</strong> Unidades de producción (para maquinaria, según horas de operación).</li>
+  </ul>
+
+  <div class="formula">
+    Depreciación anual = (Valor del activo - Valor residual) / Vida útil (años)
+  </div>
+
+  <h4>📋 Ejemplo 1: Depreciación en línea recta</h4>
+  <div class="ejemplo-box">
+    <div class="titulo">🔧 Máquina de producción de filtros</div>
+    <p><strong>Valor de compra:</strong> $480.000.000</p>
+    <p><strong>Valor residual:</strong> $80.000.000</p>
+    <p><strong>Vida útil:</strong> 10 años</p>
+    <p><strong>Cálculo:</strong> ($480M - $80M) / 10 = <strong>$40.000.000/año</strong> → <strong>$3.333.333/mes</strong></p>
+  </div>
+
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5160</td><td>Depreciación de maquinaria</td><td>$3.333.333</td><td></td></tr>
+    <tr><td>1299</td><td>Depreciación acumulada</td><td></td><td>$3.333.333</td></tr>
+  </table>
+
+  <h4>📋 Ejemplo 2: Depreciación por unidades de producción</h4>
+  <div class="ejemplo-box">
+    <div class="titulo">🏭 Línea de ensamblaje (producción estimada: 500.000 filtros)</div>
+    <p><strong>Valor de compra:</strong> $320.000.000</p>
+    <p><strong>Valor residual:</strong> $20.000.000</p>
+    <p><strong>Producción total estimada:</strong> 500.000 unidades</p>
+    <p><strong>Depreciación por unidad:</strong> ($320M - $20M) / 500.000 = <strong>$600/unidad</strong></p>
+    <p><strong>Producción del mes:</strong> 12.500 unidades → <strong>Depreciación mes:</strong> 12.500 × $600 = <strong>$7.500.000</strong></p>
+  </div>
+
+  <h3>📊 Tabla resumen de activos fijos en Partmo</h3>
+  <table>
+    <tr><th>Activo</th><th>Valor</th><th>Vida útil</th><th>Valor residual</th><th>Depreciación anual</th><th>Depreciación mensual</th></tr>
+    <tr><td>Máquinas de filtración</td><td>$480M</td><td>10 años</td><td>$80M</td><td>$40M</td><td>$3.333.333</td></tr>
+    <tr><td>Línea de ensamblaje</td><td>$320M</td><td>8 años</td><td>$20M</td><td>$37.5M</td><td>$3.125.000</td></tr>
+    <tr><td>Equipos de oficina</td><td>$45M</td><td>5 años</td><td>$5M</td><td>$8M</td><td>$666.667</td></tr>
+    <tr><td>Vehículos (flota)</td><td>$120M</td><td>5 años</td><td>$20M</td><td>$20M</td><td>$1.666.667</td></tr>
+    <tr><td>Edificio planta</td><td>$600M</td><td>20 años</td><td>$100M</td><td>$25M</td><td>$2.083.333</td></tr>
+    <tr><td style="font-weight:bold;">TOTAL</td><td>$1.565M</td><td></td><td></td><td>$130.5M</td><td><strong>$10.875.000</strong></td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 5. EJERCICIOS PRÁCTICOS                    -->
+  <!-- ========================================== -->
+  <h2 id="ejercicios">✍️ 5. Ejercicios Prácticos</h2>
+
+  <div class="highlight success">
+    <strong>💡 Instrucción:</strong> Realiza los asientos contables completos para cada caso, incluyendo las cuentas PUC y los valores.
+  </div>
+
+  <!-- Ejercicio 1 -->
+  <h4>📝 Ejercicio 1: Provisión de nómina y prestaciones</h4>
+  <p><strong>Datos de Partmo para el mes de julio 2026:</strong></p>
+  <ul>
+    <li>Salarios del período: $215.000.000</li>
+    <li>Prestaciones sociales: 29.5%</li>
+    <li>Aportes parafiscales: 9%</li>
+  </ul>
+  <div class="ejemplo-box">
+    <p><strong>👉 Tu tarea:</strong> Calcula el total provisionado y realiza el asiento contable completo.</p>
+    <details>
+      <summary style="cursor:pointer; font-weight:600; color:#1a3c6e;">🔍 Ver solución</summary>
+      <p><strong>Total provisión:</strong> $215M + ($215M × 29.5%) + ($215M × 9%) = $215M + $63.425M + $19.35M = <strong>$297.775.000</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5101</td><td>Sueldos y salarios</td><td>$215.000.000</td><td></td></tr>
+        <tr><td>5108</td><td>Prestaciones sociales</td><td>$63.425.000</td><td></td></tr>
+        <tr><td>5109</td><td>Aportes parafiscales</td><td>$19.350.000</td><td></td></tr>
+        <tr><td>2370</td><td>Nómina por pagar</td><td></td><td>$297.775.000</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- Ejercicio 2 -->
+  <h4>📝 Ejercicio 2: Depreciación de maquinaria</h4>
+  <p><strong>Datos:</strong></p>
+  <ul>
+    <li>Máquina de producción adquirida en enero 2023 por $650.000.000</li>
+    <li>Valor residual estimado: $50.000.000</li>
+    <li>Vida útil: 12 años</li>
+  </ul>
+  <div class="ejemplo-box">
+    <p><strong>👉 Tu tarea:</strong> Calcula la depreciación mensual (línea recta) y realiza el asiento para el mes de julio 2026.</p>
+    <details>
+      <summary style="cursor:pointer; font-weight:600; color:#1a3c6e;">🔍 Ver solución</summary>
+      <p><strong>Depreciación anual:</strong> ($650M - $50M) / 12 = $50.000.000/año</p>
+      <p><strong>Depreciación mensual:</strong> $50.000.000 / 12 = <strong>$4.166.667</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5160</td><td>Depreciación de maquinaria</td><td>$4.166.667</td><td></td></tr>
+        <tr><td>1299</td><td>Depreciación acumulada</td><td></td><td>$4.166.667</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- Ejercicio 3 -->
+  <h4>📝 Ejercicio 3: Provisión de comisiones</h4>
+  <p><strong>Datos de ventas de julio 2026:</strong></p>
+  <ul>
+    <li>Ventas totales del mes: $1.200.000.000</li>
+    <li>Comisión: 2.5% para el equipo comercial</li>
+  </ul>
+  <div class="ejemplo-box">
+    <p><strong>👉 Tu tarea:</strong> Calcula la provisión de comisiones y realiza el asiento contable.</p>
+    <details>
+      <summary style="cursor:pointer; font-weight:600; color:#1a3c6e;">🔍 Ver solución</summary>
+      <p><strong>Provisión de comisiones:</strong> $1.200M × 2.5% = <strong>$30.000.000</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5105</td><td>Comisiones</td><td>$30.000.000</td><td></td></tr>
+        <tr><td>2370</td><td>Nómina por pagar</td><td></td><td>$30.000.000</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- Ejercicio 4 -->
+  <h4>📝 Ejercicio 4: Provisión de mantenimiento</h4>
+  <p><strong>Datos:</strong></p>
+  <ul>
+    <li>Plan de mantenimiento preventivo: $24.000.000 trimestral</li>
+    <li>Se requiere provisionar mensualmente</li>
+  </ul>
+  <div class="ejemplo-box">
+    <p><strong>👉 Tu tarea:</strong> Calcula la provisión mensual y realiza el asiento.</p>
+    <details>
+      <summary style="cursor:pointer; font-weight:600; color:#1a3c6e;">🔍 Ver solución</summary>
+      <p><strong>Provisión mensual:</strong> $24.000.000 / 3 = <strong>$8.000.000</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5165</td><td>Mantenimiento y reparaciones</td><td>$8.000.000</td><td></td></tr>
+        <tr><td>2299</td><td>Otras cuentas por pagar</td><td></td><td>$8.000.000</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- Ejercicio 5 -->
+  <h4>📝 Ejercicio 5: Provisión de litigio laboral</h4>
+  <p><strong>Datos:</strong></p>
+  <ul>
+    <li>Demanda laboral en curso contra Partmo</li>
+    <li>Valor estimado de la demanda: $42.000.000</li>
+    <li>Abogados externos estiman probabilidad de pérdida del 65%</li>
+  </ul>
+  <div class="ejemplo-box">
+    <p><strong>👉 Tu tarea:</strong> Calcula la provisión según NIC 37 y realiza el asiento.</p>
+    <details>
+      <summary style="cursor:pointer; font-weight:600; color:#1a3c6e;">🔍 Ver solución</summary>
+      <p><strong>Provisión:</strong> $42.000.000 × 65% = <strong>$27.300.000</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Cr
