@@ -46,73 +46,69 @@
     }
     .subtitle strong { color: #1a3c6e; }
 
-    /* --- Tablero de áreas --- */
-    .area {
+    /* --- Tarjetas de área --- */
+    .grid-areas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .area-card {
       background: white;
       border-radius: 16px;
-      padding: 22px 26px;
-      margin-bottom: 28px;
+      padding: 24px 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       border-left: 6px solid #1a3c6e;
-    }
-    .area h2 {
-      color: #1a3c6e;
-      font-size: 1.2rem;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .area h2 .badge {
-      background: #1a3c6e;
-      color: white;
-      font-size: 0.7rem;
-      padding: 2px 12px;
-      border-radius: 20px;
-      font-weight: 600;
-    }
-    .grid-ejercicios {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 12px;
-    }
-    .ejercicio {
-      background: #f8f9fc;
-      padding: 14px 18px;
-      border-radius: 10px;
       text-decoration: none;
       color: #1a1a1a;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transition: background 0.2s, transform 0.15s;
-      border: 1px solid #e8ecf1;
+      display: block;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .ejercicio:hover {
-      background: #eef4ff;
-      transform: translateX(4px);
-      border-color: #1a3c6e;
+    .area-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
     }
-    .ejercicio .icon { font-size: 1.3rem; }
-    .ejercicio .info { flex: 1; }
-    .ejercicio .info .titulo { font-weight: 600; font-size: 0.92rem; }
-    .ejercicio .info .desc {
-      font-size: 0.78rem;
+    .area-card .icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .area-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+      color: #1a3c6e;
+    }
+    .area-card p {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.4;
+    }
+    .area-card .temas {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e8ecf1;
+      font-size: 0.85rem;
       color: #666;
-      margin-top: 2px;
     }
-    .ejercicio .estado {
+    .area-card .temas span {
+      display: inline-block;
+      background: #f0f2f5;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin: 3px 4px 3px 0;
+      font-size: 0.75rem;
+    }
+    .badge-area {
+      display: inline-block;
       font-size: 0.65rem;
       padding: 2px 10px;
       border-radius: 20px;
       font-weight: 600;
+      margin-top: 8px;
     }
-    .estado.pend { background: #f8d7da; color: #721c24; }
-    .estado.prog { background: #fff3cd; color: #856404; }
-    .estado.list { background: #d4edda; color: #155724; }
+    .badge-area.pend { background: #f8d7da; color: #721c24; }
+    .badge-area.prog { background: #fff3cd; color: #856404; }
+    .badge-area.list { background: #d4edda; color: #155724; }
 
+    /* --- Footer --- */
     .footer {
-      margin-top: 40px;
+      margin-top: 50px;
       text-align: center;
       font-size: 0.85rem;
       color: #888;
@@ -122,8 +118,7 @@
 
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
-      .area { padding: 16px; }
-      .grid-ejercicios { grid-template-columns: 1fr; }
+      .grid-areas { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -138,177 +133,147 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- ÁREA 1: FACTURACIÓN Y COMPRAS              -->
+  <!-- GRID DE ÁREAS FUNCIONALES                  -->
   <!-- ========================================== -->
-  <div class="area" style="border-left-color: #007bff;">
-    <h2>📄 Facturación y Compras <span class="badge">Diario</span></h2>
-    <div class="grid-ejercicios">
+  <div class="grid-areas">
 
-      <a href="01-compras.html" class="ejercicio">
-        <span class="icon">🛒</span>
-        <div class="info">
-          <div class="titulo">Registro de facturas de compra</div>
-          <div class="desc">En Dynamics: compras, proveedores, IVA, retención</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
+    <!-- 1. COMPRAS Y PROVEEDORES -->
+    <a href="compras.html" class="area-card" style="border-left-color: #007bff;">
+      <div class="icon">🛒</div>
+      <h3>Compras y Proveedores</h3>
+      <p>Gestión de compras, facturas de proveedores, retenciones y circularización.</p>
+      <div class="temas">
+        <span>📄 Facturas compra</span>
+        <span>📬 Circularización</span>
+        <span>🧾 Retenciones</span>
+      </div>
+      <span class="badge-area pend">Pendiente</span>
+    </a>
 
-      <a href="02-ventas.html" class="ejercicio">
-        <span class="icon">💳</span>
-        <div class="info">
-          <div class="titulo">Registro de facturas de venta</div>
-          <div class="desc">En Dynamics: clientes, ingresos, IVA generado</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
+    <!-- 2. VENTAS Y CLIENTES -->
+    <a href="ventas.html" class="area-card" style="border-left-color: #28a745;">
+      <div class="icon">💳</div>
+      <h3>Ventas y Clientes</h3>
+      <p>Registro de facturas de venta, clientes, IVA generado y eventos DIAN.</p>
+      <div class="temas">
+        <span>📄 Facturas venta</span>
+        <span>📡 Eventos DIAN</span>
+        <span>💰 IVA generado</span>
+      </div>
+      <span class="badge-area pend">Pendiente</span>
+    </a>
 
-      <a href="10-facturas-registro.html" class="ejercicio">
-        <span class="icon">✅</span>
-        <div class="info">
-          <div class="titulo">Control y confirmación de facturas</div>
-          <div class="desc">Revisión, validación y registro de facturas recibidas</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
+    <!-- 3. PROVISIONES Y DEPRECIACIÓN -->
+    <a href="provisiones.html" class="area-card" style="border-left-color: #fd7e14;">
+      <div class="icon">📊</div>
+      <h3>Provisiones y Depreciación</h3>
+      <p>Provisiones mensuales fijas y variables, depreciación de activos fijos.</p>
+      <div class="temas">
+        <span>📅 Provisiones fijas</span>
+        <span>📈 Provisiones variables</span>
+        <span>🔧 Depreciación</span>
+      </div>
+      <span class="badge-area pend">Pendiente</span>
+    </a>
 
-    </div>
+    <!-- 4. CUENTAS POR PAGAR -->
+    <a href="cuentasxpagar.html" class="area-card" style="border-left-color: #17a2b8;">
+      <div class="icon">📋</div>
+      <h3>Cuentas por Pagar</h3>
+      <p>Control de proveedores, facturas recibidas, servicios públicos y cuenta 15.</p>
+      <div class="temas">
+        <span>✅ Facturas recibidas</span>
+        <span>💡 Servicios públicos</span>
+        <span>📦 Cuenta 15</span>
+      </div>
+      <span class="badge-area pend">Pendiente</span>
+    </a>
+
+    <!-- 5. CONCILIACIONES BANCARIAS -->
+    <a href="conciliaciones.html" class="area-card" style="border-left-color: #6f42c1;">
+      <div class="icon">🏦</div>
+      <h3>Conciliaciones Bancarias</h3>
+      <p>Comparación entre libros contables y extractos bancarios. Identificación de diferencias.</p>
+      <div class="temas">
+        <span>🏦 Extractos bancarios</span>
+        <span>📊 Libros contables</span>
+        <span>🔍 Diferencias</span>
+      </div>
+      <span class="badge-area pend">Pendiente</span>
+    </a>
+
+    <!-- 6. CONTABILIZACIÓN GENERAL -->
+    <a href="contabilizacion.html" class="area-card" style="border-left-color: #e83e8c;">
+      <div class="icon">📝</div>
+      <h3>Contabilización General</h3>
+      <p>Asientos contables, ajustes, cierres mensuales y soporte al departamento.</p>
+      <div class="temas">
+        <span>📝 Asientos contables</span>
+        <span>🔄 Ajustes y cierres</span>
+        <span>🤝 Soporte general</span>
+      </div>
+      <span class="badge-area pend">Pendiente</span>
+    </a>
+
+    <!-- 7. GESTIÓN DE IMPUESTOS -->
+    <a href="impuestos.html" class="area-card" style="border-left-color: #dc3545;">
+      <div class="icon">🏛️</div>
+      <h3>Gestión de Impuestos</h3>
+      <p>IVA, Retención en la fuente, ICA, certificados electrónicos y DIAN.</p>
+      <div class="temas">
+        <span>🧾 Retención</span>
+        <span>📧 Certificados</span>
+        <span>📡 Eventos DIAN</span>
+      </div>
+      <span class="badge-area pend">Pendiente</span>
+    </a>
+
+    <!-- 8. MICROSOFT DYNAMICS -->
+    <a href="dynamics.html" class="area-card" style="border-left-color: #1a3c6e;">
+      <div class="icon">💻</div>
+      <h3>Microsoft Dynamics</h3>
+      <p>Módulos de Dynamics: Compras, Ventas, Contabilidad, Activos Fijos y Reportes.</p>
+      <div class="temas">
+        <span>🛒 Compras</span>
+        <span>💳 Ventas</span>
+        <span>📊 Contabilidad</span>
+        <span>🔧 Activos</span>
+      </div>
+      <span class="badge-area pend">Pendiente</span>
+    </a>
+
   </div>
 
   <!-- ========================================== -->
-  <!-- ÁREA 2: DIAN Y RETENCIONES                 -->
+  <!-- EJERCICIO INTEGRADOR                       -->
   <!-- ========================================== -->
-  <div class="area" style="border-left-color: #17a2b8;">
-    <h2>🏛️ DIAN y Retenciones <span class="badge">Legal</span></h2>
-    <div class="grid-ejercicios">
-
-      <a href="03-eventos-dian.html" class="ejercicio">
-        <span class="icon">📡</span>
-        <div class="info">
-          <div class="titulo">Eventos DIAN (facturas ajenas al inventario)</div>
-          <div class="desc">Monitoreo y generación de eventos para facturas sin inventario</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="05-certificados-retencion.html" class="ejercicio">
-        <span class="icon">📧</span>
-        <div class="info">
-          <div class="titulo">Certificados de retención</div>
-          <div class="desc">Envío electrónico de certificados a proveedores</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-    </div>
+  <div style="text-align:center; margin: 40px 0 10px; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <h2 style="color: #1a3c6e; font-size: 1.4rem; margin-bottom: 8px;">🚀 Día Completo en Partmo</h2>
+    <p style="color: #555; margin-bottom: 16px;">
+      Ejercicio integrador que combina compras, ventas, provisiones, depreciación y conciliación.<br>
+      <strong>Simula un día real en el departamento de contabilidad.</strong>
+    </p>
+    <a href="dia-completo.html" style="
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: background 0.2s;
+    ">📅 Ir al ejercicio integrador</a>
   </div>
 
-  <!-- ========================================== -->
-  <!-- ÁREA 3: PROVISIONES Y GASTOS               -->
-  <!-- ========================================== -->
-  <div class="area" style="border-left-color: #28a745;">
-    <h2>📊 Provisiones y Gastos <span class="badge">Mensual</span></h2>
-    <div class="grid-ejercicios">
-
-      <a href="06-provisiones.html" class="ejercicio">
-        <span class="icon">📅</span>
-        <div class="info">
-          <div class="titulo">Registro de provisiones mensuales</div>
-          <div class="desc">Fijas (arriendos) y variables (servicios, bonos)</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="07-depreciacion.html" class="ejercicio">
-        <span class="icon">🔧</span>
-        <div class="info">
-          <div class="titulo">Registro de depreciación</div>
-          <div class="desc">Cálculo y contabilización de activos fijos (maquinaria Partmo)</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="09-servicios-publicos.html" class="ejercicio">
-        <span class="icon">💡</span>
-        <div class="info">
-          <div class="titulo">Control de gastos por servicios públicos</div>
-          <div class="desc">Validación, contabilización y control de servicios</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-    </div>
+  <div class="footer">
+    📌 Ejercicios basados en tareas reales de <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics<br>
+    Actualizado: Julio 2026 • Bucaramanga, Santander
   </div>
 
-  <!-- ========================================== -->
-  <!-- ÁREA 4: CONCILIACIONES Y CONTROL           -->
-  <!-- ========================================== -->
-  <div class="area" style="border-left-color: #fd7e14;">
-    <h2>🔍 Conciliaciones y Control <span class="badge">Mensual</span></h2>
-    <div class="grid-ejercicios">
-
-      <a href="11-conciliaciones.html" class="ejercicio">
-        <span class="icon">🏦</span>
-        <div class="info">
-          <div class="titulo">Conciliaciones bancarias</div>
-          <div class="desc">Comparación entre libros y extractos bancarios</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="04-circularizacion.html" class="ejercicio">
-        <span class="icon">📬</span>
-        <div class="info">
-          <div class="titulo">Circularización de proveedores</div>
-          <div class="desc">Envío de cartas para confirmación de saldos</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="08-cuenta15.html" class="ejercicio">
-        <span class="icon">📦</span>
-        <div class="info">
-          <div class="titulo">Control registros cuenta 15</div>
-          <div class="desc">Productos en proceso, producción y seguimiento</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- ÁREA 5: SOPORTE Y CIERRE                   -->
-  <!-- ========================================== -->
-  <div class="area" style="border-left-color: #6f42c1;">
-    <h2>🛠️ Soporte y Cierre <span class="badge">General</span></h2>
-    <div class="grid-ejercicios">
-
-      <a href="12-soporte-general.html" class="ejercicio">
-        <span class="icon">🤝</span>
-        <div class="info">
-          <div class="titulo">Soporte general a contabilidad</div>
-          <div class="desc">Apoyo en tareas diarias, cierres y contabilizaciones</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="12-soporte-general.html" class="ejercicio">
-        <span class="icon">📝</span>
-        <div class="info">
-          <div class="titulo">Contabilización de operaciones</div>
-          <div class="desc">Asientos contables, ajustes, cierre mensual y anual</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- BOTÓN PARA EJERCICIO COMPLETO              -->
-  <!-- ========================================== -->
-  <div style="text-align:center; margin: 30px 0 10px;">
-    <a href="ejercicio-completo.html" style="
+</div>
+</body>
+</html>="
       display: inline-block;
       background: #28a745;
       color: white;
