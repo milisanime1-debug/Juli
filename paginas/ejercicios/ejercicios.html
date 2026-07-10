@@ -12,12 +12,8 @@
       padding: 30px 20px;
     }
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      background: white;
-      border-radius: 16px;
-      padding: 40px 45px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     }
     .back {
       display: inline-block;
@@ -34,7 +30,7 @@
     .back:hover { background: #0f2a4a; }
     h1 {
       color: #1a3c6e;
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       margin-bottom: 6px;
       display: flex;
       align-items: center;
@@ -43,591 +39,216 @@
     .subtitle {
       color: #555;
       margin-bottom: 30px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       border-left: 4px solid #1a3c6e;
       padding-left: 16px;
     }
     .subtitle strong { color: #1a3c6e; }
-    h2 {
-      color: #1a3c6e;
-      font-size: 1.6rem;
-      margin-top: 40px;
-      margin-bottom: 12px;
-      border-bottom: 3px solid #e8ecf1;
-      padding-bottom: 10px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    h2 .toggle-icon {
-      font-size: 1.2rem;
-      color: #1a3c6e;
-      transition: transform 0.3s;
-    }
-    h2 .toggle-icon.open { transform: rotate(180deg); }
-    h3 {
-      color: #2c3e50;
-      font-size: 1.15rem;
-      margin-top: 22px;
-      margin-bottom: 8px;
-    }
-    h4 {
-      color: #1a3c6e;
-      font-size: 1rem;
-      margin-top: 16px;
-      margin-bottom: 6px;
-    }
-    p, li {
-      color: #2d2d2d;
-      line-height: 1.8;
-      font-size: 0.98rem;
-    }
-    ul, ol {
-      padding-left: 28px;
-      margin: 10px 0 18px 0;
-    }
-    .exercise {
-      background: #f8f9fc;
-      border-left: 5px solid #1a3c6e;
-      padding: 20px 25px;
-      border-radius: 8px;
-      margin: 18px 0 12px 0;
-    }
-    .exercise strong { color: #1a3c6e; }
-    .exercise .highlight-box {
-      background: #fff8e7;
-      border-left: 4px solid #f1c40f;
-      padding: 12px 16px;
-      border-radius: 6px;
-      margin: 10px 0;
-    }
-    .solution {
-      background: #eef4ff;
-      border-left: 5px solid #28a745;
-      padding: 20px 25px;
-      border-radius: 8px;
-      margin: 14px 0 24px 0;
-      display: none;
-    }
-    .solution.show { display: block; }
-    .solution strong { color: #1a3c6e; }
-    .solution .step {
-      background: white;
-      padding: 12px 16px;
-      border-radius: 6px;
-      margin: 10px 0;
-      border: 1px solid #e0e7ef;
-    }
-    .btn-solution {
-      background: #1a3c6e;
-      color: white;
-      border: none;
-      padding: 8px 22px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: background 0.2s;
+
+    /* --- Grid de categorías --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
       margin-top: 8px;
     }
-    .btn-solution:hover { background: #0f2a4a; }
-    .btn-solution.verde { background: #28a745; }
-    .btn-solution.verde:hover { background: #1e7e34; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 14px 0 18px 0;
+    .card {
       background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      font-size: 0.95rem;
+      border-radius: 16px;
+      padding: 22px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: #1a1a1a;
+      display: block;
+      border-bottom: 5px solid #1a3c6e;
+      cursor: pointer;
     }
-    th {
-      background: #1a3c6e;
-      color: white;
-      padding: 11px 16px;
-      text-align: left;
-      font-weight: 600;
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
     }
-    td {
-      padding: 10px 16px;
-      border-bottom: 1px solid #e8ecf1;
+    .card .icon { font-size: 2rem; margin-bottom: 8px; }
+    .card h3 { 
+      font-size: 1.1rem; 
+      margin-bottom: 6px;
+      color: #1a3c6e;
     }
-    tr:hover td { background: #f8f9fc; }
-    .badge {
+    .card .badge {
       display: inline-block;
-      background: #28a745;
-      color: white;
+      background: #e8ecf1;
       font-size: 0.7rem;
-      padding: 2px 14px;
+      padding: 2px 10px;
       border-radius: 20px;
-      margin-left: 12px;
-      font-weight: 600;
+      margin-top: 4px;
+      color: #555;
     }
-    .badge.azul { background: #1a3c6e; }
+    .card .badge.urgent { background: #f8d7da; color: #721c24; }
+    .card .badge.daily { background: #d4edda; color: #155724; }
+    .card .badge.monthly { background: #cce5ff; color: #004085; }
+    .card p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.5;
+      margin-top: 6px;
+    }
+    .card .task-list {
+      font-size: 0.82rem;
+      color: #444;
+      margin-top: 10px;
+      padding-left: 18px;
+      line-height: 1.8;
+    }
+    .card .task-list li { list-style-type: "✓ "; }
+    .card .task-list li.pending { list-style-type: "○ "; color: #999; }
+
     .footer {
       margin-top: 50px;
       text-align: center;
       font-size: 0.85rem;
       color: #888;
-      border-top: 1px solid #eee;
-      padding-top: 22px;
-    }
-    .footer a { color: #1a3c6e; text-decoration: none; }
-    .footer a:hover { text-decoration: underline; }
-    @media (max-width: 600px) {
-      .container { padding: 18px; }
-      h1 { font-size: 1.6rem; }
-      table { font-size: 0.8rem; }
-      .exercise, .solution { padding: 14px; }
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
     }
   </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- Botón volver -->
   <a href="../index.html" class="back">⬅ Volver al inicio</a>
 
-  <h1>✍️ Ejercicios Prácticos Extendidos</h1>
+  <h1>✍️ Ejercicios Prácticos</h1>
   <div class="subtitle">
-    Casos detallados aplicados a <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026<br>
-    <span style="font-size:0.9rem; color:#888;">Incluyen cálculos paso a paso, asientos contables y explicaciones</span>
+    Tareas del día a día en <strong>Filtros Partmo S.A.S.</strong> con Microsoft Dynamics • 2026
   </div>
 
-  <!-- ========================================================== -->
-  <!-- EJERCICIO 1: COMPRA DE MATERIA PRIMA (CON IVA Y RETENCIÓN) -->
-  <!-- ========================================================== -->
-  <h2>1. Compra de Materia Prima con IVA y Retención</h2>
-  <div class="exercise">
-    <p><strong>📌 Enunciado completo:</strong></p>
-    <p>El <strong>1 de julio de 2026</strong>, Filtros Partmo S.A.S. realiza una compra de <strong>acero laminado</strong> a su proveedor <strong>Metales del Oriente S.A.</strong> para la fabricación de filtros. Los datos son:</p>
-    <ul>
-      <li><strong>Valor de la mercancía:</strong> $38.500.000 (sin IVA).</li>
-      <li><strong>IVA:</strong> 19% (tarifa general).</li>
-      <li><strong>Retención en la fuente:</strong> 2.5% sobre el valor de la compra (por ser persona jurídica).</li>
-      <li><strong>Descuento comercial:</strong> 5% por pronto pago (aplica antes de IVA).</li>
-      <li><strong>Plazo de pago:</strong> 30 días.</li>
-    </ul>
-    <p><strong>Preguntas:</strong></p>
-    <ol>
-      <li>Calcula el valor total de la factura (incluyendo IVA).</li>
-      <li>Calcula el valor de la retención en la fuente.</li>
-      <li>Calcula el valor neto a pagar al proveedor.</li>
-      <li>Registra el asiento contable completo.</li>
-      <li>¿Qué cuentas del PUC se afectan y por qué?</li>
-    </ol>
-    <button class="btn-solution" onclick="toggleSolution('sol1')">📖 Ver solución completa</button>
-  </div>
-  <div id="sol1" class="solution">
-    <h4>✅ Solución paso a paso:</h4>
-    <div class="step">
-      <p><strong>Paso 1: Calcular el descuento comercial</strong></p>
-      <p>Descuento = $38.500.000 × 5% = <strong>$1.925.000</strong></p>
-      <p>Valor después del descuento = $38.500.000 - $1.925.000 = <strong>$36.575.000</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 2: Calcular el IVA</strong></p>
-      <p>IVA = $36.575.000 × 19% = <strong>$6.949.250</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 3: Calcular el total de la factura</strong></p>
-      <p>Total factura = $36.575.000 + $6.949.250 = <strong>$43.524.250</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 4: Calcular la retención en la fuente</strong></p>
-      <p>Retención = $36.575.000 × 2.5% = <strong>$914.375</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 5: Calcular el valor neto a pagar</strong></p>
-      <p>Valor a pagar = $43.524.250 - $914.375 = <strong>$42.609.875</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>📝 Asiento contable:</strong></p>
-      <table>
-        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-        <tr><td>1435</td><td>Mercancías no fabricadas (Materia prima)</td><td>$36.575.000</td><td></td></tr>
-        <tr><td>2408</td><td>IVA descontable (19%)</td><td>$6.949.250</td><td></td></tr>
-        <tr><td>2205</td><td>Proveedores nacionales</td><td></td><td>$42.609.875</td></tr>
-        <tr><td>2365</td><td>Retención en la fuente por pagar</td><td></td><td>$914.375</td></tr>
-      </table>
-    </div>
-    <div class="step">
-      <p><strong>💡 Explicación de cuentas:</strong></p>
-      <ul>
-        <li><strong>1435</strong> → Activo (materia prima que entra al inventario).</li>
-        <li><strong>2408</strong> → Activo (derecho a descontar IVA en la declaración).</li>
-        <li><strong>2205</strong> → Pasivo (obligación de pago al proveedor).</li>
-        <li><strong>2365</strong> → Pasivo (obligación de pagar la retención a la DIAN).</li>
+  <!-- Grid de categorías -->
+  <div class="grid">
+
+    <!-- 1. COMPRAS Y PROVEEDORES -->
+    <a href="ejercicios/compras.html" class="card">
+      <div class="icon">🛒</div>
+      <h3>Compras y Proveedores</h3>
+      <span class="badge daily">📅 Diario</span>
+      <ul class="task-list">
+        <li>Registro facturas de compra en Dynamics</li>
+        <li>Circularización de proveedores</li>
+        <li>Confirmación de facturas recibidas</li>
+        <li class="pending">Envío certificados de retención</li>
       </ul>
-    </div>
-  </div>
+    </a>
 
-  <!-- ========================================================== -->
-  <!-- EJERCICIO 2: VENTA DE FILTROS CON DESCUENTO Y RETENCIÓN   -->
-  <!-- ========================================================== -->
-  <h2>2. Venta de Filtros con Descuento y Retención</h2>
-  <div class="exercise">
-    <p><strong>📌 Enunciado completo:</strong></p>
-    <p>El <strong>15 de julio de 2026</strong>, Partmo vende <strong>1.200 filtros</strong> a la empresa <strong>Autopartes del Norte S.A.</strong> a un precio unitario de <strong>$12.500</strong> (sin IVA). Condiciones:</p>
-    <ul>
-      <li><strong>IVA:</strong> 19%.</li>
-      <li><strong>Descuento por volumen:</strong> 8% sobre el total de la venta (aplica antes de IVA).</li>
-      <li><strong>Retención en la fuente:</strong> 2.5% (comprador es persona jurídica).</li>
-      <li><strong>Plazo de pago:</strong> 60 días.</li>
-    </ul>
-    <p><strong>Preguntas:</strong></p>
-    <ol>
-      <li>Calcula el valor total de la venta (sin IVA).</li>
-      <li>Calcula el descuento y el valor neto de la venta.</li>
-      <li>Calcula el IVA y el total de la factura.</li>
-      <li>Calcula la retención en la fuente que debe hacer el comprador.</li>
-      <li>Registra el asiento contable de la venta.</li>
-    </ol>
-    <button class="btn-solution" onclick="toggleSolution('sol2')">📖 Ver solución completa</button>
-  </div>
-  <div id="sol2" class="solution">
-    <h4>✅ Solución paso a paso:</h4>
-    <div class="step">
-      <p><strong>Paso 1: Calcular el valor total de la venta (sin IVA)</strong></p>
-      <p>Valor venta = 1.200 × $12.500 = <strong>$15.000.000</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 2: Calcular el descuento por volumen</strong></p>
-      <p>Descuento = $15.000.000 × 8% = <strong>$1.200.000</strong></p>
-      <p>Valor neto de la venta = $15.000.000 - $1.200.000 = <strong>$13.800.000</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 3: Calcular el IVA</strong></p>
-      <p>IVA = $13.800.000 × 19% = <strong>$2.622.000</strong></p>
-      <p>Total factura = $13.800.000 + $2.622.000 = <strong>$16.422.000</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 4: Calcular la retención en la fuente (el comprador la descuenta)</strong></p>
-      <p>Retención = $13.800.000 × 2.5% = <strong>$345.000</strong></p>
-      <p><em>Nota: La retención se calcula sobre el valor neto de la venta (sin IVA).</em></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 5: Valor neto a recibir por Partmo</strong></p>
-      <p>Valor a recibir = $16.422.000 - $345.000 = <strong>$16.077.000</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>📝 Asiento contable (registro en Partmo):</strong></p>
-      <table>
-        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-        <tr><td>1305</td><td>Clientes nacionales</td><td>$16.077.000</td><td></td></tr>
-        <tr><td>1355</td><td>Retención en la fuente (activo)</td><td>$345.000</td><td></td></tr>
-        <tr><td>4135</td><td>Comercio al por mayor (ingreso)</td><td></td><td>$13.800.000</td></tr>
-        <tr><td>2404</td><td>IVA generado (19%)</td><td></td><td>$2.622.000</td></tr>
-      </table>
-    </div>
-    <div class="step">
-      <p><strong>💡 Explicación:</strong></p>
-      <ul>
-        <li><strong>1305</strong> → Activo (derecho de cobro al cliente por el valor neto).</li>
-        <li><strong>1355</strong> → Activo (derecho a compensar esa retención en la declaración de renta).</li>
-        <li><strong>4135</strong> → Ingreso (aumenta el patrimonio).</li>
-        <li><strong>2404</strong> → Pasivo (obligación de pagar el IVA recaudado a la DIAN).</li>
+    <!-- 2. VENTAS Y CLIENTES -->
+    <a href="ejercicios/ventas.html" class="card">
+      <div class="icon">💳</div>
+      <h3>Ventas y Clientes</h3>
+      <span class="badge daily">📅 Diario</span>
+      <ul class="task-list">
+        <li>Registro facturas de venta en Dynamics</li>
+        <li>Monitoreo eventos DIAN (facturas ajenas a inventario)</li>
+        <li class="pending">Conciliación de cartera</li>
       </ul>
-    </div>
-  </div>
+    </a>
 
-  <!-- ========================================================== -->
-  <!-- EJERCICIO 3: NÓMINA COMPLETA (CON APORTES PARAFISCALES)   -->
-  <!-- ========================================================== -->
-  <h2>3. Nómina Completa con Aportes Parafiscales</h2>
-  <div class="exercise">
-    <p><strong>📌 Enunciado completo:</strong></p>
-    <p>Partmo tiene <strong>25 operarios de producción</strong> en el área de ensamble. La nómina del mes de <strong>julio de 2026</strong> es:</p>
-    <ul>
-      <li><strong>Salario bruto total:</strong> $42.000.000 (25 operarios × $1.680.000 promedio).</li>
-      <li><strong>Horas extras:</strong> $3.200.000 (reconocidas en la nómina).</li>
-      <li><strong>Deducciones de nómina:</strong>
-        <ul>
-          <li>Salud (4% empleado): 4% del salario bruto + horas extras.</li>
-          <li>Pensión (4% empleado): 4% del salario bruto + horas extras.</li>
-          <li>Fondo de Solidaridad Pensional: 1% sobre el excedente de 4 UVT mensuales (cálculo simplificado para este ejercicio: $2.500.000).</li>
-        </ul>
-      </li>
-      <li><strong>Aportes patronales (cargo de la empresa):</strong>
-        <ul>
-          <li>Salud (8.5%): 8.5% del salario bruto + horas extras.</li>
-          <li>Pensión (12%): 12% del salario bruto + horas extras.</li>
-          <li>ARL (1%): 1% del salario bruto + horas extras (riesgo bajo).</li>
-          <li>Cajas de Compensación (4%): 4% del salario bruto + horas extras.</li>
-          <li>ICBF (3%): 3% del salario bruto + horas extras.</li>
-          <li>SENA (2%): 2% del salario bruto + horas extras.</li>
-        </ul>
-      </li>
-    </ul>
-    <p><strong>Preguntas:</strong></p>
-    <ol>
-      <li>Calcula el valor total de las deducciones de los empleados.</li>
-      <li>Calcula el valor neto a pagar a los empleados.</li>
-      <li>Calcula el valor total de los aportes patronales.</li>
-      <li>Registra el asiento contable del pago de nómina.</li>
-      <li>Registra el asiento de los aportes patronales.</li>
-    </ol>
-    <button class="btn-solution" onclick="toggleSolution('sol3')">📖 Ver solución completa</button>
-  </div>
-  <div id="sol3" class="solution">
-    <h4>✅ Solución paso a paso:</h4>
-    <div class="step">
-      <p><strong>Paso 1: Base para cálculos</strong></p>
-      <p>Salario bruto + horas extras = $42.000.000 + $3.200.000 = <strong>$45.200.000</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 2: Deducciones de los empleados</strong></p>
-      <ul>
-        <li>Salud (4%): $45.200.000 × 4% = <strong>$1.808.000</strong></li>
-        <li>Pensión (4%): $45.200.000 × 4% = <strong>$1.808.000</strong></li>
-        <li>Fondo de Solidaridad: <strong>$2.500.000</strong> (dato simplificado)</li>
-        <li><strong>Total deducciones:</strong> $1.808.000 + $1.808.000 + $2.500.000 = <strong>$6.116.000</strong></li>
+    <!-- 3. PROVISIONES Y DEPRECIACIÓN -->
+    <a href="ejercicios/provisiones.html" class="card">
+      <div class="icon">📊</div>
+      <h3>Provisiones y Depreciación</h3>
+      <span class="badge monthly">📆 Mensual</span>
+      <ul class="task-list">
+        <li>Registro de provisiones fijas (nómina, arriendos)</li>
+        <li>Registro de provisiones variables (comisiones, bonos)</li>
+        <li>Cálculo y registro de depreciación</li>
+        <li class="pending">Ajustes por inflación</li>
       </ul>
-    </div>
-    <div class="step">
-      <p><strong>Paso 3: Valor neto a pagar a los empleados</strong></p>
-      <p>Valor neto = $45.200.000 - $6.116.000 = <strong>$39.084.000</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>Paso 4: Aportes patronales (cargo de la empresa)</strong></p>
-      <table>
-        <tr><th>Concepto</th><th>Porcentaje</th><th>Valor</th></tr>
-        <tr><td>Salud</td><td>8.5%</td><td>$3.842.000</td></tr>
-        <tr><td>Pensión</td><td>12%</td><td>$5.424.000</td></tr>
-        <tr><td>ARL</td><td>1%</td><td>$452.000</td></tr>
-        <tr><td>Cajas de Compensación</td><td>4%</td><td>$1.808.000</td></tr>
-        <tr><td>ICBF</td><td>3%</td><td>$1.356.000</td></tr>
-        <tr><td>SENA</td><td>2%</td><td>$904.000</td></tr>
-        <tr><td><strong>Total aportes patronales</strong></td><td></td><td><strong>$13.786.000</strong></td></tr>
-      </table>
-    </div>
-    <div class="step">
-      <p><strong>📝 Asiento contable del pago de nómina:</strong></p>
-      <table>
-        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-        <tr><td>7201</td><td>Mano de obra directa (costo)</td><td>$45.200.000</td><td></td></tr>
-        <tr><td>1110</td><td>Banco</td><td></td><td>$39.084.000</td></tr>
-        <tr><td>2370</td><td>Aportes de nómina por pagar (deducciones)</td><td></td><td>$6.116.000</td></tr>
-      </table>
-    </div>
-    <div class="step">
-      <p><strong>📝 Asiento contable de los aportes patronales:</strong></p>
-      <table>
-        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-        <tr><td>7201</td><td>Mano de obra directa (costo)</td><td>$13.786.000</td><td></td></tr>
-        <tr><td>2370</td><td>Aportes patronales por pagar</td><td></td><td>$13.786.000</td></tr>
-      </table>
-    </div>
-    <div class="step">
-      <p><strong>💡 Nota:</strong> La mano de obra directa y los aportes patronales van al <strong>grupo 7 (Costos de producción)</strong> porque son operarios de producción. Si fueran administrativos, irían al grupo 5 (Gastos).</p>
-    </div>
+    </a>
+
+    <!-- 4. CUENTAS POR PAGAR -->
+    <a href="ejercicios/cuentasxpagar.html" class="card">
+      <div class="icon">🧾</div>
+      <h3>Cuentas por Pagar</h3>
+      <span class="badge daily">📅 Diario</span>
+      <ul class="task-list">
+        <li>Control de facturas recibidas</li>
+        <li>Registro de gastos por servicios públicos</li>
+        <li>Conciliación de cuentas por pagar</li>
+        <li class="pending">Gestión de pagos</li>
+      </ul>
+    </a>
+
+    <!-- 5. CONCILIACIONES -->
+    <a href="ejercicios/conciliaciones.html" class="card">
+      <div class="icon">🏦</div>
+      <h3>Conciliaciones Bancarias</h3>
+      <span class="badge monthly">📆 Mensual</span>
+      <ul class="task-list">
+        <li>Conciliación de cuentas bancarias</li>
+        <li>Identificación de cheques pendientes</li>
+        <li>Registro de notas débito/crédito</li>
+        <li class="pending">Ajustes por diferencias</li>
+      </ul>
+    </a>
+
+    <!-- 6. CONTABILIZACIÓN GENERAL -->
+    <a href="ejercicios/contabilizacion.html" class="card">
+      <div class="icon">📝</div>
+      <h3>Contabilización General</h3>
+      <span class="badge daily">📅 Diario</span>
+      <ul class="task-list">
+        <li>Contabilización de operaciones contables</li>
+        <li>Control de la cuenta 15 (Inventarios)</li>
+        <li>Soporte general al departamento</li>
+        <li class="pending">Cierre contable mensual</li>
+      </ul>
+    </a>
+
+    <!-- 7. IMPUESTOS (BONUS) -->
+    <a href="ejercicios/impuestos.html" class="card">
+      <div class="icon">🧮</div>
+      <h3>Gestión de Impuestos</h3>
+      <span class="badge monthly">📆 Mensual</span>
+      <ul class="task-list">
+        <li>Liquidación de retenciones (Renta, ICA)</li>
+        <li>Preparación de información exógena</li>
+        <li>Declaraciones de IVA e ICA</li>
+        <li class="pending">Cruce con DIAN</li>
+      </ul>
+    </a>
+
+    <!-- 8. MICROSOFT DYNAMICS -->
+    <a href="ejercicios/dynamics.html" class="card">
+      <div class="icon">💻</div>
+      <h3>Microsoft Dynamics</h3>
+      <span class="badge urgent">🔥 Prioridad</span>
+      <ul class="task-list">
+        <li>Registro de compras en el sistema</li>
+        <li>Registro de ventas en el sistema</li>
+        <li>Generación de reportes financieros</li>
+        <li class="pending">Módulo de activos fijos</li>
+      </ul>
+    </a>
+
   </div>
 
-  <!-- ========================================================== -->
-  <!-- EJERCICIO 4: DEPRECIACIÓN DE MAQUINARIA (CON CÁLCULO COMPLETO) -->
-  <!-- ========================================================== -->
-  <h2>4. Depreciación de Maquinaria</h2>
-  <div class="exercise">
-    <p><strong>📌 Enunciado completo:</strong></p>
-    <p>Partmo tiene las siguientes máquinas en su planta de producción:</p>
-    <table>
-      <tr><th>Máquina</th><th>Valor de compra</th><th>Vida útil</th><th>Valor residual</th><th>Fecha compra</th></tr>
-      <tr><td>Prensa hidráulica</td><td>$85.000.000</td><td>12 años</td><td>$8.000.000</td><td>01/01/2020</td></tr>
-      <tr><td>Soldadora industrial</td><td>$52.000.000</td><td>10 años</td><td>$5.000.000</td><td>01/06/2021</td></tr>
-      <tr><td>Compresor de aire</td><td>$28.000.000</td><td>8 años</td><td>$3.000.000</td><td>01/03/2023</td></tr>
-    </table>
-    <p><strong>Preguntas:</strong></p>
-    <ol>
-      <li>Calcula la depreciación anual y mensual de cada máquina por el método de línea recta.</li>
-      <li>¿Cuál es la depreciación total mensual de las tres máquinas?</li>
-      <li>Registra el asiento de depreciación mensual para todas las máquinas.</li>
-      <li>¿Qué cuenta del PUC se afecta y por qué?</li>
+  <!-- Resumen rápido -->
+  <div style="margin-top: 40px; background: white; border-radius: 16px; padding: 20px 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <h3 style="color: #1a3c6e; margin-bottom: 8px;">📌 Orden de prioridad sugerido para tus prácticas</h3>
+    <ol style="padding-left: 22px; line-height: 2; color: #333;">
+      <li><strong>Registro de facturas</strong> (Compras y Ventas) → es lo que más harás al inicio</li>
+      <li><strong>Conciliaciones bancarias</strong> → tarea clave para aprender el flujo de caja</li>
+      <li><strong>Control de la cuenta 15</strong> (Inventarios) → vital para una empresa manufacturera</li>
+      <li><strong>Provisiones y depreciación</strong> → tareas mensuales que debes dominar</li>
+      <li><strong>Certificados de retención</strong> → envíos electrónicos que no pueden fallar</li>
     </ol>
-    <button class="btn-solution" onclick="toggleSolution('sol4')">📖 Ver solución completa</button>
-  </div>
-  <div id="sol4" class="solution">
-    <h4>✅ Solución paso a paso:</h4>
-    <div class="step">
-      <p><strong>Paso 1: Depreciación anual de cada máquina</strong></p>
-      <table>
-        <tr><th>Máquina</th><th>Fórmula</th><th>Depreciación anual</th><th>Depreciación mensual</th></tr>
-        <tr><td>Prensa hidráulica</td><td>($85M - $8M) / 12</td><td>$6.416.667</td><td>$534.722</td></tr>
-        <tr><td>Soldadora industrial</td><td>($52M - $5M) / 10</td><td>$4.700.000</td><td>$391.667</td></tr>
-        <tr><td>Compresor de aire</td><td>($28M - $3M) / 8</td><td>$3.125.000</td><td>$260.417</td></tr>
-      </table>
-    </div>
-    <div class="step">
-      <p><strong>Paso 2: Depreciación total mensual</strong></p>
-      <p>Total mensual = $534.722 + $391.667 + $260.417 = <strong>$1.186.806</strong></p>
-    </div>
-    <div class="step">
-      <p><strong>📝 Asiento contable mensual:</strong></p>
-      <table>
-        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-        <tr><td>7320</td><td>Depreciación de maquinaria (CIF)</td><td>$1.186.806</td><td></td></tr>
-        <tr><td>1540</td><td>Depreciación acumulada de maquinaria</td><td></td><td>$1.186.806</td></tr>
-      </table>
-    </div>
-    <div class="step">
-      <p><strong>💡 Explicación:</strong></p>
-      <ul>
-        <li>< útil estimada de <strong>10 años</strong> y un valor residual de <strong>$5.000.000</strong>.</p>
-    <p><strong>Preguntas:</strong></p>
-    <ol>
-      <li>Calcula la depreciación anual y mensual por el método de línea recta.</li>
-      <li>Registra el asiento de depreciación mensual.</li>
-    </ol>
-    <button class="btn-solution" onclick="toggleSolution('sol4')">📖 Ver solución</button>
-  </div>
-  <div id="sol4" class="solution">
-    <p><strong>✅ Solución:</strong></p>
-    <ul>
-      <li><strong>Depreciación anual:</strong> ($45.000.000 - $5.000.000) / 10 años = <strong>$4.000.000/año</strong></li>
-      <li><strong>Depreciación mensual:</strong> $4.000.000 / 12 = <strong>$333.333/mes</strong></li>
-    </ul>
-    <p><strong>📝 Asiento contable mensual:</strong></p>
-    <table>
-      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-      <tr><td>7320</td><td>Depreciación de maquinaria (CIF)</td><td>$333.333</td><td></td></tr>
-      <tr><td>1540</td><td>Depreciación acumulada de maquinaria</td><td></td><td>$333.333</td></tr>
-    </table>
-    <p><strong>💡 Nota:</strong> La depreciación de maquinaria va a los <strong>Costos Indirectos de Fabricación (CIF)</strong> porque afecta directamente la producción.</p>
+    <p style="margin-top: 12px; color: #888; font-size: 0.9rem;">
+      💡 <strong>Consejo:</strong> Cada tarjeta te llevará a una página con ejercicios específicos de esa área.
+    </p>
   </div>
 
-  <!-- ========================================== -->
-  <!-- EJERCICIO 5: LIQUIDACIÓN DE RETENCIONES    -->
-  <!-- ========================================== -->
-  <h2>5. Liquidación de Retenciones</h2>
-  <div class="exercise">
-    <p><strong>📌 Enunciado:</strong></p>
-    <p>Partmo contrata a una empresa de <strong>consultoría jurídica</strong> por un servicio de asesoría por valor de <strong>$6.000.000</strong> (sin IVA). La consultoría está exenta de IVA pero aplica retención en la fuente.</p>
-    <p><strong>Preguntas:</strong></p>
-    <ol>
-      <li>¿Cuánto es la retención en la fuente para consultoría (3.5%)?</li>
-      <li>¿Cuánto debe pagar Partmo al proveedor?</li>
-      <li>Registra el asiento contable.</li>
-    </ol>
-    <button class="btn-solution" onclick="toggleSolution('sol5')">📖 Ver solución</button>
-  </div>
-  <div id="sol5" class="solution">
-    <p><strong>✅ Solución:</strong></p>
-    <ul>
-      <li><strong>Retención (3.5%):</strong> $6.000.000 × 3.5% = <strong>$210.000</strong></li>
-      <li><strong>Valor a pagar:</strong> $6.000.000 - $210.000 = <strong>$5.790.000</strong></li>
-    </ul>
-    <p><strong>📝 Asiento contable:</strong></p>
-    <table>
-      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-      <tr><td>5110</td><td>Honorarios (gasto)</td><td>$6.000.000</td><td></td></tr>
-      <tr><td>1110</td><td>Banco</td><td></td><td>$5.790.000</td></tr>
-      <tr><td>2365</td><td>Retención en la fuente por pagar</td><td></td><td>$210.000</td></tr>
-    </table>
-    <p><strong>💡 Nota:</strong> La consultoría es un <strong>gasto administrativo</strong>, no va a costos de producción.</p>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- EJERCICIO 6: CONCILIACIÓN BANCARIA         -->
-  <!-- ========================================== -->
-  <h2>6. Conciliación Bancaria</h2>
-  <div class="exercise">
-    <p><strong>📌 Enunciado:</strong></p>
-    <p>Al cierre del mes, el saldo en el libro contable de Partmo para la cuenta <strong>Bancos (1110)</strong> es de <strong>$8.500.000</strong>. El extracto bancario muestra un saldo de <strong>$7.800.000</strong>. Las diferencias son:</p>
-    <ul>
-      <li>Cheques emitidos y no cobrados: <strong>$1.200.000</strong></li>
-      <li>Consignaciones en tránsito: <strong>$500.000</strong></li>
-      <li>Nota débito bancaria por comisiones: <strong>$80.000</strong></li>
-    </ul>
-    <p><strong>Preguntas:</strong></p>
-    <ol>
-      <li>¿Cuál es el saldo ajustado (conciliado)?</li>
-      <li>¿Qué asiento debe hacer Partmo para registrar la comisión bancaria?</li>
-    </ol>
-    <button class="btn-solution" onclick="toggleSolution('sol6')">📖 Ver solución</button>
-  </div>
-  <div id="sol6" class="solution">
-    <p><strong>✅ Solución:</strong></p>
-    <table>
-      <tr><th>Concepto</th><th>Saldo libro</th><th>Saldo banco</th></tr>
-      <tr><td>Saldo inicial</td><td>$8.500.000</td><td>$7.800.000</td></tr>
-      <tr><td>+ Consignaciones en tránsito</td><td></td><td>+ $500.000</td></tr>
-      <tr><td>- Cheques no cobrados</td><td></td><td>- $1.200.000</td></tr>
-      <tr><td>- Nota débito (comisiones)</td><td>- $80.000</td><td></td></tr>
-      <tr><td><strong>Saldo ajustado</strong></td><td><strong>$8.420.000</strong></td><td><strong>$8.420.000</strong></td></tr>
-    </table>
-    <p><strong>📝 Asiento por comisión bancaria:</strong></p>
-    <table>
-      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-      <tr><td>5315</td><td>Gastos bancarios</td><td>$80.000</td><td></td></tr>
-      <tr><td>1110</td><td>Banco</td><td></td><td>$80.000</td></tr>
-    </table>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- EJERCICIO 7: COSTOS DE PRODUCCIÓN          -->
-  <!-- ========================================== -->
-  <h2>7. Costos de Producción</h2>
-  <div class="exercise">
-    <p><strong>📌 Enunciado:</strong></p>
-    <p>En el mes, Partmo registró los siguientes costos de producción:</p>
-    <ul>
-      <li>Materia prima consumida: <strong>$12.000.000</strong></li>
-      <li>Mano de obra directa: <strong>$8.000.000</strong></li>
-      <li>Costos indirectos de fabricación (CIF): <strong>$5.000.000</strong></li>
-    </ul>
-    <p>Se produjeron <strong>1.000 filtros</strong> en el mes.</p>
-    <p><strong>Preguntas:</strong></p>
-    <ol>
-      <li>¿Cuál es el costo total de producción del mes?</li>
-      <li>¿Cuál es el costo unitario por filtro?</li>
-      <li>Registra el asiento para transferir los costos a inventarios de productos terminados.</li>
-    </ol>
-    <button class="btn-solution" onclick="toggleSolution('sol7')">📖 Ver solución</button>
-  </div>
-  <div id="sol7" class="solution">
-    <p><strong>✅ Solución:</strong></p>
-    <ul>
-      <li><strong>Costo total:</strong> $12.000.000 + $8.000.000 + $5.000.000 = <strong>$25.000.000</strong></li>
-      <li><strong>Costo unitario:</strong> $25.000.000 / 1.000 filtros = <strong>$25.000/filtro</strong></li>
-    </ul>
-    <p><strong>📝 Asiento para transferir a productos terminados:</strong></p>
-    <table>
-      <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
-      <tr><td>1620</td><td>Productos terminados (Inventarios)</td><td>$25.000.000</td><td></td></tr>
-      <tr><td>7201</td><td>Mano de obra directa</td><td></td><td>$8.000.000</td></tr>
-      <tr><td>7101</td><td>Materia prima</td><td></td><td>$12.000.000</td></tr>
-      <tr><td>7301</td><td>Costos indirectos de fabricación (CIF)</td><td></td><td>$5.000.000</td></tr>
-    </table>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- FOOTER                                     -->
-  <!-- ========================================== -->
   <div class="footer">
-    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander<br>
-    <a href="https://github.com/tu-usuario/tu-usuario.github.io" target="_blank">Ver código en GitHub</a>
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
   </div>
 
 </div>
-
-<script>
-  // Función para mostrar/ocultar soluciones
-  function toggleSolution(id) {
-    var sol = document.getElementById(id);
-    var btn = sol.previousElementSibling.querySelector('.btn-solution');
-    if (sol.classList.contains('show')) {
-      sol.classList.remove('show');
-      btn.textContent = '📖 Ver solución';
-      btn.classList.remove('verde');
-    } else {
-      sol.classList.add('show');
-      btn.textContent = '✅ Ocultar solución';
-      btn.classList.add('verde');
-    }
-  }
-</script>
-
 </body>
 </html>
