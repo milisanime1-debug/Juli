@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compras y Proveedores - Ejercicios</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #2c3e50;
+      font-size: 1rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .warning strong { color: #856404; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 0.95rem;
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+    .badge.green { background: #28a745; }
+    .badge.orange { background: #fd7e14; }
+    .badge.red { background: #dc3545; }
+
+    .exercise-box {
+      background: #f8f9fc;
+      border: 2px dashed #1a3c6e;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .exercise-box h4 {
+      color: #1a3c6e;
+      margin-top: 0;
+    }
+    .exercise-box .solution {
+      background: white;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 12px;
+      border: 1px solid #ddd;
+      display: none;
+    }
+    .exercise-box .solution.show { display: block; }
+    .btn-solution {
+      background: #1a3c6e;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .btn-solution:hover { background: #0f2a4a; }
+
+    .step-list {
+      counter-reset: step;
+      list-style: none;
+      padding-left: 0;
+    }
+    .step-list li {
+      counter-increment: step;
+      padding: 8px 0 8px 50px;
+      position: relative;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .step-list li::before {
+      content: counter(step);
+      background: #1a3c6e;
+      color: white;
+      font-weight: bold;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      top: 4px;
+      font-size: 0.85rem;
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      table { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Botón volver -->
+  <a href="../ejercicios.html" class="back">⬅ Volver a Ejercicios</a>
+
+  <h1>🛒 Compras y Proveedores</h1>
+  <div class="subtitle">
+    Guía completa para el registro de compras en <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. INTRODUCCIÓN                           -->
+  <!-- ========================================== -->
+  <h2>1. ¿Qué vas a hacer en esta área?</h2>
+  <ul>
+    <li><strong>Registrar facturas de compra</strong> en Microsoft Dynamics (materia prima, insumos, servicios).</li>
+    <li><strong>Circularizar proveedores</strong> para confirmar saldos y cuentas por pagar.</li>
+    <li><strong>Confirmar facturas recibidas</strong> antes de su registro contable.</li>
+    <li><strong>Enviar certificados de retención</strong> electrónicamente a los proveedores.</li>
+    <li><strong>Controlar y registrar</strong> gastos por servicios públicos y otros gastos.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>💡 Dato clave:</strong> En Partmo, al ser una empresa <strong>manufacturera</strong>, la mayoría de las compras son de <strong>materia prima</strong> (acero, fibras, polímeros, insumos industriales). También hay compras de activos fijos (maquinaria, equipos) y servicios (mantenimiento, servicios públicos).
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. REGISTRO EN DYNAMICS                    -->
+  <!-- ========================================== -->
+  <h2>2. Registro de Facturas de Compra en Microsoft Dynamics</h2>
+
+  <h3>📌 Flujo básico en Dynamics</h3>
+  <ol class="step-list">
+    <li><strong>Recepción de la factura</strong> (física o electrónica) del proveedor.</li>
+    <li><strong>Verificación:</strong> Revisar que los datos coincidan con la orden de compra y el recibo de mercancía.</li>
+    <li><strong>Ingreso al módulo de Compras / Cuentas por Pagar</strong> en Dynamics.</li>
+    <li><strong>Registro de la factura:</strong> Número, fecha, proveedor, productos, cantidades, precios, IVA.</li>
+    <li><strong>Aplicación de retenciones</strong> (Renta, ICA) según corresponda.</li>
+    <li><strong>Contabilización automática</strong> o manual del asiento contable.</li>
+    <li><strong>Generación del comprobante</strong> y envío a aprobación (si aplica).</li>
+  </ol>
+
+  <h3>📌 Campos clave en Dynamics (ejemplo)</h3>
+  <table>
+    <tr><th>Campo</th><th>Descripción</th><th>Ejemplo</th></tr>
+    <tr><td><strong>Proveedor</strong></td><td>Código o NIT del proveedor</td><td>900.123.456-7</td></tr>
+    <tr><td><strong>N° Factura</strong></td><td>Número de factura del proveedor</td><td>FAC-001234</td></tr>
+    <tr><td><strong>Fecha</strong></td><td>Fecha de emisión de la factura</td><td>15/07/2026</td></tr>
+    <tr><td><strong>Producto / Servicio</strong></td><td>Código o descripción del ítem</td><td>MP-001 (Acero laminado)</td></tr>
+    <tr><td><strong>Cantidad</strong></td><td>Unidades compradas</td><td>500 kg</td></tr>
+    <tr><td><strong>Valor unitario</strong></td><td>Precio por unidad</td><td>$12.000</td></tr>
+    <tr><td><strong>Subtotal</strong></td><td>Valor bruto sin IVA</td><td>$6.000.000</td></tr>
+    <tr><td><strong>IVA (19%)</strong></td><td>Impuesto sobre las ventas</td><td>$1.140.000</td></tr>
+    <tr><td><strong>Retención Renta</strong></td><td>2.5% sobre el subtotal</td><td>$150.000</td></tr>
+    <tr><td><strong>Total a pagar</strong></td><td>Valor neto después de retenciones</td><td>$6.990.000</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 3. ASIENTOS CONTABLES                      -->
+  <!-- ========================================== -->
+  <h2>3. Asientos Contables de Compras</h2>
+
+  <h3>📌 Ejemplo 1: Compra de materia prima (crédito)</h3>
+  <p><strong>Datos:</strong> Compra de acero por $10.000.000 + IVA 19%, a crédito. Proveedor: Aceros SAS.</p>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>1435</td><td>Mercancías no fabricadas (Materia prima)</td><td>$10.000.000</td><td></td></tr>
+    <tr><td>2408</td><td>IVA descontable (19%)</td><td>$1.900.000</td><td></td></tr>
+    <tr><td>2365</td><td>Retención en la fuente (2.5%)</td><td></td><td>$250.000</td></tr>
+    <tr><td>2205</td><td>Proveedores nacionales</td><td></td><td>$11.650.000</td></tr>
+  </table>
+  <p><em>Nota: El total a pagar al proveedor es $10.000.000 + $1.900.000 - $250.000 = <strong>$11.650.000</strong></em></p>
+
+  <h3>📌 Ejemplo 2: Compra de activo fijo (maquinaria)</h3>
+  <p><strong>Datos:</strong> Compra de una máquina por $25.000.000 + IVA 19%, pago de contado.</p>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>1524</td><td>Maquinaria y equipo</td><td>$25.000.000</td><td></td></tr>
+    <tr><td>2408</td><td>IVA descontable (19%)</td><td>$4.750.000</td><td></td></tr>
+    <tr><td>1110</td><td>Bancos</td><td></td><td>$29.750.000</td></tr>
+  </table>
+
+  <h3>📌 Ejemplo 3: Compra de servicios públicos</h3>
+  <p><strong>Datos:</strong> Factura de energía eléctrica por $1.200.000 + IVA 19%.</p>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+    <tr><td>5310</td><td>Servicios públicos</td><td>$1.200.000</td><td></td></tr>
+    <tr><td>2408</td><td>IVA descontable (19%)</td><td>$228.000</td><td></td></tr>
+    <tr><td>2205</td><td>Proveedores nacionales</td><td></td><td>$1.428.000</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 4. RETENCIONES EN COMPRAS                  -->
+  <!-- ========================================== -->
+  <h2>4. Retenciones en Compras (2026)</h2>
+  <div class="highlight">
+    <strong>⚠️ Cambio importante:</strong> Desde el <strong>1 de julio de 2026</strong> rigen las tarifas del Decreto 572 de 2025.
+  </div>
+
+  <table>
+    <tr><th>Concepto</th><th>Tarifa</th><th>Base</th><th>Ejemplo</th></tr>
+    <tr><td>Compras generales</td><td><strong>2.5%</strong></td><td>Valor total de la compra (sin IVA)</td><td>$10.000.000 → $250.000</td></tr>
+    <tr><td>Honorarios (persona jurídica)</td><td><strong>11%</strong></td><td>Valor del honorario</td><td>$5.000.000 → $550.000</td></tr>
+    <tr><td>Consultoría y software</td><td><strong>3.5%</strong></td><td>Valor del servicio</td><td>$8.000.000 → $280.000</td></tr>
+    <tr><td>Arrendamientos</td><td><strong>3.5% - 10%</strong></td><td>Valor del arriendo</td><td>Variable según valor</td></tr>
+  </table>
+
+  <div class="warning">
+    <strong>📌 Importante:</strong> Las retenciones <strong>no tienen base mínima en UVT</strong> desde 2026. Se aplican desde el primer peso.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. CIRCULARIZACIÓN DE PROVEEDORES         -->
+  <!-- ========================================== -->
+  <h2>5. Circularización de Proveedores</h2>
+  <p>
+    Es un procedimiento de <strong>auditoría</strong> que consiste en enviar una carta a los proveedores para que confirmen el saldo de su cuenta por pagar.
+  </p>
+
+  <h3>📌 Pasos para la circularización</h3>
+  <ol>
+    <li><strong>Seleccionar proveedores</strong> (generalmente los más importantes por monto).</li>
+    <li><strong>Preparar la carta</strong> con los saldos registrados en contabilidad.</li>
+    <li><strong>Enviar la circularización</strong> (por correo electrónico o carta física).</li>
+    <li><strong>Recibir respuesta</strong> del proveedor (confirmando o discrepando el saldo).</li>
+    <li><strong>Analizar diferencias</strong> y ajustar si es necesario.</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>📝 Ejemplo de carta de circularización:</strong><br>
+    "Por medio de la presente solicitamos amablemente confirmar el saldo de su cuenta por pagar al <strong>31 de julio de 2026</strong> según nuestros registros por valor de <strong>$15.234.500</strong>. Agradecemos su respuesta antes del [fecha límite]."
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 6. CERTIFICADOS DE RETENCIÓN               -->
+  <!-- ========================================== -->
+  <h2>6. Envío de Certificados de Retención</h2>
+  <p>
+    Los certificados de retención son documentos que acreditan que la empresa <strong>retuvo</strong> un impuesto a un proveedor y lo pagó a la DIAN.
+  </p>
+
+  <h3>📌 Requisitos del certificado</h3>
+  <ul>
+    <li>NIT y razón social del retenedor (Partmo).</li>
+    <li>NIT y razón social del proveedor (retenido).</li>
+    <li>Concepto de la retención (Renta, ICA, IVA).</li>
+    <li>Valor base y tarifa aplicada.</li>
+    <li>Valor retenido.</li>
+    <li>Período y fecha de pago a la DIAN.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>💡 En Partmo:</strong> El envío es <strong>electrónico</strong> a través del sistema de facturación electrónica o por correo certificado. Es una obligación que debe hacerse <strong>mensualmente</strong>.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. EJERCICIOS PRÁCTICOS                    -->
+  <!-- ========================================== -->
+  <h2>7. Ejercicios Prácticos</h2>
+
+  <!-- Ejercicio 1 -->
+  <div class="exercise-box">
+    <h4>✍️ Ejercicio 1: Registro de compra de materia prima</h4>
+    <p><strong>Datos:</strong> El 10 de julio de 2026, Partmo compra <strong>1.000 kg de polímero</strong> a <strong>Polímeros SAS</strong> (NIT 900.111.222-3) por un valor de <strong>$8.500.000</strong> + IVA 19%. La compra es a crédito a 30 días. La retención en la fuente es del 2.5%.</p>
+    <ol>
+      <li>Registra el asiento contable en el formato adecuado.</li>
+      <li>Calcula el total a pagar al proveedor.</li>
+      <li>¿Qué cuentas del PUC se afectan?</li>
+    </ol>
+    <button class="btn-solution" onclick="toggleSolution('sol1')">Ver solución</button>
+    <div id="sol1" class="solution">
+      <p><strong>Solución:</strong></p>
+      <p><strong>Total a pagar:</strong> $8.500.000 + $1.615.000 (IVA) - $212.500 (Retención) = <strong>$9.902.500</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1435</td><td>Mercancías no fabricadas</td><td>$8.500.000</td><td></td></tr>
+        <tr><td>2408</td><td>IVA descontable (19%)</td><td>$1.615.000</td><td></td></tr>
+        <tr><td>2365</td><td>Retención en la fuente</td><td></td><td>$212.500</td></tr>
+        <tr><td>2205</td><td>Proveedores nacionales</td><td></td><td>$9.902.500</td></tr>
+      </table>
+      <p><strong>Cuentas afectadas:</strong> Activo (1435, 2408), Pasivo (2365, 2205).</p>
+    </div>
+  </div>
+
+  <!-- Ejercicio 2 -->
+  <div class="exercise-box">
+    <h4>✍️ Ejercicio 2: Compra de servicio de mantenimiento</h4>
+    <p><strong>Datos:</strong> El 15 de julio de 2026, Partmo contrata a <strong>Mantenimientos Industriales SAS</strong> por un servicio de mantenimiento de maquinaria por <strong>$3.200.000</strong> + IVA 19%. El servicio se paga de contado con cheque. No aplica retención por ser un servicio de mantenimiento (según la normativa, verificar si aplica).</p>
+    <ol>
+      <li>Registra el asiento contable.</li>
+      <li>¿Qué cuenta de gasto se utiliza?</li>
+    </ol>
+    <button class="btn-solution" onclick="toggleSolution('sol2')">Ver solución</button>
+    <div id="sol2" class="solution">
+      <p><strong>Solución:</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5210</td><td>Mantenimiento y reparaciones</td><td>$3.200.000</td><td></td></tr>
+        <tr><td>2408</td><td>IVA descontable (19%)</td><td>$608.000</td><td></td></tr>
+        <tr><td>1110</td><td>Bancos</td><td></td><td>$3.808.000</td></tr>
+      </table>
+      <p><strong>Cuenta de gasto:</strong> 5210 - Mantenimiento y reparaciones.</p>
+    </div>
+  </div>
+
+  <!-- Ejercicio 3 -->
+  <div class="exercise-box">
+    <h4>✍️ Ejercicio 3: Circularización de proveedores</h4>
+    <p><strong>Datos:</strong> Al 31 de julio de 2026, la cuenta por pagar a <strong>Aceros SAS</strong> según libros de Partmo es de <strong>$45.800.000</strong>. Sin embargo, al enviar la circularización, el proveedor responde que su saldo es de <strong>$43.200.000</strong>.</p>
+    <ol>
+      <li>¿Cuál es la diferencia?</li>
+      <li>¿Qué posibles causas podría tener esta diferencia?</li>
+      <li>¿Qué acciones tomarías para resolverla?</li>
+    </ol>
+    <button class="btn-solution" onclick="toggleSolution('sol3')">Ver solución</button>
+    <div id="sol3" class="solution">
+      <p><strong>Solución:</strong></p>
+      <p><strong>Diferencia:</strong> $45.800.000 - $43.200.000 = <strong>$2.600.000</strong> (Partmo registra más de lo que el proveedor tiene).</p>
+      <p><strong>Posibles causas:</strong></p>
+      <ul>
+        <li>Facturas registradas en Partmo pero no recibidas por el proveedor.</li>
+        <li>Abonos o pagos no aplicados correctamente.</li>
+        <li>Notas crédito o descuentos no registrados.</li>
+        <li>Diferencias en fechas de corte.</li>
+      </ul>
+      <p><strong>Acciones:</strong></p>
+      <ul>
+        <li>Solicitar al proveedor el detalle de su saldo.</li>
+        <li>Revisar facturas y pagos de los últimos 3 meses.</li>
+        <li>Conciliar factura por factura.</li>
+        <li>Ajustar el saldo si se identifica un error.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Ejercicio 4 -->
+  <div class="exercise-box">
+    <h4>✍️ Ejercicio 4: Cálculo de retenciones en compra</h4>
+    <p><strong>Datos:</strong> Partmo contrata a una empresa de consultoría (<strong>Consultores SAS</strong>) por un servicio de <strong>$6.500.000</strong>. El servicio está gravado con IVA del 19% y la retención en la fuente aplica del 3.5% (consultoría).</p>
+    <ol>
+      <li>Calcula el IVA y la retención.</li>
+      <li>Registra el asiento contable completo.</li>
+      <li>¿Cuál es el valor neto a pagar al proveedor?</li>
+    </ol>
+    <button class="btn-solution" onclick="toggleSolution('sol4')">Ver solución</button>
+    <div id="sol4" class="solution">
+      <p><strong>Solución:</strong></p>
+      <p><strong>IVA:</strong> $6.500.000 × 19% = <strong>$1.235.000</strong></p>
+      <p><strong>Retención:</strong> $6.500.000 × 3.5% = <strong>$227.500</strong></p>
+      <p><strong>Total a pagar:</strong> $6.500.000 + $1.235.000 - $227.500 = <strong>$7.507.500</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5110</td><td>Honorarios</td><td>$6.500.000</td><td></td></tr>
+        <tr><td>2408</td><td>IVA descontable (19%)</td><td>$1.235.000</td><td></td></tr>
+        <tr><td>2365</td><td>Retención en la fuente</td><td></td><td>$227.500</td></tr>
+        <tr><td>2205</td><td>Proveedores nacionales</td><td></td><td>$7.507.500</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Ejercicio 5 -->
+  <div class="exercise-box">
+    <h4>✍️ Ejercicio 5: Compra de activo fijo con retención</h4>
+    <p><strong>Datos:</strong> El 20 de julio de 2026, Partmo compra una <strong>máquina industrial</strong> a <strong>Maquinarias SAS</strong> por <strong>$32.000.000</strong> + IVA 19%. La compra se financia con un crédito bancario. La retención en la fuente es del 2.5%.</p>
+    <ol>
+      <li>Registra el asiento contable completo.</li>
+      <li>¿Qué cuentas del PUC se utilizan para activos fijos?</li>
+    </ol>
+    <button class="btn-solution" onclick="toggleSolution('sol5')">Ver solución</button>
+    <div id="sol5" class="solution">
+      <p><strong>Solución:</strong></p>
+      <p><strong>IVA:</strong> $32.000.000 × 19% = <strong>$6.080.000</strong></p>
+      <p><strong>Retención:</strong> $32.000.000 × 2.5% = <strong>$800.000</strong></p>
+      <p><strong>Total a pagar:</strong> $32.000.000 + $6.080.000 - $800.000 = <strong>$37.280.000</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1524</td><td>Maquinaria y equipo</td><td>$32.000.000</td><td></td></tr>
+        <tr><td>2408</td><td>IVA descontable (19%)</td><td>$6.080.000</td><td></td></tr>
+        <tr><td>2365</td><td>Retención en la fuente</td><td></td><td>$800.000</td></tr>
+        <tr><td>2105</td><td>Obligaciones bancarias</td><td></td><td>$37.280.000</td></tr>
+      </table>
+      <p><strong>Cuentas de activos fijos:</strong> 1524 (Maquinaria), 1528 (Equipo de oficina), 1540 (Flota y equipo de transporte).</p>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 8. MICROSOFT DYNAMICS - PASOS PRÁCTICOS    -->
+  <!-- ========================================== -->
+  <h2>8. Microsoft Dynamics - Pasos Prácticos</h2>
+
+  <h3>📌 Ruta en Dynamics para registrar una compra</h3>
+  <ol>
+    <li><strong>Módulo:</strong> <em>Accounts Payable → Purchase Orders → Receive and Enter Invoices</em></li>
+    <li><strong>Buscar la orden de compra</strong> asociada (si existe).</li>
+    <li><strong>Ingresar la factura del proveedor</strong> (número, fecha, productos).</li>
+    <li><strong>Verificar cantidades y precios</strong> contra el recibo de mercancía.</li>
+    <li><strong>Aplicar retenciones</strong> (el sistema puede calcularlas automáticamente).</li>
+    <li><strong>Contabilizar</strong> (Post) → Genera el asiento contable automático.</li>
+    <li><strong>Imprimir o enviar</strong> el comprobante de contabilidad.</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>⚠️ Error común:</strong> Registrar una factura sin verificar que la mercancía haya sido recibida físicamente. Esto puede generar diferencias en inventarios.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 9. LISTA DE VERIFICACIÓN                   -->
+  <!-- ========================================== -->
+  <h2>9. Lista de Verificación - Compras</h2>
+  <table>
+    <tr><th>#</th><th>Tarea</th><th>Estado</th></tr>
+    <tr><td>1</td><td>Revisar que la factura tenga todos los datos legales (NIT, razón social, fecha, numeración).</td><td><span class="badge orange">Pendiente</span></td></tr>
+    <tr><td>2</td><td>Verificar que la mercancía haya sido recibida (cotejar con el recibo de bodega).</td><td><span class="badge orange">Pendiente</span></td></tr>
+    <tr><td>3</td><td>Confirmar que los precios y cantidades coinciden con la orden de compra.</td><td><span class="badge orange">Pendiente</span></td></tr>
+    <tr><td>4</td><td>Calcular y aplicar correctamente el IVA y las retenciones.</td><td><span class="badge orange">Pendiente</span></td></tr>
+    <tr><td>5</td><td>Registrar la factura en Dynamics con todos los datos.</td><td><span class="badge orange">Pendiente</span></td></tr>
+    <tr><td>6</td><td>Generar y enviar el certificado de retención al proveedor (si aplica).</td><td><span class="badge orange">Pendiente</span></td></tr>
+    <tr><td>7</td><td>Archivar la factura física o digital para futuras auditorías.</td><td><span class="badge orange">Pendiente</span></td></tr>
+  </table>
+
+    <!-- ========================================== -->
+  <!-- 10. TIPS PARA TU PRÁCTICA                  -->
+  <!-- ========================================== -->
+  <h2>10. Tips para tu Práctica en Compras</h2>
+
+  <div class="highlight">
+    <strong>💡 Consejos clave para destacar en tus prácticas:</strong>
+  </div>
+
+  <ul>
+    <li><strong>Organización ante todo:</strong> Lleva un registro de las facturas que ya procesaste vs. las que están pendientes. Usa un Excel auxiliar si es necesario.</li>
+    <li><strong>Comunica siempre:</strong> Si encuentras una diferencia entre la factura y la orden de compra, <strong>avisa de inmediato</strong> a tu supervisor. Es mejor prevenir que corregir después.</li>
+    <li><strong>Conoce los proveedores clave:</strong> Identifica cuáles son los proveedores más importantes de Partmo (por monto y frecuencia). Esto te ayudará a priorizar.</li>
+    <li><strong>Revisa las retenciones dos veces:</strong> Las tarifas cambian y los errores en retenciones generan sanciones. Siempre verifica con la tabla actualizada.</li>
+    <li><strong>Pregunta sin miedo:</strong> Si no sabes cómo se maneja un tipo de compra (ej. importaciones, compras de activos), pregunta. Es mejor hacerlo bien desde el inicio.</li>
+    <li><strong>Velocidad vs. Precisión:</strong> En tus primeros días, enfócate en <strong>hacerlo bien</strong>, la velocidad llegará con la práctica.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 11. CASOS ESPECIALES EN COMPRAS           -->
+  <!-- ========================================== -->
+  <h2>11. Casos Especiales en Compras</h2>
+
+  <h3>📌 Compras sin orden de compra</h3>
+  <ul>
+    <li><strong>Procedimiento:</strong> Se debe solicitar una <strong>orden de compra retroactiva</strong> o registrar la factura con una autorización especial de la gerencia.</li>
+    <li><strong>Riesgo:</strong> Puede haber problemas con el presupuesto o la autorización de pagos.</li>
+  </ul>
+
+  <h3>📌 Compras de importación</h3>
+  <ul>
+    <li><strong>Documentación adicional:</strong> Factura comercial, conocimiento de embarque, documento de transporte, declaración de importación.</li>
+    <li><strong>Cuentas adicionales:</strong> Se deben registrar <strong>gastos de nacionalización</strong> (fletes, seguros, aranceles).</li>
+    <li><strong>Ejemplo de cuenta:</strong> 1460 - Mercancías en tránsito (hasta que lleguen a bodega).</li>
+  </ul>
+
+  <h3>📌 Notas crédito de proveedores (devoluciones)</h3>
+  <ul>
+    <li><strong>Procedimiento:</strong> Cuando se devuelve mercancía, el proveedor emite una <strong>nota crédito</strong> que reduce el saldo por pagar.</li>
+    <li><strong>Asiento contable:</strong> Se debita Proveedores (2205) y se acredita Mercancías no fabricadas (1435) e IVA descontable (2408) por el valor de la devolución.</li>
+  </ul>
+
+  <div class="warning">
+    <strong>⚠️ Importante:</strong> Las notas crédito deben registrarse en el mismo período contable de la compra para evitar desfases en el IVA.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 12. CONCILIACIÓN DE CUENTAS POR PAGAR     -->
+  <!-- ========================================== -->
+  <h2>12. Conciliación de Cuentas por Pagar</h2>
+  <p>
+    La conciliación de cuentas por pagar es el proceso de <strong>comparar los saldos contables</strong> de cada proveedor contra sus extractos o estados de cuenta.
+  </p>
+
+  <h3>📌 Pasos para conciliar</h3>
+  <ol>
+    <li><strong>Obtener el extracto del proveedor</strong> (generalmente lo envían por correo).</li>
+    <li><strong>Listar todas las facturas</strong> registradas en el período en Partmo.</li>
+    <li><strong>Comparar factura por factura</strong> con el extracto del proveedor.</li>
+    <li><strong>Identificar diferencias:</strong>
+      <ul>
+        <li>Facturas registradas pero no en el extracto.</li>
+        <li>Facturas en el extracto pero no en Partmo.</li>
+        <li>Diferencias en montos o pagos aplicados.</li>
+      </ul>
+    </li>
+    <li><strong>Ajustar</strong> según corresponda (registrar facturas pendientes, solicitar notas crédito, etc.).</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>💡 En Partmo:</strong> La conciliación de cuentas por pagar se hace generalmente <strong>mensualmente</strong> antes del cierre contable.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 13. EJERCICIOS ADICIONALES                -->
+  <!-- ========================================== -->
+  <h2>13. Ejercicios Adicionales</h2>
+
+  <!-- Ejercicio 6 -->
+  <div class="exercise-box">
+    <h4>✍️ Ejercicio 6: Nota crédito por devolución</h4>
+    <p><strong>Datos:</strong> El 25 de julio de 2026, Partmo devuelve <strong>200 kg de polímero</strong> a Polímeros SAS por defectos de calidad. El valor de la devolución es de <strong>$1.700.000</strong> (más IVA 19%). La compra original fue a crédito y aún no se ha pagado.</p>
+    <ol>
+      <li>Registra el asiento contable de la nota crédito.</li>
+      <li>¿Cómo afecta esto al saldo por pagar?</li>
+    </ol>
+    <button class="btn-solution" onclick="toggleSolution('sol6')">Ver solución</button>
+    <div id="sol6" class="solution">
+      <p><strong>Solución:</strong></p>
+      <p><strong>Asiento contable:</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>2205</td><td>Proveedores nacionales</td><td>$2.023.000</td><td></td></tr>
+        <tr><td>1435</td><td>Mercancías no fabricadas</td><td></td><td>$1.700.000</td></tr>
+        <tr><td>2408</td><td>IVA descontable (19%)</td><td></td><td>$323.000</td></tr>
+      </table>
+      <p><strong>Efecto:</strong> El saldo por pagar se reduce en <strong>$2.023.000</strong>.</p>
+    </div>
+  </div>
+
+  <!-- Ejercicio 7 -->
+  <div class="exercise-box">
+    <h4>✍️ Ejercicio 7: Compra de importación</h4>
+    <p><strong>Datos:</strong> Partmo importa un lote de insumos desde China por un valor de <strong>$15.000.000</strong>. Además, paga fletes internacionales por <strong>$2.500.000</strong> y aranceles de importación por <strong>$1.800.000</strong>. El IVA se aplica sobre el valor total ($19.300.000). La compra se paga con transferencia bancaria.</p>
+    <ol>
+      <li>Registra el asiento contable completo.</li>
+      <li>¿Qué cuentas adicionales se utilizan en importaciones?</li>
+    </ol>
+    <button class="btn-solution" onclick="toggleSolution('sol7')">Ver solución</button>
+    <div id="sol7" class="solution">
+      <p><strong>Solución:</strong></p>
+      <p><strong>Valor total de la compra:</strong> $15.000.000 + $2.500.000 + $1.800.000 = <strong>$19.300.000</strong></p>
+      <p><strong>IVA (19%):</strong> $19.300.000 × 19% = <strong>$3.667.000</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1435</td><td>Mercancías no fabricadas</td><td>$19.300.000</td><td></td></tr>
+        <tr><td>2408</td><td>IVA descontable (19%)</td><td>$3.667.000</td><td></td></tr>
+        <tr><td>1110</td><td>Bancos</td><td></td><td>$22.967.000</td></tr>
+      </table>
+      <p><strong>Cuentas adicionales en importaciones:</strong> 1460 (Mercancías en tránsito), 5204 (Fletes y gastos de transporte), 5210 (Gastos de nacionalización).</p>
+    </div>
+  </div>
+
+  <!-- Ejercicio 8 -->
+  <div class="exercise-box">
+    <h4>✍️ Ejercicio 8: Concilia la cuenta de un proveedor</h4>
+    <p><strong>Datos:</strong> Al 31 de julio de 2026, Partmo tiene las siguientes facturas registradas a nombre de <strong>Materiales SAS</strong>:</p>
+    <ul>
+      <li>FAC-001: $2.300.000 (fecha 05/07/2026)</li>
+      <li>FAC-002: $4.500.000 (fecha 12/07/2026)</li>
+      <li>FAC-003: $1.800.000 (fecha 20/07/2026)</li>
+    </ul>
+    <p>El proveedor reporta en su extracto las mismas facturas, pero además una nota crédito por $500.000 que Partmo no ha registrado. También ha recibido un pago de $3.000.000 que Partmo sí registró.</p>
+    <ol>
+      <li>¿Cuál es el saldo según Partmo?</li>
+      <li>¿Cuál es el saldo según el proveedor?</li>
+      <li>¿Qué ajustes debes hacer?</li>
+    </ol>
+    <button class="btn-solution" onclick="toggleSolution('sol8')">Ver solución</button>
+    <div id="sol8" class="solution">
+      <p><strong>Solución:</strong></p>
+      <p><strong>Saldo Partmo:</strong> $2.300.000 + $4.500.000 + $1.800.000 = <strong>$8.600.000</strong></p>
+      <p><strong>Saldo Proveedor:</strong> $8.600.000 - $500.000 (nota crédito) = <strong>$8.100.000</strong></p>
+      <p><strong>Ajustes necesarios:</strong></p>
+      <ul>
+        <li>Registrar la nota crédito por $500.000 en Partmo (disminuye el saldo).</li>
+        <li>El pago de $3.000.000 ya está registrado en ambos lados.</li>
+        <li><strong>Saldo final conciliado:</strong> $8.100.000</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 14. PREGUNTAS FRECUENTES EN LA PRÁCTICA   -->
+  <!-- ========================================== -->
+  <h2>14. Preguntas Frecuentes en la Práctica</h2>
+
+  <div class="highlight">
+    <strong>❓ ¿Qué hago si la factura no tiene la orden de compra asociada?</strong>
+  </div>
+  <ul>
+    <li>Consulta con el área de compras para que generen la orden retroactiva.</li>
+    <li>Si no es posible, solicita autorización por escrito de tu supervisor para registrar la factura sin orden.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>❓ ¿Cómo sé si una retención aplica o no?</strong>
+  </div>
+  <ul>
+    <li>Revisa la <strong>tabla de retenciones</strong> vigente y el <strong>Régimen de Retención en la Fuente</strong>.</li>
+    <li>Pregunta si la empresa tiene un <strong>manual de retenciones</strong> interno.</li>
+    <li>Cuando tengas duda, consulta con tu supervisor o con el área de impuestos.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>❓ ¿Qué pasa si el proveedor no envía el certificado de retención?</strong>
+  </div>
+  <ul>
+    <li>Es responsabilidad de Partmo <strong>generarlo y enviarlo</strong> electrónicamente.</li>
+    <li>Si el proveedor no lo recibe, verifica que el correo electrónico esté correcto y reenvía.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>❓ ¿Cómo manejo una factura que vence antes de que llegue la mercancía?</strong>
+  </div>
+  <ul>
+    <li>Registra la factura, pero <strong>no la contabilices</strong> hasta que la mercancía sea recibida y verificada.</li>
+    <li>Usa la cuenta <strong>1203 - Facturas pendientes por contabilizar</strong> como puente.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 15. GLOSARIO DE COMPRAS                    -->
+  <!-- ========================================== -->
+  <h2>15. Glosario de Compras</h2>
+  <table>
+    <tr><th>Término</th><th>Definición</th></tr>
+    <tr><td><strong>Orden de compra (OC)</strong></td><td>Documento que autoriza la compra de bienes o servicios.</td></tr>
+    <tr><td><strong>Recibo de mercancía</strong></td><td>Documento que confirma la recepción física de los productos en bodega.</td></tr>
+    <tr><td><strong>Factura</strong></td><td>Documento tributario que soporta la compra y sirve como título de pago.</td></tr>
+    <tr><td><strong>Nota crédito</strong></td><td>Documento que reduce el saldo por pagar por devoluciones o descuentos.</td></tr>
+    <tr><td><strong>Retención en la fuente</strong></td><td>Impuesto que la empresa retiene al proveedor y paga a la DIAN.</td></tr>
+    <tr><td><strong>IVA descontable</strong></td><td>El IVA pagado en compras que la empresa puede descontar en su declaración de IVA.</td></tr>
+    <tr><td><strong>Proveedor</strong></td><td>Persona natural o jurídica que vende bienes o servicios a la empresa.</td></tr>
+    <tr><td><strong>Circularización</strong></td><td>Procedimiento de auditoría para confirmar saldos con proveedores.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 16. ENLACES ÚTILES                        -->
+  <!-- ========================================== -->
+  <h2>16. Enlaces Útiles para tu Práctica</h2>
+  <ul>
+    <li><a href="https://www.dian.gov.co/" target="_blank">DIAN - Dirección de Impuestos y Aduanas Nacionales</a></li>
+    <li><a href="https://www.ccb.org.co/" target="_blank">Cámara de Comercio de Bucaramanga</a></li>
+    <li><a href="https://www.dian.gov.co/impuestos/retencion/Paginas/RetencionEnLaFuente.aspx" target="_blank">Tabla de Retención en la Fuente 2026</a></li>
+    <li><a href="../tarifas.html" target="_blank">Tabla de Tarifas 2026 (tu hub contable)</a></li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 17. PÁGINA DE EJERCICIOS RELACIONADOS     -->
+  <!-- ========================================== -->
+  <h2>17. Otros Ejercicios Relacionados</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0;">
+    <a href="ventas.html" style="background: #1a3c6e; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 600;">💳 Ventas y Clientes</a>
+    <a href="provisiones.html" style="background: #28a745; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 600;">📊 Provisiones y Depreciación</a>
+    <a href="conciliaciones.html" style="background: #fd7e14; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 600;">🏦 Conciliaciones Bancarias</a>
+    <a href="contabilizacion.html" style="background: #6f42c1; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 600;">📝 Contabilización General</a>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 18. CHECKLIST DE PRÁCTICA FINAL           -->
+  <!-- ========================================== -->
+  <h2>18. Checklist de Práctica Final</h2>
+  <div style="background: #f8f9fc; border-radius: 12px; padding: 20px;">
+    <p><strong>Antes de terminar tu práctica en compras, asegúrate de haber practicado:</strong></p>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="padding: 6px 0;">☐ Registrar al menos 5 facturas de compra en Dynamics.</li>
+      <li style="padding: 6px 0;">☐ Calcular y aplicar correctamente IVA y retenciones.</li>
+      <li style="padding: 6px 0;">☐ Realizar la circularización de al menos 3 proveedores.</li>
+      <li style="padding: 6px 0;">☐ Conciliar la cuenta de un proveedor.</li>
+      <li style="padding: 6px 0;">☐ Registrar una nota crédito por devolución.</li>
+      <li style="padding: 6px 0;">☐ Generar y enviar un certificado de retención.</li>
+      <li style="padding: 6px 0;">☐ Preguntar a tu supervisor sobre casos especiales.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FOOTER                                     -->
+  <!-- ========================================== -->
+  <div class="footer">
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
+  </div>
+
+</div>
+
+<!-- JavaScript para mostrar/ocultar soluciones -->
+<script>
+function toggleSolution(id) {
+  var sol = document.getElementById(id);
+  if (sol.classList.contains('show')) {
+    sol.classList.remove('show');
+  } else {
+    sol.classList.add('show');
+  }
+}
+</script>
+
+</body>
+</html>
