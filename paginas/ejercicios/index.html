@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏋️ Ejercicios Prácticos - Partmo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1.05rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    /* --- Tablero de áreas --- */
+    .area {
+      background: white;
+      border-radius: 16px;
+      padding: 22px 26px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border-left: 6px solid #1a3c6e;
+    }
+    .area h2 {
+      color: #1a3c6e;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .area h2 .badge {
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .grid-ejercicios {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 12px;
+    }
+    .ejercicio {
+      background: #f8f9fc;
+      padding: 14px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: background 0.2s, transform 0.15s;
+      border: 1px solid #e8ecf1;
+    }
+    .ejercicio:hover {
+      background: #eef4ff;
+      transform: translateX(4px);
+      border-color: #1a3c6e;
+    }
+    .ejercicio .icon { font-size: 1.3rem; }
+    .ejercicio .info { flex: 1; }
+    .ejercicio .info .titulo { font-weight: 600; font-size: 0.92rem; }
+    .ejercicio .info .desc {
+      font-size: 0.78rem;
+      color: #666;
+      margin-top: 2px;
+    }
+    .ejercicio .estado {
+      font-size: 0.65rem;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .estado.pend { background: #f8d7da; color: #721c24; }
+    .estado.prog { background: #fff3cd; color: #856404; }
+    .estado.list { background: #d4edda; color: #155724; }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      .area { padding: 16px; }
+      .grid-ejercicios { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="../../index.html" class="back">⬅ Volver al inicio</a>
+
+  <h1>🏋️ Ejercicios Prácticos</h1>
+  <div class="subtitle">
+    <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics • Bucaramanga, 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ÁREA 1: FACTURACIÓN Y COMPRAS              -->
+  <!-- ========================================== -->
+  <div class="area" style="border-left-color: #007bff;">
+    <h2>📄 Facturación y Compras <span class="badge">Diario</span></h2>
+    <div class="grid-ejercicios">
+
+      <a href="01-compras.html" class="ejercicio">
+        <span class="icon">🛒</span>
+        <div class="info">
+          <div class="titulo">Registro de facturas de compra</div>
+          <div class="desc">En Dynamics: compras, proveedores, IVA, retención</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+      <a href="02-ventas.html" class="ejercicio">
+        <span class="icon">💳</span>
+        <div class="info">
+          <div class="titulo">Registro de facturas de venta</div>
+          <div class="desc">En Dynamics: clientes, ingresos, IVA generado</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+      <a href="10-facturas-registro.html" class="ejercicio">
+        <span class="icon">✅</span>
+        <div class="info">
+          <div class="titulo">Control y confirmación de facturas</div>
+          <div class="desc">Revisión, validación y registro de facturas recibidas</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ÁREA 2: DIAN Y RETENCIONES                 -->
+  <!-- ========================================== -->
+  <div class="area" style="border-left-color: #17a2b8;">
+    <h2>🏛️ DIAN y Retenciones <span class="badge">Legal</span></h2>
+    <div class="grid-ejercicios">
+
+      <a href="03-eventos-dian.html" class="ejercicio">
+        <span class="icon">📡</span>
+        <div class="info">
+          <div class="titulo">Eventos DIAN (facturas ajenas al inventario)</div>
+          <div class="desc">Monitoreo y generación de eventos para facturas sin inventario</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+      <a href="05-certificados-retencion.html" class="ejercicio">
+        <span class="icon">📧</span>
+        <div class="info">
+          <div class="titulo">Certificados de retención</div>
+          <div class="desc">Envío electrónico de certificados a proveedores</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ÁREA 3: PROVISIONES Y GASTOS               -->
+  <!-- ========================================== -->
+  <div class="area" style="border-left-color: #28a745;">
+    <h2>📊 Provisiones y Gastos <span class="badge">Mensual</span></h2>
+    <div class="grid-ejercicios">
+
+      <a href="06-provisiones.html" class="ejercicio">
+        <span class="icon">📅</span>
+        <div class="info">
+          <div class="titulo">Registro de provisiones mensuales</div>
+          <div class="desc">Fijas (arriendos) y variables (servicios, bonos)</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+      <a href="07-depreciacion.html" class="ejercicio">
+        <span class="icon">🔧</span>
+        <div class="info">
+          <div class="titulo">Registro de depreciación</div>
+          <div class="desc">Cálculo y contabilización de activos fijos (maquinaria Partmo)</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+      <a href="09-servicios-publicos.html" class="ejercicio">
+        <span class="icon">💡</span>
+        <div class="info">
+          <div class="titulo">Control de gastos por servicios públicos</div>
+          <div class="desc">Validación, contabilización y control de servicios</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ÁREA 4: CONCILIACIONES Y CONTROL           -->
+  <!-- ========================================== -->
+  <div class="area" style="border-left-color: #fd7e14;">
+    <h2>🔍 Conciliaciones y Control <span class="badge">Mensual</span></h2>
+    <div class="grid-ejercicios">
+
+      <a href="11-conciliaciones.html" class="ejercicio">
+        <span class="icon">🏦</span>
+        <div class="info">
+          <div class="titulo">Conciliaciones bancarias</div>
+          <div class="desc">Comparación entre libros y extractos bancarios</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+      <a href="04-circularizacion.html" class="ejercicio">
+        <span class="icon">📬</span>
+        <div class="info">
+          <div class="titulo">Circularización de proveedores</div>
+          <div class="desc">Envío de cartas para confirmación de saldos</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+      <a href="08-cuenta15.html" class="ejercicio">
+        <span class="icon">📦</span>
+        <div class="info">
+          <div class="titulo">Control registros cuenta 15</div>
+          <div class="desc">Productos en proceso, producción y seguimiento</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ÁREA 5: SOPORTE Y CIERRE                   -->
+  <!-- ========================================== -->
+  <div class="area" style="border-left-color: #6f42c1;">
+    <h2>🛠️ Soporte y Cierre <span class="badge">General</span></h2>
+    <div class="grid-ejercicios">
+
+      <a href="12-soporte-general.html" class="ejercicio">
+        <span class="icon">🤝</span>
+        <div class="info">
+          <div class="titulo">Soporte general a contabilidad</div>
+          <div class="desc">Apoyo en tareas diarias, cierres y contabilizaciones</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+      <a href="12-soporte-general.html" class="ejercicio">
+        <span class="icon">📝</span>
+        <div class="info">
+          <div class="titulo">Contabilización de operaciones</div>
+          <div class="desc">Asientos contables, ajustes, cierre mensual y anual</div>
+        </div>
+        <span class="estado pend">Pendiente</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- BOTÓN PARA EJERCICIO COMPLETO              -->
+  <!-- ========================================== -->
+  <div style="text-align:center; margin: 30px 0 10px;">
+    <a href="ejercicio-completo.html" style="
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: background 0.2s;
+    ">🚀 Ejercicio Integrador: Día Completo en Partmo</a>
+    <p style="color:#666; font-size:0.85rem; margin-top:8px;">
+      Combina compras, ventas, provisiones, depreciación y conciliación
+    </p>
+  </div>
+
+  <div class="footer">
+    📌 Ejercicios basados en tareas reales de <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics<br>
+    Actualizado: Julio 2026 • Bucaramanga, Santander
+  </div>
+
+</div>
+</body>
+</html>
