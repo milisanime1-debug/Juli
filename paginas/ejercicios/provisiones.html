@@ -560,4 +560,187 @@
       <summary style="cursor:pointer; font-weight:600; color:#1a3c6e;">🔍 Ver solución</summary>
       <p><strong>Provisión:</strong> $42.000.000 × 65% = <strong>$27.300.000</strong></p>
       <table>
-        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Cr
+                <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5170</td><td>Litigios y demandas</td><td>$27.300.000</td><td></td></tr>
+        <tr><td>2999</td><td>Otras provisiones</td><td></td><td>$27.300.000</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- Ejercicio 6 -->
+  <h4>📝 Ejercicio 6: Provisión de servicios públicos (estimado)</h4>
+  <p><strong>Datos históricos de Partmo (últimos 3 meses):</strong></p>
+  <ul>
+    <li>Abril: $7.800.000</li>
+    <li>Mayo: $8.200.000</li>
+    <li>Junio: $8.100.000</li>
+  </ul>
+  <div class="ejemplo-box">
+    <p><strong>👉 Tu tarea:</strong> Calcula el promedio mensual para provisionar julio y realiza el asiento.</p>
+    <details>
+      <summary style="cursor:pointer; font-weight:600; color:#1a3c6e;">🔍 Ver solución</summary>
+      <p><strong>Promedio:</strong> ($7.800.000 + $8.200.000 + $8.100.000) / 3 = <strong>$8.033.333</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5115</td><td>Servicios públicos</td><td>$8.033.333</td><td></td></tr>
+        <tr><td>2205</td><td>Proveedores</td><td></td><td>$8.033.333</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- Ejercicio 7 -->
+  <h4>📝 Ejercicio 7: Depreciación por unidades de producción</h4>
+  <p><strong>Datos de la línea de producción principal:</strong></p>
+  <ul>
+    <li>Valor de compra: $750.000.000</li>
+    <li>Valor residual: $150.000.000</li>
+    <li>Capacidad total estimada: 300.000 horas de operación</li>
+    <li>Horas operadas en julio: 2.450 horas</li>
+  </ul>
+  <div class="ejemplo-box">
+    <p><strong>👉 Tu tarea:</strong> Calcula la depreciación mensual por horas de operación.</p>
+    <details>
+      <summary style="cursor:pointer; font-weight:600; color:#1a3c6e;">🔍 Ver solución</summary>
+      <p><strong>Depreciación por hora:</strong> ($750M - $150M) / 300.000 = <strong>$2.000/hora</strong></p>
+      <p><strong>Depreciación mensual:</strong> 2.450 × $2.000 = <strong>$4.900.000</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5160</td><td>Depreciación de maquinaria</td><td>$4.900.000</td><td></td></tr>
+        <tr><td>1299</td><td>Depreciación acumulada</td><td></td><td>$4.900.000</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- Ejercicio 8 -->
+  <h4>📝 Ejercicio 8: Provisión de bonos por calidad</h4>
+  <p><strong>Datos del programa de calidad de Partmo:</strong></p>
+  <ul>
+    <li>Meta de filtros sin defectos: 98%</li>
+    <li>Producción del mes: 15.000 filtros</li>
+    <li>Filtros sin defectos: 14.850 (99%)</li>
+    <li>Bono: $3.500 por cada filtro adicional sobre la meta</li>
+  </ul>
+  <div class="ejemplo-box">
+    <p><strong>👉 Tu tarea:</strong> Calcula la provisión del bono y realiza el asiento contable.</p>
+    <details>
+      <summary style="cursor:pointer; font-weight:600; color:#1a3c6e;">🔍 Ver solución</summary>
+      <p><strong>Meta en unidades:</strong> 15.000 × 98% = 14.700 filtros</p>
+      <p><strong>Filtros adicionales:</strong> 14.850 - 14.700 = 150 filtros</p>
+      <p><strong>Provisión:</strong> 150 × $3.500 = <strong>$525.000</strong></p>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5105</td><td>Bonos</td><td>$525.000</td><td></td></tr>
+        <tr><td>2370</td><td>Nómina por pagar</td><td></td><td>$525.000</td></tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 6. MICROSOFT DYNAMICS                      -->
+  <!-- ========================================== -->
+  <h2 id="dynamics">💻 6. En Microsoft Dynamics</h2>
+  <p>
+    En <strong>Microsoft Dynamics 365 Finance</strong>, las provisiones y depreciación se gestionan así:
+  </p>
+
+  <h3>📌 Módulos y rutas clave</h3>
+  <table>
+    <tr><th>Proceso</th><th>Módulo</th><th>Ruta en Dynamics</th><th>Periodicidad</th></tr>
+    <tr><td><strong>Provisión de nómina</strong></td>
+        <td>Human Resources</td>
+        <td>Payroll → Payroll processing → Calculate payroll</td>
+        <td>Quincenal/Mensual</td></tr>
+    <tr><td><strong>Provisión de gastos</strong></td>
+        <td>General Ledger</td>
+        <td>General ledger → Periodic journals → Provision</td>
+        <td>Mensual</td></tr>
+    <tr><td><strong>Depreciación de activos</strong></td>
+        <td>Fixed Assets</td>
+        <td>Fixed assets → Depreciation → Run depreciation proposal</td>
+        <td>Mensual</td></tr>
+    <tr><td><strong>Comisiones y bonos</strong></td>
+        <td>Sales</td>
+        <td>Sales → Incentives → Commission calculation</td>
+        <td>Mensual</td></tr>
+    <tr><td><strong>Provisiones de litigios</strong></td>
+        <td>General Ledger</td>
+        <td>General ledger → Periodic journals → Provision (manual)</td>
+        <td>Según necesidad</td></tr>
+  </table>
+
+  <h3>📝 Paso a paso: Registrar una provisión en Dynamics</h3>
+  <ol>
+    <li><strong>Ir a:</strong> General ledger → Periodic journals → Provision</li>
+    <li><strong>Crear un nuevo diario:</strong> Haz clic en "New" y asigna un nombre.</li>
+    <li><strong>Seleccionar tipo:</strong> Choose "Provision" como tipo de diario.</li>
+    <li><strong>Ingresar líneas:</strong>
+      <ul>
+        <li>Cuenta de gasto (ej. 5101 Sueldos)</li>
+        <li>Cuenta de pasivo (ej. 2370 Nómina por pagar)</li>
+        <li>Valor (débito y crédito)</li>
+      </ul>
+    </li>
+    <li><strong>Validar y publicar:</strong> Haz clic en "Validate" y luego en "Post".</li>
+    <li><strong>Revisar el asiento:</strong> Ve a "Voucher transactions" para ver el registro.</li>
+  </ol>
+
+  <div class="highlight">
+    <strong>💡 Consejo para tu práctica:</strong> Pide al equipo que te muestre cómo <strong>crear una plantilla</strong>
+    para las provisiones recurrentes (nómina, arriendos). Así solo cambias los valores cada mes.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. LISTA DE VERIFICACIÓN                   -->
+  <!-- ========================================== -->
+  <h2 id="checklist">✅ 7. Checklist mensual de provisiones</h2>
+  <p>Al cierre de cada mes en Partmo, debes verificar estas provisiones:</p>
+  <table>
+    <tr><th>#</th><th>Provisión</th><th>¿Revisado?</th><th>Observaciones</th></tr>
+    <tr><td>1</td><td>Nómina y prestaciones</td><td>⬜</td><td>Verificar días laborados, incapacidades</td></tr>
+    <tr><td>2</td><td>Arriendos</td><td>⬜</td><td>Confirmar valor según contrato</td></tr>
+    <tr><td>3</td><td>Servicios públicos (estimado)</td><td>⬜</td><td>Basado en consumo histórico</td></tr>
+    <tr><td>4</td><td>Seguros (amortización)</td><td>⬜</td><td>Revisar pólizas vigentes</td></tr>
+    <tr><td>5</td><td>Comisiones</td><td>⬜</td><td>Calcular según ventas del mes</td></tr>
+    <tr><td>6</td><td>Bonos y primas</td><td>⬜</td><td>Revisar cumplimiento de metas</td></tr>
+    <tr><td>7</td><td>Mantenimiento</td><td>⬜</td><td>Verificar plan de mantenimiento</td></tr>
+    <tr><td>8</td><td>Litigios y demandas</td><td>⬜</td><td>Consultar estado de procesos</td></tr>
+    <tr><td>9</td><td>Depreciación (activos fijos)</td><td>⬜</td><td>Correr propuesta en Dynamics</td></tr>
+    <tr><td>10</td><td>Indemnizaciones laborales</td><td>⬜</td><td>Revisar procesos de liquidación</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 8. CONSEJOS PARA TU PRÁCTICA              -->
+  <!-- ========================================== -->
+  <h2>💡 8. Consejos prácticos para tu día a día</h2>
+  <ul>
+    <li><strong>🚀 Prioriza las provisiones fijas:</strong> Son las más fáciles de dominar al inicio (nómina, arriendos).</li>
+    <li><strong>📂 Crea un archivo de control:</strong> En Excel, lleva un registro de todas las provisiones mensuales con sus valores y fechas.</li>
+    <li><strong>🔄 Revisa el mes anterior:</strong> Compara provisiones vs. valores reales para ajustar estimaciones.</li>
+    <li><strong>📅 Programa alarmas:</strong> En Outlook o Teams, pon recordatorios para no olvidar provisiones al cierre.</li>
+    <li><strong>💬 Pregunta sin miedo:</strong> Si no estás segura del porcentaje de una provisión (ej. comisiones), <strong>pregunta a tu jefe</strong> o al equipo.</li>
+    <li><strong>📊 Usa Dynamics al máximo:</strong> Aprende a usar las <strong>plantillas de diario</strong> y las <strong>propuestas automáticas</strong> de depreciación.</li>
+  </ul>
+
+  <div class="highlight success">
+    <strong>🎯 Recuerda:</strong> Las provisiones son un <strong>pasivo</strong> (representan obligaciones). Afectan tanto el <strong>estado de resultados</strong> (gastos) como el <strong>balance general</strong> (pasivos).
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 9. RECURSOS ADICIONALES                    -->
+  <!-- ========================================== -->
+  <h2>📚 9. Recursos adicionales</h2>
+  <ul>
+    <li><strong>NIC 37:</strong> Puedes consultar el texto completo en el sitio de <a href="https://www.ifrs.org/" target="_blank" style="color:#1a3c6e;">IFRS.org</a>.</li>
+    <li><strong>Microsoft Learn:</strong> Busca "Dynamics 365 Finance provision" para tutoriales oficiales.</li>
+    <li><strong>En la DIAN:</strong> Revisa las <strong>tablas de retención</strong> que afectan algunas provisiones (ej. intereses moratorios).</li>
+  </ul>
+
+  <!-- Footer -->
+  <div class="footer">
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander<br>
+    <span style="font-size:0.8rem;">Prácticas en Filtros Partmo S.A.S. • Microsoft Dynamics 365 Finance</span>
+  </div>
+
+</div>
+</body>
+</html>
