@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 02 - Registro de Ventas en Dynamics</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover {
+      background: #0f2a4a;
+    }
+    h1 {
+      color: #1a3c6e;
+      font-size: 2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 28px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong {
+      color: #1a3c6e;
+    }
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.4rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+    p,
+    li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul,
+    ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong {
+      color: #1a3c6e;
+    }
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .warning strong {
+      color: #856404;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td {
+      background: #f8f9fc;
+    }
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    .badge.green {
+      background: #28a745;
+    }
+    .badge.orange {
+      background: #fd7e14;
+    }
+    .badge.red {
+      background: #dc3545;
+    }
+    .ejercicio-practico {
+      background: #f8f9fc;
+      border: 2px dashed #1a3c6e;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 24px 0;
+    }
+    .ejercicio-practico h3 {
+      margin-top: 0;
+      color: #1a3c6e;
+    }
+    .btn {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .btn:hover {
+      background: #218838;
+    }
+    .btn.secundario {
+      background: #6c757d;
+    }
+    .btn.secundario:hover {
+      background: #5a6268;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    .solucion {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+      display: none;
+    }
+    .solucion.visible {
+      display: block;
+    }
+    .solucion strong {
+      color: #155724;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      table {
+        font-size: 0.85rem;
+      }
+      th,
+      td {
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <a href="index.html" class="back">⬅ Volver a ejercicios</a>
+
+    <h1>💳 Ejercicio 02: Registro de Ventas</h1>
+    <div class="subtitle">
+      <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics • Bucaramanga, 2026
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 1. OBJETIVO DEL EJERCICIO                  -->
+    <!-- ========================================== -->
+    <h2>🎯 Objetivo del Ejercicio</h2>
+    <p>
+      Aprender a <strong>registrar facturas de venta</strong> en el sistema <strong>Microsoft Dynamics</strong>,
+      aplicando los conceptos de:
+    </p>
+    <ul>
+      <li>Contabilización de ingresos (cuenta 4135).</li>
+      <li>Liquidación y registro de <strong>IVA generado</strong> (cuenta 2404).</li>
+      <li>Aplicación de <strong>retención en la fuente</strong> según el tipo de cliente.</li>
+      <li>Registro de <strong>costos de ventas</strong> (cuenta 6135).</li>
+      <li>Manejo de <strong>descuentos y bonificaciones</strong>.</li>
+    </ul>
+
+    <div class="highlight">
+      <strong>💡 Contexto:</strong> Partmo fabrica y vende filtros para motores a clientes nacionales
+      (grandes empresas, talleres y distribuidores). Las ventas pueden ser <strong>de contado</strong> o <strong>a crédito</strong>.
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. ESQUEMA DEL PROCESO EN DYNAMICS         -->
+    <!-- ========================================== -->
+    <h2>📋 Proceso en Microsoft Dynamics</h2>
+    <h3>Pasos para registrar una venta</h3>
+    <ol>
+      <li><strong>Crear pedido de venta:</strong> Se ingresa el cliente, productos, cantidades y precios.</li>
+      <li><strong>Generar albarán (remisión):</strong> Confirma el despacho de mercancía.</li>
+      <li><strong>Facturar:</strong> El sistema genera la factura electrónica y la envía a la DIAN.</li>
+      <li><strong>Contabilizar:</strong> Dynamics genera automáticamente los asientos contables según la configuración.</li>
+      <li><strong>Registrar pago:</strong> Se aplica al cliente (si es de contado o parcial).</li>
+    </ol>
+
+    <div class="warning">
+      <strong>⚠️ Importante:</strong> Dynamics tiene <strong>plantillas de contabilización</strong> que asignan
+      automáticamente las cuentas contables según el tipo de cliente, producto y ubicación.
+      Debes <strong>revisar</strong> que los asientos generados sean correctos antes de confirmar.
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. CUENTAS CONTABLES INVOLUCRADAS          -->
+    <!-- ========================================== -->
+    <h2>📊 Cuentas Contables Involucradas</h2>
+    <table>
+      <tr>
+        <th>Código PUC</th>
+        <th>Cuenta</th>
+        <th>Naturaleza</th>
+        <th>¿Cuándo se usa?</th>
+      </tr>
+      <tr>
+        <td><strong>4135</strong></td>
+        <td>Comercio al por mayor y al por menor</td>
+        <td>Crédito (Ingreso)</td>
+        <td>Venta de filtros y repuestos</td>
+      </tr>
+      <tr>
+        <td><strong>2404</strong></td>
+        <td>IVA generado (19%)</td>
+        <td>Crédito (Pasivo)</td>
+        <td>IVA cobrado al cliente</td>
+      </tr>
+      <tr>
+        <td><strong>1105 / 1110</strong></td>
+        <td>Caja / Bancos</td>
+        <td>Débito (Activo)</td>
+        <td>Pago de contado o recaudo</td>
+      </tr>
+      <tr>
+        <td><strong>1305</strong></td>
+        <td>Clientes nacionales</td>
+        <td>Débito (Activo)</td>
+        <td>Ventas a crédito</td>
+      </tr>
+      <tr>
+        <td><strong>6135</strong></td>
+        <td>Costo de ventas</td>
+        <td>Débito (Costo)</td>
+        <td>Registro del costo de los filtros vendidos</td>
+      </tr>
+      <tr>
+        <td><strong>1435</strong></td>
+        <td>Inventario de productos terminados</td>
+        <td>Crédito (Activo)</td>
+        <td>Salida de inventario por venta</td>
+      </tr>
+      <tr>
+        <td><strong>2365</strong></td>
+        <td>Retención en la fuente por pagar</td>
+        <td>Crédito (Pasivo)</td>
+        <td>Retención practicada al cliente (si aplica)</td>
+      </tr>
+      <tr>
+        <td><strong>2380</strong></td>
+        <td>Descuentos comerciales</td>
+        <td>Débito (Gasto)</td>
+        <td>Descuentos otorgados al cliente</td>
+      </tr>
+    </table>
+
+    <!-- ========================================== -->
+    <!-- 4. TIPOS DE VENTA Y SUS ASIENTOS           -->
+    <!-- ========================================== -->
+    <h2>📝 Tipos de Venta y sus Asientos</h2>
+
+    <!-- VENTA DE CONTADO -->
+    <h3>Venta de Contado</h3>
+    <p><strong>Ejemplo:</strong> Venta de 100 filtros a <strong>$50.000 c/u</strong> = $5.000.000 + IVA 19%.</p>
+    <div class="highlight">
+      <strong>Datos:</strong> Cliente paga de contado en efectivo. No aplica retención (cliente persona natural).
+    </div>
+    <table>
+      <tr>
+        <th>Código</th>
+        <th>Cuenta</th>
+        <th>Débito</th>
+        <th>Crédito</th>
+      </tr>
+      <tr>
+        <td>1105</td>
+        <td>Caja</td>
+        <td>$5.950.000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>4135</td>
+        <td>Comercio al por mayor</td>
+        <td></td>
+        <td>$5.000.000</td>
+      </tr>
+      <tr>
+        <td>2404</td>
+        <td>IVA generado (19%)</td>
+        <td></td>
+        <td>$950.000</td>
+      </tr>
+      <tr>
+        <td>6135</td>
+        <td>Costo de ventas</td>
+        <td>$3.200.000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>1435</td>
+        <td>Inventario productos terminados</td>
+        <td></td>
+        <td>$3.200.000</td>
+      </tr>
+    </table>
+    <p><em><strong>Nota:</strong> El costo de ventas ($3.200.000) corresponde al costo de producción de los 100 filtros.</em></p>
+
+    <!-- VENTA A CRÉDITO CON RETENCIÓN -->
+    <h3>Venta a Crédito con Retención en la Fuente</h3>
+    <p><strong>Ejemplo:</strong> Venta de 200 filtros a <strong>$60.000 c/u</strong> = $12.000.000 + IVA 19%.
+      Cliente es <strong>persona jurídica</strong> (Gran Contribuyente), aplica <strong>retención del 2.5%</strong> sobre compras.</p>
+    <div class="highlight">
+      <strong>Cálculos:</strong><br>
+      Valor venta: $12.000.000<br>
+      IVA (19%): $2.280.000<br>
+      Total factura: $14.280.000<br>
+      Retención (2.5% sobre $12.000.000): $300.000<br>
+      <strong>Neto a pagar por cliente: $13.980.000</strong>
+    </div>
+    <table>
+      <tr>
+        <th>Código</th>
+        <th>Cuenta</th>
+        <th>Débito</th>
+        <th>Crédito</th>
+      </tr>
+      <tr>
+        <td>1305</td>
+        <td>Clientes nacionales</td>
+        <td>$13.980.000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>2365</td>
+        <td>Retención en la fuente por pagar</td>
+        <td></td>
+        <td>$300.000</td>
+      </tr>
+      <tr>
+        <td>4135</td>
+        <td>Comercio al por mayor</td>
+        <td></td>
+        <td>$12.000.000</td>
+      </tr>
+      <tr>
+        <td>2404</td>
+        <td>IVA generado (19%)</td>
+        <td></td>
+        <td>$2.280.000</td>
+      </tr>
+      <tr>
+        <td>6135</td>
+        <td>Costo de ventas</td>
+        <td>$7.500.000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>1435</td>
+        <td>Inventario productos terminados</td>
+        <td></td>
+        <td>$7.500.000</td>
+      </tr>
+    </table>
+    <div class="warning">
+      <strong>⚠️ Recordatorio:</strong> La retención en la fuente <strong>no</strong> se aplica sobre el IVA,
+      solo sobre la base gravable ($12.000.000).
+    </div>
+
+    <!-- VENTA CON DESCUENTO -->
+    <h3>Venta con Descuento Comercial</h3>
+    <p><strong>Ejemplo:</strong> Venta de 50 filtros a <strong>$70.000 c/u</strong> = $3.500.000,
+      con <strong>descuento del 10%</strong> por volumen. IVA 19% sobre el valor con descuento.</p>
+    <div class="highlight">
+      <strong>Cálculos:</strong><br>
+      Valor bruto: $3.500.000<br>
+      Descuento (10%): $350.000<br>
+      Valor neto: $3.150.000<br>
+      IVA (19%): $598.500<br>
+      Total factura: $3.748.500
+    </div>
+    <table>
+      <tr>
+        <th>Código</th>
+        <th>Cuenta</th>
+        <th>Débito</th>
+        <th>Crédito</th>
+      </tr>
+      <tr>
+        <td>1305</td>
+        <td>Clientes nacionales</td>
+        <td>$3.748.500</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>2380</td>
+        <td>Descuentos comerciales</td>
+        <td>$350.000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>4135</td>
+        <td>Comercio al por mayor</td>
+        <td></td>
+        <td>$3.150.000</td>
+      </tr>
+      <tr>
+        <td>2404</td>
+        <td>IVA generado (19%)</td>
+        <td></td>
+        <td>$598.500</td>
+      </tr>
+      <tr>
+        <td>6135</td>
+        <td>Costo de ventas</td>
+        <td>$1.750.000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>1435</td>
+        <td>Inventario productos terminados</td>
+        <td></td>
+        <td>$1.750.000</td>
+      </tr>
+    </table>
+
+    <!-- ========================================== -->
+    <!-- 5. EJERCICIO PRÁCTICO                     -->
+    <!-- ========================================== -->
+    <h2>✍️ Ejercicio Práctico</h2>
+
+    <div class="ejercicio-practico">
+      <h3>📌 Caso: Ventas de Filtros Partmo</h3>
+      <p><strong>Datos del día:</strong></p>
+      <ul>
+        <li><strong>Venta 1:</strong> 300 filtros de aire a <strong>$45.000 c/u</strong> a <strong>Talleres El Motor S.A.</strong>
+          (NIT: 900.123.456-7, persona jurídica). Cliente paga <strong>30% de contado</strong> y el resto a 30 días.
+          Aplica retención del <strong>2.5%</strong> sobre compras.</li>
+        <li><strong>Venta 2:</strong> 150 filtros de aceite a <strong>$55.000 c/u</strong> a <strong>Distribuidora Autopartes Ltda.</strong>
+          (NIT: 800.987.654-3, persona jurídica). Venta <strong>a crédito</strong> a 60 días.
+          Cliente tiene <strong>descuento del 8%</strong> por fidelidad.
+          Aplica retención del <strong>2.5%</strong> sobre compras.</li>
+        <li><strong>Venta 3:</strong> 50 filtros de combustible a <strong>$80.000 c/u</strong> a <strong>Carlos Pérez</strong>
+          (CC: 12.345.678, persona natural). Venta <strong>de contado</strong> en efectivo.
+          <strong>No</strong> aplica retención.</li>
+      </ul>
+      <p><strong>Datos adicionales:</strong></p>
+      <ul>
+        <li>Costo de producción por filtro de aire: <strong>$28.000</strong></li>
+        <li>Costo de producción por filtro de aceite: <strong>$32.000</strong></li>
+        <li>Costo de producción por filtro de combustible: <strong>$45.000</strong></li>
+        <li>IVA general: <strong>19%</strong></li>
+      </ul>
+
+      <p style="margin-top:16px;"><strong>📝 Tu tarea:</strong></p>
+      <ol>
+        <li>Calcula el valor total de cada factura (incluyendo IVA, descuentos y retenciones).</li>
+        <li>Prepara los <strong>asientos contables</strong> completos para cada venta.</li>
+        <li>Identifica los <strong>movimientos en Dynamics</strong> (qué cuentas se afectan y con qué valores).</li>
+        <li>Responde: ¿Qué <strong>documentos</strong> se generan en el sistema para cada tipo de venta?</li>
+      </ol>
+
+      <button class="btn" onclick="mostrarSolucion()">📖 Mostrar solución</button>
+      <button class="btn secundario" onclick="ocultarSolucion()">Ocultar solución</button>
+
+      <div id="solucion" class="solucion">
+        <h3 style="margin-top:0;">✅ Solución</h3>
+
+        <h4>Venta 1: Talleres El Motor S.A.</h4>
+        <ul>
+          <li>Valor bruto: 300 × $45.000 = <strong>$13.500.000</strong></li>
+          <li>IVA (19%): $13.500.000 × 19% = <strong>$2.565.000</strong></li>
+          <li>Total factura: <strong>$16.065.000</strong></li>
+          <li>Retención (2.5% sobre $13.500.000): <strong>$337.500</strong></li>
+          <li>Pago de contado (30%): $16.065.000 × 30% = <strong>$4.819.500</strong></li>
+          <li>Saldo a crédito (70%): <strong>$11.245.500</strong></li>
+          <li>Costo de ventas: 300 × $28.000 = <strong>$8.400.000</strong></li>
+        </ul>
+        <table>
+          <tr>
+            <th>Código</th>
+            <th>Cuenta</th>
+            <th>Débito</th>
+            <th>Crédito</th>
+          </tr>
+          <tr>
+            <td>1105</td>
+            <td>Caja</td>
+            <td>$4.819.500</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>1305</td>
+            <td>Clientes nacionales</td>
+            <td>$11.245.500</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2365</td>
+            <td>Retención en la fuente por pagar</td>
+            <td></td>
+            <td>$337.500</td>
+          </tr>
+          <tr>
+            <td>4135</td>
+            <td>Comercio al por mayor</td>
+            <td></td>
+            <td>$13.500.000</td>
+          </tr>
+          <tr>
+            <td>2404</td>
+            <td>IVA generado (19%)</td>
+            <td></td>
+            <td>$2.565.000</td>
+          </tr>
+          <tr>
+            <td>6135</td>
+            <td>Costo de ventas</td>
+            <td>$8.400.000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>1435</td>
+            <td>Inventario productos terminados</td>
+            <td></td>
+            <td>$8.400.000</td>
+          </tr>
+        </table>
+
+        <h4>Venta 2: Distribuidora Autopartes Ltda.</h4>
+        <ul>
+          <li>Valor bruto: 150 × $55.000 = <strong>$8.250.000</strong></li>
+          <li>Descuento (8%): $8.250.000 × 8% = <strong>$660.000</strong></li>
+          <li>Valor neto: <strong>$7.590.000</strong></li>
+          <li>IVA (19% sobre $7.590.000): <strong>$1.442.100</strong></li>
+          <li>Total factura: <strong>$9.032.100</strong></li>
+          <li>Retención (2.5% sobre $7.590.000): <strong>$189.750</strong></li>
+          <li>Saldo a crédito: $9.032.100 - $189.750 = <strong>$8.842.350</strong></li>
+          <li>Costo de ventas: 150 × $32.000 = <strong>$4.800.000</strong></li>
+        </ul>
+        <table>
+          <tr>
+            <th>Código</th>
+            <th>Cuenta</th>
+            <th>Débito</th>
+            <th>Crédito</th>
+          </tr>
+          <tr>
+            <td>1305</td>
+            <td>Clientes nacionales</td>
+            <td>$8.842.350</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2365</td>
+            <td>Retención en la fuente por pagar</td>
+            <td></td>
+            <td>$189.750</td>
+          </tr>
+          <tr>
+            <td>2380</td>
+            <td>Descuentos comerciales</td>
+            <td>$660.000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>4135</td>
+            <td>Comercio al por mayor</td>
+            <td></td>
+            <td>$7.590.000</td>
+          </tr>
+          <tr>
+            <td>2404</td>
+            <td>IVA generado (19%)</td>
+            <td></td>
+            <td>$1.442.100</td>
+          </tr>
+          <tr>
+            <td>6135</td>
+            <td>Costo de ventas</td>
+            <td>$4.800.000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>1435</td>
+            <td>Inventario productos terminados</td>
+            <td></td>
+            <td>$4.800.000</td>
+          </tr>
+        </table>
+
+        <h4>Venta 3: Carlos Pérez (Persona Natural)</h4>
+        <ul>
+          <li>Valor bruto: 50 × $80.000 = <strong>$4.000.000</strong></li>
+          <li>IVA (19%): $4.000.000 × 19% = <strong>$760.000</strong></li>
+          <li>Total factura: <strong>$4.760.000</strong></li>
+          <li><strong>No</strong> aplica retención (persona natural).</li>
+          <li>Costo de ventas: 50 × $45.000 = <strong>$2.250.000</strong></li>
+        </ul>
+        <table>
+          <tr>
+            <th>Código</th>
+            <th>Cuenta</th>
+            <th>Débito</th>
+            <th>Crédito</th>
+          </tr>
+          <tr>
+            <td>1105</td>
+            <td>Caja</td>
+            <td>$4.760.000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>4135</td>
+            <td>Comercio al por mayor</td>
+            <td></td>
+            <td>$4.000.000</td>
+          </tr>
+          <tr>
+            <td>2404</td>
+            <td>IVA generado (19%)</td>
+            <td></td>
+            <td>$760.000</td>
+          </tr>
+          <tr>
+            <td>6135</td>
+            <td>Costo de ventas</td>
+            <td>$2.250.000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>1435</td>
+            <td>Inventario productos terminados</td>
+            <td></td>
+            <td>$2.250.000</td>
+          </tr>
+        </table>
+
+        <h4>📄 Documentos generados en Dynamics</h4>
+        <ul>
+          <li><strong>Venta 1:</strong> Pedido de venta → Albarán → Factura electrónica → Recibo de caja (por el 30%) → Cuenta por cobrar (70%).</li>
+          <li><strong>Venta 2:</strong> Pedido de venta → Albarán → Factura electrónica → Cuenta por cobrar (a 60 días).</li>
+          <li><strong>Venta 3:</strong> Pedido de venta → Albarán → Factura electrónica → Recibo de caja (pago completo).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 6. ERRORES COMUNES EN DYNAMICS             -->
+    <!-- ========================================== -->
+    <h2>⚠️ Errores Comunes en Dynamics</h2>
+    <ul>
+      <li><strong>No verificar la retención:</strong> Olvidar aplicar retención a clientes jurídicos.</li>
+      <li><strong>Confundir IVA con retención:</strong> La retención se calcula sobre la base gravable, no sobre el IVA.</li>
+      <li><strong>No registrar el costo de ventas:</strong> Dynamics lo hace automáticamente si está configurado, pero debes validar que el costo sea el correcto.</li>
+      <li><strong>Descuentos mal aplicados:</strong> Asegurar que el descuento se calcule ANTES del IVA.</li>
+      <li><strong>No reconciliar:</strong> Siempre revisa que el total del asiento cuadre (débito = crédito).</li>
+    </ul>
+
+    <!-- ========================================== -->
+    <!-- 7. PREGUNTAS CLAVE PARA LA ENTREVISTA      -->
+    <!-- ========================================== -->
+    <h2>💬 Preguntas Clave para tu Práctica</h2>
+    <ul>
+      <li><em>"¿Cómo maneja Dynamics los descuentos comerciales en las facturas?"</em></li>
+      <li><em>"¿Qué configuración de retención en la fuente tiene Partmo para sus clientes?"</em></li>
+      <li><em>"¿Cómo se genera el costo de ventas automáticamente en Dynamics?"</em></li>
+      <li><em>"¿Cómo se maneja la facturación electrónica en Dynamics para ventas sin inventario?"</em></li>
+    </ul>
+
+    <div class="footer">
+      📌 Ejercicio 02: Registro de Ventas • <strong>Filtros Partmo S.A.S.</strong> • Microsoft Dynamics<br>
+      Actualizado: Julio 2026 • Bucaramanga, Santander
+    </div>
+
+  </div>
+
+  <script>
+    function mostrarSolucion() {
+      document.getElementById('solucion').classList.add('visible');
+    }
+
+    function ocultarSolucion() {
+      document.getElementById('solucion').classList.remove('visible');
+    }
+  </script>
+
+</body>
+</html>
