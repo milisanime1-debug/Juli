@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIIF - Módulo 5</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #1a3c6e;
+      font-size: 1.05rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.green {
+      border-left-color: #28a745;
+      background: #f0faf4;
+    }
+    .highlight.green strong { color: #28a745; }
+    .highlight.orange {
+      border-left-color: #e67e22;
+      background: #fef5e7;
+    }
+    .highlight.orange strong { color: #e67e22; }
+    .highlight.purple {
+      border-left-color: #6f42c1;
+      background: #f4f0fa;
+    }
+    .highlight.purple strong { color: #6f42c1; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 0.95rem;
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .card-norma {
+      background: #f8f9fc;
+      border: 1px solid #e8ecf1;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 16px 0;
+    }
+    .card-norma .titulo {
+      font-weight: 700;
+      color: #1a3c6e;
+      font-size: 1.05rem;
+    }
+    .card-norma .detalle {
+      margin-top: 6px;
+      font-size: 0.92rem;
+      color: #444;
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back">⬅ Volver al índice</a>
+
+  <h1>🌍 NIIF</h1>
+  <div class="subtitle">
+    Normas Internacionales de Información Financiera • Módulo 5 • <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- INTRODUCCIÓN                               -->
+  <!-- ========================================== -->
+  <h2>📌 ¿Qué son las NIIF?</h2>
+  <p>
+    Las <strong>Normas Internacionales de Información Financiera (NIIF)</strong> son un conjunto de estándares globales que establecen cómo deben prepararse y presentarse los estados financieros. Su objetivo es lograr <strong>transparencia, comparabilidad y confiabilidad</strong> en la información financiera a nivel mundial.
+  </p>
+  <div class="highlight">
+    <strong>💡 En Colombia:</strong> Las NIIF son obligatorias desde la <strong>Ley 1314 de 2009</strong>, que estableció la convergencia hacia estándares internacionales.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CLASIFICACIÓN POR GRUPOS                   -->
+  <!-- ========================================== -->
+  <h2>📂 Clasificación de Empresas por Grupos</h2>
+  <p>
+    En Colombia, las empresas se clasifican en <strong>tres grupos</strong> según su tamaño y actividad, y cada uno aplica un marco normativo diferente:
+  </p>
+
+  <table>
+    <tr>
+      <th>Grupo</th>
+      <th>¿Quiénes aplican?</th>
+      <th>Marco Normativo</th>
+      <th>¿Partmo?</th>
+    </tr>
+    <tr>
+      <td><strong>Grupo 1</strong></td>
+      <td>Empresas cotizantes en bolsa, grandes, filiales de multinacionales.</td>
+      <td><strong>NIIF Plenas</strong></td>
+      <td style="background:#d4edda; font-weight:bold; color:#155724;">✅ SÍ</td>
+    </tr>
+    <tr>
+      <td><strong>Grupo 2</strong></td>
+      <td>Empresas medianas (no cotizantes).</td>
+      <td><strong>NIIF para PYMES</strong></td>
+      <td style="color:#888;">❌ No</td>
+    </tr>
+    <tr>
+      <td><strong>Grupo 3</strong></td>
+      <td>Microempresas (ingresos < 500.000 UVT).</td>
+      <td><strong>Contabilidad Simplificada</strong></td>
+      <td style="color:#888;">❌ No</td>
+    </tr>
+  </table>
+
+  <div class="highlight green">
+    <strong>📌 Partmo:</strong> Por su tamaño (Grande, ~349 empleados) y ser filial de <strong>Donaldson Company Inc.</strong>, aplica <strong>NIIF Plenas</strong>. Esto implica un mayor nivel de detalle y revelación en sus estados financieros.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ESTRUCTURA DE LAS NIIF                     -->
+  <!-- ========================================== -->
+  <h2>📚 Estructura de las NIIF</h2>
+  <p>
+    Las NIIF se componen de:
+  </p>
+  <ul>
+    <li><strong>NIIF (Normas Internacionales de Información Financiera):</strong> Son las normas principales. Ejemplo: NIIF 15 (Ingresos), NIIF 16 (Arrendamientos).</li>
+    <li><strong>NIC (Normas Internacionales de Contabilidad):</strong> Normas anteriores que aún están vigentes. Ejemplo: NIC 1 (Presentación de EE.FF.), NIC 2 (Inventarios).</li>
+    <li><strong>CINIIF (Interpretaciones):</strong> Guías para aplicar las NIIF en casos específicos.</li>
+    <li><strong>SIC (Interpretaciones de las NIC):</strong> Interpretaciones de las NIC.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- PRINCIPALES NIIF Y NIC                     -->
+  <!-- ========================================== -->
+  <h2>📋 Principales NIIF y NIC aplicables a Partmo</h2>
+
+  <div class="card-norma">
+    <div class="titulo">📊 NIC 1 – Presentación de Estados Financieros</div>
+    <div class="detalle">
+      Establece los requisitos para la presentación de los estados financieros, incluyendo estructura, contenido mínimo y principios de <strong>devengado</strong> y <strong>negocio en marcha</strong>.
+    </div>
+  </div>
+
+  <div class="card-norma">
+    <div class="titulo">📦 NIC 2 – Inventarios</div>
+    <div class="detalle">
+      Define cómo medir y revelar los inventarios. En Partmo, aplica a <strong>materia prima, producto en proceso y producto terminado</strong>. Permite métodos como <strong>PEPS, UEPS y promedio ponderado</strong>.
+    </div>
+  </div>
+
+  <div class="card-norma">
+    <div class="titulo">🏭 NIC 16 – Propiedades, Planta y Equipo</div>
+    <div class="detalle">
+      Regula el reconocimiento, medición y depreciación de activos fijos. En Partmo, aplica a <strong>maquinaria industrial</strong>, vehículos, edificios y equipos de oficina.
+    </div>
+  </div>
+
+  <div class="card-norma">
+    <div class="titulo">📈 NIC 18 – Ingresos (reemplazada por NIIF 15 desde 2018)</div>
+    <div class="detalle">
+      <strong>NIIF 15</strong> establece cómo reconocer ingresos por contratos con clientes. En Partmo, aplica a la <strong>venta de filtros</strong> y contratos de mantenimiento.
+    </div>
+  </div>
+
+  <div class="card-norma">
+    <div class="titulo">💵 NIC 7 – Estado de Flujos de Efectivo</div>
+    <div class="detalle">
+      Requiere presentar el flujo de efectivo clasificado en <strong>actividades operativas, de inversión y de financiamiento</strong>. Es clave para evaluar la liquidez de Partmo.
+    </div>
+  </div>
+
+  <div class="card-norma">
+    <div class="titulo">🏛️ NIC 12 – Impuestos a las Ganancias</div>
+    <div class="detalle">
+      Establece cómo contabilizar los impuestos corrientes y diferidos. En Partmo, aplica al <strong>impuesto de renta</strong> y sus diferencias temporales.
+    </div>
+  </div>
+
+  <div class="card-norma">
+    <div class="titulo">📝 NIC 37 – Provisiones, Pasivos y Activos Contingentes</div>
+    <div class="detalle">
+      Define cómo reconocer provisiones (ej. garantías, litigios) y pasivos contingentes. En Partmo, puede aplicar a <strong>garantías de productos</strong> y demandas laborales.
+    </div>
+  </div>
+
+  <div class="card-norma">
+    <div class="titulo">📋 NIIF 7 – Instrumentos Financieros: Revelaciones</div>
+    <div class="detalle">
+      Requiere revelar información sobre instrumentos financieros, incluyendo riesgos de crédito, liquidez y mercado.
+    </div>
+  </div>
+
+  <div class="card-norma">
+    <div class="titulo">📋 NIIF 16 – Arrendamientos</div>
+    <div class="detalle">
+      Establece que los arrendamientos deben reconocerse como activos y pasivos en el balance. En Partmo, aplica a <strong>arrendamientos de planta, oficinas y equipos</strong>.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ENMIENDAS 2026                             -->
+  <!-- ========================================== -->
+  <h2>📅 Enmiendas Vigentes desde 2026</h2>
+  <p>
+    A partir del <strong>1 de enero de 2026</strong>, entraron en vigor varias enmiendas que afectan a las empresas que aplican NIIF Plenas. Estas son las más importantes para Partmo:
+  </p>
+
+  <table>
+    <tr>
+      <th>Norma</th>
+      <th>Cambio clave</th>
+      <th>Impacto en Partmo</th>
+    </tr>
+    <tr>
+      <td><strong>NIIF 16</strong></td>
+      <td>Nuevos requerimientos de revelación sobre arrendamientos.</td>
+      <td>Más detalles en notas sobre arrendamientos de planta y equipos.</td>
+    </tr>
+    <tr>
+      <td><strong>NIC 1</strong></td>
+      <td>Clasificación de pasivos como corrientes o no corrientes.</td>
+      <td>Revisar plazos de deudas a corto/largo plazo.</td>
+    </tr>
+    <tr>
+      <td><strong>NIC 7</strong></td>
+      <td>Revelaciones sobre acuerdos de financiamiento.</td>
+      <td>Mayor transparencia en flujos de efectivo.</td>
+    </tr>
+    <tr>
+      <td><strong>NIIF 7</strong></td>
+      <td>Revelaciones sobre instrumentos financieros.</td>
+      <td>Detallar riesgos financieros y contratos de derivados.</td>
+    </tr>
+    <tr>
+      <td><strong>NIC 12</strong></td>
+      <td>Impuestos diferidos relacionados con activos y pasivos.</td>
+      <td>Afecta el cálculo de impuestos diferidos por depreciación.</td>
+    </tr>
+  </table>
+
+  <div class="highlight orange">
+    <strong>⚠️ Atención:</strong> La <strong>NIIF 18</strong> (Presentación y Revelación en Estados Financieros) <strong>aún no es obligatoria</strong> en Colombia. Se espera su adopción en los próximos años.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- DIFERENCIAS NIIF VS NIIF PYMES            -->
+  <!-- ========================================== -->
+  <h2>⚖️ Diferencias entre NIIF Plenas y NIIF para PYMES</h2>
+  <p>
+    Como Partmo aplica <strong>NIIF Plenas</strong>, es importante entender las diferencias con <strong>NIIF para PYMES</strong> (que aplican empresas medianas). Estas son las principales:
+  </p>
+
+  <table>
+    <tr>
+      <th>Aspecto</th>
+      <th>NIIF Plenas</th>
+      <th>NIIF para PYMES</th>
+    </tr>
+    <tr>
+      <td><strong>Complejidad</strong></td>
+      <td>Alta. Más detalle y revelaciones.</td>
+      <td>Media. Requisitos simplificados.</td>
+    </tr>
+    <tr>
+      <td><strong>Instrumentos financieros</strong></td>
+      <td>NIIF 9 (clasificación, medición, deterioro).</td>
+      <td>Sección 11 y 12 (más simplificado).</td>
+    </tr>
+    <tr>
+      <td><strong>Arrendamientos</strong></td>
+      <td>NIIF 16 (reconocimiento en balance).</td>
+      <td>Sección 20 (reconocimiento en balance pero con excepciones).</td>
+    </tr>
+    <tr>
+      <td><strong>Impuestos diferidos</strong></td>
+      <td>NIC 12 (reconocimiento completo).</td>
+      <td>Sección 29 (reconocimiento simplificado).</td>
+    </tr>
+    <tr>
+      <td><strong>Estados financieros</strong></td>
+      <td>4 estados + notas detalladas.</td>
+      <td>4 estados + notas menos detalladas.</td>
+    </tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- APLICACIÓN EN PARTMO                       -->
+  <!-- ========================================== -->
+  <h2>🏢 ¿Cómo aplica esto en Partmo?</h2>
+  <p>
+    Como empresa del <strong>Grupo 1</strong>, Partmo debe cumplir con todos los requerimientos de las NIIF Plenas. En tu práctica, deberás tener en cuenta:
+  </p>
+  <ul>
+    <li><strong>Revisar arrendamientos:</strong> Verificar que los contratos de planta y equipos estén reconocidos bajo NIIF 16.</li>
+    <li><strong>Controlar inventarios:</strong> Asegurar que la materia prima, producto en proceso y terminado estén valorizados correctamente (NIC 2).</li>
+    <li><strong>Calcular depreciación:</strong> Aplicar NIC 16 para maquinaria, vehículos y edificios.</li>
+    <li><strong>Revelar impuestos diferidos:</strong> Ayudar a calcular las diferencias temporales entre contabilidad y fiscal (NIC 12).</li>
+    <li><strong>Preparar flujos de efectivo:</strong> Apoyar en la clasificación de actividades (NIC 7).</li>
+  </ul>
+  <div class="highlight green">
+    <strong>💡 Tu rol en Partmo:</strong> Apoyar en la <strong>revisión de políticas contables</strong>, verificar que los asientos cumplan con las NIIF y asistir en la <strong>preparación de notas a los estados financieros</strong>.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EJERCICIO PRÁCTICO                         -->
+  <!-- ========================================== -->
+  <h2>✍️ Ejercicio Práctico</h2>
+  <div class="highlight orange">
+    <strong>📌 Caso Partmo:</strong> La empresa tiene un arrendamiento de una planta por $10.000.000/mes durante 5 años (60 meses). Bajo NIIF 16, debes:
+    <ol style="margin-top:10px;">
+      <li>Calcular el <strong>valor presente</strong> de los pagos (tasa de descuento: 8% anual).</li>
+      <li>Registrar el <strong>activo por derecho de uso</strong> y el <strong>pasivo por arrendamiento</strong>.</li>
+      <li>Calcular el <strong>gasto financiero</strong> del primer mes.</li>
+    </ol>
+    <p style="margin-top:10px;">
+      <em>(Respuesta: revisa el índice para ver el Módulo 9: Práctica en Partmo)</em>
+    </p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- GLOSARIO NIIF                             -->
+  <!-- ========================================== -->
+  <h2>📝 Glosario NIIF</h2>
+  <table>
+    <tr><th>Término</th><th>Definición</th></tr>
+    <tr><td><strong>NIIF</strong></td><td>Normas Internacionales de Información Financiera.</td></tr>
+    <tr><td><strong>NIC</strong></td><td>Normas Internacionales de Contabilidad (anteriores).</td></tr>
+    <tr><td><strong>Devengado</strong></td><td>Principio que reconoce ingresos y gastos cuando ocurren, no cuando se cobran/pagan.</td></tr>
+    <tr><td><strong>Negocio en marcha</strong></td><td>Supuesto de que la empresa continuará operando en el futuro previsible.</td></tr>
+    <tr><td><strong>Valor razonable</strong></td><td>Precio que se recibiría por vender un activo o pagar por transferir un pasivo en una transacción ordenada.</td></tr>
+    <tr><td><strong>Impuesto diferido</strong></td><td>Impuesto que se pagará en el futuro debido a diferencias temporales entre contabilidad y fiscal.</td></tr>
+    <tr><td><strong>Deterioro</strong></td><td>Pérdida de valor de un activo cuando su valor en libros excede su importe recuperable.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- ENLACE AL SIGUIENTE MÓDULO                -->
+  <!-- ========================================== -->
+  <div style="display:flex; justify-content:space-between; margin-top:30px; padding-top:20px; border-top:2px solid #e8ecf1;">
+    <a href="04-estados-financieros.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">⬅ Módulo 4: Estados Financieros</a>
+    <a href="06-costos-produccion.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">Módulo 6: Costos de Producción ➡</a>
+  </div>
+
+  <div class="footer">
+    📌 Módulo 5 • NIIF - Normas Internacionales • <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026
+  </div>
+
+</div>
+</body>
+</html>
