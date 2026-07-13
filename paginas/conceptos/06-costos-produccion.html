@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Costos, Inventarios y Depreciación - Módulo 6</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #1a3c6e;
+      font-size: 1.05rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.green {
+      border-left-color: #28a745;
+      background: #f0faf4;
+    }
+    .highlight.green strong { color: #28a745; }
+    .highlight.orange {
+      border-left-color: #e67e22;
+      background: #fef5e7;
+    }
+    .highlight.orange strong { color: #e67e22; }
+    .highlight.purple {
+      border-left-color: #8e44ad;
+      background: #f4ecf7;
+    }
+    .highlight.purple strong { color: #8e44ad; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 0.95rem;
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+    tr.total { background: #eef4ff; font-weight: 700; }
+
+    .card-ejemplo {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 16px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .card-ejemplo .titulo {
+      font-weight: 700;
+      color: #1a3c6e;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+    .card-ejemplo .num {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 0.85rem;
+      margin-right: 10px;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px 0;
+      padding: 16px;
+      background: #f4f6fa;
+      border-radius: 12px;
+    }
+    .flow .item {
+      background: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 2px solid #1a3c6e;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #1a3c6e;
+    }
+    .flow .arrow {
+      font-size: 1.5rem;
+      color: #1a3c6e;
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      .flow { flex-direction: column; }
+      .flow .arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back">⬅ Volver al índice</a>
+
+  <h1>🏭 Costos de Producción, Inventarios y Depreciación</h1>
+  <div class="subtitle">
+    Módulo 6 • Enfoque práctico para <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- INTRODUCCIÓN                               -->
+  <!-- ========================================== -->
+  <h2>📌 Introducción</h2>
+  <p>
+    Para una empresa <strong>manufacturera</strong> como <strong>Filtros Partmo S.A.S.</strong>, los costos de producción, el manejo de inventarios y la depreciación de activos son el <strong>corazón</strong> de la contabilidad. Estos tres elementos determinan la <strong>rentabilidad</strong> y la <strong>eficiencia</strong> operativa.
+  </p>
+  <div class="highlight green">
+    <strong>🎯 Objetivo de este módulo:</strong> Comprender cómo se calculan los costos de producción, cómo se valoran los inventarios y cómo se deprecia la maquinaria, aplicado directamente a la operación de Partmo.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- PARTE 1: COSTOS DE PRODUCCIÓN              -->
+  <!-- ========================================== -->
+  <h2>1️⃣ Costos de Producción</h2>
+  <p>
+    Los <strong>costos de producción</strong> son todos los desembolsos necesarios para transformar la materia prima en un producto terminado. En Partmo, el producto terminado son los <strong>filtros para motores</strong> (automotriz, industrial, etc.).
+  </p>
+
+  <h3>📋 Elementos del Costo de Producción</h3>
+  <p>Los costos de producción se dividen en <strong>tres elementos</strong>:</p>
+
+  <div class="card-ejemplo">
+    <div class="titulo">1. Materia Prima Directa (MPD)</div>
+    <p>Son los <strong>materiales</strong> que se incorporan físicamente al producto y son fácilmente identificables. En Partmo:</p>
+    <ul>
+      <li><strong>Acero</strong> (para estructuras de filtros).</li>
+      <li><strong>Fibras sintéticas</strong> (elementos filtrantes).</li>
+      <li><strong>Polímeros</strong> (sellos y empaques).</li>
+      <li><strong>Cartuchos y mallas</strong>.</li>
+    </ul>
+    <div class="highlight" style="margin-top:10px;">
+      <strong>📌 Cuenta PUC:</strong> 1435 - Mercancías no fabricadas (materia prima).
+    </div>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">2. Mano de Obra Directa (MOD)</div>
+    <p>Es el <strong>trabajo humano</strong> directamente involucrado en la transformación del producto. En Partmo:</p>
+    <ul>
+      <li>Operarios de producción (aproximadamente <strong>150-200</strong> de los 349 empleados).</li>
+      <li>Supervisores de línea de producción.</li>
+      <li>Personal de calidad y empaque.</li>
+    </ul>
+    <div class="highlight" style="margin-top:10px;">
+      <strong>📌 Cuenta PUC:</strong> 7201 - Mano de obra directa.
+    </div>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">3. Costos Indirectos de Fabricación (CIF)</div>
+    <p>Son todos los <strong>costos</strong> que no son directamente identificables con el producto, pero son necesarios para la producción. En Partmo:</p>
+    <ul>
+      <li><strong>Arriendo</strong> de la planta industrial (Parque Industrial 2, Km 7 Vía Palenque).</li>
+      <li><strong>Servicios públicos</strong> (energía eléctrica, agua, gas).</li>
+      <li><strong>Mantenimiento</strong> de maquinaria.</li>
+      <li><strong>Depreciación</strong> de maquinaria y equipos.</li>
+      <li><strong>Materiales indirectos</strong> (lubricantes, repuestos).</li>
+      <li><strong>Seguros</strong> de la planta.</li>
+    </ul>
+    <div class="highlight" style="margin-top:10px;">
+      <strong>📌 Cuenta PUC:</strong> 7301 - Costos indirectos de fabricación (CIF).
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FLUJO DE COSTOS                            -->
+  <!-- ========================================== -->
+  <h3>🔄 Flujo de los Costos de Producción</h3>
+  <div class="flow">
+    <span class="item">Materia Prima</span>
+    <span class="arrow">→</span>
+    <span class="item">Producto en Proceso</span>
+    <span class="arrow">→</span>
+    <span class="item">Producto Terminado</span>
+    <span class="arrow">→</span>
+    <span class="item">Costo de Ventas</span>
+  </div>
+  <ul>
+    <li><strong>Materia Prima (cuenta 14):</strong> Materiales sin procesar.</li>
+    <li><strong>Producto en Proceso (cuenta 15):</strong> Materiales que están siendo transformados pero no están terminados.</li>
+    <li><strong>Producto Terminado (cuenta 16):</strong> Filtros listos para la venta.</li>
+    <li><strong>Costo de Ventas (cuenta 61):</strong> Cuando se vende el producto, su costo se traslada a esta cuenta.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- ECUACIÓN DE COSTOS                         -->
+  <!-- ========================================== -->
+  <h3>🧮 Ecuación del Costo de Producción</h3>
+  <div class="highlight" style="text-align:center; font-size:1.1rem;">
+    <strong>Costo de Producción = Materia Prima Directa + Mano de Obra Directa + Costos Indirectos de Fabricación (CIF)</strong>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">📌 Ejemplo Partmo - Costo de Producción Mensual</div>
+    <table>
+      <tr><th>Concepto</th><th>Valor</th></tr>
+      <tr><td>Materia Prima Directa (acero, fibras, polímeros)</td><td>$45.000.000</td></tr>
+      <tr><td>Mano de Obra Directa (operarios)</td><td>$30.000.000</td></tr>
+      <tr><td>Costos Indirectos de Fabricación (CIF)</td><td>$18.000.000</td></tr>
+      <tr class="total"><td><strong>TOTAL COSTO DE PRODUCCIÓN</strong></td><td><strong>$93.000.000</strong></td></tr>
+    </table>
+    <p style="margin-top:10px; font-size:0.9rem; color:#666;">
+      <strong>Nota:</strong> Estos valores son aproximados para fines educativos. En la realidad, Partmo maneja volúmenes mucho mayores.
+    </p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- SISTEMAS DE COSTEO                         -->
+  <!-- ========================================== -->
+  <h3>📊 Sistemas de Costeo</h3>
+  <p>Existen dos sistemas principales para asignar costos a los productos:</p>
+  <ul>
+    <li><strong>Costeo por Órdenes de Producción:</strong> Se usa cuando los productos son <strong>personalizados</strong> o se fabrican por lotes específicos. Cada lote tiene su propia hoja de costos.</li>
+    <li><strong>Costeo por Procesos:</strong> Se usa cuando los productos son <strong>homogéneos</strong> y se producen en masa. Los costos se acumulan por departamento o proceso.</li>
+  </ul>
+  <div class="highlight orange">
+    <strong>💡 En Partmo:</strong> Por su volumen de producción (filtros en masa), es muy probable que usen un <strong>sistema de costeo por procesos</strong>, acumulando costos por áreas (corte, ensamble, empaque).
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ASIENTOS CONTABLES - COSTOS                -->
+  <!-- ========================================== -->
+  <h3>✍️ Asientos Contables de Costos (en Partmo)</h3>
+
+  <div class="card-ejemplo">
+    <div class="titulo">1. Compra de Materia Prima</div>
+    <p><strong>Ejemplo:</strong> Compra de acero por $10.000.000 + IVA (19%).</p>
+    <table>
+      <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>1435</td><td>Mercancías no fabricadas</td><td>$10.000.000</td><td></td></tr>
+      <tr><td>2408</td><td>IVA descontable</td><td>$1.900.000</td><td></td></tr>
+      <tr><td>1110</td><td>Bancos</td><td></td><td>$11.900.000</td></tr>
+    </table>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">2. Consumo de Materia Prima a Producción</div>
+    <p><strong>Ejemplo:</strong> Se envía a producción acero por $8.000.000.</p>
+    <table>
+      <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>7101</td><td>Materia prima (Costo de producción)</td><td>$8.000.000</td><td></td></tr>
+      <tr><td>1435</td><td>Mercancías no fabricadas</td><td></td><td>$8.000.000</td></tr>
+    </table>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">3. Mano de Obra Directa</div>
+    <p><strong>Ejemplo:</strong> Pago de nómina de operarios por $5.000.000.</p>
+    <table>
+      <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>7201</td><td>Mano de obra directa</td><td>$5.000.000</td><td></td></tr>
+      <tr><td>1110</td><td>Bancos</td><td></td><td>$5.000.000</td></tr>
+    </table>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">4. Costos Indirectos de Fabricación (CIF)</div>
+    <p><strong>Ejemplo:</strong> Pago de servicios públicos de la planta por $2.000.000.</p>
+    <table>
+      <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>7301</td><td>Costos indirectos de fabricación</td><td>$2.000.000</td><td></td></tr>
+      <tr><td>1110</td><td>Bancos</td><td></td><td>$2.000.000</td></tr>
+    </table>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">5. Transferencia de Producto Terminado</div>
+    <p><strong>Ejemplo:</strong> Se terminan filtros con un costo total de $12.000.000.</p>
+    <table>
+      <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>1605</td><td>Productos terminados</td><td>$12.000.000</td><td></td></tr>
+      <tr><td>7101</td><td>Materia prima</td><td></td><td>$8.000.000</td></tr>
+      <tr><td>7201</td><td>Mano de obra directa</td><td></td><td>$2.000.000</td></tr>
+      <tr><td>7301</td><td>Costos indirectos de fabricación</td><td></td><td>$2.000.000</td></tr>
+    </table>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- PARTE 2: INVENTARIOS                       -->
+  <!-- ========================================== -->
+  <h2>2️⃣ Inventarios (NIC 2)</h2>
+  <p>
+    Los <strong>inventarios</strong> son activos mantenidos para la venta, en proceso de producción o en forma de materiales para ser consumidos. En Partmo, los inventarios se dividen en:
+  </p>
+  <ul>
+    <li><strong>Materia Prima (cuenta 14):</strong> Acero, fibras, polímeros, etc.</li>
+    <li><strong>Producto en Proceso (cuenta 15):</strong> Filtros en diferentes etapas de fabricación.</li>
+    <li><strong>Producto Terminado (cuenta 16):</strong> Filtros listos para la venta.</li>
+    <li><strong>Materiales de empaque y suministros:</strong> Cajas, etiquetas, etc.</li>
+  </ul>
+
+  <h3>📌 Métodos de Valoración de Inventarios (NIC 2)</h3>
+  <p>
+    La <strong>NIC 2</strong> establece que los inventarios deben medirse al <strong>menor valor entre el costo y el valor neto realizable</strong>. Para determinar el costo, se pueden usar diferentes métodos:
+  </p>
+
+  <div class="card-ejemplo">
+    <div class="titulo">A. PEPS (Primeras en Entrar, Primeras en Salir)</div>
+    <p>Asume que los primeros productos en entrar al inventario son los primeros en salir (venderse o consumirse).</p>
+    <div class="highlight green" style="margin-top:10px;">
+      <strong>✅ Ventaja:</strong> El inventario final refleja costos más recientes (más cercanos al valor de mercado).<br>
+      <strong>📌 En Partmo:</strong> Es el método más común para materiales perecederos o con alta rotación.
+    </div>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">B. UEPS (Últimas en Entrar, Primeras en Salir)</div>
+    <p>Asume que los últimos productos en entrar son los primeros en salir.</p>
+    <div class="highlight orange" style="margin-top:10px;">
+      <strong>⚠️ En Colombia:</strong> <strong>NO está permitido</strong> para efectos fiscales. Solo se usa en algunos casos bajo NIIF con restricciones.
+    </div>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">C. Promedio Ponderado</div>
+    <p>Calcula un costo promedio por unidad, dividiendo el costo total disponible entre el número de unidades disponibles.</p>
+    <div class="highlight purple" style="margin-top:10px;">
+      <strong>📌 Fórmula:</strong> <em>Costo Promedio = (Costo total de inventario) / (Unidades totales disponibles)</em><br>
+      <strong>✅ Ventaja:</strong> Suaviza las fluctuaciones de precios. Muy usado en Partmo para materiales homogéneos (acero, fibras).
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EJEMPLO PRÁCTICO INVENTARIOS               -->
+  <!-- ========================================== -->
+  <h3>📊 Ejemplo Práctico: Valoración de Inventarios en Partmo</h3>
+  <div class="card-ejemplo">
+    <div class="titulo">Caso: Compra de Acero en Julio 2026</div>
+    <table>
+      <tr><th>Fecha</th><th>Movimiento</th><th>Unidades</th><th>Costo Unitario</th><th>Costo Total</th></tr>
+      <tr><td>01/07</td><td>Inventario inicial</td><td>1.000</td><td>$10.000</td><td>$10.000.000</td></tr>
+      <tr><td>10/07</td><td>Compra</td><td>500</td><td>$10.500</td><td>$5.250.000</td></tr>
+      <tr><td>15/07</td><td>Compra</td><td>300</td><td>$11.000</td><td>$3.300.000</td></tr>
+      <tr><td>20/07</td><td>Venta/consumo</td><td>1.200</td><td>?</td><td>?</td></tr>
+      <tr><td>30/07</td><td>Inventario final</td><td>600</td><td>?</td><td>?</td></tr>
+    </table>
+
+    <h4 style="margin-top:15px;">Cálculo con PEPS:</h4>
+    <ul>
+      <li><strong>Salen 1.200 unidades:</strong> 1.000 (inicial) + 200 (compra 10/07).</li>
+      <li><strong>Costo de venta:</strong> (1.000 × $10.000) + (200 × $10.500) = $10.000.000 + $2.100.000 = <strong>$12.100.000</strong>.</li>
+      <li><strong>Inventario final:</strong> 300 (compra 10/07) + 300 (compra 15/07) = 600 unidades.</li>
+      <li><strong>Costo inventario final:</strong> (300 × $10.500) + (300 × $11.000) = $3.150.000 + $3.300.000 = <strong>$6.450.000</strong>.</li>
+    </ul>
+
+    <h4 style="margin-top:15px;">Cálculo con Promedio Ponderado:</h4>
+    <ul>
+      <li><strong>Costo total disponible:</strong> $10.000.000 + $5.250.000 + $3.300.000 = $18.550.000.</li>
+      <li><strong>Unidades disponibles:</strong> 1.000 + 500 + 300 = 1.800 unidades.</li>
+      <li><strong>Costo promedio unitario:</strong> $18.550.000 / 1.800 = <strong>$10.305,56</strong>.</li>
+      <li><strong>Costo de venta (1.200 unidades):</strong> 1.200 × $10.305,56 = <strong>$12.366.667</strong>.</li>
+      <li><strong>Inventario final (600 unidades):</strong> 600 × $10.305,56 = <strong>$6.183.333</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- PARTE 3: DEPRECIACIÓN                      -->
+  <!-- ========================================== -->
+  <h2>3️⃣ Depreciación de Activos Fijos</h2>
+  <p>
+    La <strong>depreciación</strong> es la pérdida de valor de los activos fijos (maquinaria, vehículos, edificios) por uso, desgaste o paso del tiempo. En Partmo, la depreciación aplica principalmente a:
+  </p>
+  <ul>
+    <li><strong>Maquinaria industrial:</strong> Máquinas de filtrado, cortadoras, ensambladoras.</li>
+    <li><strong>Equipos de producción:</strong> Compresores, transportadores.</li>
+    <li><strong>Vehículos:</strong> Camiones de reparto.</li>
+    <li><strong>Muebles y enseres:</strong> Oficinas y planta.</li>
+  </ul>
+
+  <h3>📌 Métodos de Depreciación</h3>
+
+  <div class="card-ejemplo">
+    <div class="titulo">A. Línea Recta (el más común)</div>
+    <p>Distribuye el costo del activo de manera uniforme durante su vida útil.</p>
+    <div class="highlight" style="margin-top:10px;">
+      <strong>📌 Fórmula:</strong><br>
+      <em>Depreciación Anual = (Costo del activo - Valor Residual) / Vida Útil (años)</em>
+    </div>
+    <div class="highlight green" style="margin-top:10px;">
+      <strong>✅ Ventaja:</strong> Simple y fácil de calcular.<br>
+      <strong>📌 En Partmo:</strong> Es el método más usado para maquinaria y equipos.
+    </div>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">B. Unidades de Producción</div>
+    <p>La depreciación depende del <strong>uso</strong> del activo (horas máquina, unidades producidas).</p>
+    <div class="highlight orange" style="margin-top:10px;">
+      <strong>📌 Fórmula:</strong><br>
+      <em>Depreciación por unidad = (Costo - Valor Residual) / Total de unidades estimadas</em><br>
+      <em>Depreciación del período = Depreciación por unidad × Unidades producidas</em>
+    </div>
+    <div class="highlight" style="margin-top:10px;">
+      <strong>📌 En Partmo:</strong> Podría aplicarse a máquinas que se usan intensivamente en ciertos turnos o para productos específicos.
+    </div>
+  </div>
+
+  <div class="card-ejemplo">
+    <div class="titulo">C. Depreciación Acelerada (Suma de Dígitos)</div>
+    <p>Asigna mayor depreciación en los primeros años de vida útil del activo.</p>
+    <div class="highlight purple" style="margin-top:10px;">
+      <strong>📌 En Partmo:</strong> Poco común, pero podría usarse para activos tecnológicos que se obsoletizan rápido.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EJEMPLO PRÁCTICO DEPRECIACIÓN              -->
+  <!-- ========================================== -->
+  <h3>📊 Ejemplo Práctico: Depreciación en Partmo</h3>
+  <div class="card-ejemplo">
+    <div class="titulo">Caso: Máquina de Filtrado</div>
+    <ul>
+      <li><strong>Costo:</strong> $60.000.000</li>
+      <li><strong>Valor Residual:</strong> $6.000.000 (10%)</li>
+      <li><strong>Vida Útil:</strong> 10 años</li>
+      <li><strong>Método:</strong> Línea Recta</li>
+    </ul>
+
+    <h4 style="margin-top:15px;">Cálculo:</h4>
+    <ul>
+      <li><strong>Depreciación Anual:</strong> ($60.000.000 - $6.000.000) / 10 = <strong>$5.400.000/año</strong></li>
+      <li><strong>Depreciación Mensual:</strong> $5.400.000 / 12 = <strong>$450.000/mes</strong></li>
+    </ul>
+
+    <h4 style="margin-top:15px;">Asiento Contable Mensual:</h4>
+    <table>
+      <tr><th>Código</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+      <tr><td>5160</td><td>Gasto por depreciación</td><td>$450.000</td><td></td></tr>
+      <tr><td>1592</td><td>Depreciación acumulada (maquinaria)</td><td></td><td>$450.000</td></tr>
+    </table>
+    <p style="margin-top:10px; font-size:0.9rem; color:#666;">
+      <strong>Nota:</strong> La depreciación acumulada es una <strong>cuenta de activo con saldo acreedor</strong>, que reduce el valor de la maquinaria en el Balance General.
+    </p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TABLA DE VIDA ÚTIL EN COLOMBIA             -->
+  <!-- ========================================== -->
+  <h3>📋 Vida Útil de Activos según la DIAN</h3>
+  <table>
+    <tr><th>Tipo de Activo</th><th>Vida Útil (años)</th></tr>
+    <tr><td>Edificios y construcciones</td><td>20 - 40</td></tr>
+    <tr><td>Maquinaria industrial</td><td>10 - 15</td></tr>
+    <tr><td>Vehículos (camiones, automóviles)</td><td>5 - 10</td></tr>
+    <tr><td>Muebles y enseres</td><td>5 - 10</td></tr>
+    <tr><td>Equipos de computación</td><td>3 - 5</td></tr>
+    <tr><td>Barcos y aeronaves</td><td>10 - 20</td></tr>
+  </table>
+  <div class="highlight orange">
+    <strong>⚠️ Importante:</strong> La vida útil puede variar según el uso y las políticas de la empresa. En Partmo, la maquinaria puede tener una vida útil de <strong>10 años</strong> si recibe buen mantenimiento.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- RELACIÓN COSTOS - INVENTARIOS - DEPREC.    -->
+  <!-- ========================================== -->
+  <h2>🔗 Relación entre Costos, Inventarios y Depreciación</h2>
+  <p>
+    Estos tres temas están <strong>interconectados</strong> en la contabilidad de Partmo:
+  </p>
+  <ul>
+    <li><strong>La depreciación</strong> de maquinaria es un <strong>CIF</strong> (Costo Indirecto de Fabricación).</li>
+    <li>Los <strong>CIF</strong> se asignan a los <strong>productos en proceso</strong> (inventarios).</li>
+    <li>Cuando el producto se termina, el costo se traslada a <strong>producto terminado</strong>.</li>
+    <li>Cuando se vende, el costo pasa a ser <strong>costo de ventas</strong>, que afecta la utilidad.</li>
+  </ul>
+  <div class="flow">
+    <span class="item">Depreciación</span>
+    <span class="arrow">→</span>
+    <span class="item">CIF</span>
+        <span class="arrow">→</span>
+    <span class="item">Producto en Proceso</span>
+    <span class="arrow">→</span>
+    <span class="item">Producto Terminado</span>
+    <span class="arrow">→</span>
+    <span class="item">Costo de Ventas</span>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EJERCICIOS PRÁCTICOS                       -->
+  <!-- ========================================== -->
+  <h2>✍️ Ejercicios Prácticos</h2>
+
+  <div class="card-ejemplo" style="border-left: 4px solid #e67e22;">
+    <div class="titulo">Ejercicio 1: Cálculo de Costo de Producción</div>
+    <p><strong>Enunciado:</strong> Partmo produjo en julio 2.500 filtros. Los costos del mes fueron:</p>
+    <ul>
+      <li>Materia prima consumida: $25.000.000</li>
+      <li>Mano de obra directa: $18.000.000</li>
+      <li>CIF (arriendo, servicios, mantenimiento): $12.000.000</li>
+    </ul>
+    <p style="margin-top:10px;"><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es el costo total de producción del mes?</li>
+      <li>¿Cuál es el costo unitario por filtro?</li>
+    </ol>
+    <div class="highlight green" style="margin-top:10px;">
+      <strong>✅ Solución:</strong><br>
+      <strong>Costo total:</strong> $25.000.000 + $18.000.000 + $12.000.000 = <strong>$55.000.000</strong><br>
+      <strong>Costo unitario:</strong> $55.000.000 / 2.500 = <strong>$22.000 por filtro</strong>
+    </div>
+  </div>
+
+  <div class="card-ejemplo" style="border-left: 4px solid #8e44ad;">
+    <div class="titulo">Ejercicio 2: Valoración de Inventarios (PEPS vs Promedio)</div>
+    <p><strong>Enunciado:</strong> Partmo tiene los siguientes movimientos de fibras sintéticas en julio:</p>
+    <table>
+      <tr><th>Fecha</th><th>Movimiento</th><th>Unidades</th><th>Costo Unitario</th></tr>
+      <tr><td>01/07</td><td>Inventario inicial</td><td>500</td><td>$8.000</td></tr>
+      <tr><td>05/07</td><td>Compra</td><td>300</td><td>$8.500</td></tr>
+      <tr><td>12/07</td><td>Compra</td><td>400</td><td>$9.000</td></tr>
+      <tr><td>20/07</td><td>Consumo a producción</td><td>800</td><td>?</td></tr>
+    </table>
+    <p style="margin-top:10px;"><strong>Preguntas:</strong></p>
+    <ol>
+      <li>Calcula el costo del consumo usando el método <strong>PEPS</strong>.</li>
+      <li>Calcula el costo del consumo usando el método <strong>Promedio Ponderado</strong>.</li>
+      <li>¿Cuál método da un mayor costo de producción?</li>
+    </ol>
+    <div class="highlight green" style="margin-top:10px;">
+      <strong>✅ Solución PEPS:</strong><br>
+      Salen 800 unidades: 500 (inicial) + 300 (compra 05/07)<br>
+      Costo = (500 × $8.000) + (300 × $8.500) = $4.000.000 + $2.550.000 = <strong>$6.550.000</strong>
+    </div>
+    <div class="highlight purple" style="margin-top:10px;">
+      <strong>✅ Solución Promedio Ponderado:</strong><br>
+      Costo total disponible: (500×$8.000)+(300×$8.500)+(400×$9.000) = $4.000.000+$2.550.000+$3.600.000 = $10.150.000<br>
+      Unidades disponibles: 500+300+400 = 1.200<br>
+      Costo promedio unitario: $10.150.000 / 1.200 = <strong>$8.458,33</strong><br>
+      Costo de consumo: 800 × $8.458,33 = <strong>$6.766.667</strong>
+    </div>
+    <div class="highlight orange" style="margin-top:10px;">
+      <strong>📌 Comparación:</strong> El método <strong>Promedio Ponderado</strong> ($6.766.667) da un costo mayor que PEPS ($6.550.000). Esto afecta la utilidad del período.
+    </div>
+  </div>
+
+  <div class="card-ejemplo" style="border-left: 4px solid #1a3c6e;">
+    <div class="titulo">Ejercicio 3: Depreciación de Maquinaria</div>
+    <p><strong>Enunciado:</strong> Partmo compró una máquina de ensamble por $80.000.000. Valor residual $8.000.000. Vida útil 12 años.</p>
+    <p style="margin-top:10px;"><strong>Preguntas:</strong></p>
+    <ol>
+      <li>Calcula la depreciación anual y mensual usando <strong>línea recta</strong>.</li>
+      <li>Realiza el asiento contable del primer mes.</li>
+    </ol>
+    <div class="highlight green" style="margin-top:10px;">
+      <strong>✅ Solución:</strong><br>
+      <strong>Depreciación anual:</strong> ($80.000.000 - $8.000.000) / 12 = <strong>$6.000.000/año</strong><br>
+      <strong>Depreciación mensual:</strong> $6.000.000 / 12 = <strong>$500.000/mes</strong>
+    </div>
+    <div class="highlight" style="margin-top:10px;">
+      <strong>Asiento contable mensual:</strong><br>
+      Débito: 5160 Gasto por depreciación $500.000<br>
+      Crédito: 1592 Depreciación acumulada $500.000
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- APLICACIÓN EN PARTMO                       -->
+  <!-- ========================================== -->
+  <h2>🏢 ¿Cómo aplicar esto en Partmo?</h2>
+
+  <div class="card-ejemplo" style="border-left: 4px solid #28a745;">
+    <div class="titulo">📌 En tu día a día como auxiliar contable</div>
+    <ul>
+      <li><strong>Revisa las órdenes de compra</strong> de materia prima y verifica que estén bien codificadas en el PUC.</li>
+      <li><strong>Apoya en la asignación de CIF:</strong> Pregunta cómo se distribuyen los costos indirectos (¿por horas máquina? ¿por unidades producidas?).</li>
+      <li><strong>Controla los inventarios:</strong> Revisa que las salidas de materia prima estén bien registradas y que el método de valoración sea coherente (PEPS o Promedio).</li>
+      <li><strong>Verifica la depreciación:</strong> Revisa que los activos fijos estén en la base de datos y que la depreciación mensual se haya registrado correctamente.</li>
+      <li><strong>Concilia costos:</strong> Compara los costos de producción con el presupuesto y reporta diferencias significativas.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- PREGUNTAS PARA LA ENTREVISTA               -->
+  <!-- ========================================== -->
+  <h2>💡 Preguntas que puedes hacer en la entrevista</h2>
+  <ul>
+    <li><strong>“¿Qué método de valoración de inventarios utiliza Partmo (PEPS o Promedio Ponderado)?”</strong></li>
+    <li><strong>“¿Cómo se asignan los CIF a los productos? ¿Por horas máquina, unidades producidas u otro criterio?”</strong></li>
+    <li><strong>“¿Cada cuánto se revisa la vida útil de los activos fijos y cómo se manejan los cambios?”</strong></li>
+    <li><strong>“¿Qué software contable usan para el manejo de costos e inventarios?”</strong></li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- GUÍA DE ESTUDIO RÁPIDA                     -->
+  <!-- ========================================== -->
+  <h2>📋 Guía de Estudio Rápida</h2>
+  <table>
+    <tr><th>Tema</th><th>Conceptos Clave</th><th>Fórmulas</th></tr>
+    <tr>
+      <td><strong>Costos</strong></td>
+      <td>MPD, MOD, CIF, Producto en Proceso, Terminado</td>
+      <td>Costo = MPD + MOD + CIF</td>
+    </tr>
+    <tr>
+      <td><strong>Inventarios (PEPS)</strong></td>
+      <td>Primeras en entrar, primeras en salir</td>
+      <td>Salen las primeras compradas</td>
+    </tr>
+    <tr>
+      <td><strong>Inventarios (Promedio)</strong></td>
+      <td>Costo promedio ponderado</td>
+      <td>Costo total / Unidades totales</td>
+    </tr>
+    <tr>
+      <td><strong>Depreciación</strong></td>
+      <td>Línea recta, unidades de producción</td>
+      <td>(Costo - Residual) / Vida útil</td>
+    </tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- GLOSARIO DEL MÓDULO                        -->
+  <!-- ========================================== -->
+  <h2>📖 Glosario del Módulo</h2>
+  <table>
+    <tr><th>Término</th><th>Definición</th></tr>
+    <tr><td><strong>MPD</strong></td><td>Materia Prima Directa. Materiales que se incorporan físicamente al producto.</td></tr>
+    <tr><td><strong>MOD</strong></td><td>Mano de Obra Directa. Trabajo humano directamente involucrado en la producción.</td></tr>
+    <tr><td><strong>CIF</strong></td><td>Costos Indirectos de Fabricación. Costos necesarios para la producción pero no directamente identificables.</td></tr>
+    <tr><td><strong>PEPS</strong></td><td>Primeras en Entrar, Primeras en Salir. Método de valoración de inventarios.</td></tr>
+    <tr><td><strong>Promedio Ponderado</strong></td><td>Método de valoración que calcula un costo promedio por unidad.</td></tr>
+    <tr><td><strong>Valor Residual</strong></td><td>Valor estimado de un activo al final de su vida útil.</td></tr>
+    <tr><td><strong>Depreciación Acumulada</strong></td><td>Cuenta que acumula el total de depreciación de un activo a lo largo del tiempo.</td></tr>
+    <tr><td><strong>NIC 2</strong></td><td>Norma Internacional de Contabilidad que regula la valoración de inventarios.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- CIERRE Y SIGUIENTE MÓDULO                  -->
+  <!-- ========================================== -->
+  <div style="display:flex; justify-content:space-between; margin-top:30px; padding-top:20px; border-top:2px solid #e8ecf1;">
+    <a href="05-niif.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">⬅ Módulo 5: NIIF</a>
+    <a href="07-impuestos-colombia.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">Módulo 7: Impuestos en Colombia ➡</a>
+  </div>
+
+  <div class="footer">
+    📌 Módulo 6 • Costos de Producción, Inventarios y Depreciación • <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026
+  </div>
+
+</div>
+</body>
+</html>
