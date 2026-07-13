@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impuestos en Colombia - Módulo 7</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 35px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+        .back {
+            display: inline-block;
+            margin-bottom: 25px;
+            background: #1a3c6e;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+        .back:hover {
+            background: #0f2a4a;
+        }
+
+        h1 {
+            color: #1a3c6e;
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .subtitle {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            border-left: 4px solid #1a3c6e;
+            padding-left: 16px;
+        }
+        .subtitle strong {
+            color: #1a3c6e;
+        }
+
+        h2 {
+            color: #1a3c6e;
+            font-size: 1.5rem;
+            margin-top: 35px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #e8ecf1;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: #2c3e50;
+            font-size: 1.15rem;
+            margin-top: 25px;
+            margin-bottom: 8px;
+        }
+        h4 {
+            color: #1a3c6e;
+            font-size: 1.05rem;
+            margin-top: 18px;
+            margin-bottom: 6px;
+        }
+        p,
+        li {
+            color: #2d2d2d;
+            line-height: 1.7;
+            font-size: 0.98rem;
+        }
+        ul,
+        ol {
+            padding-left: 25px;
+            margin: 8px 0 16px 0;
+        }
+        .highlight {
+            background: #eef4ff;
+            border-left: 4px solid #1a3c6e;
+            padding: 14px 20px;
+            border-radius: 6px;
+            margin: 14px 0;
+        }
+        .highlight strong {
+            color: #1a3c6e;
+        }
+        .highlight.green {
+            border-left-color: #28a745;
+            background: #f0faf4;
+        }
+        .highlight.green strong {
+            color: #28a745;
+        }
+        .highlight.orange {
+            border-left-color: #e67e22;
+            background: #fef5e7;
+        }
+        .highlight.orange strong {
+            color: #e67e22;
+        }
+        .highlight.red {
+            border-left-color: #c0392b;
+            background: #fdf0ef;
+        }
+        .highlight.red strong {
+            color: #c0392b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            font-size: 0.95rem;
+        }
+        th {
+            background: #1a3c6e;
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e8ecf1;
+        }
+        tr:hover td {
+            background: #f8f9fc;
+        }
+        tr.total {
+            font-weight: bold;
+            background: #eef4ff;
+        }
+
+        .impuesto-card {
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 16px 0;
+            border: 1px solid #e8ecf1;
+        }
+        .impuesto-card .titulo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a3c6e;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .impuesto-card .titulo .badge {
+            background: #1a3c6e;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .impuesto-card .detalle {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 20px;
+            margin-top: 8px;
+        }
+        .impuesto-card .detalle .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px dashed #e8ecf1;
+        }
+        .impuesto-card .detalle .item .label {
+            color: #555;
+        }
+        .impuesto-card .detalle .item .valor {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .impuesto-card .detalle {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <a href="index.html" class="back">⬅ Volver al índice</a>
+
+        <h1>💰 Impuestos en Colombia</h1>
+        <div class="subtitle">
+            Módulo 7 • Guía completa para <strong>Filtros Partmo S.A.S.</strong> • Vigencia 2026
+        </div>
+
+        <!-- ========================================== -->
+        <!-- INTRODUCCIÓN                               -->
+        <!-- ========================================== -->
+        <h2>📌 Introducción al Sistema Tributario Colombiano</h2>
+        <p>
+            El sistema tributario colombiano está regulado principalmente por el <strong>Estatuto Tributario</strong> y administrado por la <strong>DIAN</strong> (Dirección de Impuestos y Aduanas Nacionales). Las empresas deben cumplir con múltiples obligaciones tributarias, tanto a nivel <strong>nacional</strong> (Renta, IVA, Retención) como <strong>municipal</strong> (ICA).
+        </p>
+        <div class="highlight">
+            <strong>💡 En Partmo:</strong> Al ser una empresa <strong>Grande</strong> (Grupo 1 NIIF), sus obligaciones tributarias son más complejas y requieren declaraciones mensuales, bimestrales y anuales.
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TABLA RESUMEN DE IMPUESTOS                 -->
+        <!-- ========================================== -->
+        <h2>📊 Resumen de Impuestos 2026</h2>
+        <table>
+            <tr>
+                <th>Impuesto</th>
+                <th>Tarifa / Base</th>
+                <th>Frecuencia</th>
+                <th>Entidad</th>
+            </tr>
+            <tr>
+                <td><strong>Renta</strong></td>
+                <td>35% (utilidad)</td>
+                <td>Anual</td>
+                <td>DIAN</td>
+            </tr>
+            <tr>
+                <td><strong>IVA</strong></td>
+                <td>19% (general)</td>
+                <td>Bimestral/Mensual</td>
+                <td>DIAN</td>
+            </tr>
+            <tr>
+                <td><strong>Retención en la Fuente</strong></td>
+                <td>Variable (2.5% - 39%)</td>
+                <td>Mensual</td>
+                <td>DIAN</td>
+            </tr>
+            <tr>
+                <td><strong>ICA (Bucaramanga)</strong></td>
+                <td>~2.5‰ (industria)</td>
+                <td>Bimestral</td>
+                <td>Alcaldía</td>
+            </tr>
+            <tr>
+                <td><strong>RETEICA</strong></td>
+                <td>Variable (hasta 9.6‰)</td>
+                <td>Mensual</td>
+                <td>Alcaldía</td>
+            </tr>
+            <tr>
+                <td><strong>Impuesto al Patrimonio</strong></td>
+                <td>0.5% - 5% (progresivo)</td>
+                <td>Anual</td>
+                <td>DIAN</td>
+            </tr>
+            <tr>
+                <td><strong>Impuesto al Consumo</strong></td>
+                <td>8% - 16%</td>
+                <td>Bimestral</td>
+                <td>DIAN</td>
+            </tr>
+        </table>
+
+        <!-- ========================================== -->
+        <!-- 1. RENTA                                   -->
+        <!-- ========================================== -->
+        <h2>1. Impuesto de Renta</h2>
+        <p>
+            El <strong>Impuesto de Renta</strong> grava las <strong>utilidades</strong> (ingresos - gastos - costos) obtenidas por las empresas durante el año gravable. En Colombia, el año gravable va del <strong>1 de enero al 31 de diciembre</strong>.
+        </p>
+
+        <div class="impuesto-card">
+            <div class="titulo">📌 Tarifas Renta 2026 <span class="badge">Vigente</span></div>
+            <div class="detalle">
+                <div class="item"><span class="label">Tarifa general</span><span class="valor">35%</span></div>
+                <div class="item"><span class="label">Sector financiero (sobretasa)</span><span class="valor">15% adicional → ~50%</span></div>
+                <div class="item"><span class="label">Hoteles y ecoturismo</span><span class="valor">15%</span></div>
+                <div class="item"><span class="label">Empresas editoriales</span><span class="valor">15%</span></div>
+                <div class="item"><span class="label">Renta presuntiva</span><span class="valor">1.5% del patrimonio líquido</span></div>
+            </div>
+        </div>
+
+        <h3>📌 Conceptos clave de Renta</h3>
+        <ul>
+            <li><strong>Renta Líquida:</strong> Ingresos totales menos costos y gastos deducibles.</li>
+            <li><strong>Renta Presuntiva:</strong> Mínimo a declarar (1.5% del patrimonio líquido). Se paga el mayor entre renta líquida y renta presuntiva.</li>
+            <li><strong>Descuentos tributarios:</strong> Donaciones, inversiones en I+D, etc.</li>
+            <li><strong>Anticipo de Renta:</strong> Se paga durante el año siguiente (se descuenta de la declaración anual).</li>
+        </ul>
+
+        <div class="highlight green">
+            <strong>✅ Ejemplo Partmo:</strong><br>
+            Utilidad Neta: <strong>$15.000.000.000</strong><br>
+            Renta a pagar: $15.000M × 35% = <strong>$5.250.000.000</strong>
+        </div>
+
+        <h3>📅 Fechas clave Renta 2026 (declaración año 2025)</h3>
+        <p>El calendario de vencimientos se define según los <strong>últimos 4 dígitos del NIT</strong>. Para Partmo (NIT 900.994.125-1 → últimos dígitos <strong>1251</strong>):</p>
+        <ul>
+            <li><strong>Grandes contribuyentes:</strong> 12 de agosto - 26 de octubre de 2026.</li>
+            <li><strong>Régimen ordinario:</strong> Fechas específicas según dígito NIT (consultar calendario DIAN).</li>
+        </ul>
+        <div class="highlight orange">
+            <strong>⚠️ Importante:</strong> La declaración de renta debe presentarse con el <strong>Formulario 110</strong> y el pago se hace por PSE o en bancos autorizados.
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 2. IVA                                     -->
+        <!-- ========================================== -->
+        <h2>2. IVA - Impuesto sobre las Ventas</h2>
+        <p>
+            El <strong>IVA</strong> es un impuesto indirecto que grava la <strong>venta de bienes y servicios</strong>, las importaciones y la prestación de servicios en Colombia. El responsable del IVA es el <strong>vendedor</strong>, quien lo traslada al comprador y lo declara a la DIAN.
+        </p>
+
+        <div class="impuesto-card">
+            <div class="titulo">📌 Tarifas IVA 2026 <span class="badge">Vigente</span></div>
+            <div class="detalle">
+                <div class="item"><span class="label">Tarifa general</span><span class="valor">19%</span></div>
+                <div class="item"><span class="label">Tarifa reducida (excluida)</span><span class="valor">5% (solo algunos productos)</span></div>
+                <div class="item"><span class="label">Licores y cervezas</span><span class="valor">19% (aumentó desde 2026)</span></div>
+                <div class="item"><span class="label">Servicios excluidos</span><span class="valor">0% (educación, salud, arrendamientos)</span></div>
+            </div>
+        </div>
+
+        <h3>📌 Conceptos clave de IVA</h3>
+        <ul>
+            <li><strong>IVA generado (débito fiscal):</strong> IVA que la empresa cobra a sus clientes en las ventas.</li>
+            <li><strong>IVA descontable (crédito fiscal):</strong> IVA que la empresa paga en sus compras y que puede descontar.</li>
+            <li><strong>IVA a pagar:</strong> IVA generado - IVA descontable (si es positivo, se paga; si es negativo, se solicita saldo a favor).</li>
+        </ul>
+
+        <div class="highlight green">
+            <strong>✅ Ejemplo Partmo:</strong><br>
+            <strong>Ventas del bimestre:</strong> $100.000.000 + IVA 19% → IVA generado = $19.000.000<br>
+            <strong>Compras del bimestre:</strong> $60.000.000 + IVA 19% → IVA descontable = $11.400.000<br>
+            <strong>IVA a pagar:</strong> $19.000.000 - $11.400.000 = <strong>$7.600.000</strong>
+        </div>
+
+        <h3>📅 Frecuencia de declaración</h3>
+        <ul>
+            <li><strong>Bimestral:</strong> Empresas con ingresos > 92.000 UVT (~$4.581M). Partmo aplica esta frecuencia.</li>
+            <li><strong>Cuatrimestral:</strong> Empresas con ingresos ≤ 92.000 UVT.</li>
+        </ul>
+        <p><strong>Fechas 2026:</strong> Los vencimientos son el <strong>15 de cada mes</strong> según el dígito del NIT (ej. NIT terminado en 1 → 15 de marzo, 15 de mayo, etc.).</p>
+
+        <!-- ========================================== -->
+        <!-- 3. RETENCIÓN EN LA FUENTE                  -->
+        <!-- ========================================== -->
+        <h2>3. Retención en la Fuente</h2>
+        <p>
+            La <strong>Retención en la Fuente</strong> es un mecanismo de <strong>recaudo anticipado</strong> del impuesto de renta. El pagador (agente retenedor) descuenta un porcentaje al beneficiario del pago y lo consigna a la DIAN.
+        </p>
+        <div class="highlight orange">
+            <strong>⚠️ Atención 2026:</strong> El <strong>Decreto 572 de 2025</strong> modificó tarifas, pero estuvo suspendido. <strong>A partir del 1 de julio de 2026</strong> vuelve a regir. ¡Verifica siempre la tarifa vigente!
+        </div>
+
+        <h3>📌 Tarifas de Retención (vigentes desde julio 2026)</h3>
+        <table>
+            <tr>
+                <th>Concepto</th>
+                <th>Tarifa</th>
+                <th>Base mínima (UVT)</th>
+            </tr>
+            <tr>
+                <td><strong>Compras (bienes)</strong></td>
+                <td>2.5%</td>
+                <td>Sin base mínima</td>
+            </tr>
+            <tr>
+                <td><strong>Honorarios</strong> (a persona jurídica)</td>
+                <td>11%</td>
+                <td>Sin base mínima</td>
+            </tr>
+            <tr>
+                <td><strong>Honorarios</strong> (a persona natural)</td>
+                <td>10%</td>
+                <td>Sin base mínima</td>
+            </tr>
+            <tr>
+                <td><strong>Consultoría y software</strong></td>
+                <td>3.5%</td>
+                <td>Sin base mínima</td>
+            </tr>
+            <tr>
+                <td><strong>Arrendamientos</strong></td>
+                <td>3.5% - 10%</td>
+                <td>Según valor</td>
+            </tr>
+            <tr>
+                <td><strong>Ingresos laborales (nómina)</strong></td>
+                <td>19% - 39%</td>
+                <td>Progresivo desde 95 UVT</td>
+            </tr>
+            <tr>
+                <td><strong>Intereses (personas jurídicas)</strong></td>
+                <td>7%</td>
+                <td>Sin base mínima</td>
+            </tr>
+            <tr>
+                <td><strong>Dividendos (personas naturales)</strong></td>
+                <td>7%</td>
+                <td>Sin base mínima</td>
+            </tr>
+        </table>
+
+        <div class="highlight green">
+            <strong>✅ Ejemplo Partmo (compras):</strong><br>
+            Compra de acero por <strong>$10.000.000</strong> (sin IVA).<br>
+            Retención = $10.000.000 × 2.5% = <strong>$250.000</strong> (se descuenta al proveedor).
+        </div>
+
+        <div class="highlight green">
+            <strong>✅ Ejemplo Partmo (honorarios):</strong><br>
+            Pago a un consultor (persona jurídica) por <strong>$5.000.000</strong>.<br>
+            Retención = $5.000.000 × 11% = <strong>$550.000</strong> (se descuenta al consultor).
+        </div>
+
+        <h3>📌 Obligaciones del agente retenedor</h3>
+        <ul>
+            <li><strong>Autoretención:</strong> Cuando la empresa se retiene a sí misma (aplica para grandes contribuyentes).</li>
+            <li><strong>Declaración mensual:</strong> Formulario 350 (antes 230) con el resumen de retenciones practicadas.</li>
+            <li><strong>Certificados de retención:</strong> Entregar a los retenidos antes del 31 de marzo de cada año.</li>
+        </ul>
+
+        <!-- ========================================== -->
+        <!-- 4. ICA - IMPUESTO DE INDUSTRIA Y COMERCIO  -->
+        <!-- ========================================== -->
+        <h2>4. ICA - Impuesto de Industria y Comercio (Bucaramanga)</h2>
+        <p>
+            El <strong>ICA</strong> es un impuesto <strong>municipal</strong> que grava las actividades industriales, comerciales y de servicios que se realizan dentro del municipio. En <strong>Bucaramanga</strong>, lo administra la Alcaldía.
+        </p>
+
+        <div class="impuesto-card">
+            <div class="titulo">📌 ICA en Bucaramanga <span class="badge">Municipal</span></div>
+            <div class="detalle">
+                <div class="item"><span class="label">Tarifa industria (CIIU 2819)</span><span class="valor">2.5‰ (2.5 por mil)</span></div>
+                <div class="item"><span class="label">Tarifa comercio</span><span class="valor">4.0‰ - 7.0‰</span></div>
+                <div class="item"><span class="label">Tarifa servicios</span><span class="valor">5.0‰ - 9.6‰</span></div>
+                <div class="item"><span class="label">Régimen preferencial</span><span class="valor">Hasta 30% descuento (según sector)</span></div>
+                <div class="item"><span class="label">Base gravable</span><span class="valor">Ingresos brutos del período</span></div>
+            </div>
+        </div>
+
+        <div class="highlight green">
+            <strong>✅ Ejemplo Partmo:</strong><br>
+            Ingresos brutos bimestrales: <strong>$200.000.000</strong><br>
+            ICA = $200.000.000 × 2.5‰ = <strong>$500.000</strong> (a pagar a la Alcaldía de Bucaramanga).
+        </div>
+
+        <h3>📅 Fechas clave ICA Bucaramanga 2026</h3>
+        <ul>
+            <li><strong>Primera cuota (régimen preferencial):</strong> 27 de febrero.</li>
+            <li><strong>Declaraciones bimestrales:</strong> Vencen el <strong>12 de cada mes</strong> (según dígito NIT).</li>
+            <li><strong>RETEICA:</strong> Se declara mensualmente junto con la retención de ICA practicada a terceros.</li>
+        </ul>
+
+        <div class="highlight orange">
+            <strong>⚠️ Importante:</strong> El ICA es <strong>deducible</strong> del impuesto de renta, así que guárdalo como gasto.
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 5. RETEICA                                 -->
+        <!-- ========================================== -->
+        <h2>5. RETEICA - Retención en el ICA</h2>
+        <p>
+            La <strong>RETEICA</strong> es el mecanismo de retención del ICA. El pagador (agente retenedor) descuenta un porcentaje al beneficiario y lo consigna a la Alcaldía.
+        </p>
+        <table>
+            <tr>
+                <th>Concepto</th>
+                <th>Tarifa (Bucaramanga)</th>
+            </tr>
+            <tr>
+                <td>Industria (CIIU 2819)</td>
+                <td>1.0‰ - 2.5‰</td>
+            </tr>
+            <tr>
+                <td>Comercio</td>
+                <td>2.0‰ - 4.0‰</td>
+            </tr>
+            <tr>
+                <td>Servicios</td>
+                <td>2.5‰ - 9.6‰</td>
+            </tr>
+        </table>
+        <div class="highlight green">
+            <strong>✅ Ejemplo Partmo:</strong><br>
+            Pago a un proveedor de servicios por <strong>$5.000.000</strong>.<br>
+            RETEICA = $5.000.000 × 2.5‰ = <strong>$12.500</strong> (se descuenta y se paga a la Alcaldía).
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 6. IMPUESTO AL PATRIMONIO                  -->
+        <!-- ========================================== -->
+        <h2>6. Impuesto al Patrimonio</h2>
+        <p>
+            El <strong>Impuesto al Patrimonio</strong> grava el <strong>patrimonio líquido</strong> de las personas jurídicas (y naturales) cuando supera un umbral determinado.
+        </p>
+        <div class="impuesto-card">
+            <div class="titulo">📌 Tarifas 2026 <span class="badge">Nuevo</span></div>
+            <div class="detalle">
+                <div class="item"><span class="label">Base mínima</span><span class="valor">40.000 UVT (~$2.095M)</span></div>
+                <div class="item"><span class="label">Tarifa</span><span class="valor">0.5% - 5% (progresiva)</span></div>
+                <div class="item"><span class="label">Personas naturales</span><span class="valor">Excluidas hasta 40.000 UVT</span></div>
+            </div>
+        </div>
+        <div class="highlight orange">
+            <strong>⚠️ Importante:</strong> La base mínima bajó de <strong>72.000 a 40.000 UVT</strong> en 2026, ¡más empresas están obligadas!
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 7. OTRAS OBLIGACIONES                     -->
+        <!-- ========================================== -->
+        <h2>7. Otras Obligaciones Tributarias</h2>
+        <ul>
+            <li><strong>Información Exógena:</strong> Reporte anual a la DIAN sobre transacciones con terceros. Vence el <strong>15 de diciembre de 2026</strong> (para año 2025).</li>
+            <li><strong>Sanciones:</strong> Por no declarar, declarar extemporáneamente o pagar tarde. Incluyen intereses moratorios (1.33% mensual) y multas.</li>
+            <li><strong>Facturación Electrónica:</strong> Obligatoria desde 2020. Todos los comprobantes deben cumplir con el formato XML de la DIAN.</li>
+        </ul>
+
+        <!-- ========================================== -->
+        <!-- CALENDARIO TRIBUTARIO 2026                -->
+        <!-- ========================================== -->
+        <h2>📅 Calendario Tributario 2026 (Partmo)</h2>
+        <table>
+            <tr>
+                <th>Impuesto</th>
+                <th>Frecuencia</th>
+                <th>Fechas clave</th>
+            </tr>
+            <tr>
+                <td><strong>Renta</strong></td>
+                <td>Anual</td>
+                <td>12 de agosto - 26 de octubre (según NIT)</td>
+            </tr>
+            <tr>
+                <td><strong>IVA</strong></td>
+                <td>Bimestral</td>
+                <td>15 de marzo, 15 de mayo, 15 de julio, 15 de septiembre, 15 de noviembre</td>
+            </tr>
+            <tr>
+                <td><strong>Retención</strong></td>
+                <td>Mensual</td>
+                <td>12 de cada mes (según dígito NIT)</td>
+            </tr>
+            <tr>
+                <td><strong>ICA (Bucaramanga)</strong></td>
+                <td>Bimestral</td>
+                <td>12 de marzo, 12 de mayo, 12 de julio, 12 de septiembre, 12 de noviembre</td>
+            </tr>
+            <tr>
+                <td><strong>RETEICA</strong></td>
+                <td>Mensual</td>
+                <td>12 de cada mes</td>
+            </tr>
+            <tr>
+                <td><strong>Información Exógena</strong></td>
+                <td>Anual</td>
+                <td>15 de diciembre de 2026</td>
+            </tr>
+        </table>
+
+        <!-- ========================================== -->
+        <!-- GLOSARIO TRIBUTARIO                        -->
+        <!-- ========================================== -->
+        <h2>📖 Glosario Tributario</h2>
+        <table>
+            <tr>
+                <th>Término</th>
+                <th>Definición</th>
+            </tr>
+            <tr>
+                <td><strong>UVT</strong></td>
+                <td>Unidad de Valor Tributario. 2026 = $52.374. Base para sanciones, multas y límites.</td>
+            </tr>
+            <tr>
+                <td><strong>DIAN</strong></td>
+                <td>Dirección de Impuestos y Aduanas Nacionales. Entidad que administra los impuestos nacionales.</td>
+            </tr>
+            <tr>
+                <td><strong>Agente retenedor</strong></td>
+                <td>Persona jurídica o natural obligada a practicar retención en la fuente.</td>
+            </tr>
+            <tr>
+                <td><strong>Saldo a favor</strong></td>
+                <td>Cuando el IVA descontable es mayor al IVA generado. Se puede solicitar devolución o compensar.</td>
+            </tr>
+            <tr>
+                <td><strong>Régimen Simple</strong></td>
+                <td>Régimen de tributación simplificado para pequeñas empresas (no aplica a Partmo por su tamaño).</td>
+            </tr>
+            <tr>
+                <td><strong>Gran Contribuyente</strong></td>
+                <td>Empresas con ingresos superiores a 111.000 UVT (~$5.800M). Tienen obligaciones adicionales.</td>
+            </tr>
+        </table>
+
+        <!-- ========================================== -->
+        <!-- APLICACIÓN EN PARTMO                      -->
+        <!-- ========================================== -->
+        <h2>🏢 ¿Cómo aplica esto en Partmo?</h2>
+        <div class="highlight">
+            <strong>💡 Tu rol en Partmo (impuestos):</strong>
+            <ul style="margin-top:8px;">
+                <li>Revisar que las <strong>retenciones</strong> en compras y honorarios estén correctamente aplicadas.</li>
+                <li>Apoyar en la <strong>declaración de IVA</strong> bimestral: verificar IVA generado vs. descontable.</li>
+                <li>Calcular el <strong>ICA</strong> de Bucaramanga y la <strong>RETEICA</strong>.</li>
+                <li>Preparar la <strong>información exógena</strong> anual.</li>
+                <li>Verificar que la <strong>facturación electrónica</strong> cumpla con los requisitos de la DIAN.</li>
+            </ul>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- EJERCICIO PRÁCTICO                         -->
+        <!-- ========================================== -->
+        <h2>✍️ Ejercicio Práctico</h2>
+        <div class="highlight orange">
+            <strong>📌 Caso Partmo - Julio 2026:</strong>
+            <ol style="margin-top:10px;">
+                <li>Ventas del bimestre (junio-julio): <strong>$250.000.000</strong> + IVA.</li>
+                <li>Compras del bimestre (con IVA): <strong>$180.000.000</strong>.</li>
+                <li>Pago de honorarios a un consultor (persona jurídica): <strong>$8.000.000</strong>.</li>
+                <li>Compra de acero (sin IVA): <strong>$15.000.000</strong>.</li>
+            </ol>
+            <p style="margin-top:10px;">
+                <strong>Preguntas:</strong>
+            </p>
+            <ol style="margin-top:5px;" type="a">
+                <li>Calcula el <strong>IVA a pagar</strong> del bimestre.</li>
+                <li>Calcula la <strong>retención en la fuente</strong> para el consultor.</li>
+                <li>Calcula la <strong>retención en la fuente</strong> para la compra de acero.</li>
+                <li>Calcula el <strong>ICA</strong> para Partmo (ingresos brutos bimestrales: $250M).</li>
+            </ol>
+            <p style="margin-top:10px;">
+                <em>(Respuestas: revisa el Módulo 9: Práctica en Partmo)</em>
+            </p>
+        </div>
+
+        <!-- ========================================== -->
+<!-- ENLACES (continuación)                     -->
+<!-- ========================================== -->
+<div style="display:flex; justify-content:space-between; margin-top:30px; padding-top:20px; border-top:2px solid #e8ecf1; flex-wrap:wrap; gap:10px;">
+    <a href="06-costos-produccion.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">⬅ Módulo 6: Costos + Inventarios</a>
+    <a href="08-analisis-financiero.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">Módulo 8: Análisis Financiero ➡</a>
+</div>
+
+<!-- ========================================== -->
+<!-- SOLUCIÓN DEL EJERCICIO PRÁCTICO           -->
+<!-- ========================================== -->
+<h2>✅ Solución del Ejercicio Práctico</h2>
+
+<div class="highlight green">
+    <strong>📌 Caso Partmo - Julio 2026 (Resuelto)</strong>
+</div>
+
+<h3>a) IVA a pagar del bimestre</h3>
+<div class="impuesto-card">
+    <div class="detalle">
+        <div class="item"><span class="label">Ventas del bimestre</span><span class="valor">$250.000.000</span></div>
+        <div class="item"><span class="label">IVA generado (19%)</span><span class="valor">$47.500.000</span></div>
+        <div class="item"><span class="label">Compras del bimestre (con IVA)</span><span class="valor">$180.000.000</span></div>
+        <div class="item"><span class="label">IVA descontable (19% sobre base)</span><span class="valor">$180.000.000 / 1.19 = $151.260.504 × 19% = $28.739.496</span></div>
+        <div class="item" style="font-weight:bold; border-bottom:2px solid #1a3c6e;"><span class="label">IVA a pagar</span><span class="valor" style="color:#1a3c6e;">$47.500.000 - $28.739.496 = <strong>$18.760.504</strong></span></div>
+    </div>
+</div>
+
+<h3>b) Retención en la fuente para el consultor</h3>
+<div class="impuesto-card">
+    <div class="detalle">
+        <div class="item"><span class="label">Valor del honorario</span><span class="valor">$8.000.000</span></div>
+        <div class="item"><span class="label">Tarifa (persona jurídica)</span><span class="valor">11%</span></div>
+        <div class="item" style="font-weight:bold; border-bottom:2px solid #1a3c6e;"><span class="label">Retención practicada</span><span class="valor" style="color:#1a3c6e;">$8.000.000 × 11% = <strong>$880.000</strong></span></div>
+        <div class="item"><span class="label">Valor a pagar al consultor</span><span class="valor">$8.000.000 - $880.000 = $7.120.000</span></div>
+    </div>
+</div>
+
+<h3>c) Retención en la fuente para la compra de acero</h3>
+<div class="impuesto-card">
+    <div class="detalle">
+        <div class="item"><span class="label">Valor de la compra (sin IVA)</span><span class="valor">$15.000.000</span></div>
+        <div class="item"><span class="label">Tarifa (compras)</span><span class="valor">2.5%</span></div>
+        <div class="item" style="font-weight:bold; border-bottom:2px solid #1a3c6e;"><span class="label">Retención practicada</span><span class="valor" style="color:#1a3c6e;">$15.000.000 × 2.5% = <strong>$375.000</strong></span></div>
+        <div class="item"><span class="label">Valor a pagar al proveedor</span><span class="valor">$15.000.000 - $375.000 = $14.625.000</span></div>
+    </div>
+</div>
+
+<h3>d) ICA para Partmo (Bucaramanga)</h3>
+<div class="impuesto-card">
+    <div class="detalle">
+        <div class="item"><span class="label">Ingresos brutos bimestrales</span><span class="valor">$250.000.000</span></div>
+        <div class="item"><span class="label">Tarifa industria (CIIU 2819)</span><span class="valor">2.5‰ (2.5 por mil)</span></div>
+        <div class="item" style="font-weight:bold; border-bottom:2px solid #1a3c6e;"><span class="label">ICA a pagar</span><span class="valor" style="color:#1a3c6e;">$250.000.000 × 2.5‰ = <strong>$625.000</strong></span></div>
+    </div>
+</div>
+
+<div class="highlight green">
+    <strong>✅ Resumen de pagos del bimestre:</strong><br>
+    • IVA a pagar: <strong>$18.760.504</strong> (a la DIAN)<br>
+    • Retención consultor: <strong>$880.000</strong> (a la DIAN)<br>
+    • Retención compra acero: <strong>$375.000</strong> (a la DIAN)<br>
+    • ICA: <strong>$625.000</strong> (a la Alcaldía de Bucaramanga)<br>
+    <strong>Total a pagar en impuestos del bimestre: $20.640.504</strong>
+</div>
+
+<!-- ========================================== -->
+<!-- CASO PRÁCTICO ADICIONAL                    -->
+<!-- ========================================== -->
+<h2>📌 Caso Práctico Adicional: Liquidación de Nómina</h2>
+<p>
+    Además de los impuestos comerciales, en <strong>Partmo</strong> también debes manejar los impuestos relacionados con la <strong>nómina</strong> de los ~349 empleados.
+</p>
+
+<div class="impuesto-card">
+    <div class="titulo">📌 Retención en la fuente - Nómina <span class="badge">Mensual</span></div>
+    <div class="detalle">
+        <div class="item"><span class="label">Base mínima para retención</span><span class="valor">95 UVT mensuales (~$4.975.530)</span></div>
+        <div class="item"><span class="label">Tarifa</span><span class="valor">19% - 39% (progresiva según ingreso)</span></div>
+        <div class="item"><span class="label">Ejemplo: Empleado con $6.000.000</span><span class="valor">19% sobre el excedente de 95 UVT</span></div>
+    </div>
+</div>
+
+<div class="highlight green">
+    <strong>✅ Ejemplo Partmo (nómina):</strong><br>
+    <strong>Empleado:</strong> Operario de producción con salario <strong>$2.500.000</strong> mensual.<br>
+    <strong>Aportes de nómina:</strong>
+    <ul style="margin-top:6px;">
+        <li><strong>Salud:</strong> 12.5% (empleador 8.5%, empleado 4%) → $2.500.000 × 4% = <strong>$100.000</strong> (empleado)</li>
+        <li><strong>Pensión:</strong> 16% (empleador 12%, empleado 4%) → $2.500.000 × 4% = <strong>$100.000</strong> (empleado)</li>
+        <li><strong>ARL:</strong> 0.522% (empleador) → $2.500.000 × 0.522% = <strong>$13.050</strong></li>
+        <li><strong>Caja de Compensación:</strong> 4% (empleador) → $2.500.000 × 4% = <strong>$100.000</strong></li>
+        <li><strong>ICBF:</strong> 3% (empleador) → $2.500.000 × 3% = <strong>$75.000</strong></li>
+        <li><strong>SENA:</strong> 2% (empleador) → $2.500.000 × 2% = <strong>$50.000</strong></li>
+    </ul>
+    <p style="margin-top:8px;">
+        <strong>Total aportes empleado:</strong> $200.000 (descontados de su salario)<br>
+        <strong>Total aportes empleador:</strong> $338.050 (costo adicional para Partmo)<br>
+        <strong>Salario neto del empleado:</strong> $2.500.000 - $200.000 = <strong>$2.300.000</strong>
+    </p>
+</div>
+
+<!-- ========================================== -->
+<!-- SANCIONES Y RÉGIMEN SANCIONATORIO         -->
+<!-- ========================================== -->
+<h2>⚠️ Sanciones y Régimen Sancionatorio</h2>
+<p>
+    El incumplimiento de las obligaciones tributarias genera <strong>sanciones</strong> que pueden ser muy costosas. Las más comunes son:
+</p>
+
+<table>
+    <tr>
+        <th>Tipo de sanción</th>
+        <th>Valor</th>
+        <th>Descripción</th>
+    </tr>
+    <tr>
+        <td><strong>No declarar</strong></td>
+        <td>5% del valor del impuesto</td>
+        <td>Por cada mes o fracción de retraso</td>
+    </tr>
+    <tr>
+        <td><strong>Declarar extemporáneamente</strong></td>
+        <td>Hasta 10% del impuesto</td>
+        <td>Según el tiempo de retraso</td>
+    </tr>
+    <tr>
+        <td><strong>No pagar</strong></td>
+        <td>1.33% mensual</td>
+        <td>Interés moratorio sobre el valor adeudado</td>
+    </tr>
+    <tr>
+        <td><strong>Información exógena incorrecta</strong></td>
+        <td>Hasta 5.000 UVT (~$261M)</td>
+        <td>Por datos erróneos o incompletos</td>
+    </tr>
+    <tr>
+        <td><strong>No facturar electrónicamente</strong></td>
+        <td>Hasta 1.000 UVT (~$52M)</td>
+        <td>Por cada factura no emitida</td>
+    </tr>
+</table>
+
+<div class="highlight red">
+    <strong>🚨 ¡Ojo en Partmo!</strong> Como empresa grande, las sanciones pueden ser <strong>millonarias</strong>. Es crucial revisar que <strong>todas</strong> las declaraciones estén en fecha y que la facturación electrónica sea impecable.
+</div>
+
+<!-- ========================================== -->
+<!-- FACTURACIÓN ELECTRÓNICA                    -->
+<!-- ========================================== -->
+<h2>📄 Facturación Electrónica</h2>
+<p>
+    Desde <strong>2020</strong>, todas las empresas en Colombia deben emitir <strong>factura electrónica</strong> con el formato XML autorizado por la DIAN. Partmo, por su tamaño, debe cumplir con:
+</p>
+<ul>
+    <li><strong>Validación previa:</strong> La factura se envía a la DIAN antes de entregarse al cliente.</li>
+    <li><strong>Código QR:</strong> Toda factura debe tener un código QR para verificación.</li>
+    <li><strong>Reporte de ingresos:</strong> La DIAN cruza automáticamente la información con las declaraciones de IVA y Renta.</li>
+</ul>
+<div class="highlight orange">
+    <strong>⚠️ Importante:</strong> En Partmo, la facturación electrónica se integra con el <strong>sistema contable</strong> (SAP, SIIGO u Odoo) para evitar errores manuales.
+</div>
+
+<!-- ========================================== -->
+<!-- RÉGIMEN SIMPLE (NO APLICA A PARTMO)      -->
+<!-- ========================================== -->
+<h2>📌 Régimen Simple de Tributación</h2>
+<p>
+    El <strong>Régimen Simple</strong> es una opción para pequeñas y medianas empresas con ingresos ≤ 100.000 UVT (~$5.237M). <strong>Partmo NO aplica</strong> porque es una empresa grande, pero es importante conocerlo porque:
+</p>
+<ul>
+    <li>Unifica Renta, IVA e ICA en una sola declaración.</li>
+    <li>Tarifa del 2% al 14.5% según los ingresos.</li>
+    <li>Aplica a PYMES que quieran simplificar su tributación.</li>
+</ul>
+
+<!-- ========================================== -->
+<!-- GUÍA RÁPIDA PARA PARTMO                   -->
+<!-- ========================================== -->
+<h2>📋 Guía Rápida para Partmo (Checklist Diario)</h2>
+<div class="highlight green">
+    <strong>✅ Lo que debes revisar cada día/mes:</strong>
+    <ul style="margin-top:8px;">
+        <li><strong>Diario:</strong> Verificar que todas las facturas de venta tengan su respectiva <strong>retención</strong> aplicada (si aplica).</li>
+        <li><strong>Diario:</strong> Revisar que las compras tengan el <strong>IVA descontable</strong> bien calculado.</li>
+        <li><strong>Mensual:</strong> Liquidar y pagar la <strong>Retención en la Fuente</strong> (Formulario 350) antes del 12 de cada mes.</li>
+        <li><strong>Bimestral:</strong> Declarar y pagar el <strong>IVA</strong> (Formulario 300) en las fechas establecidas.</li>
+        <li><strong>Bimestral:</strong> Declarar y pagar el <strong>ICA</strong> en Bucaramanga.</li>
+        <li><strong>Anual:</strong> Preparar la <strong>Información Exógena</strong> con todos los datos de terceros.</li>
+        <li><strong>Anual:</strong> Calcular y presentar la <strong>Declaración de Renta</strong> (con el apoyo del contador o revisor fiscal).</li>
+    </ul>
+</div>
+
+<!-- ========================================== -->
+<!-- PREGUNTAS FRECUENTES                       -->
+<!-- ========================================== -->
+<h2>❓ Preguntas Frecuentes</h2>
+
+<div class="impuesto-card">
+    <div class="titulo">¿Qué pasa si el IVA descontable es mayor al IVA generado?</div>
+    <p>Se genera un <strong>saldo a favor</strong> que se puede solicitar en devolución o compensar en períodos siguientes.</p>
+</div>
+
+<div class="impuesto-card">
+    <div class="titulo">¿Cómo sé si debo aplicar la tarifa del 2.5% o del 11% en retención?</div>
+    <p>Depende del concepto de pago: <strong>2.5%</strong> para compras de bienes y <strong>11%</strong> para honorarios a personas jurídicas.</p>
+</div>
+
+<div class="impuesto-card">
+    <div class="titulo">¿Qué pasa si no declaro a tiempo?</div>
+    <p>Se generan <strong>intereses moratorios</strong> (1.33% mensual) y <strong>sanciones</strong> por extemporaneidad (hasta 10% del impuesto).</p>
+</div>
+
+<div class="impuesto-card">
+    <div class="titulo">¿El ICA es deducible de Renta?</div>
+    <p><strong>Sí.</strong> El ICA pagado se registra como gasto deducible en la declaración de renta.</p>
+</div>
+
+<!-- ========================================== -->
+<!-- FOOTER                                     -->
+<!-- ========================================== -->
+<div class="footer">
+    📌 Módulo 7 • Impuestos en Colombia • <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026<br>
+    Creado para estudio personal • Actualizado: Julio 2026
+</div>
+
+</div>
+</body>
+</html>
