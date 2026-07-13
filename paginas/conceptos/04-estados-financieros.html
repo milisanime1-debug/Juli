@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estados Financieros - Módulo 4</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #2c3e50;
+      font-size: 1.05rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.green {
+      border-left-color: #28a745;
+      background: #f0faf4;
+    }
+    .highlight.green strong { color: #28a745; }
+    .highlight.orange {
+      border-left-color: #e67e22;
+      background: #fef5e7;
+    }
+    .highlight.orange strong { color: #e67e22; }
+    .highlight.purple {
+      border-left-color: #8e44ad;
+      background: #f4ecf7;
+    }
+    .highlight.purple strong { color: #8e44ad; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 0.95rem;
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+    tr.total { font-weight: bold; background: #eef4ff; }
+
+    .estado {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 16px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .estado .titulo {
+      font-weight: 700;
+      color: #1a3c6e;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 16px 0;
+    }
+    @media (max-width: 700px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    .nav-links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid #e8ecf1;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav-links a {
+      color: #1a3c6e;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .nav-links a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back">⬅ Volver al índice</a>
+
+  <h1>📊 Estados Financieros</h1>
+  <div class="subtitle">
+    Módulo 4 • Estructura, análisis y aplicación en <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- INTRODUCCIÓN                               -->
+  <!-- ========================================== -->
+  <h2>📌 ¿Qué son los Estados Financieros?</h2>
+  <p>
+    Los <strong>Estados Financieros</strong> son informes estructurados que representan la situación económica y financiera de una empresa en un momento determinado o durante un período. Son la <strong>salida final</strong> del ciclo contable y la base para la toma de decisiones.
+  </p>
+  <div class="highlight">
+    <strong>💡 En Partmo:</strong> Los estados financieros se elaboran <strong>mensualmente</strong> para la gerencia y <strong>anualmente</strong> para la DIAN, accionistas (Donaldson Company Inc.) y entidades financieras.
+  </div>
+
+  <h3>📋 Estados Financieros Básicos (NIIF)</h3>
+  <div class="grid-2">
+    <div class="estado">
+      <div class="titulo">📊 Balance General</div>
+      <p>Muestra <strong>Activo, Pasivo y Patrimonio</strong> en una fecha específica. Es una "foto" de la empresa.</p>
+    </div>
+    <div class="estado">
+      <div class="titulo">📈 Estado de Resultados</div>
+      <p>Muestra <strong>Ingresos, Gastos, Costos</strong> y la Utilidad o Pérdida del período. Es una "película".</p>
+    </div>
+    <div class="estado">
+      <div class="titulo">💵 Estado de Flujo de Efectivo</div>
+      <p>Muestra <strong>entradas y salidas de efectivo</strong> en tres áreas: operativa, inversión y financiación.</p>
+    </div>
+    <div class="estado">
+      <div class="titulo">📑 Estado de Cambios en el Patrimonio</div>
+      <p>Muestra <strong>movimientos de capital, utilidades y reservas</strong> durante el período.</p>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. BALANCE GENERAL                         -->
+  <!-- ========================================== -->
+  <h2>📊 1. Balance General (Estado de Situación)</h2>
+  <p>
+    El <strong>Balance General</strong> muestra la situación financiera de la empresa en una fecha determinada (ej. 31 de diciembre de 2026). Se basa en la <strong>ecuación contable</strong>:
+  </p>
+  <div class="highlight" style="text-align:center; font-size:1.3rem; font-weight:bold;">
+    Activo = Pasivo + Patrimonio
+  </div>
+
+  <h3>📌 Estructura del Balance</h3>
+  <div class="grid-2">
+    <div style="background:#f0faf4; padding:16px; border-radius:10px;">
+      <h4 style="margin-top:0; color:#28a745;">🔵 ACTIVO</h4>
+      <p><strong>Recursos que posee la empresa</strong> con valor económico.</p>
+      <ul>
+        <li><strong>Corriente:</strong> Caja, bancos, inventarios, cuentas por cobrar (< 1 año).</li>
+        <li><strong>No corriente:</strong> Maquinaria, vehículos, edificios, patentes (> 1 año).</li>
+      </ul>
+    </div>
+    <div>
+      <div style="background:#fef5e7; padding:16px; border-radius:10px; margin-bottom:12px;">
+        <h4 style="margin-top:0; color:#e67e22;">🟠 PASIVO</h4>
+        <p><strong>Obligaciones de la empresa</strong> con terceros.</p>
+        <ul>
+          <li><strong>Corriente:</strong> Proveedores, impuestos por pagar, préstamos < 1 año.</li>
+          <li><strong>No corriente:</strong> Obligaciones bancarias, pasivos diferidos (> 1 año).</li>
+        </ul>
+      </div>
+      <div style="background:#eef4ff; padding:16px; border-radius:10px;">
+        <h4 style="margin-top:0; color:#1a3c6e;">🟣 PATRIMONIO</h4>
+        <p><strong>Recursos de los propietarios</strong> (capital + utilidades retenidas).</p>
+        <ul>
+          <li><strong>Capital social:</strong> Aportes de los accionistas.</li>
+          <li><strong>Utilidades retenidas:</strong> Ganancias acumuladas no distribuidas.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3>📋 Ejemplo: Balance General de Partmo (31/12/2026)</h3>
+  <table>
+    <tr><th colspan="2" style="text-align:center;">ACTIVO</th></tr>
+    <tr><td><strong>Activo Corriente</strong></td><td></td></tr>
+    <tr><td style="padding-left:20px;">Caja y bancos</td><td>$15.000.000</td></tr>
+    <tr><td style="padding-left:20px;">Cuentas por cobrar</td><td>$8.000.000</td></tr>
+    <tr><td style="padding-left:20px;">Inventarios (materia prima, producto terminado)</td><td>$25.000.000</td></tr>
+    <tr><td style="padding-left:20px;">Total Activo Corriente</td><td><strong>$48.000.000</strong></td></tr>
+    <tr><td><strong>Activo No Corriente</strong></td><td></td></tr>
+    <tr><td style="padding-left:20px;">Maquinaria y equipos</td><td>$50.000.000</td></tr>
+    <tr><td style="padding-left:20px;">Depreciación acumulada</td><td>($10.000.000)</td></tr>
+    <tr><td style="padding-left:20px;">Propiedad, planta y equipo (neto)</td><td><strong>$40.000.000</strong></td></tr>
+    <tr class="total"><td>TOTAL ACTIVO</td><td><strong>$88.000.000</strong></td></tr>
+    <tr><th colspan="2" style="text-align:center;">PASIVO Y PATRIMONIO</th></tr>
+    <tr><td><strong>Pasivo Corriente</strong></td><td></td></tr>
+    <tr><td style="padding-left:20px;">Proveedores</td><td>$12.000.000</td></tr>
+    <tr><td style="padding-left:20px;">Impuestos por pagar</td><td>$5.000.000</td></tr>
+    <tr><td style="padding-left:20px;">Total Pasivo Corriente</td><td><strong>$17.000.000</strong></td></tr>
+    <tr><td><strong>Pasivo No Corriente</strong></td><td></td></tr>
+    <tr><td style="padding-left:20px;">Obligaciones bancarias a largo plazo</td><td>$20.000.000</td></tr>
+    <tr class="total"><td>TOTAL PASIVO</td><td><strong>$37.000.000</strong></td></tr>
+    <tr><td><strong>Patrimonio</strong></td><td></td></tr>
+    <tr><td style="padding-left:20px;">Capital social</td><td>$30.000.000</td></tr>
+    <tr><td style="padding-left:20px;">Utilidades retenidas</td><td>$21.000.000</td></tr>
+    <tr class="total"><td>TOTAL PATRIMONIO</td><td><strong>$51.000.000</strong></td></tr>
+    <tr class="total" style="background:#1a3c6e; color:white;"><td>TOTAL PASIVO + PATRIMONIO</td><td><strong>$88.000.000</strong></td></tr>
+  </table>
+  <div class="highlight green">
+    <strong>✅ ¡Equilibrado!</strong> Activo ($88M) = Pasivo ($37M) + Patrimonio ($51M)
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. ESTADO DE RESULTADOS                   -->
+  <!-- ========================================== -->
+  <h2>📈 2. Estado de Resultados (PyG)</h2>
+  <p>
+    El <strong>Estado de Resultados</strong> (también llamado PyG - Pérdidas y Ganancias) muestra los <strong>ingresos, costos y gastos</strong> de la empresa durante un período. Su fórmula es:
+  </p>
+  <div class="highlight" style="text-align:center; font-size:1.2rem; font-weight:bold;">
+    Utilidad Neta = Ingresos - Costos - Gastos
+  </div>
+
+  <h3>📋 Ejemplo: Estado de Resultados de Partmo (2026)</h3>
+  <table>
+    <tr><th>Concepto</th><th>Valor</th></tr>
+    <tr><td><strong>Ingresos Operacionales</strong></td><td></td></tr>
+    <tr><td style="padding-left:20px;">Ventas de filtros</td><td>$320.000.000</td></tr>
+    <tr><td style="padding-left:20px;">Devoluciones y rebajas</td><td>($5.000.000)</td></tr>
+    <tr><td style="padding-left:20px;"><strong>Ingresos netos</strong></td><td><strong>$315.000.000</strong></td></tr>
+    <tr><td><strong>Costos de Ventas</strong></td><td></td></tr>
+    <tr><td style="padding-left:20px;">Materia prima</td><td>($80.000.000)</td></tr>
+    <tr><td style="padding-left:20px;">Mano de obra directa</td><td>($60.000.000)</td></tr>
+    <tr><td style="padding-left:20px;">Costos indirectos (CIF)</td><td>($45.000.000)</td></tr>
+    <tr><td style="padding-left:20px;"><strong>Total Costos de Ventas</strong></td><td><strong>($185.000.000)</strong></td></tr>
+    <tr class="total"><td><strong>Utilidad Bruta</strong></td><td><strong>$130.000.000</strong></td></tr>
+    <tr><td><strong>Gastos Operacionales</strong></td><td></td></tr>
+    <tr><td style="padding-left:20px;">Gastos administrativos (sueldos, arriendos)</td><td>($45.000.000)</td></tr>
+    <tr><td style="padding-left:20px;">Gastos de ventas (publicidad, comisiones)</td><td>($20.000.000)</td></tr>
+    <tr><td style="padding-left:20px;">Depreciación</td><td>($4.500.000)</td></tr>
+    <tr><td style="padding-left:20px;"><strong>Total Gastos Operacionales</strong></td><td><strong>($69.500.000)</strong></td></tr>
+    <tr class="total"><td><strong>Utilidad Operacional (EBITDA)</strong></td><td><strong>$60.500.000</strong></td></tr>
+    <tr><td><strong>Gastos No Operacionales</strong></td><td></td></tr>
+    <tr><td style="padding-left:20px;">Gastos financieros (intereses)</td><td>($8.000.000)</td></tr>
+    <tr><td style="padding-left:20px;">Otros gastos</td><td>($2.000.000)</td></tr>
+    <tr class="total"><td><strong>Utilidad Antes de Impuestos</strong></td><td><strong>$50.500.000</strong></td></tr>
+    <tr><td style="padding-left:20px;">Impuesto de renta (35%)</td><td>($17.675.000)</td></tr>
+    <tr class="total" style="background:#1a3c6e; color:white;"><td><strong>Utilidad Neta</strong></td><td><strong>$32.825.000</strong></td></tr>
+  </table>
+  <div class="highlight purple">
+    <strong>📌 Interpretación:</strong> Partmo generó <strong>$32.825.000</strong> de utilidad neta en 2026, lo que representa un <strong>10.4%</strong> sobre los ingresos netos.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. ESTADO DE FLUJO DE EFECTIVO            -->
+  <!-- ========================================== -->
+  <h2>💵 3. Estado de Flujo de Efectivo</h2>
+  <p>
+    El <strong>Estado de Flujo de Efectivo</strong> muestra las <strong>entradas y salidas de efectivo</strong> durante un período, clasificadas en tres actividades (NIC 7):
+  </p>
+  <ul>
+    <li><strong>Operativas:</strong> Flujos generados por la actividad principal (ventas, cobros, pagos a proveedores, nómina).</li>
+    <li><strong>Inversión:</strong> Compra/venta de activos fijos (maquinaria, edificios).</li>
+    <li><strong>Financiación:</strong> Préstamos, aportes de capital, pago de dividendos.</li>
+  </ul>
+
+  <h3>📋 Ejemplo: Flujo de Efectivo de Partmo (2026)</h3>
+  <table>
+    <tr><th colspan="2" style="text-align:center;">Flujo de Efectivo - Método Indirecto</th></tr>
+    <tr><th colspan="2" style="background:#eef4ff;">Actividades Operativas</th></tr>
+    <tr><td style="padding-left:20px;">Utilidad Neta</td><td>$32.825.000</td></tr>
+    <tr><td style="padding-left:20px;">+ Depreciación</td><td>$4.500.000</td></tr>
+    <tr><td style="padding-left:20px;">- Aumento de inventarios</td><td>($3.000.000)</td></tr>
+    <tr><td style="padding-left:20px;">+ Aumento de proveedores</td><td>$2.000.000</td></tr>
+    <tr><td style="padding-left:20px;">- Aumento de cuentas por cobrar</td><td>($1.500.000)</td></tr>
+    <tr class="total"><td><strong>Flujo Efectivo Operativo</strong></td><td><strong>$34.825.000</strong></td></tr>
+    <tr><th colspan="2" style="background:#eef4ff;">Actividades de Inversión</th></tr>
+    <tr><td style="padding-left:20px;">Compra de maquinaria</td><td>($10.000.000)</td></tr>
+    <tr class="total"><td><strong>Flujo Efectivo de Inversión</strong></td><td><strong>($10.000.000)</strong></td></tr>
+    <tr><th colspan="2" style="background:#eef4ff;">Actividades de Financiación</th></tr>
+    <tr><td style="padding-left:20px;">Pago de préstamo</td><td>($5.000.000)</td></tr>
+    <tr><td style="padding-left:20px;">Aporte de socios</td><td>$2.000.000</td></tr>
+    <tr class="total"><td><strong>Flujo Efectivo de Financiación</strong></td><td><strong>($3.000.000)</strong></td></tr>
+    <tr class="total" style="background:#1a3c6e; color:white;">
+      <td><strong>Aumento Neto de Efectivo</strong></td>
+      <td><strong>$21.825.000</strong></td>
+    </tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 4. ESTADO DE CAMBIOS EN EL PATRIMONIO     -->
+  <!-- ========================================== -->
+  <h2>📑 4. Estado de Cambios en el Patrimonio</h2>
+  <p>
+    Muestra los <strong>movimientos del patrimonio</strong> durante un período: aportes de socios, utilidades generadas, dividendos pagados y otros ajustes.
+  </p>
+
+  <h3>📋 Ejemplo: Cambios en Patrimonio de Partmo (2026)</h3>
+  <table>
+    <tr><th>Concepto</th><th>Capital Social</th><th>Utilidades Retenidas</th><th>Total Patrimonio</th></tr>
+    <tr><td><strong>Saldo inicial (31/12/2025)</strong></td><td>$28.000.000</td><td>$15.000.000</td><td><strong>$43.000.000</strong></td></tr>
+    <tr><td style="padding-left:20px;">+ Aportes de socios</td><td>$2.000.000</td><td></td><td>$2.000.000</td></tr>
+    <tr><td style="padding-left:20px;">+ Utilidad Neta</td><td></td><td>$32.825.000</td><td>$32.825.000</td></tr>
+    <tr><td style="padding-left:20px;">- Distribución de dividendos</td><td></td><td>($26.825.000)</td><td>($26.825.000)</td></tr>
+    <tr class="total"><td><strong>Saldo final (31/12/2026)</strong></td><td><strong>$30.000.000</strong></td><td><strong>$21.000.000</strong></td><td><strong>$51.000.000</strong></td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- RELACIÓN ENTRE ESTADOS                    -->
+  <!-- ========================================== -->
+  <h2>🔗 Relación entre los Estados Financieros</h2>
+  <div class="highlight">
+    <p>
+      <strong>La utilidad neta del Estado de Resultados</strong> se traslada al <strong>Patrimonio</strong> en el Balance General (como utilidades retenidas) y es el punto de partida del <strong>Flujo de Efectivo</strong> (método indirecto).
+    </p>
+  </div>
+  <div style="text-align:center; padding:20px; background:#f4f6fa; border-radius:12px; margin:16px 0;">
+    <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+      <span style="background:#1a3c6e; color:white; padding:10px 18px; border-radius:8px;">📊 Balance General</span>
+      <span style="font-size:1.5rem;">↔</span>
+      <span style="background:#28a745; color:white; padding:10px 18px; border-radius:8px;">📈 Estado de Resultados</span>
+      <span style="font-size:1.5rem;">↔</span>
+      <span style="background:#e67e22; color:white; padding:10px 18px; border-radius:8px;">💵 Flujo de Efectivo</span>
+    </div>
+    <p style="margin-top:12px; font-size:0.9rem; color:#555;">Todos están interconectados. ¡Ninguno se puede entender por separado!</p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ANÁLISIS FINANCIERO BÁSICO                -->
+  <!-- ========================================== -->
+  <h2>📉 Análisis Financiero Básico (Ratios)</h2>
+  <p>
+    Los <strong>ratios financieros</strong> permiten interpretar los estados financieros y evaluar la salud de la empresa.
+  </p>
+
+  <h3>📌 Ratios de Partmo (ejemplo)</h3>
+  <table>
+    <tr><th>Ratio</th><th>Fórmula</th><th>Cálculo</th><th>Interpretación</th></tr>
+    <tr>
+      <td><strong>Liquidez Corriente</strong></td>
+      <td>Activo Corriente / Pasivo Corriente</td>
+      <td>$48M / $17M = <strong>2.82</strong></td>
+      <td>✅ Bueno: tiene $2.82 por cada $1 de deuda a corto plazo.</td>
+    </tr>
+    <tr>
+      <td><strong>Endeudamiento</strong></td>
+      <td>Pasivo Total / Activo Total</td>
+      <td>$37M / $88M = <strong>42%</strong></td>
+      <td>✅ Aceptable: menos del 50% de deuda sobre activos.</td>
+    </tr>
+    <tr>
+      <td><strong>ROE (Rentabilidad Patrimonio)</strong></td>
+      <td>Utilidad Neta / Patrimonio</td>
+      <td>$32.8M / $51M = <strong>64.4%</strong></td>
+      <td>✅ Excelente: genera alta rentabilidad para los accionistas.</td>
+    </tr>
+    <tr>
+      <td><strong>Margen Neto</strong></td>
+      <td>Utilidad Neta / Ingresos Netos</td>
+      <td>$32.8M / $315M = <strong>10.4%</strong></td>
+      <td>✅ Bueno: por cada $100 vendido, gana $10.40.</td>
+    </tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- APLICACIÓN EN PARTMO                      -->
+  <!-- ========================================== -->
+  <h2>🏢 ¿Cómo aplica esto en Partmo?</h2>
+  <ul>
+    <li><strong>Balance General:</strong> Se revisa mensualmente para controlar inventarios y cuentas por cobrar.</li>
+    <li><strong>Estado de Resultados:</strong> Se analiza la rentabilidad de cada línea de productos (filtros de aire, aceite, combustible).</li>
+    <li><strong>Flujo de Efectivo:</strong> Clave para planificar compras de materia prima y pagos de nómina.</li>
+    <li><strong>Ratios:</strong> La gerencia los usa para tomar decisiones de inversión y financiamiento.</li>
+  </ul>
+  <div class="highlight green">
+    <strong>💡 Tu rol en Partmo:</strong> Apoyar en la <strong>preparación de estos estados</strong> mensuales, revisar que los ajustes estén registrados y ayudar a calcular los <strong>ratios financieros</strong> para la gerencia.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EJERCICIO PRÁCTICO                         -->
+  <!-- ========================================== -->
+  <h2>✍️ Ejercicio Práctico</h2>
+  <div class="highlight orange">
+    <strong>📌 Caso Partmo (mes de julio):</strong> La empresa presenta los siguientes saldos al 31 de julio:
+    <ul style="margin-top:10px;">
+      <li>Ventas: $45.000.000</li>
+      <li>Costo de ventas: $28.000.000</li>
+      <li>Gastos administrativos: $8.000.000</li>
+      <li>Gastos de ventas: $4.000.000</li>
+      <li>Gastos financieros: $2.000.000</li>
+      <li>Impuesto de renta: 35%</li>
+    </ul>
+    <p style="margin-top:10px;">
+      <strong>Pregunta:</strong> Elabora el Estado de Resultados, calcula la Utilidad Neta y el Margen Neto.
+    </p>
+    <p style="margin-top:10px; font-size:0.9rem; color:#666;">
+      <em>(Respuesta: Utilidad Neta = $7.150.000, Margen Neto = 15.9%)</em>
+    </p>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- NAVEGACIÓN                                -->
+  <!-- ========================================== -->
+  <div class="nav-links">
+    <a href="03-ciclo-contable.html">⬅ Módulo 3: Ciclo Contable</a>
+    <a href="05-niif.html">Módulo 5: NIIF ➡</a>
+  </div>
+
+  <div class="footer">
+    📌 Módulo 4 • Estados Financieros • <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026
+  </div>
+
+</div>
+</body>
+</html>
