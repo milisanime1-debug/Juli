@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis Financiero - Módulo 8</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #1a3c6e;
+      font-size: 1.05rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.green {
+      border-left-color: #28a745;
+      background: #f0faf4;
+    }
+    .highlight.green strong { color: #28a745; }
+    .highlight.orange {
+      border-left-color: #e67e22;
+      background: #fef5e7;
+    }
+    .highlight.orange strong { color: #e67e22; }
+    .highlight.red {
+      border-left-color: #c0392b;
+      background: #fdf0ee;
+    }
+    .highlight.red strong { color: #c0392b; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 0.95rem;
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+    tr.total { font-weight: 700; background: #f4f6fa; }
+
+    .ratio-box {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 16px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .ratio-box .num {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 0.85rem;
+      margin-right: 10px;
+    }
+    .ratio-box h4 {
+      display: inline;
+      color: #1a3c6e;
+      font-size: 1.05rem;
+    }
+    .ratio-box .formula {
+      background: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px dashed #1a3c6e;
+      margin: 8px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      display: inline-block;
+    }
+    .ratio-box .interpretacion {
+      margin-top: 8px;
+      padding: 8px 14px;
+      background: #eef4ff;
+      border-radius: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .badge.excelente { background: #d4edda; color: #155724; }
+    .badge.bueno { background: #cce5ff; color: #004085; }
+    .badge.regular { background: #fff3cd; color: #856404; }
+    .badge.peligro { background: #f8d7da; color: #721c24; }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      table { font-size: 0.82rem; }
+      .ratio-box { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back">⬅ Volver al índice</a>
+
+  <h1>📉 Análisis Financiero</h1>
+  <div class="subtitle">
+    Módulo 8 • Interpretación de Estados Financieros para <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- INTRODUCCIÓN                               -->
+  <!-- ========================================== -->
+  <h2>📌 ¿Qué es el Análisis Financiero?</h2>
+  <p>
+    El <strong>análisis financiero</strong> es el proceso de evaluar la salud económica de una empresa mediante el estudio de sus <strong>estados financieros</strong>. Su objetivo es:
+  </p>
+  <ul>
+    <li>Determinar la <strong>liquidez</strong> (capacidad de pagar deudas a corto plazo).</li>
+    <li>Evaluar el <strong>endeudamiento</strong> (nivel de deuda frente al patrimonio).</li>
+    <li>Medir la <strong>rentabilidad</strong> (capacidad de generar utilidades).</li>
+    <li>Analizar la <strong>eficiencia</strong> (uso de activos para generar ventas).</li>
+  </ul>
+  <div class="highlight">
+    <strong>💡 En Partmo:</strong> El análisis financiero es clave para tomar decisiones sobre <strong>inversiones en maquinaria</strong>, <strong>políticas de crédito</strong> a clientes y <strong>control de costos</strong> de producción.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ESTADOS FINANCIEROS BASE                   -->
+  <!-- ========================================== -->
+  <h2>📊 Estados Financieros de Partmo (Ejemplo 2025)</h2>
+  <p>Para nuestro análisis, usaremos los siguientes estados financieros resumidos de <strong>Filtros Partmo S.A.S.</strong>:</p>
+
+  <h3>📋 Balance General (31 de diciembre de 2025)</h3>
+  <table>
+    <tr><th colspan="3">ACTIVO</th></tr>
+    <tr><td>Caja y Bancos</td><td>$15.000.000</td><td></td></tr>
+    <tr><td>Cuentas por Cobrar</td><td>$25.000.000</td><td></td></tr>
+    <tr><td>Inventarios</td><td>$40.000.000</td><td></td></tr>
+    <tr><td><strong>Total Activo Corriente</strong></td><td><strong>$80.000.000</strong></td><td></td></tr>
+    <tr><td>Propiedades, Planta y Equipo</td><td>$120.000.000</td><td></td></tr>
+    <tr><td>(-) Depreciación Acumulada</td><td>($20.000.000)</td><td></td></tr>
+    <tr><td><strong>Total Activo No Corriente</strong></td><td><strong>$100.000.000</strong></td><td></td></tr>
+    <tr style="font-weight:700; background:#f4f6fa;"><td><strong>TOTAL ACTIVO</strong></td><td></td><td><strong>$180.000.000</strong></td></tr>
+
+    <tr><th colspan="3">PASIVO</th></tr>
+    <tr><td>Proveedores</td><td>$12.000.000</td><td></td></tr>
+    <tr><td>Obligaciones Financieras CP</td><td>$8.000.000</td><td></td></tr>
+    <tr><td><strong>Total Pasivo Corriente</strong></td><td><strong>$20.000.000</strong></td><td></td></tr>
+    <tr><td>Obligaciones Financieras LP</td><td>$50.000.000</td><td></td></tr>
+    <tr><td><strong>Total Pasivo No Corriente</strong></td><td><strong>$50.000.000</strong></td><td></td></tr>
+    <tr style="font-weight:700; background:#f4f6fa;"><td><strong>TOTAL PASIVO</strong></td><td></td><td><strong>$70.000.000</strong></td></tr>
+
+    <tr><th colspan="3">PATRIMONIO</th></tr>
+    <tr><td>Capital Social</td><td>$80.000.000</td><td></td></tr>
+    <tr><td>Utilidades Retenidas</td><td>$30.000.000</td><td></td></tr>
+    <tr style="font-weight:700; background:#f4f6fa;"><td><strong>TOTAL PATRIMONIO</strong></td><td></td><td><strong>$110.000.000</strong></td></tr>
+    <tr style="font-weight:700; background:#d4edda;"><td><strong>TOTAL PASIVO + PATRIMONIO</strong></td><td></td><td><strong>$180.000.000</strong></td></tr>
+  </table>
+
+  <h3>📈 Estado de Resultados (2025)</h3>
+  <table>
+    <tr><td><strong>Ingresos por Ventas</strong></td><td><strong>$250.000.000</strong></td></tr>
+    <tr><td>Costo de Ventas</td><td>($150.000.000)</td></tr>
+    <tr style="font-weight:700;"><td>Utilidad Bruta</td><td>$100.000.000</td></tr>
+    <tr><td>Gastos Operacionales</td><td>($65.000.000)</td></tr>
+    <tr><td>Gastos Financieros</td><td>($10.000.000)</td></tr>
+    <tr style="font-weight:700; background:#f4f6fa;"><td>Utilidad Neta</td><td><strong>$25.000.000</strong></td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- GRUPO 1: RATIOS DE LIQUIDEZ                -->
+  <!-- ========================================== -->
+  <h2>💰 Grupo 1: Ratios de Liquidez</h2>
+  <p>Miden la capacidad de la empresa para <strong>pagar sus deudas a corto plazo</strong> con sus activos corrientes.</p>
+
+  <!-- Ratio 1: Liquidez Corriente -->
+  <div class="ratio-box">
+    <span class="num">1</span>
+    <h4>Liquidez Corriente (Razón Corriente)</h4>
+    <div class="formula">Liquidez Corriente = Activo Corriente / Pasivo Corriente</div>
+    <p><strong>Cálculo Partmo:</strong> $80.000.000 / $20.000.000 = <strong>4.00</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo tiene <strong>$4.00</strong> en activos corrientes por cada <strong>$1.00</strong> de deuda a corto plazo. <br>
+      <span class="badge excelente">Excelente</span> El valor ideal está entre 1.5 y 2.5. Partmo tiene una liquidez muy sólida.
+    </div>
+  </div>
+
+  <!-- Ratio 2: Prueba Ácida -->
+  <div class="ratio-box">
+    <span class="num">2</span>
+    <h4>Prueba Ácida (Liquidez Rápida)</h4>
+    <div class="formula">Prueba Ácida = (Activo Corriente - Inventarios) / Pasivo Corriente</div>
+    <p><strong>Cálculo Partmo:</strong> ($80.000.000 - $40.000.000) / $20.000.000 = <strong>2.00</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo tiene <strong>$2.00</strong> en activos líquidos (sin inventarios) por cada <strong>$1.00</strong> de deuda. <br>
+      <span class="badge excelente">Excelente</span> El valor ideal es > 1.0. Partmo puede pagar sus deudas sin depender de vender inventarios.
+    </div>
+  </div>
+
+  <!-- Ratio 3: Capital de Trabajo -->
+  <div class="ratio-box">
+    <span class="num">3</span>
+    <h4>Capital de Trabajo Neto</h4>
+    <div class="formula">Capital de Trabajo = Activo Corriente - Pasivo Corriente</div>
+    <p><strong>Cálculo Partmo:</strong> $80.000.000 - $20.000.000 = <strong>$60.000.000</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo tiene <strong>$60.000.000</strong> disponibles para operar después de cubrir sus deudas a corto plazo. <br>
+      <span class="badge excelente">Excelente</span> Un capital de trabajo positivo indica que la empresa puede financiar su operación diaria sin problemas.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- GRUPO 2: RATIOS DE ENDEUDAMIENTO           -->
+  <!-- ========================================== -->
+  <h2>📊 Grupo 2: Ratios de Endeudamiento</h2>
+  <p>Miden el nivel de <strong>deuda</strong> de la empresa en relación con sus activos y patrimonio.</p>
+
+  <!-- Ratio 4: Endeudamiento Total -->
+  <div class="ratio-box">
+    <span class="num">4</span>
+    <h4>Endeudamiento Total</h4>
+    <div class="formula">Endeudamiento = Pasivo Total / Activo Total</div>
+    <p><strong>Cálculo Partmo:</strong> $70.000.000 / $180.000.000 = <strong>0.39 (39%)</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> El <strong>39%</strong> de los activos de Partmo están financiados con deuda. <br>
+      <span class="badge excelente">Excelente</span> El valor ideal está entre 40% y 60%. Partmo tiene un nivel de deuda saludable y bajo riesgo.
+    </div>
+  </div>
+
+  <!-- Ratio 5: Apalancamiento Financiero -->
+  <div class="ratio-box">
+    <span class="num">5</span>
+    <h4>Apalancamiento Financiero</h4>
+    <div class="formula">Apalancamiento = Pasivo Total / Patrimonio</div>
+    <p><strong>Cálculo Partmo:</strong> $70.000.000 / $110.000.000 = <strong>0.64</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Por cada <strong>$1.00</strong> de patrimonio, Partmo tiene <strong>$0.64</strong> de deuda. <br>
+      <span class="badge excelente">Excelente</span> Un apalancamiento bajo (menor a 1.0) indica que la empresa no depende excesivamente de terceros.
+    </div>
+  </div>
+
+  <!-- Ratio 6: Cobertura de Intereses -->
+  <div class="ratio-box">
+    <span class="num">6</span>
+    <h4>Cobertura de Intereses</h4>
+    <div class="formula">Cobertura = Utilidad Operacional / Gastos Financieros</div>
+    <p><strong>Cálculo Partmo:</strong> $35.000.000 / $10.000.000 = <strong>3.50</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo genera <strong>$3.50</strong> de utilidad operacional por cada <strong>$1.00</strong> que paga en intereses. <br>
+      <span class="badge buen">Bueno</span> El valor ideal es > 2.0. La empresa tiene capacidad para cubrir sus obligaciones financieras.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- GRUPO 3: RATIOS DE RENTABILIDAD            -->
+  <!-- ========================================== -->
+  <h2>📈 Grupo 3: Ratios de Rentabilidad</h2>
+  <p>Miden la capacidad de la empresa para <strong>generar utilidades</strong> en relación con sus ventas, activos y patrimonio.</p>
+
+  <!-- Ratio 7: Margen Bruto -->
+  <div class="ratio-box">
+    <span class="num">7</span>
+    <h4>Margen Bruto</h4>
+    <div class="formula">Margen Bruto = (Utilidad Bruta / Ventas) × 100</div>
+    <p><strong>Cálculo Partmo:</strong> ($100.000.000 / $250.000.000) × 100 = <strong>40%</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo retiene <strong>$0.40</strong> por cada <strong>$1.00</strong> en ventas después de pagar el costo de producción. <br>
+      <span class="badge excelente">Excelente</span> Un margen bruto > 30% es excelente para la industria manufacturera. Indica un buen control de costos.
+    </div>
+  </div>
+
+  <!-- Ratio 8: Margen Neto -->
+  <div class="ratio-box">
+    <span class="num">8</span>
+    <h4>Margen Neto</h4>
+    <div class="formula">Margen Neto = (Utilidad Neta / Ventas) × 100</div>
+    <p><strong>Cálculo Partmo:</strong> ($25.000.000 / $250.000.000) × 100 = <strong>10%</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo obtiene <strong>$0.10</strong> de utilidad neta por cada <strong>$1.00</strong> en ventas. <br>
+      <span class="badge excelente">Excelente</span> Un margen neto > 8% es excelente para el sector industrial.
+    </div>
+  </div>
+
+  <!-- Ratio 9: ROA (Rendimiento sobre Activos) -->
+  <div class="ratio-box">
+    <span class="num">9</span>
+    <h4>ROA - Rendimiento sobre Activos</h4>
+    <div class="formula">ROA = (Utilidad Neta / Activo Total) × 100</div>
+    <p><strong>Cálculo Partmo:</strong> ($25.000.000 / $180.000.000) × 100 = <strong>13.9%</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo genera <strong>$0.14</strong> de utilidad por cada <strong>$1.00</strong> invertido en activos. <br>
+      <span class="badge excelente">Excelente</span> Un ROA > 10% indica que la empresa usa eficientemente sus activos para generar utilidades.
+    </div>
+  </div>
+
+  <!-- Ratio 10: ROE (Rendimiento sobre Patrimonio) -->
+  <div class="ratio-box">
+    <span class="num">10</span>
+    <h4>ROE - Rendimiento sobre Patrimonio</h4>
+    <div class="formula">ROE = (Utilidad Neta / Patrimonio) × 100</div>
+    <p><strong>Cálculo Partmo:</strong> ($25.000.000 / $110.000.000) × 100 = <strong>22.7%</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo genera <strong>$0.23</strong> de utilidad por cada <strong>$1.00</strong> de patrimonio de los accionistas. <br>
+      <span class="badge excelente">Excelente</span> Un ROE > 20% es excelente. Los accionistas obtienen un alto retorno sobre su inversión.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- GRUPO 4: RATIOS DE EFICIENCIA              -->
+  <!-- ========================================== -->
+  <h2>⚡ Grupo 4: Ratios de Eficiencia</h2>
+  <p>Miden la <strong>efectividad</strong> con la que la empresa usa sus activos para generar ventas.</p>
+
+  <!-- Ratio 11: Rotación de Inventarios -->
+  <div class="ratio-box">
+    <span class="num">11</span>
+    <h4>Rotación de Inventarios</h4>
+    <div class="formula">Rotación Inventarios = Costo de Ventas / Inventario Promedio</div>
+    <p><strong>Cálculo Partmo:</strong> $150.000.000 / $40.000.000 = <strong>3.75 veces</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo vende y reemplaza su inventario <strong>3.75 veces</strong> al año. <br>
+      <span class="badge buen">Bueno</span> Para una empresa manufacturera, una rotación entre 3 y 6 veces es adecuada. <br>
+      <strong>⏱️ Días promedio:</strong> 365 / 3.75 = <strong>97 días</strong> de inventario.
+    </div>
+  </div>
+
+  <!-- Ratio 12: Rotación de Cuentas por Cobrar -->
+  <div class="ratio-box">
+    <span class="num">12</span>
+    <h4>Rotación de Cuentas por Cobrar</h4>
+    <div class="formula">Rotación CxC = Ventas a Crédito / Cuentas por Cobrar Promedio</div>
+    <p><strong>Cálculo Partmo:</strong> (asumiendo 60% ventas a crédito) $150.000.000 / $25.000.000 = <strong>6 veces</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo cobra a sus clientes <strong>6 veces</strong> al año. <br>
+      <span class="badge excelente">Excelente</span> <strong>⏱️ Días promedio:</strong> 365 / 6 = <strong>61 días</strong> de cobro. Para una empresa industrial, menos de 60 días es óptimo.
+    </div>
+  </div>
+
+  <!-- Ratio 13: Rotación de Proveedores -->
+  <div class="ratio-box">
+    <span class="num">13</span>
+    <h4>Rotación de Proveedores</h4>
+    <div class="formula">Rotación Proveedores = Compras a Crédito / Proveedores Promedio</div>
+    <p><strong>Cálculo Partmo:</strong> (asumiendo compras de $100M) $100.000.000 / $12.000.000 = <strong>8.33 veces</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo paga a sus proveedores <strong>8.33 veces</strong> al año. <br>
+      <span class="badge excelente">Excelente</span> <strong>⏱️ Días promedio:</strong> 365 / 8.33 = <strong>44 días</strong> de pago. Partmo tiene buena capacidad de negociación y no depende de créditos de proveedores.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- GRUPO 5: RATIOS DE MERCADO                 -->
+  <!-- ========================================== -->
+  <h2>📊 Grupo 5: Ratios de Mercado</h2>
+  <p>Miden el <strong>valor</strong> de la empresa desde la perspectiva de los accionistas y el mercado.</p>
+
+  <!-- Ratio 14: Utilidad por Acción -->
+  <div class="ratio-box">
+    <span class="num">14</span>
+    <h4>Utilidad por Acción (UPA / EPS)</h4>
+    <div class="formula">UPA = Utilidad Neta / Número de Acciones en Circulación</div>
+    <p><strong>Cálculo Partmo:</strong> $25.000.000 / 100.000 acciones = <strong>$250 por acción</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Cada acción de Partmo genera <strong>$250</strong> de utilidad anual. <br>
+      <span class="badge excelente">Excelente</span> Este indicador muestra la rentabilidad por acción y es clave para los inversionistas.
+    </div>
+  </div>
+
+  <!-- Ratio 15: Dividendos por Acción -->
+  <div class="ratio-box">
+    <span class="num">15</span>
+    <h4>Dividendo por Acción (DPA / DPS)</h4>
+    <div class="formula">DPA = Dividendos Pagados / Número de Acciones</div>
+    <p><strong>Cálculo Partmo:</strong> (asumiendo 40% de utilidad como dividendo) $10.000.000 / 100.000 = <strong>$100 por acción</strong></p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo paga <strong>$100</strong> en dividendos por cada acción. <br>
+      <span class="badge buen">Bueno</span> El pago de dividendos refleja la política de distribución de utilidades de la empresa.
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ANÁLISIS DUPONT                            -->
+  <!-- ========================================== -->
+  <h2>🔍 Análisis Dupont</h2>
+  <p>
+    El <strong>Análisis Dupont</strong> descompone el ROE en tres factores para entender <strong>qué está impulsando</strong> la rentabilidad:
+  </p>
+  <div class="highlight" style="text-align:center; font-size:1.1rem;">
+    <strong>ROE = Margen Neto × Rotación de Activos × Apalancamiento Financiero</strong>
+  </div>
+
+  <h3>📌 Cálculo para Partmo:</h3>
+  <table>
+    <tr><th>Componente</th><th>Fórmula</th><th>Valor</th></tr>
+    <tr><td>Margen Neto</td><td>Utilidad Neta / Ventas</td><td>25M / 250M = <strong>10%</strong></td></tr>
+    <tr><td>Rotación de Activos</td><td>Ventas / Activo Total</td><td>250M / 180M = <strong>1.39</strong></td></tr>
+    <tr><td>Apalancamiento</td><td>Activo Total / Patrimonio</td><td>180M / 110M = <strong>1.64</strong></td></tr>
+    <tr style="font-weight:700; background:#d4edda;"><td>ROE (Dupont)</td><td>10% × 1.39 × 1.64</td><td><strong>22.8%</strong></td></tr>
+  </table>
+  <div class="interpretacion" style="background:#eef4ff; padding:14px; border-radius:8px; margin:12px 0;">
+    <strong>✅ Interpretación:</strong> El ROE de Partmo (22.8%) es impulsado principalmente por:
+    <ul>
+      <li><strong>Alto margen neto (10%)</strong> → Buen control de costos.</li>
+      <li><strong>Buena rotación de activos (1.39)</strong> → Uso eficiente de activos.</li>
+      <li><strong>Apalancamiento moderado (1.64)</strong> → Nivel saludable de deuda.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- RESULTADOS Y RECOMENDACIONES               -->
+  <!-- ========================================== -->
+  <h2>📋 Resumen de Resultados para Partmo</h2>
+  <table>
+    <tr><th>Ratio</th><th>Valor</th><th>Interpretación</th></tr>
+    <tr><td>Liquidez Corriente</td><td>4.00</td><td><span class="badge excelente">Excelente</span> Alta capacidad de pago</td></tr>
+    <tr><td>Prueba Ácida</td><td>2.00</td><td><span class="badge excelente">Excelente</span> Sin depender de inventarios</td></tr>
+    <tr><td>Endeudamiento</td><td>39%</td><td><span class="badge excelente">Excelente</span> Bajo riesgo financiero</td></tr>
+    <tr><td>Margen Neto</td><td>10%</td><td><span class="badge excelente">Excelente</span> Alta rentabilidad</td></tr>
+    <tr><td>ROA</td><td>13.9%</td><td><span class="badge excelente">Excelente</span> Uso eficiente de activos</td></tr>
+    <tr><td>ROE</td><td>22.7%</td><td><span class="badge excelente">Excelente</span> Alto retorno para accionistas</td></tr>
+  </table>
+
+  <div class="highlight green">
+    <strong>✅ Conclusión:</strong> <strong>Filtros Partmo S.A.S.</strong> presenta una <strong>situación financiera excelente</strong>:
+    <ul>
+      <li><strong>Liquidez sólida</strong> → Capacidad de pago alta.</li>
+      <li><strong>Endeudamiento bajo</strong> → Riesgo financiero controlado.</li>
+      <li><strong>Rentabilidad alta</strong> → Utilidades consistentes.</li>
+      <li><strong>Eficiencia operativa</strong> → Buen uso de inventarios y activos.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- RECOMENDACIONES ESTRATÉGICAS               -->
+  <!-- ========================================== -->
+  <h2>📌 Recomendaciones para Partmo</h2>
+  <div class="ratio-box" style="border-left-color: #1a3c6e;">
+    <h4>💡 ¿Cómo mejorar aún más?</h4>
+    <ul>
+      <li><strong>Optimizar inventarios:</strong> Reducir los días de inventario (97 días) mediante una mejor planificación de producción.</li>
+      <li><strong>Mejorar cobro:</strong> Reducir los días de cobro (61 días) ofreciendo descuentos por pronto pago.</li>
+      <li><strong>Invertir en tecnología:</strong> Automatizar procesos para mejorar el margen neto.</li>
+    <li><strong>Revisar políticas de crédito:</strong> Evaluar si los plazos otorgados a clientes son óptimos.</li>
+    <li><strong>Planificar inversiones:</strong> Aprovechar la buena liquidez para invertir en maquinaria que mejore la eficiencia.</li>
+  </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ANÁLISIS HORIZONTAL Y VERTICAL             -->
+  <!-- ========================================== -->
+  <h2>📊 Análisis Horizontal y Vertical</h2>
+  <p>
+    Además de los ratios, existen dos técnicas complementarias para analizar estados financieros:
+  </p>
+
+  <h3>📌 Análisis Vertical (Estructura)</h3>
+  <p>
+    Consiste en expresar cada cuenta como <strong>porcentaje</strong> de un total (Activo Total o Ventas). Permite ver la <strong>composición</strong> de los estados financieros.
+  </p>
+
+  <h4>📋 Balance General - Análisis Vertical (Activo)</h4>
+  <table>
+    <tr><th>Cuenta</th><th>Valor</th><th>% del Activo Total</th></tr>
+    <tr><td>Caja y Bancos</td><td>$15.000.000</td><td>8.3%</td></tr>
+    <tr><td>Cuentas por Cobrar</td><td>$25.000.000</td><td>13.9%</td></tr>
+    <tr><td>Inventarios</td><td>$40.000.000</td><td>22.2%</td></tr>
+    <tr><td><strong>Total Activo Corriente</strong></td><td><strong>$80.000.000</strong></td><td><strong>44.4%</strong></td></tr>
+    <tr><td>Propiedades, Planta y Equipo</td><td>$100.000.000</td><td>55.6%</td></tr>
+    <tr style="font-weight:700; background:#f4f6fa;"><td><strong>TOTAL ACTIVO</strong></td><td><strong>$180.000.000</strong></td><td><strong>100%</strong></td></tr>
+  </table>
+  <div class="highlight">
+    <strong>💡 Interpretación:</strong> El <strong>55.6%</strong> de los activos de Partmo están en <strong>activos fijos</strong> (maquinaria, planta), lo cual es típico de una empresa manufacturera. Los inventarios representan el <strong>22.2%</strong>, lo que indica una inversión significativa en materia prima y producto terminado.
+  </div>
+
+  <h4>📈 Estado de Resultados - Análisis Vertical</h4>
+  <table>
+    <tr><th>Cuenta</th><th>Valor</th><th>% de Ventas</th></tr>
+    <tr><td><strong>Ingresos por Ventas</strong></td><td><strong>$250.000.000</strong></td><td><strong>100%</strong></td></tr>
+    <tr><td>Costo de Ventas</td><td>($150.000.000)</td><td>60%</td></tr>
+    <tr style="font-weight:700;"><td>Utilidad Bruta</td><td>$100.000.000</td><td>40%</td></tr>
+    <tr><td>Gastos Operacionales</td><td>($65.000.000)</td><td>26%</td></tr>
+    <tr><td>Gastos Financieros</td><td>($10.000.000)</td><td>4%</td></tr>
+    <tr style="font-weight:700; background:#f4f6fa;"><td>Utilidad Neta</td><td><strong>$25.000.000</strong></td><td><strong>10%</strong></td></tr>
+  </table>
+  <div class="highlight green">
+    <strong>✅ Interpretación:</strong> El <strong>60%</strong> de las ventas se va en costos de producción, dejando un <strong>40%</strong> de utilidad bruta. Los gastos operacionales representan el <strong>26%</strong> y los financieros el <strong>4%</strong>, resultando en un <strong>10%</strong> de utilidad neta.
+  </div>
+
+  <h3>📌 Análisis Horizontal (Tendencias)</h3>
+  <p>
+    Compara los estados financieros de <strong>varios períodos</strong> para identificar tendencias y variaciones. Ejemplo con datos de Partmo (2024 vs 2025):
+  </p>
+  <table>
+    <tr><th>Cuenta</th><th>2024</th><th>2025</th><th>Variación ($)</th><th>Variación (%)</th></tr>
+    <tr><td>Ventas</td><td>$220.000.000</td><td>$250.000.000</td><td>+$30.000.000</td><td>+13.6%</td></tr>
+    <tr><td>Costo de Ventas</td><td>($135.000.000)</td><td>($150.000.000)</td><td>+$15.000.000</td><td>+11.1%</td></tr>
+    <tr style="font-weight:700;"><td>Utilidad Bruta</td><td>$85.000.000</td><td>$100.000.000</td><td>+$15.000.000</td><td>+17.6%</td></tr>
+    <tr><td>Gastos Operacionales</td><td>($55.000.000)</td><td>($65.000.000)</td><td>+$10.000.000</td><td>+18.2%</td></tr>
+    <tr style="font-weight:700; background:#f4f6fa;"><td>Utilidad Neta</td><td>$20.000.000</td><td>$25.000.000</td><td>+$5.000.000</td><td>+25%</td></tr>
+  </table>
+  <div class="highlight orange">
+    <strong>📊 Interpretación:</strong> Partmo creció en ventas un <strong>13.6%</strong>, pero los gastos operacionales crecieron más rápido (<strong>18.2%</strong>). A pesar de esto, la utilidad neta aumentó un <strong>25%</strong> gracias a la mejora en el margen bruto.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ANÁLISIS DE PUNTO DE EQUILIBRIO            -->
+  <!-- ========================================== -->
+  <h2>⚖️ Análisis de Punto de Equilibrio (Break-Even)</h2>
+  <p>
+    El <strong>punto de equilibrio</strong> es el nivel de ventas en el que los <strong>ingresos totales son iguales a los costos totales</strong> (no hay utilidad ni pérdida). Es fundamental para saber cuánto debe vender Partmo para cubrir sus costos fijos.
+  </p>
+
+  <div class="ratio-box">
+    <h4>📌 Fórmula Básica</h4>
+    <div class="formula">Punto de Equilibrio (Unidades) = Costos Fijos / (Precio de Venta Unitario - Costo Variable Unitario)</div>
+    <div class="formula">Punto de Equilibrio (Pesos) = Costos Fijos / (1 - Costo Variable / Ventas)</div>
+  </div>
+
+  <h3>📌 Ejemplo para Partmo (Filtros Industriales)</h3>
+  <table>
+    <tr><th>Concepto</th><th>Valor</th></tr>
+    <tr><td>Precio de venta por filtro</td><td>$50.000</td></tr>
+    <tr><td>Costo variable por filtro</td><td>$30.000</td></tr>
+    <tr><td>Margen de contribución</td><td>$20.000</td></tr>
+    <tr><td>Costos fijos totales (mensuales)</td><td>$15.000.000</td></tr>
+  </table>
+
+  <div class="ratio-box">
+    <h4>🧮 Cálculo</h4>
+    <p>
+      <strong>Punto de Equilibrio (Unidades):</strong> $15.000.000 / $20.000 = <strong>750 filtros/mes</strong>
+    </p>
+    <p>
+      <strong>Punto de Equilibrio (Pesos):</strong> 750 × $50.000 = <strong>$37.500.000/mes</strong>
+    </p>
+    <div class="interpretacion">
+      <strong>✅ Interpretación:</strong> Partmo debe vender <strong>750 filtros</strong> al mes (o generar $37.500.000 en ventas) para cubrir todos sus costos fijos y variables. Por encima de ese nivel, comienza a generar utilidades.
+    </div>
+  </div>
+
+  <div class="highlight green">
+    <strong>💡 Aplicación en Partmo:</strong> Si la empresa vende actualmente <strong>1.000 filtros/mes</strong>, está operando por encima del punto de equilibrio, generando utilidades por <strong>250 unidades × $20.000 = $5.000.000/mes</strong> antes de impuestos.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FLUJO DE CAJA Y ANÁLISIS DE SOLVENCIA      -->
+  <!-- ========================================== -->
+  <h2>💵 Flujo de Caja y Solvencia</h2>
+  <p>
+    El <strong>flujo de caja</strong> mide las <strong>entradas y salidas reales de efectivo</strong>. Es diferente a la utilidad, ya que incluye partidas que no afectan el efectivo (como depreciación).
+  </p>
+
+  <h3>📌 Flujo de Caja Libre (2025) - Partmo</h3>
+  <table>
+    <tr><th>Concepto</th><th>Valor</th></tr>
+    <tr style="font-weight:700;"><td>Utilidad Neta</td><td>$25.000.000</td></tr>
+    <tr><td>+ Depreciación</td><td>$5.000.000</td></tr>
+    <tr><td>+ Amortización</td><td>$1.000.000</td></tr>
+    <tr style="font-weight:700; background:#f4f6fa;"><td>Flujo de Caja Operativo</td><td>$31.000.000</td></tr>
+    <tr><td>- Inversión en Activos Fijos</td><td>($8.000.000)</td></tr>
+    <tr><td>- Pago de Deuda</td><td>($3.000.000)</td></tr>
+    <tr style="font-weight:700; background:#d4edda;"><td>Flujo de Caja Libre</td><td><strong>$20.000.000</strong></td></tr>
+  </table>
+  <div class="highlight green">
+    <strong>✅ Interpretación:</strong> Partmo generó <strong>$20.000.000</strong> en flujo de caja libre durante 2025. Este dinero puede usarse para:
+    <ul>
+      <li>Pagar dividendos a accionistas.</li>
+      <li>Reducir deuda.</li>
+      <li>Invertir en nuevos proyectos.</li>
+      <li>Crear reservas para contingencias.</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EJERCICIO PRÁCTICO COMPLETO                -->
+  <!-- ========================================== -->
+  <h2>✍️ Ejercicio Práctico</h2>
+  <div class="highlight orange">
+    <strong>📌 Caso Partmo - Análisis Financiero Completo</strong>
+    <p style="margin-top:10px;">
+      <strong>Datos:</strong> Filtros Partmo S.A.S. presenta los siguientes estados financieros resumidos:
+    </p>
+    <table style="font-size:0.9rem;">
+      <tr><th colspan="2">Balance General (31/12/2025)</th></tr>
+      <tr><td>Activo Corriente</td><td>$90.000.000</td></tr>
+      <tr><td>Activo No Corriente</td><td>$130.000.000</td></tr>
+      <tr style="font-weight:700; background:#f4f6fa;"><td>Total Activo</td><td>$220.000.000</td></tr>
+      <tr><td>Pasivo Corriente</td><td>$25.000.000</td></tr>
+      <tr><td>Pasivo No Corriente</td><td>$55.000.000</td></tr>
+      <tr style="font-weight:700; background:#f4f6fa;"><td>Total Pasivo</td><td>$80.000.000</td></tr>
+      <tr><td>Patrimonio</td><td>$140.000.000</td></tr>
+      <tr><th colspan="2">Estado de Resultados (2025)</th></tr>
+      <tr><td>Ventas</td><td>$300.000.000</td></tr>
+      <tr><td>Costo de Ventas</td><td>($180.000.000)</td></tr>
+      <tr style="font-weight:700;"><td>Utilidad Bruta</td><td>$120.000.000</td></tr>
+      <tr><td>Gastos Operacionales</td><td>($70.000.000)</td></tr>
+      <tr><td>Gastos Financieros</td><td>($12.000.000)</td></tr>
+      <tr style="font-weight:700; background:#f4f6fa;"><td>Utilidad Neta</td><td>$38.000.000</td></tr>
+    </table>
+
+    <p style="margin-top:15px;">
+      <strong>Preguntas:</strong>
+    </p>
+    <ol>
+      <li>Calcula la <strong>Liquidez Corriente</strong> y la <strong>Prueba Ácida</strong> (asumiendo inventarios de $40M).</li>
+      <li>Calcula el <strong>Endeudamiento Total</strong> y el <strong>Apalancamiento</strong>.</li>
+      <li>Calcula el <strong>Margen Bruto</strong>, <strong>Margen Neto</strong>, <strong>ROA</strong> y <strong>ROE</strong>.</li>
+      <li>¿Cuál es la situación financiera de Partmo? ¿Es saludable?</li>
+    </ol>
+  </div>
+
+  <div class="highlight green" style="display:none;" id="solucion">
+    <strong>✅ Solución (¡Haz clic para revelar!)</strong>
+    <div style="margin-top:10px; display:none;" id="solucion-contenido">
+      <p><strong>1. Liquidez:</strong></p>
+      <ul>
+        <li>Liquidez Corriente = $90M / $25M = <strong>3.60</strong></li>
+        <li>Prueba Ácida = ($90M - $40M) / $25M = <strong>2.00</strong></li>
+      </ul>
+      <p><strong>2. Endeudamiento:</strong></p>
+      <ul>
+        <li>Endeudamiento = $80M / $220M = <strong>36.4%</strong></li>
+        <li>Apalancamiento = $80M / $140M = <strong>0.57</strong></li>
+      </ul>
+      <p><strong>3. Rentabilidad:</strong></p>
+      <ul>
+        <li>Margen Bruto = $120M / $300M = <strong>40%</strong></li>
+        <li>Margen Neto = $38M / $300M = <strong>12.7%</strong></li>
+        <li>ROA = $38M / $220M = <strong>17.3%</strong></li>
+        <li>ROE = $38M / $140M = <strong>27.1%</strong></li>
+      </ul>
+      <p><strong>4. Conclusión:</strong> Partmo tiene una <strong>situación financiera excelente</strong>:</p>
+      <ul>
+        <li><strong>Liquidez sólida (3.60)</strong> → Capacidad de pago alta.</li>
+        <li><strong>Endeudamiento bajo (36.4%)</strong> → Riesgo financiero controlado.</li>
+        <li><strong>Rentabilidad alta (27.1% ROE)</strong> → Excelente retorno para accionistas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ENLACE AL SIGUIENTE MÓDULO                -->
+  <!-- ========================================== -->
+  <div style="display:flex; justify-content:space-between; margin-top:30px; padding-top:20px; border-top:2px solid #e8ecf1;">
+    <a href="07-impuestos-colombia.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">⬅ Módulo 7: Impuestos en Colombia</a>
+    <a href="09-practica-partmo.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">Módulo 9: Práctica en Partmo ➡</a>
+  </div>
+
+  <div class="footer">
+    📌 Módulo 8 • Análisis Financiero • <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026
+  </div>
+
+</div>
+
+<script>
+  // Mostrar/ocultar solución del ejercicio
+  document.addEventListener('DOMContentLoaded', function() {
+    const solucion = document.getElementById('solucion');
+    if (solucion) {
+      solucion.style.cursor = 'pointer';
+      solucion.addEventListener('click', function() {
+        const contenido = document.getElementById('solucion-contenido');
+        if (contenido.style.display === 'none' || contenido.style.display === '') {
+          contenido.style.display = 'block';
+          solucion.querySelector('strong').textContent = '✅ Solución (Click para ocultar)';
+        } else {
+          contenido.style.display = 'none';
+          solucion.querySelector('strong').textContent = '✅ Solución (¡Haz clic para revelar!)';
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
