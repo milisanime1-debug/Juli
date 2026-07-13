@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contabilización General - Guía Completa</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.6rem;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.2rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #34495e;
+      font-size: 1.05rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .warning strong { color: #856404; }
+    .success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .success strong { color: #155724; }
+    .info {
+      background: #cce5ff;
+      border-left: 4px solid #004085;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .info strong { color: #004085; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+    .badge.orange { background: #e67e22; }
+    .badge.green { background: #28a745; }
+    .badge.red { background: #dc3545; }
+    .badge.purple { background: #6f42c1; }
+
+    .step-box {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .step-box .step-num {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      text-align: center;
+      line-height: 28px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      margin-right: 10px;
+    }
+
+    .asiento {
+      background: #f4f6fa;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.92rem;
+      border: 1px solid #dde1e8;
+    }
+    .asiento .debito { color: #1a3c6e; }
+    .asiento .credito { color: #e67e22; }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    .footer a { color: #1a3c6e; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      table { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Botón volver -->
+  <a href="../ejercicios.html" class="back">⬅ Volver a Ejercicios</a>
+
+  <h1>📝 Contabilización General</h1>
+  <div class="subtitle">
+    Guía completa para el registro de operaciones contables en <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 1. INTRODUCCIÓN                              -->
+  <!-- ============================================ -->
+  <h2>1. Introducción a la Contabilización General</h2>
+  <p>
+    La <strong>contabilización general</strong> es el corazón del departamento de contabilidad.
+    Aquí se registran <strong>todas las transacciones</strong> de la empresa: compras, ventas,
+    gastos, costos, nómina, provisiones, depreciaciones, ajustes y más.
+  </p>
+
+  <div class="highlight">
+    <strong>🎯 Tu rol en contabilización:</strong> Como aprendiz, serás responsable de registrar
+    las operaciones diarias, verificar que los asientos estén correctos, y apoyar en los
+    <strong>cierres mensuales</strong> y en el <strong>soporte general</strong> al departamento.
+  </div>
+
+  <h3>📌 Principios básicos de contabilización</h3>
+  <ul>
+    <li><strong>Partida doble:</strong> Cada transacción afecta al menos dos cuentas (débito y crédito).</li>
+    <li><strong>Ecuación fundamental:</strong> Activo = Pasivo + Patrimonio (siempre debe cuadrar).</li>
+    <li><strong>Devengado:</strong> Los ingresos y gastos se registran cuando se causan, no cuando se pagan o cobran.</li>
+    <li><strong>Moneda funcional:</strong> En Colombia, el <strong>Peso Colombiano (COP)</strong>.</li>
+  </ul>
+
+  <!-- ============================================ -->
+  <!-- 2. ESTRUCTURA DE UN ASIENTO CONTABLE         -->
+  <!-- ============================================ -->
+  <h2>2. Estructura de un Asiento Contable</h2>
+  <p>Un asiento contable en Dynamics (o en cualquier sistema) tiene los siguientes campos obligatorios:</p>
+
+  <table>
+    <tr><th>Campo</th><th>Descripción</th><th>Ejemplo</th></tr>
+    <tr><td><strong>Fecha</strong></td><td>Fecha en que se registra la operación</td><td>15/07/2026</td></tr>
+    <tr><td><strong>Cuenta contable</strong></td><td>Código PUC de la cuenta afectada</td><td>1435 (Mercancías no fabricadas)</td></tr>
+    <tr><td><strong>Débito / Crédito</strong></td><td>Valor que aumenta o disminuye la cuenta</td><td>$10.000.000 (Débito)</td></tr>
+    <tr><td><strong>Descripción</strong></td><td>Breve explicación de la transacción</td><td>Compra de acero</td></tr>
+    <tr><td><strong>Documento</strong></td><td>Número de factura, comprobante o soporte</td><td>FV-2026-001</td></tr>
+    <tr><td><strong>Centro de costo</strong></td><td>Dimensión financiera para segmentar costos</td><td>Planta 1, Departamento de Producción</td></tr>
+  </table>
+
+  <!-- ============================================ -->
+  <!-- 3. ASIENTOS TIPO (CASOS PRÁCTICOS)          -->
+  <!-- ============================================ -->
+  <h2>3. Asientos Contables Tipo en Partmo</h2>
+
+  <!-- 3.1 COMPRA DE MATERIA PRIMA -->
+  <h3>3.1 🛒 Compra de Materia Prima</h3>
+  <p>
+    Cuando Partmo compra acero, polímeros u otros insumos para fabricar filtros,
+    el asiento se registra en la <strong>cuenta 1435</strong>.
+  </p>
+
+  <div class="asiento">
+    <p><strong>Ejemplo:</strong> Compra de acero por $15.000.000 + IVA 19% a Metales del Oriente S.A.S.</p>
+    <div class="debito">Débito: 1435 Mercancías no fabricadas → $15.000.000</div>
+    <div class="debito">Débito: 2408 IVA descontable (19%) → $2.850.000</div>
+    <div class="credito">Crédito: 2205 Proveedores nacionales → $17.850.000</div>
+    <div style="margin-top:8px; font-size:0.85rem; color:#666;">
+      Nota: La retención en la fuente (2.5%) se aplica si el proveedor es agente de retención.
+    </div>
+  </div>
+
+  <!-- 3.2 VENTA DE PRODUCTO TERMINADO -->
+  <h3>3.2 💳 Venta de Producto Terminado</h3>
+  <p>
+    Cuando se vende un filtro, se registra el <strong>ingreso</strong> y el <strong>costo de venta</strong>.
+  </p>
+
+  <div class="asiento">
+    <p><strong>Ejemplo:</strong> Venta de 500 filtros F-2000 por $25.000.000 + IVA 19% a Autopartes S.A.S.</p>
+    <div class="debito">Débito: 1305 Clientes → $29.750.000</div>
+    <div class="credito">Crédito: 4135 Comercio al por mayor → $25.000.000</div>
+    <div class="credito">Crédito: 2404 IVA generado (19%) → $4.750.000</div>
+  </div>
+
+  <div class="asiento" style="margin-top:8px;">
+    <p><strong>Registro del costo de venta (simultáneo):</strong></p>
+    <div class="debito">Débito: 6135 Costo de ventas → $12.500.000</div>
+    <div class="credito">Crédito: 1601 Productos terminados → $12.500.000</div>
+  </div>
+
+  <!-- 3.3 NÓMINA -->
+  <h3>3.3 👷 Nómina</h3>
+  <p>
+    El registro de nómina incluye <strong>sueldos, aportes parafiscales y seguridad social</strong>.
+  </p>
+
+  <div class="asiento">
+    <p><strong>Ejemplo:</strong> Nómina mensual de producción - $20.000.000 (sueldos y prestaciones)</p>
+    <div class="debito">Débito: 7201 Mano de obra directa → $14.000.000</div>
+    <div class="debito">Débito: 5101 Sueldos y salarios (administrativos) → $6.000.000</div>
+    <div class="credito">Crédito: 2370 Aportes por pagar → $20.000.000</div>
+  </div>
+
+  <div class="warning">
+    <strong>⚠️ Importante:</strong> En nómina, también se registran <strong>provisiones</strong>
+    (prima, cesantías, intereses, vacaciones) y los <strong>aportes a seguridad social</strong>
+    (salud, pensión, ARL) que son pagados por la empresa.
+  </div>
+
+  <!-- 3.4 GASTOS -->
+  <h3>3.4 🧾 Gastos Administrativos y Operativos</h3>
+
+  <div class="asiento">
+    <p><strong>Ejemplo 1:</strong> Pago de arriendo de la planta por $5.000.000 + IVA (no descontable)</p>
+    <div class="debito">Débito: 5120 Arrendamientos → $5.000.000</div>
+    <div class="debito">Débito: 5305 Gastos bancarios (comisión) → $50.000</div>
+    <div class="credito">Crédito: 1110 Bancos → $5.050.000</div>
+  </div>
+
+  <div class="asiento">
+    <p><strong>Ejemplo 2:</strong> Servicios públicos (energía, agua, internet) - $2.000.000</p>
+    <div class="debito">Débito: 5135 Servicios públicos → $2.000.000</div>
+    <div class="credito">Crédito: 2205 Proveedores → $2.000.000</div>
+  </div>
+
+  <!-- 3.5 DEPRECIACIÓN -->
+  <h3>3.5 🏭 Depreciación de Activos Fijos</h3>
+
+  <div class="asiento">
+    <p><strong>Ejemplo:</strong> Depreciación mensual de maquinaria industrial - $4.500.000</p>
+    <div class="debito">Débito: 5160 Depreciación de maquinaria → $4.500.000</div>
+    <div class="credito">Crédito: 1592 Depreciación acumulada → $4.500.000</div>
+  </div>
+
+  <!-- 3.6 PROVISIONES -->
+  <h3>3.6 📊 Provisiones (Fijas y Variables)</h3>
+
+  <div class="asiento">
+    <p><strong>Ejemplo 1 - Provisión fija:</strong> Comisiones de ventas (2% sobre ventas del mes)</p>
+    <div class="debito">Débito: 5109 Comisiones → $500.000</div>
+    <div class="credito">Crédito: 2370 Aportes por pagar → $500.000</div>
+  </div>
+
+  <div class="asiento">
+    <p><strong>Ejemplo 2 - Provisión variable:</strong> Bonificación anual (se registra mensualmente)</p>
+    <div class="debito">Débito: 5101 Sueldos → $1.200.000</div>
+    <div class="credito">Crédito: 2370 Aportes por pagar → $1.200.000</div>
+  </div>
+
+  <!-- 3.7 COSTOS DE PRODUCCIÓN -->
+  <h3>3.7 ⚙️ Costos de Producción (Cuenta 7)</h3>
+  <p>
+    Para una empresa manufacturera como Partmo, los costos de producción se registran en el <strong>grupo 7</strong>.
+    Estos se dividen en:
+  </p>
+  <ul>
+    <li><strong>7101</strong> - Materia prima directa</li>
+    <li><strong>7201</strong> - Mano de obra directa</li>
+    <li><strong>7301</strong> - Costos indirectos de fabricación (CIF)</li>
+  </ul>
+
+  <div class="asiento">
+    <p><strong>Ejemplo:</strong> Costos de producción del mes:</p>
+    <div class="debito">Débito: 7101 Materia prima (acero) → $15.000.000</div>
+    <div class="debito">Débito: 7201 Mano de obra directa → $8.000.000</div>
+    <div class="debito">Débito: 7301 CIF (arriendo planta, mantenimiento) → $3.500.000</div>
+    <div class="credito">Crédito: 2205 Proveedores → $15.000.000</div>
+    <div class="credito">Crédito: 2370 Aportes por pagar → $8.000.000</div>
+    <div class="credito">Crédito: 1110 Bancos → $3.500.000</div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 4. CONTROL DE LA CUENTA 15 (INVENTARIOS)    -->
+  <!-- ============================================ -->
+  <h2>4. Control de la Cuenta 15 (Inventarios) <span class="badge purple">¡Clave!</span></h2>
+  <p>
+    En Partmo, la cuenta <strong>15</strong> (Inventarios) es <strong>crítica</strong>
+    porque maneja materia prima, producto en proceso y producto terminado.
+  </p>
+
+  <h3>📌 Subcuentas de la cuenta 15 en Partmo</h3>
+  <table>
+    <tr><th>Código</th><th>Cuenta</th><th>Descripción</th></tr>
+    <tr><td><strong>1401</strong></td><td>Materias primas</td><td>Acero, polímeros, químicos, empaques</td></tr>
+    <tr><td><strong>1410</strong></td><td>Materias primas en tránsito</td><td>Compras que están en camino</td></tr>
+    <tr><td><strong>1501</strong></td><td>Productos en proceso</td><td>Filtros en producción (no terminados)</td></tr>
+    <tr><td><strong>1601</strong></td><td>Productos terminados</td><td>Filtros listos para la venta</td></tr>
+    <tr><td><strong>1695</strong></td><td>Inventarios en tránsito</td><td>Productos enviados pero no recibidos por cliente</td></tr>
+  </table>
+
+  <h3>🔍 ¿Cómo controlar la cuenta 15?</h3>
+
+  <div class="step-box">
+    <span class="step-num">1</span> <strong>Revisa movimientos:</strong> En Dynamics, ve a <code>Gestión de inventarios → Transacciones → Movimientos de inventario</code>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span> <strong>Valida saldos:</strong> Compara el saldo contable contra el reporte de inventario físico.
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span> <strong>Identifica diferencias:</strong> Si hay diferencias (por mermas, robos, errores), se debe hacer un <strong>ajuste de inventario</strong>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span> <strong>Registra ajustes:</strong> Ve a <code>Gestión de inventarios → Diarios → Ajuste de inventario</code>.
+  </div>
+
+  <div class="asiento">
+    <p><strong>Ejemplo de ajuste de inventario (merma):</strong></p>
+    <div class="debito">Débito: 5305 Gastos por mermas → $500.000</div>
+    <div class="credito">Crédito: 1401 Materias primas → $500.000</div>
+  </div>
+
+  <div class="highlight">
+    <strong>💡 Consejo:</strong> Siempre pregunta a tu supervisor antes de hacer un ajuste de inventario.
+    En empresas grandes como Partmo, los ajustes requieren aprobación.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 5. SOPORTE AL DEPARTAMENTO DE CONTABILIDAD  -->
+  <!-- ============================================ -->
+  <h2>5. Soporte General al Departamento de Contabilidad</h2>
+  <p>Como aprendiz, también apoyarás en tareas de soporte que son clave para el equipo:</p>
+
+  <h3>📌 Tareas de soporte que puedes hacer</h3>
+  <ul>
+    <li><strong>Organizar documentos físicos y digitales:</strong> Facturas, comprobantes, contratos.</li>
+    <li><strong>Digitalizar y archivar:</strong> Escanear documentos y guardarlos en las carpetas correspondientes.</li>
+    <li><strong>Preparar información para auditorías:</strong> Reunir soportes de transacciones.</li>
+    <li><strong>Ayudar en la preparación de informes:</strong> Balance de comprobación, estado de resultados.</li>
+    <li><strong>Apoyar en la respuesta a requerimientos de la DIAN:</strong> Reunir información solicitada.</li>
+    <li><strong>Mantener actualizados los archivos de proveedores y clientes:</strong> Datos de contacto, NIT, régimen.</li>
+  </ul>
+
+  <div class="info">
+    <strong>📌 Pro tip:</strong> Si te piden algo que no sabes, no improvises.
+    Pregunta a tu supervisor o a un compañero con más experiencia.
+    Es mejor preguntar que cometer un error contable.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 6. CIERRE CONTABLE MENSUAL                  -->
+  <!-- ============================================ -->
+  <h2>6. Cierre Contable Mensual</h2>
+  <p>
+    Al final de cada mes, el departamento de contabilidad realiza un <strong>cierre contable</strong>
+    para asegurar que todos los movimientos estén registrados y los saldos sean correctos.
+  </p>
+
+  <h3>📌 Pasos del cierre contable</h3>
+  <div class="step-box">
+    <span class="step-num">1</span> <strong>Registrar todas las operaciones del mes:</strong> Facturas de compra y venta, nómina, gastos, costos.
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span> <strong>Registrar provisiones:</strong> Comisiones, bonificaciones, prestaciones sociales.
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span> <strong>Registrar depreciaciones:</strong> Activos fijos (maquinaria, vehículos, equipos).
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span> <strong>Conciliar cuentas bancarias:</strong> Comparar saldos contables vs extractos.
+  </div>
+  <div class="step-box">
+    <span class="step-num">5</span> <strong>Revisar cuentas por pagar y cobrar:</strong> Confirmar saldos con proveedores y clientes.
+  </div>
+  <div class="step-box">
+    <span class="step-num">6</span> <strong>Generar reportes financieros:</strong> Balance de comprobación, estado de resultados, flujo de caja.
+  </div>
+  <div class="step-box">
+    <span class="step-num">7</span> <strong>Cerrar el período contable:</strong> En Dynamics, se bloquea el período para evitar registros posteriores.
+  </div>
+
+  <div class="warning">
+    <strong>⚠️ Atención:</strong> Una vez cerrado el período, <strong>NO</strong> se pueden hacer cambios sin autorización
+    del contador jefe o del supervisor. Si encuentras un error después del cierre, se debe hacer un <strong>ajuste en el período siguiente</strong>.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 7. CONTROL DE GASTOS POR SERVICIOS PÚBLICOS -->
+  <!-- ============================================ -->
+  <h2>7. Control de Gastos por Servicios Públicos</h2>
+  <p>
+    Los servicios públicos (energía, agua, gas, internet) son gastos que deben controlarse cuidadosamente
+    para asegurar que se registren en el período correcto.
+  </p>
+
+  <h3>📌 Tipos de servicios públicos en Partmo</h3>
+  <table>
+    <tr><th>Servicio</th><th>Proveedor</th><th>Cuenta contable</th></tr>
+    <tr><td>Energía eléctrica</td><td>ESSA</td><td>513505</td></tr>
+    <tr><td>Agua</td><td>Acueducto de Bucaramanga</td><td>513510</td></tr>
+    <tr><td>Gas natural</td><td>Vanti</td><td>513515</td></tr>
+    <tr><td>Internet / Datos</td><td>Claro / Movistar</td><td>513520</td></tr>
+  </table>
+
+  <div class="highlight">
+    <strong>💡 Consejo:</strong> Clasifica cada servicio en una subcuenta diferente.
+    Esto te permitirá hacer un <strong>análisis de gastos</strong> por tipo de servicio
+    y detectar incrementos o irregularidades.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 8. EJERCICIO PRÁCTICO GUIADO                -->
+  <!-- ============================================ -->
+  <h2>8. 🧪 Ejercicio Práctico Guiado</h2>
+  <p>
+    Este es un ejercicio completo para que practiques la contabilización general en Partmo.
+    Realiza los asientos contables y luego verifica tus respuestas.
+  </p>
+
+  <div style="background: #f8f9fc; border-radius: 12px; padding: 20px 24px; border: 2px dashed #1a3c6e; margin: 20px 0;">
+
+    <h4 style="margin-top: 0; color: #1a3c6e;">📋 Ejercicio: Ciclo Contable del Mes</h4>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Transacción 1:</strong> Compra de polímeros a "Plásticos del Oriente S.A.S." por $8.000.000 + IVA 19%.</p>
+      <p><em>Cuenta: 1435 Mercancías no fabricadas. Proveedor: NIT 890.567.890-1.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 1435 Mercancías no fabricadas → $8.000.000</div>
+          <div class="debito">Débito: 2408 IVA descontable (19%) → $1.520.000</div>
+          <div class="credito">Crédito: 2205 Proveedores nacionales → $9.520.000</div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Transacción 2:</strong> Venta de 1.000 filtros modelo "F-3000" a "Repuestos del Norte S.A.S." por $45.000.000 + IVA.</p>
+      <p><em>Cuenta: 4135 Comercio al por mayor. Cliente: NIT 900.987.654-3.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 1305 Clientes nacionales → $53.550.000</div>
+          <div class="credito">Crédito: 4135 Comercio al por mayor → $45.000.000</div>
+          <div class="credito">Crédito: 2404 IVA generado (19%) → $8.550.000</div>
+        </div>
+        <div class="asiento" style="margin-top:8px;">
+          <p><strong>Costo de venta:</strong></p>
+          <div class="debito">Débito: 6135 Costo de ventas → $22.500.000</div>
+          <div class="credito">Crédito: 1601 Productos terminados → $22.500.000</div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Transacción 3:</strong> Pago de servicios públicos: Energía $850.000, Agua $320.000, Internet $210.000.</p>
+      <p><em>Cuenta: 5135 Servicios públicos. Proveedores: ESSA, Acueducto, Claro.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 513505 Energía → $850.000</div>
+          <div class="debito">Débito: 513510 Agua → $320.000</div>
+          <div class="debito">Débito: 513520 Internet → $210.000</div>
+          <div class="credito">Crédito: 1110 Bancos → $1.380.000</div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Transacción 4:</strong> Nómina del mes: Producción $12.000.000, Administrativos $5.000.000.</p>
+      <p><em>Cuentas: 7201 (producción) y 5101 (administrativos). Pasivo: 2370.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 7201 Mano de obra directa → $12.000.000</div>
+          <div class="debito">Débito: 5101 Sueldos y salarios (admin) → $5.000.000</div>
+          <div class="credito">Crédito: 2370 Aportes por pagar → $17.000.000</div>
+        </div>
+      </details>
+    </div>
+
+  <!-- Continuación del archivo contabilizacion.html -->
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Transacción 5:</strong> Depreciación mensual de maquinaria industrial por $3.800.000.</p>
+      <p><em>Cuenta: 5160 Depreciación de maquinaria. Contrapartida: 1592 Depreciación acumulada.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 5160 Depreciación de maquinaria → $3.800.000</div>
+          <div class="credito">Crédito: 1592 Depreciación acumulada → $3.800.000</div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Transacción 6:</strong> Provisión de comisiones de ventas (2% sobre ventas del mes: $45.000.000).</p>
+      <p><em>Cuenta: 5109 Comisiones. Pasivo: 2370 Aportes por pagar.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 5109 Comisiones → $900.000</div>
+          <div class="credito">Crédito: 2370 Aportes por pagar → $900.000</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 9. CHECKLIST DE CONTABILIZACIÓN             -->
+  <!-- ============================================ -->
+  <h2>9. ✅ Checklist de Contabilización Diaria</h2>
+  <p>Usa esta lista para asegurarte de que no olvidas nada en tu día a día:</p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0;">
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #28a745;">
+      <strong>📅 Tareas Diarias</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Revisar facturas de compra pendientes</li>
+        <li>☐ Revisar facturas de venta pendientes</li>
+        <li>☐ Verificar que los asientos cuadren (Débito = Crédito)</li>
+        <li>☐ Revisar eventos DIAN (facturación electrónica)</li>
+        <li>☐ Organizar documentos físicos y digitales</li>
+      </ul>
+    </div>
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #1a3c6e;">
+      <strong>📆 Tareas Semanales</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Revisar cuentas por pagar (proveedores)</li>
+        <li>☐ Revisar cuentas por cobrar (clientes)</li>
+        <li>☐ Control de gastos por servicios públicos</li>
+        <li>☐ Actualizar archivos de proveedores y clientes</li>
+      </ul>
+    </div>
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #e67e22;">
+      <strong>📊 Tareas Mensuales</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Registrar provisiones (fijas y variables)</li>
+        <li>☐ Registrar depreciación de activos</li>
+        <li>☐ Control de la cuenta 15 (inventarios)</li>
+        <li>☐ Conciliaciones bancarias</li>
+        <li>☐ Preparar informes financieros</li>
+        <li>☐ Cerrar período contable</li>
+      </ul>
+    </div>
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #dc3545;">
+      <strong>📌 Tareas Bimestrales / Anuales</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Declaraciones de IVA (bimestral)</li>
+        <li>☐ Preparación de información exógena</li>
+        <li>☐ Cierre fiscal anual</li>
+        <li>☐ Preparación para auditorías</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 10. ERRORES COMUNES EN CONTABILIZACIÓN      -->
+  <!-- ============================================ -->
+  <h2>10. ⚠️ Errores Comunes en Contabilización</h2>
+  <p>Estos son los errores más frecuentes que cometen los aprendices. <strong>¡Evítalos!</strong></p>
+
+  <table>
+    <tr><th>Error</th><th>Consecuencia</th><th>Cómo evitarlo</th></tr>
+    <tr>
+      <td>Débito ≠ Crédito</td>
+      <td>El asiento no cuadra, el sistema rechaza la contabilización</td>
+      <td>Revisa que la suma del débito sea igual al crédito <strong>antes</strong> de contabilizar</td>
+    </tr>
+    <tr>
+      <td>Cuenta contable incorrecta</td>
+      <td>Saldo incorrecto en la cuenta, afecta estados financieros</td>
+      <td>Verifica el PUC y consulta a tu supervisor si tienes dudas</td>
+    </tr>
+    <tr>
+      <td>Fecha incorrecta</td>
+      <td>El asiento queda en período equivocado</td>
+      <td>Siempre verifica que la fecha corresponda al período actual</td>
+    </tr>
+    <tr>
+      <td>Falta de soporte documental</td>
+      <td>No se puede comprobar la transacción en auditorías</td>
+      <td>Archiva facturas, comprobantes y contratos correctamente</td>
+    </tr>
+    <tr>
+      <td>No registrar el costo de venta</td>
+      <td>Utilidad sobrestimada, inventario subestimado</td>
+      <td>Recuerda: <strong>si hay venta, hay costo de venta</strong></td>
+    </tr>
+    <tr>
+      <td>Confundir gasto con costo</td>
+      <td>Clasificación incorrecta, afecta el estado de resultados</td>
+      <td>Gastos = grupo 5, Costos = grupos 6 y 7</td>
+    </tr>
+    <tr>
+      <td>No registrar provisiones</td>
+      <td>Pasivos subestimados, gastos no causados</td>
+      <td>Sigue el calendario de provisiones mensuales</td>
+    </tr>
+  </table>
+
+  <div class="warning">
+    <strong>⚠️ Regla de oro:</strong> Si tienes dudas sobre una contabilización,
+    <strong>NO</strong> la hagas por tu cuenta. Pregunta a tu supervisor o a un compañero con más experiencia.
+    Es mejor preguntar que corregir un error después.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 11. REPORTES Y CONSULTAS CLAVE              -->
+  <!-- ============================================ -->
+  <h2>11. 📊 Reportes Clave para Contabilización</h2>
+  <p>
+    En Dynamics y en cualquier sistema contable, estos reportes te ayudarán a
+    hacer seguimiento y control de las operaciones:
+  </p>
+
+  <table>
+    <tr><th>Reporte</th><th>Ruta en Dynamics</th><th>Uso</th></tr>
+    <tr>
+      <td><strong>Balance de comprobación</strong></td>
+      <td>GL → Consultas → Balance de comprobación</td>
+      <td>Ver saldos de todas las cuentas, detectar inconsistencias</td>
+    </tr>
+    <tr>
+      <td><strong>Mayor analítico</strong></td>
+      <td>GL → Consultas → Mayor</td>
+      <td>Ver movimientos detallados de una cuenta específica</td>
+    </tr>
+    <tr>
+      <td><strong>Estado de resultados</strong></td>
+      <td>GL → Consultas → Estado de resultados</td>
+      <td>Ver utilidad o pérdida del período</td>
+    </tr>
+    <tr>
+      <td><strong>Lista de facturas pendientes</strong></td>
+      <td>AP → Facturas → Pendientes</td>
+      <td>Control de cuentas por pagar (proveedores)</td>
+    </tr>
+    <tr>
+      <td><strong>Antigüedad de cartera</strong></td>
+      <td>AR → Cobranzas → Antigüedad de saldos</td>
+      <td>Control de cuentas por cobrar (clientes)</td>
+    </tr>
+    <tr>
+      <td><strong>Reporte de inventarios</strong></td>
+      <td>IM → Consultas → Inventario disponible</td>
+      <td>Control de la cuenta 15 (cantidades y valores)</td>
+    </tr>
+    <tr>
+      <td><strong>Reporte de depreciación</strong></td>
+      <td>FA → Consultas → Detalle de depreciación</td>
+      <td>Ver depreciación acumulada de activos fijos</td>
+    </tr>
+  </table>
+
+  <!-- ============================================ -->
+  <!-- 12. PREGUNTAS FRECUENTES (FAQ)              -->
+  <!-- ============================================ -->
+  <h2>12. ❓ Preguntas Frecuentes (FAQ)</h2>
+
+  <h4>❓ ¿Qué hago si un asiento no cuadra (Débito ≠ Crédito)?</h4>
+  <p>
+    Revisa los valores uno por uno. Puede ser un error de digitación.
+    También verifica que no hayas registrado una cuenta en el lado incorrecto
+    (ej. debitar una cuenta que debía acreditarse).
+  </p>
+
+  <h4>❓ ¿Cómo sé si una cuenta debe debitarse o acreditarse?</h4>
+  <p>Recuerda las reglas básicas:</p>
+  <ul>
+    <li><strong>Activo:</strong> Aumenta con Débito, disminuye con Crédito.</li>
+    <li><strong>Pasivo:</strong> Aumenta con Crédito, disminuye con Débito.</li>
+    <li><strong>Patrimonio:</strong> Aumenta con Crédito, disminuye con Débito.</li>
+    <li><strong>Ingresos:</strong> Aumentan con Crédito, disminuyen con Débito.</li>
+    <li><strong>Gastos y Costos:</strong> Aumentan con Débito, disminuyen con Crédito.</li>
+  </ul>
+
+  <h4>❓ ¿Qué hago si me falta un soporte para contabilizar?</h4>
+  <p>
+    No contabilices sin soporte. Comunícate con el área correspondiente
+    (compras, ventas, administración) para solicitar el documento.
+    Si es urgente, consulta a tu supervisor.
+  </p>
+
+  <h4>❓ ¿Cómo sé si un gasto debe ir a la cuenta 5 (Gastos) o a la 7 (Costos)?</h4>
+  <ul>
+    <li><strong>Costos (grupo 6 y 7):</strong> Relacionados directamente con la producción (ej. materia prima, mano de obra).</li>
+    <li><strong>Gastos (grupo 5):</strong> Relacionados con administración, ventas y operaciones generales (ej. arriendos de oficinas, publicidad).</li>
+  </ul>
+
+  <h4>❓ ¿Qué hago si encuentro un error en un asiento ya contabilizado?</h4>
+  <p>
+    Si el período está abierto, puedes hacer un <strong>asiento de ajuste</strong> (reversar y registrar correctamente).
+    Si el período está cerrado, se debe hacer un ajuste en el período actual con las aprobaciones correspondientes.
+    <strong>No borres ni modifiques asientos contabilizados</strong> sin autorización.
+  </p>
+
+  <h4>❓ ¿Qué es el "cierre contable" y por qué es importante?</h4>
+  <p>
+    Es el proceso de revisar, ajustar y finalizar todas las transacciones de un período (mes, trimestre, año).
+    Es importante porque permite generar <strong>estados financieros confiables</strong>
+    y cumplir con las obligaciones tributarias.
+  </p>
+
+  <!-- ============================================ -->
+  <!-- 13. GLOSARIO DE TÉRMINOS                    -->
+  <!-- ============================================ -->
+  <h2>13. 📝 Glosario de Términos en Contabilización</h2>
+
+  <table>
+    <tr><th>Término</th><th>Significado</th></tr>
+    <tr><td><strong>Asiento contable</strong></td><td>Registro de una transacción en el sistema contable</td></tr>
+    <tr><td><strong>Voucher</strong></td><td>Número de documento que identifica un asiento contable</td></tr>
+    <tr><td><strong>Comprobante</strong></td><td>Documento que soporta la transacción (factura, recibo, etc.)</td></tr>
+    <tr><td><strong>Provision</strong></td><td>Estimación de un gasto o pasivo que se reconoce antes de su pago</td></tr>
+    <tr><td><strong>Depreciación</strong></td><td>Pérdida de valor de un activo fijo por uso o tiempo</td></tr>
+    <tr><td><strong>CIF</strong></td><td>Costos Indirectos de Fabricación</td></tr>
+    <tr><td><strong>Partida doble</strong></td><td>Principio contable: cada transacción afecta al menos dos cuentas</td></tr>
+    <tr><td><strong>Devengado</strong></td><td>Registro de ingresos y gastos cuando se causan, no cuando se pagan</td></tr>
+    <tr><td><strong>PUC</strong></td><td>Plan Único de Cuentas (catálogo de cuentas en Colombia)</td></tr>
+    <tr><td><strong>Balance de comprobación</strong></td><td>Reporte que muestra saldos de todas las cuentas</td></tr>
+  </table>
+
+  <!-- ============================================ -->
+  <!-- 14. RECURSOS Y AYUDA                        -->
+  <!-- ============================================ -->
+  <h2>14. 📚 Recursos de Ayuda para Contabilización</h2>
+
+  <ul>
+    <li>
+      <strong>PUC Colombiano:</strong> Descarga el catálogo completo en el sitio web de la DIAN.
+      <a href="https://www.dian.gov.co/" target="_blank" style="color: #1a3c6e;">Visitar DIAN</a>
+    </li>
+    <li>
+      <strong>Documentación NIIF:</strong> Revisa las enmiendas vigentes desde 2026 en
+      <a href="https://www.ifrs.org/" target="_blank" style="color: #1a3c6e;">IFRS.org</a>
+    </li>
+    <li>
+      <strong>Manual de Dynamics 365 Finance:</strong> Documentación oficial de Microsoft.
+      <a href="https://learn.microsoft.com/es-es/training/dynamics365/" target="_blank" style="color: #1a3c6e;">Ver aquí</a>
+    </li>
+    <li>
+      <strong>Calendario Tributario DIAN 2026:</strong> Fechas de vencimiento de declaraciones.
+      <a href="https://www.dian.gov.co/" target="_blank" style="color: #1a3c6e;">Descargar</a>
+    </li>
+  </ul>
+
+  <div class="info">
+    <strong>💡 Pro tip final:</strong> Crea tu propio <strong>"manual de procedimientos"</strong>
+    con los pasos que aprendas en la práctica. Escríbelo en un cuaderno o en un documento digital
+    (como tu página de GitHub). Esto te ayudará a recordar los procesos y a ser más autónoma.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 15. SEGUNDO EJERCICIO PRÁCTICO              -->
+  <!-- ============================================ -->
+  <h2>15. 🧪 Segundo Ejercicio Práctico (Autónomo)</h2>
+  <p>
+    Ahora es tu turno. Realiza los siguientes asientos contables sin mirar las soluciones.
+    Luego verifica tus respuestas.
+  </p>
+
+  <div style="background: #f8f9fc; border-radius: 12px; padding: 20px 24px; border: 2px solid #1a3c6e; margin: 20px 0;">
+
+    <h4 style="margin-top: 0; color: #1a3c6e;">📋 Ejercicio: Ciclo Contable Completo</h4>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>1. Compra:</strong> Compra de empaques a "Envases S.A.S." por $2.500.000 + IVA 19%.</p>
+      <p><em>Cuenta: 1435 Mercancías no fabricadas. Proveedor: NIT 890.123.456-7.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 1435 Mercancías no fabricadas → $2.500.000</div>
+          <div class="debito">Débito: 2408 IVA descontable (19%) → $475.000</div>
+          <div class="credito">Crédito: 2205 Proveedores nacionales → $2.975.000</div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>2. Venta:</strong> Venta de 300 filtros modelo "F-100" a "Distribuidora Automotriz S.A.S." por $18.000.000 + IVA 19%.</p>
+      <p><em>Cuenta: 4135 Comercio al por mayor. Cliente: NIT 900.234.567-8.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 1305 Clientes nacionales → $21.420.000</div>
+          <div class="credito">Crédito: 4135 Comercio al por mayor → $18.000.000</div>
+          <div class="credito">Crédito: 2404 IVA generado (19%) → $3.420.000</div>
+        </div>
+        <div class="asiento" style="margin-top:8px;">
+          <p><strong>Costo de venta:</strong> $9.000.000.</p>
+          <div class="debito">Débito: 6135 Costo de ventas → $9.000.000</div>
+          <div class="credito">Crédito: 1601 Productos terminados → $9.000.000</div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>3. Pago de nómina:</strong> Nómina administrativa $6.000.000.</p>
+      <p><em>Cuenta: 5101 Sueldos. Pasivo: 2370 Aportes por pagar.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 5101 Sueldos y salarios → $6.000.000</div>
+          <div class="credito">Crédito: 2370 Aportes por pagar → $6.000.000</div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>4. Arriendo:</strong> Pago de arriendo de oficinas $3.500.000 + IVA 19%.</p>
+      <p><em>Cuenta: 5120 Arrendamientos. Proveedor: Centro Empresarial del Norte.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 5120 Arrendamientos → $3.500.000</div>
+          <div class="debito">Débito: 2408 IVA descontable (19%) → $665.000</div>
+          <div class="credito">Crédito: 1110 Bancos → $4.165.000</div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>5. Depreciación:</strong> Depreciación mensual de vehículos de reparto $1.200.000.</p>
+      <p><em>Cuenta: 5165 Depreciación de vehículos. Contrapartida: 1597 Depreciación acumulada.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 5165 Depreciación de vehículos → $1.200.000</div>
+          <div class="credito">Crédito: 1597 Depreciación acumulada de vehículos → $1.200.000</div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>6. Provisión:</strong> Provisión para prestaciones sociales (prima) $800.000.</p>
+      <p><em>Cuenta: 5101 Sueldos. Pasivo: 2370 Aportes por pagar.</em></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver solución</summary>
+        <div class="asiento" style="margin-top:8px;">
+          <div class="debito">Débito: 5101 Sueldos → $800.000</div>
+          <div class="credito">Crédito: 2370 Aportes por pagar → $800.000</div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                      -->
+  <!-- ============================================ -->
+  <div class="footer">
+    📌 Guía completa de Contabilización General para Filtros Partmo S.A.S.<br>
+    Actualizado: Julio 2026 • Bucaramanga, Santander<br>
+    <a href="https://www.dian.gov.co/" target="_blank">Sitio web DIAN</a> •
+    <a href="https://learn.microsoft.com/es-es/training/dynamics365/" target="_blank">Microsoft Learn</a>
+  </div>
+
+</div>
+</body>
+</html>
