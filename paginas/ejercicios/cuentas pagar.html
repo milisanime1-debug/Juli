@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuentas por Pagar - Ejercicios Prácticos</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    .back-secondary {
+      display: inline-block;
+      margin: 10px 5px 20px 0;
+      background: #6c757d;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+    .back-secondary:hover { background: #5a6268; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #2c3e50;
+      font-size: 1rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight.warning {
+      background: #fff3cd;
+      border-left-color: #ffc107;
+    }
+    .highlight.success {
+      background: #d4edda;
+      border-left-color: #28a745;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.warning strong { color: #856404; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 0.95rem;
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+    .badge.orange { background: #fd7e14; }
+    .badge.green { background: #28a745; }
+    .badge.red { background: #dc3545; }
+
+    .ejercicio-box {
+      background: #f8f9fc;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .ejercicio-box .enunciado {
+      font-weight: 600;
+      color: #1a3c6e;
+      margin-bottom: 8px;
+    }
+    .ejercicio-box .solucion {
+      background: white;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-top: 12px;
+      border: 1px dashed #1a3c6e;
+    }
+    .ejercicio-box .solucion summary {
+      cursor: pointer;
+      color: #1a3c6e;
+      font-weight: 600;
+    }
+    .ejercicio-box .solucion summary:hover { text-decoration: underline; }
+
+    .checklist {
+      background: white;
+      border-radius: 10px;
+      padding: 16px 20px;
+      border: 1px solid #dee2e6;
+      margin: 12px 0;
+    }
+    .checklist li {
+      list-style: none;
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: "☐ ";
+      font-size: 1.1rem;
+      color: #1a3c6e;
+    }
+    .checklist li.done::before { content: "✅ "; }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      table { font-size: 0.8rem; }
+      .ejercicio-box { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Botones de navegación -->
+  <div>
+    <a href="../../index.html" class="back">⬅ Volver al inicio</a>
+    <a href="../ejercicios.html" class="back-secondary">📋 Volver a Ejercicios</a>
+  </div>
+
+  <h1>🧾 Cuentas por Pagar</h1>
+  <div class="subtitle">
+    Gestión de proveedores, facturas, retenciones y pagos • <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1. INTRODUCCIÓN                           -->
+  <!-- ========================================== -->
+  <h2>1. ¿Qué son las Cuentas por Pagar?</h2>
+  <p>
+    Las <strong>Cuentas por Pagar (CxP)</strong> representan las obligaciones que tiene la empresa con terceros (proveedores, contratistas, servicios públicos, etc.) por bienes o servicios recibidos que aún no han sido pagados.
+  </p>
+  <div class="highlight">
+    <strong>📌 En Partmo:</strong> Como empresa manufacturera, las CxP incluyen:
+    <ul>
+      <li><strong>Proveedores de materia prima</strong> (acero, fibras, polímeros, químicos).</li>
+      <li><strong>Servicios públicos</strong> (energía, agua, gas para la planta).</li>
+      <li><strong>Contratistas</strong> (mantenimiento, transporte, asesorías).</li>
+      <li><strong>Arrendamientos</strong> (bodegas, oficinas, maquinaria).</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. CICLO DEL PROCESO                       -->
+  <!-- ========================================== -->
+  <h2>2. Ciclo del Proceso de Cuentas por Pagar</h2>
+  <div style="background:#f8f9fc; padding:16px 20px; border-radius:10px; margin:12px 0;">
+    <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:space-between; text-align:center; font-size:0.9rem;">
+      <div style="flex:1; min-width:100px; background:white; padding:12px; border-radius:8px; border:1px solid #dee2e6;">
+        <div style="font-size:2rem;">📩</div>
+        <strong>1. Recepción</strong><br>Factura + soportes
+      </div>
+      <div style="font-size:1.5rem; color:#aaa; align-self:center;">→</div>
+      <div style="flex:1; min-width:100px; background:white; padding:12px; border-radius:8px; border:1px solid #dee2e6;">
+        <div style="font-size:2rem;">✅</div>
+        <strong>2. Validación</strong><br>Datos fiscales y contables
+      </div>
+      <div style="font-size:1.5rem; color:#aaa; align-self:center;">→</div>
+      <div style="flex:1; min-width:100px; background:white; padding:12px; border-radius:8px; border:1px solid #dee2e6;">
+        <div style="font-size:2rem;">📝</div>
+        <strong>3. Registro</strong><br>Asiento contable en Dynamics
+      </div>
+      <div style="font-size:1.5rem; color:#aaa; align-self:center;">→</div>
+      <div style="flex:1; min-width:100px; background:white; padding:12px; border-radius:8px; border:1px solid #dee2e6;">
+        <div style="font-size:2rem;">💳</div>
+        <strong>4. Autorización</strong><br>Pago o programación
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 3. CUENTAS PUC INVOLUCRADAS                -->
+  <!-- ========================================== -->
+  <h2>3. Cuentas PUC para Cuentas por Pagar</h2>
+  <table>
+    <tr><th>Código PUC</th><th>Cuenta</th><th>Uso</th></tr>
+    <tr><td><strong>2205</strong></td><td>Proveedores nacionales</td><td>Proveedores de materia prima y servicios locales</td></tr>
+    <tr><td><strong>2210</strong></td><td>Proveedores del exterior</td><td>Importaciones de materiales</td></tr>
+    <tr><td><strong>2335</strong></td><td>Costos y gastos por pagar</td><td>Servicios públicos, arriendos, honorarios</td></tr>
+    <tr><td><strong>2370</strong></td><td>Aportes de nómina por pagar</td><td>Seguridad social, parafiscales</td></tr>
+    <tr><td><strong>2408</strong></td><td>IVA descontable</td><td>IVA de compras (se puede descontar)</td></tr>
+    <tr><td><strong>2505</strong></td><td>Retención en la fuente por pagar</td><td>Retenciones practicadas a proveedores</td></tr>
+    <tr><td><strong>2520</strong></td><td>ICA por pagar</td><td>RETEICA practicada</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- 4. EJERCICIOS PRÁCTICOS                    -->
+  <!-- ========================================== -->
+  <h2>4. Ejercicios Prácticos</h2>
+
+  <!-- EJERCICIO 1 -->
+  <div class="ejercicio-box">
+    <div class="enunciado">📌 Ejercicio 1: Registro de factura de compra de materia prima</div>
+    <p>
+      <strong>Datos:</strong> Partmo recibe factura de <strong>Aceros Andinos S.A.</strong> por compra de acero laminado:
+    </p>
+    <ul>
+      <li>Valor mercancía: <strong>$25.000.000</strong></li>
+      <li>IVA 19%: <strong>$4.750.000</strong></li>
+      <li>Total factura: <strong>$29.750.000</strong></li>
+      <li>Retención en la fuente (compras 2.5%): <strong>$625.000</strong></li>
+      <li>Plazo de pago: 30 días</li>
+    </ul>
+    <details class="solucion">
+      <summary>🔍 Ver asiento contable</summary>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1435</td><td>Mercancías no fabricadas (materia prima)</td><td>$25.000.000</td><td></td></tr>
+        <tr><td>2408</td><td>IVA descontable</td><td>$4.750.000</td><td></td></tr>
+        <tr><td>2205</td><td>Proveedores nacionales</td><td></td><td>$29.750.000</td></tr>
+        <tr style="background:#f0f2f5; font-weight:bold; color:#1a3c6e;">
+          <td colspan="2">Total</td>
+          <td>$29.750.000</td>
+          <td>$29.750.000</td>
+        </tr>
+      </table>
+      <p style="margin-top:8px;">
+        <strong>Nota:</strong> La retención en la fuente se registra al momento del pago, no en la compra.
+      </p>
+    </details>
+  </div>
+
+  <!-- EJERCICIO 2 -->
+  <div class="ejercicio-box">
+    <div class="enunciado">📌 Ejercicio 2: Registro de pago a proveedor con retención</div>
+    <p>
+      <strong>Datos:</strong> Se paga la factura anterior de <strong>Aceros Andinos S.A.</strong>:
+    </p>
+    <ul>
+      <li>Valor total factura: <strong>$29.750.000</strong></li>
+      <li>Retención en la fuente (2.5%): <strong>$625.000</strong></li>
+      <li>RETEICA (2.5‰ sobre $25.000.000): <strong>$62.500</strong></li>
+      <li>Valor neto a pagar: <strong>$29.062.500</strong></li>
+    </ul>
+    <details class="solucion">
+      <summary>🔍 Ver asiento contable</summary>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>2205</td><td>Proveedores nacionales</td><td>$29.750.000</td><td></td></tr>
+        <tr><td>1110</td><td>Bancos</td><td></td><td>$29.062.500</td></tr>
+        <tr><td>2505</td><td>Retención en la fuente por pagar</td><td></td><td>$625.000</td></tr>
+        <tr><td>2520</td><td>ICA por pagar (RETEICA)</td><td></td><td>$62.500</td></tr>
+        <tr style="background:#f0f2f5; font-weight:bold; color:#1a3c6e;">
+          <td colspan="2">Total</td>
+          <td>$29.750.000</td>
+          <td>$29.750.000</td>
+        </tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- EJERCICIO 3 -->
+  <div class="ejercicio-box">
+    <div class="enunciado">📌 Ejercicio 3: Registro de servicios públicos (energía)</div>
+    <p>
+      <strong>Datos:</strong> Partmo recibe factura de <strong>ESSAR S.A.</strong> por energía eléctrica de la planta:
+    </p>
+    <ul>
+      <li>Valor consumo: <strong>$3.200.000</strong></li>
+      <li>IVA 19%: <strong>$608.000</strong></li>
+      <li>Total factura: <strong>$3.808.000</strong></li>
+      <li>Sin retención (servicios públicos no aplica para personas jurídicas)</li>
+    </ul>
+    <details class="solucion">
+      <summary>🔍 Ver asiento contable</summary>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5215</td><td>Servicios públicos (energía)</td><td>$3.200.000</td><td></td></tr>
+        <tr><td>2408</td><td>IVA descontable</td><td>$608.000</td><td></td></tr>
+        <tr><td>2335</td><td>Costos y gastos por pagar</td><td></td><td>$3.808.000</td></tr>
+        <tr style="background:#f0f2f5; font-weight:bold; color:#1a3c6e;">
+          <td colspan="2">Total</td>
+          <td>$3.808.000</td>
+          <td>$3.808.000</td>
+        </tr>
+      </table>
+    </details>
+  </div>
+
+  <!-- EJERCICIO 4 -->
+  <div class="ejercicio-box">
+    <div class="enunciado">📌 Ejercicio 4: Registro de honorarios (consultoría)</div>
+    <p>
+      <strong>Datos:</strong> Partmo contrata consultoría de <strong>Consultores Asociados S.A.</strong> para optimización de procesos:
+    </p>
+    <ul>
+      <li>Valor honorarios: <strong>$8.000.000</strong></li>
+      <li>IVA 19%: <strong>$1.520.000</strong></li>
+      <li>Total factura: <strong>$9.520.000</strong></li>
+      <li>Retención en la fuente (honorarios 11%): <strong>$880.000</strong></li>
+    </ul>
+    <details class="solucion">
+      <summary>🔍 Ver asiento contable</summary>
+      <table>
+        <tr><th>Código PUC</th><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>5110</td><td>Honorarios</td><td>$8.000.000</td><td></td></tr>
+        <tr><td>2408</td><td>IVA descontable</td><td>$1.520.000</td><td></td></tr>
+        <tr><td>2205</td><td>Proveedores nacionales</td><td></td><td>$9.520.000</td></tr>
+        <tr style="background:#f0f2f5; font-weight:bold; color:#1a3c6e;">
+          <td colspan="2">Total</td>
+          <td>$9.520.000</td>
+          <td>$9.520.000</td>
+        </tr>
+      </table>
+      <p style="margin-top:8px;">
+        <strong>Nota:</strong> La retención del 11% se registra al momento del pago.
+      </p>
+    </details>
+  </div>
+
+  <!-- EJERCICIO 5 -->
+  <div class="ejercicio-box">
+    <div class="enunciado">📌 Ejercicio 5: Circularización de proveedores</div>
+    <p>
+      <strong>Contexto:</strong> Al cierre del mes, debes enviar cartas de circularización a los principales proveedores para confirmar saldos.
+    </p>
+    <div class="highlight">
+      <strong>📌 Ejemplo de carta:</strong><br>
+      <em>"Por medio de la presente, solicitamos confirmar el saldo pendiente a corte del 31 de julio de 2026 por valor de $29.062.500 correspondiente a la factura No. 12345 de Aceros Andinos S.A."</em>
+    </div>
+    <details class="solucion">
+      <summary>🔍 Ver proceso paso a paso</summary>
+      <ol>
+        <li><strong>Selecciona proveedores:</strong> Los de mayor saldo (ej. Aceros Andinos, Polímeros del Oriente, etc.).</li>
+        <li><strong>Prepara la carta:</strong> Con fecha, nombre del proveedor, saldo a confirmar y facturas relacionadas.</li>
+        <li><strong>Envía por correo electrónico:</strong> Con copia a tu jefe.</li>
+        <li><strong>Registra respuesta:</strong> Si el proveedor confirma el saldo, archiva. Si no, investiga diferencias.</li>
+        <li><strong>Plazo:</strong> Debes hacerlo dentro de los primeros 5 días hábiles del mes siguiente.</li>
+      </ol>
+    </details>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. CHECKLIST DE TAREAS                     -->
+  <!-- ========================================== -->
+  <h2>5. Checklist del Área de Cuentas por Pagar</h2>
+  <div class="checklist">
+    <ul>
+      <li class="done">Recepción y validación de facturas (firma, fechas, IVA)</li>
+      <li class="done">Verificar que el proveedor esté en el sistema</li>
+      <li class="done">Registrar la factura en Microsoft Dynamics (cuenta 2205)</li>
+      <li class="done">Calcular y registrar retenciones (Renta 2.5% o 11%, ICA 2.5‰)</li>
+      <li class="done">Asignar centro de costo (producción, administrativo, ventas)</li>
+      <li>Programar pago según fecha de vencimiento</li>
+      <li>Generar certificados de retención para el proveedor</li>
+      <li>Realizar conciliación mensual de proveedores</li>
+      <li>Enviar circularización a proveedores principales</li>
+      <li>Revisar cuentas por pagar vencidas (reporte de antigüedad)</li>
+    </ul>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 6. TARIFAS APLICABLES                     -->
+  <!-- ========================================== -->
+  <h2>6. Tarifas para Cuentas por Pagar (2026)</h2>
+  <table>
+    <tr><th>Concepto</th><th>Tarifa</th><th>Base de cálculo</th></tr>
+    <tr><td>Retención en la fuente - Compras</td><td><strong>2.5%</strong></td><td>Valor total de la compra (sin IVA)</td></tr>
+    <tr><td>Retención en la fuente - Honorarios</td><td><strong>11%</strong></td><td>Valor total del honorario (sin IVA)</td></tr>
+    <tr><td>Retención en la fuente - Consultoría/software</td><td><strong>3.5%</strong></td><td>Valor total del servicio (sin IVA)</td></tr>
+    <tr><td>RETEICA (Bucaramanga)</td><td><strong>2.5‰</strong></td><td>Valor total de la operación (sin IVA)</td></tr>
+    <tr><td>IVA</td><td><strong>19%</strong></td><td>Valor total de la compra o servicio</td></tr>
+  </table>
+  <div class="highlight warning">
+    <strong>⚠️ Importante:</strong> La retención en la fuente <strong>no se resta al proveedor al momento de registrar la compra</strong>, solo al momento del pago se hace el asiento con las cuentas 2505 y 2520.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 7. ERRORES COMUNES                        -->
+  <!-- ========================================== -->
+  <h2>7. Errores Comunes en Cuentas por Pagar</h2>
+  <ul>
+    <li><strong>❌ Registrar la retención en la compra:</strong> La retención solo se registra al momento del pago.</li>
+    <li><strong>❌ No verificar el IVA:</strong> Revisar que el proveedor haya facturado correctamente el 19%.</li>
+    <li><strong>❌ Confundir la tarifa de retención:</strong> No aplicar 11% a compras (es 2.5%) o viceversa.</li>
+    <li><strong>❌ Olvidar RETEICA:</strong> En Bucaramanga, todas las operaciones sujetas a ICA tienen RETEICA.</li>
+    <li><strong>❌ No asignar centro de costo:</strong> Cada gasto debe ir a producción, administrativo o ventas.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 8. PREGUNTAS DE ENTREVISTA                -->
+  <!-- ========================================== -->
+  <h2>8. Preguntas que Debes Saber Responder</h2>
+  <ul>
+    <li><strong>¿Cuál es el proceso de registro de una factura en Dynamics?</strong></li>
+    <li><strong>¿Qué tarifas de retención aplican para proveedores?</strong></li>
+    <li><strong>¿Cómo se hace la circularización de proveedores?</strong></li>
+    <li><strong>¿Qué hago si un proveedor no confirma el saldo?</strong></li>
+    <li><strong>¿Cómo genero un certificado de retención?</strong></li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- 9. RECURSOS ADICIONALES                    -->
+  <!-- ========================================== -->
+  <h2>9. Recursos para Practicar</h2>
+  <ul>
+    <li><strong>Excel:</strong> Crea una plantilla para calcular retenciones automáticamente.</li>
+    <li><strong>Dynamics 365:</strong> Busca tutoriales de "Accounts Payable" en YouTube.</li>
+    <li><strong>DIAN:</strong> Descarga el calendario tributario para fechas de pago de retenciones.</li>
+    <li><strong>Partmo:</strong> Pregunta si tienen un manual de procedimientos CxP.</li>
+  </ul>
+
+  <div class="footer">
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
+  </div>
+
+</div>
+</body>
+</html>
