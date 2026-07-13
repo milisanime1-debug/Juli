@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Impuestos - Guía Completa</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.6rem;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.2rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #34495e;
+      font-size: 1.05rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .warning strong { color: #856404; }
+    .success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .success strong { color: #155724; }
+    .danger {
+      background: #f8d7da;
+      border-left: 4px solid #dc3545;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .danger strong { color: #721c24; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+    .badge.orange { background: #e67e22; }
+    .badge.green { background: #28a745; }
+    .badge.red { background: #dc3545; }
+    .badge.purple { background: #6f42c1; }
+
+    .step-box {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .step-box .step-num {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      text-align: center;
+      line-height: 28px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      margin-right: 10px;
+    }
+
+    .formula-box {
+      background: #f4f6fa;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 1.05rem;
+      border: 1px solid #d0d7de;
+      text-align: center;
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    .footer a { color: #1a3c6e; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Botón volver -->
+  <a href="../ejercicios.html" class="back">⬅ Volver a Ejercicios</a>
+
+  <h1>🧮 Gestión de Impuestos</h1>
+  <div class="subtitle">
+    Guía completa para <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, Santander • 2026
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 1. INTRODUCCIÓN                              -->
+  <!-- ============================================ -->
+  <h2>1. Introducción al Sistema Tributario Colombiano 2026</h2>
+  <p>
+    Colombia tiene un sistema tributario complejo que toda empresa debe cumplir. Para
+    <strong>Filtros Partmo S.A.S.</strong>, como empresa grande del sector industrial, los impuestos más relevantes son:
+  </p>
+  <ul>
+    <li><strong>Renta:</strong> Impuesto sobre las ganancias (35% en 2026).</li>
+    <li><strong>IVA:</strong> Impuesto sobre las ventas (19% general).</li>
+    <li><strong>Retención en la fuente:</strong> Anticipo del impuesto de renta.</li>
+    <li><strong>ICA:</strong> Impuesto de Industria y Comercio (municipal).</li>
+    <li><strong>Impuesto al Patrimonio:</strong> Para patrimonios superiores a 40.000 UVT.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>📌 Recordatorio 2026:</strong> La UVT está en <strong>$52.374</strong>.
+    El Decreto 572 de 2025 (retenciones) <strong>entró a regir desde el 1 de julio de 2026</strong>.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 2. RETENCIÓN EN LA FUENTE (RENTA)           -->
+  <!-- ============================================ -->
+  <h2>2. Retención en la Fuente (Renta)</h2>
+  <p>
+    La retención en la fuente es un <strong>anticipo</strong> del impuesto de renta que las empresas
+    deben practicar a sus proveedores y contratistas cuando les realizan pagos.
+  </p>
+
+  <h3>📌 Tarifas de Retención 2026 (vigentes desde julio)</h3>
+  <table>
+    <tr><th>Concepto</th><th>Tarifa</th><th>Base</th><th>Aplica en Partmo</th></tr>
+    <tr><td>Compras (bienes corporales muebles)</td><td><strong>2.5%</strong></td><td>Valor total de la compra</td><td>✅ Sí (materia prima, insumos)</td></tr>
+    <tr><td>Honorarios (persona jurídica)</td><td><strong>11%</strong></td><td>Valor total del servicio</td><td>✅ Sí (consultorías, asesorías)</td></tr>
+    <tr><td>Consultoría y software</td><td><strong>3.5%</strong></td><td>Valor total del servicio</td><td>✅ Sí (licencias, desarrollos)</td></tr>
+    <tr><td>Arrendamientos (persona jurídica)</td><td><strong>3.5% - 10%</strong></td><td>Según valor del arriendo</td><td>✅ Sí (bodegas, oficinas)</td></tr>
+    <tr><td>Servicios (persona jurídica)</td><td><strong>4%</strong></td><td>Valor del servicio</td><td>✅ Sí (mantenimiento, limpieza)</td></tr>
+    <tr><td>Intereses (persona jurídica)</td><td><strong>20%</strong></td><td>Valor del interés</td><td>✅ Sí (financiación bancaria)</td></tr>
+    <tr><td>Regalías (persona jurídica)</td><td><strong>15%</strong></td><td>Valor de la regalía</td><td>✅ Sí (si aplica)</td></tr>
+  </table>
+
+  <div class="warning">
+    <strong>⚠️ Atención:</strong> La retención <strong>NO se aplica</strong> si el valor del pago es inferior
+    al límite establecido por la DIAN (generalmente 4 UVT). Siempre verifica el concepto específico.
+  </div>
+
+  <h3>🧪 Ejemplo de liquidación de retención</h3>
+  <div class="step-box">
+    <p><strong>Datos:</strong> Compra de materia prima a "Metales del Oriente S.A.S." por <strong>$15.000.000</strong>.</p>
+    <div class="formula-box">
+      Retención = $15.000.000 × 2.5% = <strong>$375.000</strong>
+    </div>
+    <p><strong>Asiento contable:</strong></p>
+    <div class="success">
+      <code>Débito: 1435 Mercancías no fabricadas → $15.000.000</code><br>
+      <code>Débito: 2408 IVA descontable (19%) → $2.850.000</code><br>
+      <code>Crédito: 2205 Proveedores nacionales → $17.475.000</code><br>
+      <code>Crédito: 2365 Retención en la fuente por pagar → $375.000</code>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 3. IVA - IMPUESTO SOBRE LAS VENTAS          -->
+  <!-- ============================================ -->
+  <h2>3. IVA - Impuesto sobre las Ventas</h2>
+  <p>
+    El IVA es un impuesto que se aplica a la <strong>venta de bienes y servicios</strong> en Colombia.
+    En 2026, la tarifa general es del <strong>19%</strong>.
+  </p>
+
+  <h3>📌 Tarifas de IVA 2026</h3>
+  <table>
+    <tr><th>Concepto</th><th>Tarifa</th><th>Aplica en Partmo</th></tr>
+    <tr><td>Venta de filtros (producto terminado)</td><td><strong>19%</strong></td><td>✅ Sí (principal)</td></tr>
+    <tr><td>Compra de materia prima</td><td><strong>19%</strong></td><td>✅ Sí (descontable)</td></tr>
+    <tr><td>Servicios públicos</td><td><strong>19%</strong></td><td>✅ Sí (descontable)</td></tr>
+    <tr><td>Licores</td><td><strong>19%</strong></td><td>❌ No aplica en Partmo</td></tr>
+    <tr><td>Algunos productos agropecuarios</td><td><strong>0%</strong> o <strong>5%</strong></td><td>❌ No aplica en Partmo</td></tr>
+  </table>
+
+  <h3>📊 IVA Descontable vs IVA Generado</h3>
+  <ul>
+    <li><strong>IVA Descontable (2408):</strong> Es el IVA que <strong>pagaste</strong> en tus compras. Lo registras en el <strong>débito</strong>.</li>
+    <li><strong>IVA Generado (2404):</strong> Es el IVA que <strong>cobraste</strong> en tus ventas. Lo registras en el <strong>crédito</strong>.</li>
+    <li><strong>Resultado:</strong> IVA Generado - IVA Descontable = <strong>IVA a pagar</strong> (o saldo a favor).</li>
+  </ul>
+
+  <div class="formula-box">
+    IVA a Pagar = IVA Generado (ventas) - IVA Descontable (compras)
+  </div>
+
+  <h3>🧪 Ejemplo de liquidación de IVA</h3>
+  <div class="step-box">
+    <p><strong>Datos del mes:</strong></p>
+    <ul>
+      <li>Ventas totales: $50.000.000 → IVA generado: $9.500.000 (19%)</li>
+      <li>Compras totales: $30.000.000 → IVA descontable: $5.700.000 (19%)</li>
+    </ul>
+    <div class="formula-box">
+      IVA a Pagar = $9.500.000 - $5.700.000 = <strong>$3.800.000</strong>
+    </div>
+    <p><strong>Asiento contable:</strong></p>
+    <div class="success">
+      <code>Débito: 2404 IVA generado → $9.500.000</code><br>
+      <code>Crédito: 2408 IVA descontable → $5.700.000</code><br>
+      <code>Crédito: 2406 IVA por pagar → $3.800.000</code>
+    </div>
+  </div>
+
+  <div class="warning">
+    <strong>⚠️ Importante:</strong> Las declaraciones de IVA son <strong>bimestrales</strong> para empresas que
+    superan los 92.000 UVT en ingresos (~$4.581 millones). Partmo está en este grupo.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 4. ICA - IMPUESTO DE INDUSTRIA Y COMERCIO    -->
+  <!-- ============================================ -->
+  <h2>4. ICA - Impuesto de Industria y Comercio</h2>
+  <p>
+    El ICA es un impuesto <strong>municipal</strong> que grava las actividades industriales, comerciales y de servicios
+    que se realizan en un municipio. En <strong>Bucaramanga</strong>, la tarifa varía según la actividad.
+  </p>
+
+  <h3>📌 Tarifas ICA en Bucaramanga (2026)</h3>
+  <table>
+    <tr><th>Actividad</th><th>CIIU</th><th>Tarifa (milaje)</th><th>Aplica en Partmo</th></tr>
+    <tr><td>Industrial (fabricación)</td><td>2819</td><td><strong>2.5‰</strong></td><td>✅ Sí (principal)</td></tr>
+    <tr><td>Comercial</td><td>Variados</td><td><strong>3‰ - 5‰</strong></td><td>✅ Sí (ventas)</td></tr>
+    <tr><td>Servicios</td><td>Variados</td><td><strong>3‰ - 6‰</strong></td><td>✅ Sí (servicios contratados)</td></tr>
+  </ul>
+
+  <div class="highlight">
+    <strong>💡 Recuerda:</strong> La tarifa del ICA se mide en <strong>milaje (‰)</strong>, que significa "por mil".
+    Ejemplo: 2.5‰ = $2.5 por cada $1.000 de ingresos.
+  </div>
+
+  <h3>🧪 Ejemplo de liquidación de ICA</h3>
+  <div class="step-box">
+    <p><strong>Datos:</strong> Ingresos brutos del mes = $50.000.000. Tarifa ICA = 2.5‰.</p>
+    <div class="formula-box">
+      ICA a Pagar = $50.000.000 × 2.5‰ = <strong>$125.000</strong>
+    </div>
+    <p><strong>Asiento contable:</strong></p>
+    <div class="success">
+      <code>Débito: 5190 Impuestos y contribuciones (ICA) → $125.000</code><br>
+      <code>Crédito: 2370 Aportes por pagar (ICA) → $125.000</code>
+    </div>
+  </div>
+
+  <div class="warning">
+    <strong>⚠️ Reteica:</strong> En Bucaramanga, existe la <strong>Retención del ICA (RETEICA)</strong>
+    que se aplica a proveedores de servicios. Verifica si tu proveedor está sujeto a esta retención.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 5. DECLARACIONES DE IVA E ICA               -->
+  <!-- ============================================ -->
+  <h2>5. Declaraciones de IVA e ICA</h2>
+  <p>
+    Las declaraciones de IVA e ICA se presentan en los plazos establecidos por la DIAN y la Alcaldía de Bucaramanga.
+  </p>
+
+  <h3>📅 Calendario IVA 2026 (bimestral)</h3>
+  <table>
+    <tr><th>Período</th><th>Fechas de declaración (según NIT)</th></tr>
+    <tr><td><strong>Enero - Febrero</strong></td><td>Marzo (días 3 al 14 según NIT)</td></tr>
+    <tr><td><strong>Marzo - Abril</strong></td><td>Mayo (días 3 al 14 según NIT)</td></tr>
+    <tr><td><strong>Mayo - Junio</strong></td><td>Julio (días 3 al 14 según NIT)</td></tr>
+    <tr><td><strong>Julio - Agosto</strong></td><td>Septiembre (días 3 al 14 según NIT)</td></tr>
+    <tr><td><strong>Septiembre - Octubre</strong></td><td>Noviembre (días 3 al 14 según NIT)</td></tr>
+    <tr><td><strong>Noviembre - Diciembre</strong></td><td>Enero 2027 (días 3 al 14 según NIT)</td></tr>
+  </table>
+
+  <h3>📅 Calendario ICA Bucaramanga 2026</h3>
+  <table>
+    <tr><th>Concepto</th><th>Fecha límite</th></tr>
+    <tr><td><strong>Primera cuota (régimen preferencial)</strong></td><td>27 de febrero de 2026</td></tr>
+    <tr><td><strong>Segunda cuota (régimen preferencial)</strong></td><td>27 de marzo de 2026</td></tr>
+    <tr><td><strong>Declaración anual ICA</strong></td><td>Junio 2026 (según dígito NIT)</td></tr>
+    <tr><td><strong>RETEICA (Bucaramanga)</strong></td><td>12 de marzo de 2026 (según dígito NIT)</td></tr>
+  </table>
+
+  <div class="highlight">
+    <strong>📌 Para Partmo:</strong> Como el NIT termina en <strong>1251</strong>, debes revisar el
+    <strong>dígito de verificación</strong> para conocer las fechas exactas de declaración.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 6. INFORMACIÓN EXÓGENA 2026                 -->
+  <!-- ============================================ -->
+  <h2>6. Información Exógena 2026</h2>
+  <p>
+    La <strong>información exógena</strong> es un reporte que las empresas deben enviar a la DIAN
+    con los detalles de sus transacciones con terceros (proveedores, clientes, empleados).
+  </p>
+
+  <h3>📌 Datos clave de la exógena</h3>
+  <ul>
+    <li><strong>¿Qué se reporta?</strong> Pagos, retenciones, compras, ventas, honorarios, etc.</li>
+    <li><strong>¿Quiénes reportan?</strong> Empresas que superan ciertos topes (Partmo sí reporta).</li>
+    <li><strong>¿Cuándo se reporta?</strong> Fecha límite: <strong>15 de diciembre de 2026</strong> (año gravable 2025).</li>
+    <li><strong>¿Cómo se reporta?</strong> A través del <strong>MUISCA</strong> (Módulo de Usuarios de Información) de la DIAN.</li>
+  </ul>
+
+  <h3>🧪 Ejemplo de información exógena</h3>
+  <table>
+    <tr><th>Concepto</th><th>Valor reportado</th><th>Retención practicada</th></tr>
+    <tr><td>Compras a Metales del Oriente</td><td>$15.000.000</td><td>$375.000</td></tr>
+    <tr><td>Honorarios a Consultores S.A.S.</td><td>$8.000.000</td><td>$880.000 (11%)</td></tr>
+    <tr><td>Arriendos a Inmobiliaria X</td><td>$5.000.000</td><td>$175.000 (3.5%)</td></tr>
+  </table>
+
+  <div class="warning">
+    <strong>⚠️ Importante:</strong> La exógena debe ser <strong>100% precisa</strong>. Un error puede generar
+    multas o sanciones. Siempre cruza la información con las facturas y retenciones registradas en Dynamics.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 7. IMPUESTO AL PATRIMONIO 2026              -->
+  <!-- ============================================ -->
+  <h2>7. Impuesto al Patrimonio 2026</h2>
+  <p>
+    El impuesto al patrimonio grava el <strong>patrimonio líquido</strong> de las personas jurídicas
+    cuando supera un cierto límite. En 2026, el límite bajó de 72.000 a <strong>40.000 UVT</strong>.
+  </p>
+
+  <div class="highlight">
+    <strong>📌 Cálculo del límite:</strong><br>
+    40.000 UVT × $52.374 = <strong>$2.094.960.000</strong>
+  </div>
+
+  <h3>📌 Tarifas del Impuesto al Patrimonio 2026</h3>
+  <table>
+    <tr><th>Patrimonio Líquido (en UVT)</th><th>Tarifa</th></tr>
+    <tr><td>Más de 40.000 hasta 80.000</td><td><strong>0.5%</strong></td></tr>
+    <tr><td>Más de 80.000 hasta 120.000</td><td><strong>1.0%</strong></td></tr>
+    <tr><td>Más de 120.000 hasta 160.000</td><td><strong>1.5%</strong></td></tr>
+    <tr><td>Más de 160.000</td><td><strong>5.0%</strong> (máximo)</td></tr>
+  </table>
+
+  <div class="warning">
+    <strong>⚠️ Para Partmo:</strong> Por su tamaño y activos, es probable que <strong>sí aplique</strong>
+    este impuesto. Pregunta a tu supervisor cómo se calcula en la empresa.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 8. PREPARACIÓN DE DECLARACIONES             -->
+  <!-- ============================================ -->
+  <h2>8. Preparación de Declaraciones en Dynamics</h2>
+  <p>
+    En Dynamics, puedes generar las declaraciones de impuestos directamente desde el sistema.
+  </p>
+
+  <h3>📌 Paso a paso para declarar IVA</h3>
+  <div class="step-box">
+    <span class="step-num">1</span> Ve a <code>Impuestos → Declaraciones → Declaraciones de IVA</code>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span> Selecciona el <strong>período</strong> (ej. Enero-Febrero 2026).
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span> Haz clic en <strong>"Generar declaración"</strong>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span> Revisa los valores:
+    <ul>
+      <li>IVA Generado (ventas)</li>
+      <li>IVA Descontable (compras)</li>
+      <li>Saldo a favor o a pagar</li>
+    </ul>
+  </div>
+  <div class="step-box">
+    <span class="step-num">5</span> Si todo es correcto, haz clic en <strong>"Contabilizar"</strong>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">6</span> Exporta el archivo para cargarlo en el <strong>MUISCA</strong> de la DIAN.
+  </div>
+
+  <h3>📌 Paso a paso para declarar ICA</h3>
+  <ul>
+    <li>El ICA se declara en el <strong>portal de la Alcaldía de Bucaramanga</strong>.</li>
+    <li>En Dynamics, genera un <strong>reporte de ingresos brutos</strong> para tener los datos listos.</li>
+    <li>Ve a <code>Contabilidad general → Consultas → Balance de comprobación → Cuenta 4135 (Ingresos)</code>.</li>
+    <li>Con el total de ingresos, calcula el ICA (2.5‰) y presenta la declaración en el portal.</li>
+  </ul>
+
+  <!-- ============================================ -->
+  <!-- 9. CRUCE CON DIAN                           -->
+  <!-- ============================================ -->
+  <h2>9. Cruce con DIAN</h2>
+  <p>
+    La DIAN realiza <strong>cruces automáticos</strong> entre las declaraciones de IVA, retenciones y la información exógena.
+    Si hay inconsistencias, la DIAN envía <strong>requerimientos</strong> o impone sanciones.
+  </p>
+
+  <h3>🔍 ¿Cómo evitar inconsistencias?</h3>
+  <ul>
+    <li><strong>Verifica el RUT</strong> de todos tus proveedores y clientes antes de facturar.</li>
+    <li><strong>Revisa las retenciones</strong> practicadas y reportadas.</li>
+    <li><strong>Confirma que los CUFE</strong> (Código Único de Factura Electrónica) estén activos en la DIAN.</li>
+    <li><strong>Cruza los totales</strong> de tus declaraciones con los reportes de Dynamics.</li>
+  </ul>
+
+  <div class="danger">
+    <strong>⚠️ Consecuencias de un cruce fallido:</strong>
+    <ul>
+      <li>Multas de hasta el <strong>10%</strong> del valor del impuesto.</li>
+      <li>Intereses moratorios.</li>
+      <li>Requerimientos especiales de la DIAN.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 10. EJERCICIO PRÁCTICO GUIADO               -->
+  <!-- ============================================ -->
+  <h2>10. 🧪 Ejercicio Práctico Guiado</h2>
+  <p>
+    Este es un ejercicio completo para que practiques la <strong>gestión de impuestos</strong>
+    en el contexto de Partmo.
+  </p>
+
+  <div style="background: #f8f9fc; border-radius: 12px; padding: 20px 24px; border: 2px dashed #1a3c6e; margin: 20px 0;">
+    <h4 style="margin-top: 0; color: #1a3c6e;">📋 Ejercicio: Liquidación de Impuestos Mensuales</h4>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Datos del mes de julio 2026:</strong></p>
+      <ul>
+        <li>Ventas totales: <strong>$85.000.000</strong> (IVA 19%)</li>
+        <li>Compras totales: <strong>$45.000.000</strong> (IVA 19%)</li>
+        <li>Honorarios pagados (persona jurídica): <strong>$12.000.000</strong></li>
+        <li>Arrendamientos pagados: <strong>$8.000.000</strong></li>
+        <li>Ingresos brutos para ICA: <strong>$85.000.000</strong></li>
+        <li>La empresa es <strong>Gran Contribuyente</strong></li>
+      </ul>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>1. Calcula el IVA a pagar</strong></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver respuesta</summary>
+        <div class="success" style="margin-top: 8px;">
+          <strong>IVA Generado:</strong> $85.000.000 × 19% = <strong>$16.150.000</strong><br>
+          <strong>IVA Descontable:</strong> $45.000.000 × 19% = <strong>$8.550.000</strong><br>
+          <strong>IVA a Pagar:</strong> $16.150.000 - $8.550.000 = <strong>$7.600.000</strong>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>2. Calcula las retenciones en la fuente</strong></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver respuesta</summary>
+        <div class="success" style="margin-top: 8px;">
+          <strong>Retención en compras:</strong> $45.000.000 × 2.5% = <strong>$1.125.000</strong><br>
+          <strong>Retención en honorarios:</strong> $12.000.000 × 11% = <strong>$1.320.000</strong><br>
+          <strong>Retención en arrendamientos:</strong> $8.000.000 × 3.5% = <strong>$280.000</strong><br>
+          <strong>Total retenciones practicadas:</strong> <strong>$2.725.000</strong>
+        </div>
+      </details>
+    </div>
+
+      <!-- Continuación del archivo impuestos.html -->
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>3. Calcula el ICA a pagar (Bucaramanga)</strong></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver respuesta</summary>
+        <div class="success" style="margin-top: 8px;">
+          <strong>ICA a Pagar:</strong> $85.000.000 × 2.5‰ = <strong>$212.500</strong>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>4. Prepara el asiento contable consolidado</strong></p>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver respuesta</summary>
+        <div class="success" style="margin-top: 8px;">
+          <strong>Por el IVA:</strong><br>
+          <code>Débito: 2404 IVA generado → $16.150.000</code><br>
+          <code>Crédito: 2408 IVA descontable → $8.550.000</code><br>
+          <code>Crédito: 2406 IVA por pagar → $7.600.000</code><br><br>
+          <strong>Por las retenciones:</strong><br>
+          <code>Débito: 2205 Proveedores → $2.725.000</code><br>
+          <code>Crédito: 2365 Retención en la fuente por pagar → $2.725.000</code><br><br>
+          <strong>Por el ICA:</strong><br>
+          <code>Débito: 5190 Impuestos y contribuciones → $212.500</code><br>
+          <code>Crédito: 2370 Aportes por pagar (ICA) → $212.500</code>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 11. CHECKLIST DE TAREAS TRIBUTARIAS         -->
+  <!-- ============================================ -->
+  <h2>11. ✅ Checklist de Tareas Tributarias</h2>
+  <p>Usa esta lista para asegurarte de que no olvidas ninguna obligación fiscal:</p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0;">
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #28a745;">
+      <strong>📅 Diario</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Verificar retenciones practicadas en compras</li>
+        <li>☐ Confirmar que las facturas tengan CUFE válido</li>
+        <li>☐ Revisar que los proveedores estén en RUT</li>
+      </ul>
+    </div>
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #1a3c6e;">
+      <strong>📆 Mensual</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Liquidar retenciones del mes</li>
+        <li>☐ Preparar declaración de ICA (si aplica)</li>
+        <li>☐ Revisar saldos de IVA (generado vs descontable)</li>
+        <li>☐ Conciliar retenciones con proveedores</li>
+      </ul>
+    </div>
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #e67e22;">
+      <strong>📊 Bimestral</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Presentar declaración de IVA</li>
+        <li>☐ Pagar el IVA (si hay saldo a favor del municipio)</li>
+        <li>☐ Revisar cruce con DIAN</li>
+      </ul>
+    </div>
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #dc3545;">
+      <strong>📌 Anual</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Preparar información exógena</li>
+        <li>☐ Declaración de renta</li>
+        <li>☐ Declaración de ICA anual</li>
+        <li>☐ Impuesto al patrimonio (si aplica)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 12. SANCIONES Y MULTAS                      -->
+  <!-- ============================================ -->
+  <h2>12. ⚠️ Sanciones y Multas Tributarias</h2>
+  <p>
+    El incumplimiento de las obligaciones fiscales puede generar <strong>sanciones económicas</strong>
+    que afectan la salud financiera de la empresa. Aquí las más comunes:
+  </p>
+
+  <table>
+    <tr><th>Infracción</th><th>Sanción</th><th>Ejemplo (2026)</th></tr>
+    <tr><td>Declarar IVA después de la fecha</td>
+        <td>Interés moratorio <strong>1.5% mensual</strong> sobre el valor</td>
+        <td>IVA de $7.600.000 → multa de $114.000/mes</td></tr>
+    <tr><td>No practicar retención en la fuente</td>
+        <td><strong>10%</strong> del valor no retenido</td>
+        <td>$1.000.000 no retenido → $100.000 de multa</td></tr>
+    <tr><td>Errores en información exógena</td>
+        <td><strong>5%</strong> del valor reportado incorrectamente</td>
+        <td>$10.000.000 reportado mal → $500.000 de multa</td></tr>
+    <tr><td>No presentar declaración de ICA</td>
+        <td>Hasta <strong>15%</strong> del impuesto</td>
+        <td>ICA de $212.500 → $31.875 de multa</td></tr>
+  </table>
+
+  <div class="danger">
+    <strong>⚠️ Consejo de oro:</strong> Siempre lleva un <strong>registro de vencimientos</strong>
+    en un calendario o Excel. Una multa por olvido puede costar muy caro a la empresa.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 13. HERRAMIENTAS Y RECURSOS                 -->
+  <!-- ============================================ -->
+  <h2>13. 🛠️ Herramientas y Recursos</h2>
+
+  <ul>
+    <li>
+      <strong>MUISCA (DIAN):</strong> Módulo de Usuarios de Información para presentar declaraciones.
+      <a href="https://muisca.dian.gov.co" target="_blank" style="color: #1a3c6e;">Acceder aquí</a>
+    </li>
+    <li>
+      <strong>Portal de la Alcaldía de Bucaramanga:</strong> Para declarar ICA y RETEICA.
+      <a href="https://www.bucaramanga.gov.co" target="_blank" style="color: #1a3c6e;">Visitar sitio</a>
+    </li>
+    <li>
+      <strong>Dynamics 365:</strong> Módulo de impuestos para generar declaraciones y reportes.
+    </li>
+    <li>
+      <strong>Calendario Tributario DIAN 2026:</strong> Descarga el PDF oficial.
+      <a href="https://www.dian.gov.co" target="_blank" style="color: #1a3c6e;">Ver calendario</a>
+    </li>
+    <li>
+      <strong>Excel Tributario:</strong> Crea tu propia hoja de cálculo con las tarifas y cálculos.
+    </li>
+  </ul>
+
+  <!-- ============================================ -->
+  <!-- 14. PREGUNTAS FRECUENTES (FAQ)              -->
+  <!-- ============================================ -->
+  <h2>14. ❓ Preguntas Frecuentes</h2>
+
+  <h4>❓ ¿Qué hago si no me alcanza el IVA descontable para cubrir el IVA generado?</h4>
+  <p>
+    Si el IVA descontable es mayor al IVA generado, tienes un <strong>saldo a favor</strong>.
+    Puedes solicitarlo como <strong>devolución</strong> o <strong>compensarlo</strong> en períodos siguientes.
+    Pregunta a tu supervisor cómo manejan estos saldos.
+  </p>
+
+  <h4>❓ ¿Cómo sé si un proveedor está obligado a practicarme retención?</h4>
+  <p>
+    Verifica el <strong>RUT</strong> del proveedor. Si es <strong>Gran Contribuyente</strong> o
+    <strong>Agente de Retención</strong>, debe practicarte retención. También aplica si el pago
+    supera el límite establecido por la DIAN (generalmente 4 UVT).
+  </p>
+
+  <h4>❓ ¿Qué pasa si no presento la información exógena?</h4>
+  <p>
+    La DIAN puede imponer <strong>multas de hasta el 5% del valor de las operaciones</strong>
+    no reportadas. Además, la empresa puede quedar en <strong>lista de incumplidos</strong>
+    lo que afecta su reputación fiscal.
+  </p>
+
+  <h4>❓ ¿Cómo sé si mi declaración de IVA fue aceptada por la DIAN?</h4>
+  <p>
+    En el <strong>MUISCA</strong>, puedes ver el <strong>estado de la declaración</strong>.
+    Si aparece como <span style="color: #28a745;">"Aceptada"</span>, está todo bien.
+    Si aparece con errores, debes corregirla lo antes posible.
+  </p>
+
+  <h4>❓ ¿Qué diferencia hay entre ICA y RETEICA?</h4>
+  <ul>
+    <li><strong>ICA:</strong> Es el impuesto que <strong>pagas tú</strong> como empresa (sobre tus ingresos).</li>
+    <li><strong>RETEICA:</strong> Es la retención que <strong>le haces</strong> a tus proveedores (sobre sus servicios).</li>
+  </ul>
+
+  <!-- ============================================ -->
+  <!-- 15. GLOSARIO TRIBUTARIO                     -->
+  <!-- ============================================ -->
+  <h2>15. 📝 Glosario Tributario</h2>
+  <table>
+    <tr><th>Término</th><th>Significado</th></tr>
+    <tr><td><strong>UVT</strong></td><td>Unidad de Valor Tributario. Base para impuestos y sanciones. 2026 = $52.374.</td></tr>
+    <tr><td><strong>RUT</strong></td><td>Registro Único Tributario. Identificación fiscal de la empresa.</td></tr>
+    <tr><td><strong>CUFE</strong></td><td>Código Único de Factura Electrónica. Identificador de la factura en DIAN.</td></tr>
+    <tr><td><strong>MUISCA</strong></td><td>Módulo de Usuarios de Información de la DIAN.</td></tr>
+    <tr><td><strong>Exógena</strong></td><td>Información de terceros que se reporta a la DIAN.</td></tr>
+    <tr><td><strong>RETEICA</strong></td><td>Retención del ICA aplicada a proveedores de servicios.</td></tr>
+    <tr><td><strong>Gran Contribuyente</strong></td><td>Empresas con ingresos superiores a 92.000 UVT (~$4.581M).</td></tr>
+    <tr><td><strong>Agente de Retención</strong></td><td>Empresa obligada a practicar retenciones a sus proveedores.</td></tr>
+  </table>
+
+  <!-- ============================================ -->
+  <!-- 16. CONSEJOS FINALES                        -->
+  <!-- ============================================ -->
+  <h2>16. 💡 Consejos Finales para tu Práctica</h2>
+
+  <ul>
+    <li>
+      <strong>Organiza tu tiempo:</strong> Lleva un <strong>calendario de vencimientos</strong>
+      con las fechas clave de IVA, ICA, Reteica y Exógena.
+    </li>
+    <li>
+      <strong>Revisa siempre el RUT:</strong> Antes de cualquier pago, confirma que el proveedor
+      esté registrado y activo en la DIAN.
+    </li>
+    <li>
+      <strong>Pregunta sin miedo:</strong> Los impuestos son complejos y cambian constantemente.
+      Pregunta a tu supervisor cualquier duda que tengas.
+    </li>
+    <li>
+      <strong>Usa Dynamics a tu favor:</strong> Aprende a generar los reportes de impuestos
+      desde el sistema para ahorrar tiempo y evitar errores.
+    </li>
+    <li>
+      <strong>Mantén un registro de retenciones:</strong> Lleva un archivo Excel con todas las
+      retenciones practicadas por proveedor y por mes.
+    </li>
+    <li>
+      <strong>Revisa los cambios normativos:</strong> Colombia cambia su legislación tributaria
+      con frecuencia. Suscríbete a boletines de la DIAN o la Cámara de Comercio.
+    </li>
+  </ul>
+
+  <div class="highlight">
+    <strong>🎯 Tu objetivo en la práctica:</strong> Dominar el ciclo tributario de Partmo
+    (retenciones → declaraciones → pagos → cruces con DIAN) y ser un apoyo confiable para el equipo contable.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                      -->
+  <!-- ============================================ -->
+  <div class="footer">
+    📌 Guía completa de Gestión de Impuestos para Filtros Partmo S.A.S.<br>
+    Actualizado: Julio 2026 • Bucaramanga, Santander • Basado en normativa DIAN vigente<br>
+    <a href="https://www.dian.gov.co" target="_blank">Sitio oficial de la DIAN</a> •
+    <a href="https://www.bucaramanga.gov.co" target="_blank">Alcaldía de Bucaramanga</a>
+  </div>
+
+</div>
+</body>
+  </html>
