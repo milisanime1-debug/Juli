@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>📚 Plan de Estudios - Contabilidad</title>
+  <title>📚 Plan de Estudios - Contabilidad (9 Módulos)</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -46,66 +46,82 @@
     }
     .subtitle strong { color: #1a3c6e; }
 
-    /* --- Secciones del plan --- */
-    .semestre {
+    /* --- Módulos --- */
+    .modulo {
       background: white;
       border-radius: 16px;
-      padding: 24px 28px;
-      margin-bottom: 24px;
+      padding: 22px 28px;
+      margin-bottom: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       border-left: 6px solid #1a3c6e;
-    }
-    .semestre h2 {
-      color: #1a3c6e;
-      font-size: 1.3rem;
-      margin-bottom: 14px;
       display: flex;
-      align-items: center;
-      gap: 10px;
+      align-items: flex-start;
+      gap: 16px;
+      transition: transform 0.15s;
     }
-    .semestre h2 .badge {
+    .modulo:hover { transform: translateX(4px); }
+    .modulo .num {
       background: #1a3c6e;
       color: white;
-      font-size: 0.7rem;
-      padding: 2px 12px;
-      border-radius: 20px;
-      font-weight: 600;
-    }
-    .temas {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-    }
-    .tema {
-      background: #f8f9fc;
-      padding: 14px 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      color: #1a1a1a;
+      font-weight: 700;
+      font-size: 1.2rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 12px;
-      transition: background 0.2s, transform 0.15s;
-      border: 1px solid #e8ecf1;
+      justify-content: center;
+      flex-shrink: 0;
     }
-    .tema:hover {
+    .modulo .contenido { flex: 1; }
+    .modulo .contenido h2 {
+      color: #1a3c6e;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+    .modulo .contenido p {
+      color: #555;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .modulo .contenido .temas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      margin-top: 8px;
+    }
+    .modulo .contenido .temas span {
       background: #eef4ff;
-      transform: translateX(4px);
-      border-color: #1a3c6e;
-    }
-    .tema .icon { font-size: 1.4rem; }
-    .tema .info { flex: 1; }
-    .tema .info .titulo { font-weight: 600; font-size: 0.95rem; }
-    .tema .info .desc {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 2px;
-    }
-    .tema .estado {
-      font-size: 0.7rem;
-      padding: 2px 10px;
+      padding: 2px 12px;
       border-radius: 20px;
+      font-size: 0.75rem;
+      color: #1a3c6e;
       font-weight: 600;
+    }
+    .modulo .accion {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .modulo .accion .btn {
+      background: #1a3c6e;
+      color: white;
+      padding: 6px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.2s;
+      text-align: center;
+    }
+    .modulo .accion .btn:hover { background: #0f2a4a; }
+    .modulo .accion .estado {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 12px;
+      border-radius: 20px;
     }
     .estado.list { background: #d4edda; color: #155724; }
     .estado.pend { background: #f8d7da; color: #721c24; }
@@ -119,11 +135,10 @@
       border-top: 1px solid #ddd;
       padding-top: 20px;
     }
-
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
-      .semestre { padding: 18px; }
-      .temas { grid-template-columns: 1fr; }
+      .modulo { flex-wrap: wrap; }
+      .modulo .accion { width: 100%; flex-direction: row; justify-content: flex-end; }
     }
   </style>
 </head>
@@ -134,223 +149,203 @@
 
   <h1>📚 Plan de Estudios</h1>
   <div class="subtitle">
-    <strong>Contabilidad General y Financiera</strong> • Enfoque práctico para <strong>Filtros Partmo S.A.S.</strong>
+    <strong>Contabilidad General y Financiera</strong> • 9 Módulos • Enfoque <strong>Filtros Partmo S.A.S.</strong>
   </div>
 
   <!-- ========================================== -->
-  <!-- SEMESTRE 1: FUNDAMENTOS                     -->
+  <!-- MÓDULO 1                                   -->
   <!-- ========================================== -->
-  <div class="semestre">
-    <h2>📘 Nivel 1: Fundamentos de Contabilidad <span class="badge">Base</span></h2>
-    <div class="temas">
-
-      <a href="01-introduccion.html" class="tema">
-        <span class="icon">📖</span>
-        <div class="info">
-          <div class="titulo">1. Introducción a la Contabilidad</div>
-          <div class="desc">Historia, objetivos, usuarios y cualidades de la información</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="02-puc.html" class="tema">
-        <span class="icon">📋</span>
-        <div class="info">
-          <div class="titulo">2. PUC - Plan Único de Cuentas</div>
-          <div class="desc">Estructura, clases, grupos, cuentas y subcuentas (Decreto 2650)</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="03-partida-doble.html" class="tema">
-        <span class="icon">⚖️</span>
-        <div class="info">
-          <div class="titulo">3. Partida Doble y Cuentas T</div>
-          <div class="desc">Principio fundamental, reglas débito/crédito, representación gráfica</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="04-ciclo-contable.html" class="tema">
-        <span class="icon">🔄</span>
-        <div class="info">
-          <div class="titulo">4. Ciclo Contable</div>
-          <div class="desc">Pasos: comprobantes, libros, balances, ajustes y cierre</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
+  <div class="modulo">
+    <div class="num">1</div>
+    <div class="contenido">
+      <h2>📖 Introducción a la Contabilidad</h2>
+      <p>Historia, objetivos, usuarios de la información, cualidades, principios de contabilidad generalmente aceptados (PCGA).</p>
+      <div class="temas">
+        <span>Historia</span>
+        <span>Usuarios</span>
+        <span>PCGA</span>
+        <span>Cualidades</span>
+      </div>
+    </div>
+    <div class="accion">
+      <a href="01-introduccion.html" class="btn">Ver</a>
+      <span class="estado list">✅ Listo</span>
     </div>
   </div>
 
   <!-- ========================================== -->
-  <!-- SEMESTRE 2: ESTADOS FINANCIEROS            -->
+  <!-- MÓDULO 2                                   -->
   <!-- ========================================== -->
-  <div class="semestre">
-    <h2>📊 Nivel 2: Estados Financieros <span class="badge">Intermedio</span></h2>
-    <div class="temas">
-
-      <a href="05-balance-general.html" class="tema">
-        <span class="icon">📊</span>
-        <div class="info">
-          <div class="titulo">5. Balance General (Estado de Situación)</div>
-          <div class="desc">Activo, pasivo y patrimonio. Ecuación contable</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="06-estado-resultados.html" class="tema">
-        <span class="icon">📈</span>
-        <div class="info">
-          <div class="titulo">6. Estado de Resultados</div>
-          <div class="desc">Ingresos, gastos, costos, utilidad y EBITDA</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="07-flujo-efectivo.html" class="tema">
-        <span class="icon">💵</span>
-        <div class="info">
-          <div class="titulo">7. Estado de Flujo de Efectivo</div>
-          <div class="desc">Actividades operativas, de inversión y financiamiento</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="08-cambios-patrimonio.html" class="tema">
-        <span class="icon">📑</span>
-        <div class="info">
-          <div class="titulo">8. Estado de Cambios en el Patrimonio</div>
-          <div class="desc">Movimientos de capital, utilidades y reservas</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
+  <div class="modulo">
+    <div class="num">2</div>
+    <div class="contenido">
+      <h2>📋 PUC + Partida Doble + Cuentas T</h2>
+      <p>Plan Único de Cuentas (Decreto 2650), estructura jerárquica, clases. Principio de partida doble. Representación gráfica (cuentas T).</p>
+      <div class="temas">
+        <span>PUC</span>
+        <span>Partida doble</span>
+        <span>Cuentas T</span>
+        <span>Débito/Crédito</span>
+      </div>
+    </div>
+    <div class="accion">
+      <a href="02-puc-partida-doble.html" class="btn">Ver</a>
+      <span class="estado list">✅ Listo</span>
     </div>
   </div>
 
   <!-- ========================================== -->
-  <!-- SEMESTRE 3: NIIF Y COSTOS                  -->
+  <!-- MÓDULO 3                                   -->
   <!-- ========================================== -->
-  <div class="semestre">
-    <h2>🌍 Nivel 3: NIIF y Costos <span class="badge">Avanzado</span></h2>
-    <div class="temas">
-
-      <a href="09-niif.html" class="tema">
-        <span class="icon">📜</span>
-        <div class="info">
-          <div class="titulo">9. NIIF - Normas Internacionales</div>
-          <div class="desc">Grupos, enmiendas 2026 (NIIF 16, NIC 1, NIC 7, NIC 12, NIIF 7)</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="10-costos-produccion.html" class="tema">
-        <span class="icon">🏭</span>
-        <div class="info">
-          <div class="titulo">10. Costos de Producción (Partmo)</div>
-          <div class="desc">Materia prima, mano de obra, CIF. Sistemas de costeo</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="11-depreciacion.html" class="tema">
-        <span class="icon">🔧</span>
-        <div class="info">
-          <div class="titulo">11. Depreciación y Amortización</div>
-          <div class="desc">Métodos línea recta, unidades producidas, depreciación acelerada</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="12-inventarios.html" class="tema">
-        <span class="icon">📦</span>
-        <div class="info">
-          <div class="titulo">12. Inventarios (NIC 2)</div>
-          <div class="desc">Métodos UEPS, PEPS, promedio ponderado. Control de materiales</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
+  <div class="modulo">
+    <div class="num">3</div>
+    <div class="contenido">
+      <h2>🔄 Ciclo Contable</h2>
+      <p>Pasos del ciclo: comprobantes, libros auxiliares y principales, balances de comprobación, ajustes, cierre contable.</p>
+      <div class="temas">
+        <span>Comprobantes</span>
+        <span>Libros</span>
+        <span>Ajustes</span>
+        <span>Cierre</span>
+      </div>
+    </div>
+    <div class="accion">
+      <a href="03-ciclo-contable.html" class="btn">Ver</a>
+      <span class="estado list">✅ Listo</span>
     </div>
   </div>
 
   <!-- ========================================== -->
-  <!-- SEMESTRE 4: IMPUESTOS Y FINANZAS           -->
+  <!-- MÓDULO 4                                   -->
   <!-- ========================================== -->
-  <div class="semestre">
-    <h2>💰 Nivel 4: Impuestos y Análisis Financiero <span class="badge">Especializado</span></h2>
-    <div class="temas">
-
-      <a href="13-impuestos-colombia.html" class="tema">
-        <span class="icon">🏛️</span>
-        <div class="info">
-          <div class="titulo">13. Impuestos en Colombia</div>
-          <div class="desc">Renta, IVA, ICA, Retención, Patrimonio, RETEICA</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="14-retenciones.html" class="tema">
-        <span class="icon">🧾</span>
-        <div class="info">
-          <div class="titulo">14. Retención en la Fuente</div>
-          <div class="desc">Tarifas 2026: compras, honorarios, nómina, arrendamientos</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="15-analisis-financiero.html" class="tema">
-        <span class="icon">📉</span>
-        <div class="info">
-          <div class="titulo">15. Análisis de Estados Financieros</div>
-          <div class="desc">Ratios de liquidez, endeudamiento, rentabilidad y eficiencia</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
-      <a href="16-auditoria.html" class="tema">
-        <span class="icon">🔍</span>
-        <div class="info">
-          <div class="titulo">16. Auditoría y Control Interno</div>
-          <div class="desc">Principios, tipos de auditoría y procesos de control</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
-
+  <div class="modulo">
+    <div class="num">4</div>
+    <div class="contenido">
+      <h2>📊 Estados Financieros</h2>
+      <p>Balance General, Estado de Resultados, Flujo de Efectivo, Cambios en el Patrimonio. Estructura, cuentas y análisis básico.</p>
+      <div class="temas">
+        <span>Balance</span>
+        <span>Resultados</span>
+        <span>Flujo de efectivo</span>
+        <span>Patrimonio</span>
+      </div>
+    </div>
+    <div class="accion">
+      <a href="04-estados-financieros.html" class="btn">Ver</a>
+      <span class="estado list">✅ Listo</span>
     </div>
   </div>
 
   <!-- ========================================== -->
-  <!-- SEMESTRE 5: PRÁCTICA EN PARTMO             -->
+  <!-- MÓDULO 5                                   -->
   <!-- ========================================== -->
-  <div class="semestre" style="border-left-color: #28a745;">
-    <h2>🏢 Nivel 5: Aplicación Práctica en Partmo <span class="badge" style="background:#28a745;">¡Enfoque!</span></h2>
-    <div class="temas">
+  <div class="modulo">
+    <div class="num">5</div>
+    <div class="contenido">
+      <h2>🌍 NIIF - Normas Internacionales</h2>
+      <p>Ley 1314, grupos (1, 2, 3), enmiendas 2026: NIIF 16, NIC 1, NIC 7, NIC 12, NIIF 7. Aplicación en Partmo.</p>
+      <div class="temas">
+        <span>Ley 1314</span>
+        <span>Grupos</span>
+        <span>Enmiendas 2026</span>
+        <span>Partmo</span>
+      </div>
+    </div>
+    <div class="accion">
+      <a href="05-niif.html" class="btn">Ver</a>
+      <span class="estado list">✅ Listo</span>
+    </div>
+  </div>
 
-      <a href="17-practica-diaria.html" class="tema">
-        <span class="icon">📝</span>
-        <div class="info">
-          <div class="titulo">17. Tareas Diarias en Partmo</div>
-          <div class="desc">Facturación, conciliaciones, costos, retenciones y cierres</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
+  <!-- ========================================== -->
+  <!-- MÓDULO 6                                   -->
+  <!-- ========================================== -->
+  <div class="modulo">
+    <div class="num">6</div>
+    <div class="contenido">
+      <h2>🏭 Costos de Producción + Inventarios + Depreciación</h2>
+      <p>Materia prima, mano de obra, CIF. Sistemas de costeo. Inventarios (NIC 2): UEPS, PEPS, promedio. Depreciación de activos fijos.</p>
+      <div class="temas">
+        <span>Materia prima</span>
+        <span>Mano de obra</span>
+        <span>CIF</span>
+        <span>Inventarios</span>
+        <span>Depreciación</span>
+      </div>
+    </div>
+    <div class="accion">
+      <a href="06-costos-produccion.html" class="btn">Ver</a>
+      <span class="estado pend">⏳ Pendiente</span>
+    </div>
+  </div>
 
-      <a href="18-casos-partmo.html" class="tema">
-        <span class="icon">💼</span>
-        <div class="info">
-          <div class="titulo">18. Casos Prácticos Partmo</div>
-          <div class="desc">Ejercicios reales: producción, ventas, costos CIF y nómina</div>
-        </div>
-        <span class="estado pend">Pendiente</span>
-      </a>
+  <!-- ========================================== -->
+  <!-- MÓDULO 7                                   -->
+  <!-- ========================================== -->
+  <div class="modulo">
+    <div class="num">7</div>
+    <div class="contenido">
+      <h2>💰 Impuestos en Colombia</h2>
+      <p>Renta (35%), IVA (19%), ICA (Bucaramanga 2.5‰), Retención en la fuente (compras, honorarios, nómina), Impuesto al Patrimonio, RETEICA.</p>
+      <div class="temas">
+        <span>Renta</span>
+        <span>IVA</span>
+        <span>ICA</span>
+        <span>Retención</span>
+        <span>Patrimonio</span>
+      </div>
+    </div>
+    <div class="accion">
+      <a href="07-impuestos-colombia.html" class="btn">Ver</a>
+      <span class="estado pend">⏳ Pendiente</span>
+    </div>
+  </div>
 
+  <!-- ========================================== -->
+  <!-- MÓDULO 8                                   -->
+  <!-- ========================================== -->
+  <div class="modulo">
+    <div class="num">8</div>
+    <div class="contenido">
+      <h2>📉 Análisis Financiero</h2>
+      <p>Ratios de liquidez, endeudamiento, rentabilidad, eficiencia. Interpretación de estados financieros para la toma de decisiones.</p>
+      <div class="temas">
+        <span>Liquidez</span>
+        <span>Endeudamiento</span>
+        <span>Rentabilidad</span>
+        <span>Eficiencia</span>
+      </div>
+    </div>
+    <div class="accion">
+      <a href="08-analisis-financiero.html" class="btn">Ver</a>
+      <span class="estado pend">⏳ Pendiente</span>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MÓDULO 9                                   -->
+  <!-- ========================================== -->
+  <div class="modulo" style="border-left-color: #28a745;">
+    <div class="num" style="background: #28a745;">9</div>
+    <div class="contenido">
+      <h2>🏢 Práctica en Filtros Partmo</h2>
+      <p>Casos prácticos: facturación, conciliaciones bancarias, costos de producción, liquidación de nómina, retenciones, cierres contables.</p>
+      <div class="temas">
+        <span>Facturación</span>
+        <span>Conciliaciones</span>
+        <span>Costos</span>
+        <span>Nómina</span>
+        <span>Cierres</span>
+      </div>
+    </div>
+    <div class="accion">
+      <a href="09-practica-partmo.html" class="btn">Ver</a>
+      <span class="estado pend">⏳ Pendiente</span>
     </div>
   </div>
 
   <div class="footer">
-    📌 Plan de estudios personalizado para <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026<br>
+    📌 9 módulos • Plan de estudios para <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026<br>
     Creado para estudio autodirigido • Actualizado: Julio 2026
   </div>
 
