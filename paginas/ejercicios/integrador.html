@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador Dynamics - Ejercicio Integrador</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #e6e9ef;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1300px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            padding: 24px 28px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        /* --- Header estilo Dynamics --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 3px solid #1a3c6e;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .header .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .header .logo h1 {
+            font-size: 1.6rem;
+            color: #1a3c6e;
+            font-weight: 600;
+        }
+        .header .logo span {
+            font-size: 0.85rem;
+            color: #666;
+            background: #f0f2f5;
+            padding: 4px 12px;
+            border-radius: 12px;
+        }
+        .header .user {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .header .user .badge {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .back {
+            display: inline-block;
+            background: #1a3c6e;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .back:hover { background: #0f2a4a; }
+
+        /* --- Pestañas --- */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            background: #f0f2f5;
+            padding: 4px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .tab {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #555;
+            transition: 0.2s;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+        .tab:hover { background: #e0e4ea; }
+        .tab.active {
+            background: #1a3c6e;
+            color: white;
+        }
+        .tab.active:hover { background: #1a3c6e; }
+
+        /* --- Paneles --- */
+        .panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .panel.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Formularios --- */
+        .form-group {
+            margin-bottom: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 16px;
+        }
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+            min-width: 160px;
+        }
+        .form-group input, .form-group select {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            flex: 1;
+            min-width: 200px;
+            background: #fafbfc;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #1a3c6e;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26,60,110,0.15);
+        }
+        .form-group .help {
+            font-size: 0.78rem;
+            color: #888;
+            flex-basis: 100%;
+            padding-left: 176px;
+        }
+
+        .btn {
+            padding: 10px 28px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #1a3c6e;
+            color: white;
+        }
+        .btn:hover { background: #0f2a4a; transform: translateY(-1px); }
+        .btn-success { background: #28a745; }
+        .btn-success:hover { background: #1e7e34; }
+        .btn-warning { background: #e67e22; }
+        .btn-warning:hover { background: #ca6f1e; }
+        .btn-danger { background: #dc3545; }
+        .btn-danger:hover { background: #b02a37; }
+        .btn-outline { background: transparent; color: #1a3c6e; border: 2px solid #1a3c6e; }
+        .btn-outline:hover { background: #1a3c6e; color: white; }
+
+        /* --- Tablas --- */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0;
+            border-radius: 8px;
+            border: 1px solid #e8ecf1;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        th {
+            background: #1a3c6e;
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e8ecf1;
+        }
+        tr:hover td { background: #f8f9fc; }
+        .table-total {
+            background: #f0f2f5;
+            font-weight: 700;
+        }
+        .table-total td { border-top: 2px solid #1a3c6e; }
+
+        /* --- Tarjetas de estado --- */
+        .status-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .status-card {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 16px 18px;
+            border-left: 4px solid #1a3c6e;
+        }
+        .status-card .label { font-size: 0.78rem; color: #888; }
+        .status-card .value { font-size: 1.4rem; font-weight: 700; color: #1a3c6e; }
+
+        /* --- Mensajes --- */
+        .msg {
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin: 12px 0;
+            font-weight: 500;
+            display: none;
+        }
+        .msg.show { display: block; }
+        .msg.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .msg.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .msg.info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+
+        /* --- Asiento contable (estilo) --- */
+        .asiento-box {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid #e8ecf1;
+            margin: 12px 0;
+            white-space: pre-wrap;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 16px;
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 16px; }
+            .header .logo h1 { font-size: 1.2rem; }
+            .form-group label { min-width: 100%; }
+            .form-group .help { padding-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">
+            <h1>🧾 Dynamics 365</h1>
+            <span>Simulador • Practica Contable</span>
+        </div>
+        <div class="user">
+            <span>👩‍💻 Aprendiz Partmo</span>
+            <span class="badge">En línea</span>
+            <a href="../ejercicios.html" class="back">⬅ Volver</a>
+        </div>
+    </div>
+
+    <!-- PESTAÑAS -->
+    <div class="tabs">
+        <button class="tab active" data-tab="tab-compra">🛒 Compra</button>
+        <button class="tab" data-tab="tab-venta">💳 Venta</button>
+        <button class="tab" data-tab="tab-provision">📊 Provisión</button>
+        <button class="tab" data-tab="tab-conciliacion">🏦 Conciliación</button>
+        <button class="tab" data-tab="tab-resumen">📋 Resumen</button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PANEL 1: COMPRA                              -->
+    <!-- ============================================ -->
+    <div class="panel active" id="tab-compra">
+        <h2 style="color:#1a3c6e; margin-bottom:12px;">🛒 Registro de Compra</h2>
+        <p style="color:#555; margin-bottom:16px;">Simula el registro de una factura de compra en el módulo <strong>Cuentas por Pagar (AP)</strong>.</p>
+
+        <div class="form-group">
+            <label>Proveedor *</label>
+            <select id="proveedor-compra">
+                <option value="Metales del Oriente S.A.S. (890.123.456-7)">Metales del Oriente S.A.S. (890.123.456-7)</option>
+                <option value="Aceros Industriales S.A. (900.456.789-0)">Aceros Industriales S.A. (900.456.789-0)</option>
+                <option value="Polímeros del Norte S.A.S. (890.987.654-3)">Polímeros del Norte S.A.S. (890.987.654-3)</option>
+                <option value="Mantenimiento Total S.A.S. (900.111.222-9)">Mantenimiento Total S.A.S. (900.111.222-9)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Número de Factura *</label>
+            <input type="text" id="num-factura-compra" placeholder="Ej: 002-2026" value="FV-2026-001" />
+        </div>
+
+        <div class="form-group">
+            <label>Fecha de Factura *</label>
+            <input type="date" id="fecha-compra" value="2026-07-15" />
+        </div>
+
+        <div class="form-group">
+            <label>Cuenta Contable *</label>
+            <select id="cuenta-compra">
+                <option value="1435">1435 - Mercancías no fabricadas (Materia prima)</option>
+                <option value="1436">1436 - Mercancías en tránsito</option>
+                <option value="5120">5120 - Arrendamientos</option>
+                <option value="5135">5135 - Servicios públicos</option>
+                <option value="5110">5110 - Honorarios</option>
+            </select>
+            <span class="help">Selecciona la cuenta según el tipo de compra.</span>
+        </div>
+
+        <div class="form-group">
+            <label>Valor (sin IVA) *</label>
+            <input type="number" id="valor-compra" value="15000000" step="1000" />
+        </div>
+
+        <div class="form-group">
+            <label>IVA</label>
+            <select id="iva-compra">
+                <option value="19">19% (General)</option>
+                <option value="5">5% (Reducido)</option>
+                <option value="0">0% (Exento)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Retención en la Fuente</label>
+            <select id="retencion-compra">
+                <option value="2.5">2.5% (Compras generales)</option>
+                <option value="11">11% (Honorarios PJ)</option>
+                <option value="3.5">3.5% (Consultoría)</option>
+                <option value="0">0% (No aplica)</option>
+            </select>
+            <span class="help">Aplica según el tipo de proveedor y el valor.</span>
+        </div>
+
+        <button class="btn" id="btn-registrar-compra">📌 Registrar Compra</button>
+
+        <div id="msg-compra" class="msg"></div>
+        <div id="asiento-compra" class="asiento-box" style="display:none;"></div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PANEL 2: VENTA                              -->
+    <!-- ============================================ -->
+    <div class="panel" id="tab-venta">
+        <h2 style="color:#1a3c6e; margin-bottom:12px;">💳 Registro de Venta</h2>
+        <p style="color:#555; margin-bottom:16px;">Simula el registro de una factura de venta en el módulo <strong>Cuentas por Cobrar (AR)</strong>.</p>
+
+        <div class="form-group">
+            <label>Cliente *</label>
+            <select id="cliente-venta">
+                <option value="Autopartes del Norte S.A.S. (900.123.456-0)">Autopartes del Norte S.A.S. (900.123.456-0)</option>
+                <option value="Distribuidora de Filtros Ltda. (890.765.432-1)">Distribuidora de Filtros Ltda. (890.765.432-1)</option>
+                <option value="Talleres Unidos S.A.S. (900.444.555-2)">Talleres Unidos S.A.S. (900.444.555-2)</option>
+                <option value="Industrial Motors S.A. (890.333.222-3)">Industrial Motors S.A. (890.333.222-3)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Número de Factura *</label>
+            <input type="text" id="num-factura-venta" placeholder="Ej: 2026-001" value="FV-2026-1001" />
+        </div>
+
+        <div class="form-group">
+            <label>Fecha de Factura *</label>
+            <input type="date" id="fecha-venta" value="2026-07-15" />
+        </div>
+
+        <div class="form-group">
+            <label>Producto / Servicio</label>
+            <select id="producto-venta">
+                <option value="Filtro industrial F-2000">Filtro industrial F-2000</option>
+                <option value="Filtro de aceite F-150">Filtro de aceite F-150</option>
+                <option value="Filtro de aire F-300">Filtro de aire F-300</option>
+                <option value="Kit de mantenimiento K-100">Kit de mantenimiento K-100</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Cantidad *</label>
+            <input type="number" id="cantidad-venta" value="200" step="1" />
+        </div>
+
+        <div class="form-group">
+            <label>Precio Unitario *</label>
+            <input type="number" id="precio-unitario" value="42500" step="100" />
+        </div>
+
+        <div class="form-group">
+            <label>IVA</label>
+            <select id="iva-venta">
+                <option value="19">19% (General)</option>
+                <option value="5">5% (Reducido)</option>
+                <option value="0">0% (Exento)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Retención en la Fuente (cliente)</label>
+            <select id="retencion-venta">
+                <option value="3.5">3.5% (Agente de retención)</option>
+                <option value="11">11% (Servicios)</option>
+                <option value="0">0% (No aplica)</option>
+            </select>
+            <span class="help">Solo si el cliente es agente de retención.</span>
+        </div>
+
+        <button class="btn btn-success" id="btn-registrar-venta">📌 Registrar Venta</button>
+
+        <div id="msg-venta" class="msg"></div>
+        <div id="asiento-venta" class="asiento-box" style="display:none;"></div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PANEL 3: PROVISIÓN                          -->
+    <!-- ============================================ -->
+    <div class="panel" id="tab-provision">
+        <h2 style="color:#1a3c6e; margin-bottom:12px;">📊 Provisiones y Depreciación</h2>
+        <p style="color:#555; margin-bottom:16px;">Simula el registro de provisiones mensuales y depreciación de activos.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <div style="background:#f8f9fc; padding:16px; border-radius:10px;">
+                <h4 style="color:#1a3c6e;">🔹 Provisión Fija</h4>
+                <div class="form-group">
+                    <label>Concepto</label>
+                    <select id="concepto-provision">
+                        <option value="Nómina producción">Nómina producción</option>
+                        <option value="Nómina administrativa">Nómina administrativa</option>
+                        <option value="Arrendamiento planta">Arrendamiento planta</option>
+                        <option value="Seguros">Seguros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Cuenta de Gasto</label>
+                    <select id="cuenta-gasto-provision">
+                        <option value="7201">7201 - Mano de obra directa</option>
+                        <option value="5101">5101 - Sueldos y salarios</option>
+                        <option value="5120">5120 - Arrendamientos</option>
+                        <option value="5140">5140 - Seguros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valor</label>
+                    <input type="number" id="valor-provision" value="12000000" step="1000" />
+                </div>
+                <button class="btn btn-warning" id="btn-registrar-provision">📌 Registrar Provisión</button>
+            </div>
+
+            <div style="background:#f8f9fc; padding:16px; border-radius:10px;">
+                <h4 style="color:#1a3c6e;">🏭 Depreciación</h4>
+                <div class="form-group">
+                    <label>Activo a depreciar</label>
+                    <select id="activo-depreciacion">
+                        <option value="Máquina cortadora CNC">Máquina cortadora CNC</option>
+                        <option value="Prensa hidráulica 500T">Prensa hidráulica 500T</option>
+                        <option value="Equipo de soldadura">Equipo de soldadura</option>
+                        <option value="Vehículo de carga">Vehículo de carga</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valor del activo</label>
+                    <input type="number" id="valor-activo" value="50000000" step="1000" />
+                </div>
+                <div class="form-group">
+                    <label>Valor residual</label>
+                    <input type="number" id="valor-residual" value="5000000" step="1000" />
+                </div>
+                <div class="form-group">
+                    <label>Vida útil (años)</label>
+                    <input type="number" id="vida-util" value="10" step="1" />
+                </div>
+                <div class="form-group">
+                    <label>Período actual (meses transcurridos)</label>
+                    <input type="number" id="meses-transcurridos" value="36" step="1" />
+                </div>
+                <button class="btn" id="btn-calcular-depreciacion">📌 Calcular Depreciación</button>
+            </div>
+        </div>
+
+        <div id="msg-provision" class="msg"></div>
+        <div id="asiento-provision" class="asiento-box" style="display:none;"></div>
+        <div id="resultado-depreciacion" class="asiento-box" style="display:none;"></div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PANEL 4: CONCILIACIÓN                       -->
+    <!-- ============================================ -->
+    <div class="panel" id="tab-conciliacion">
+        <h2 style="color:#1a3c6e; margin-bottom:12px;">🏦 Conciliación Bancaria</h2>
+        <p style="color:#555; margin-bottom:16px;">Simula una conciliación bancaria entre el saldo contable y el extracto bancario.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <div style="background:#f8f9fc; padding:16px; border-radius:10px;">
+                <h4 style="color:#1a3c6e;">Saldo Contable</h4>
+                <div class="form-group">
+                    <label>Cuenta bancaria</label>
+                    <select id="cuenta-bancaria">
+                        <option value="1110">1110 - Bancos (Bancolombia)</option>
+                        <option value="1112">1112 - Bancos (Davivienda)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Saldo contable</label>
+                    <input type="number" id="saldo-contable" value="25800000" step="1000" />
+                </div>
+                <div class="form-group">
+                    <label>Saldo según extracto</label>
+                    <input type="number" id="saldo-extracto" value="24200000" step="1000" />
+                </div>
+            </div>
+
+            <div style="background:#f8f9fc; padding:16px; border-radius:10px;">
+                <h4 style="color:#1a3c6e;">Diferencias a conciliar</h4>
+                <div class="form-group">
+                    <label>Cheques pendientes</label>
+                    <input type="number" id="cheques-pendientes" value="2100000" step="1000" />
+                </div>
+                <div class="form-group">
+                    <label>Depósitos en tránsito</label>
+                    <input type="number" id="depositos-transito" value="800000" step="1000" />
+                </div>
+                <div class="form-group">
+                    <label>Comisiones bancarias</label>
+                    <input type="number" id="comisiones" value="50000" step="1000" />
+                </div>
+                <div class="form-group">
+                    <label>Intereses a favor</label>
+                    <input type="number" id="intereses" value="30000" step="1000" />
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-success" id="btn-conciliar">📌 Ejecutar Conciliación</button>
+
+        <div id="msg-conciliacion" class="msg"></div>
+        <div id="resultado-conciliacion" style="display:none; margin-top:12px;"></div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PANEL 5: RESUMEN                            -->
+    <!-- ============================================ -->
+    <div class="panel" id="tab-resumen">
+        <h2 style="color:#1a3c6e; margin-bottom:12px;">📋 Resumen del Ejercicio</h2>
+        <p style="color:#555; margin-bottom:16px;">Aquí se consolidan todas las operaciones registradas en el simulador.</p>
+
+        <div class="status-cards">
+            <div class="status-card"><div class="label">Compras registradas</div><div class="value" id="resumen-compras">0</div></div>
+            <div class="status-card"><div class="label">Ventas registradas</div><div class="value" id="resumen-ventas">0</div></div>
+            <div class="status-card"><div class="label">Provisiones</div><div class="value" id="resumen-provisiones">0</div></div>
+            <div class="status-card"><div class="label">Conciliaciones</div><div class="value" id="resumen-conciliaciones">0</div></div>
+            <div class="status-card" style="border-left-color:#28a745;"><div class="label">Total Débitos</div><div class="value" id="resumen-debitos">$0</div></div>
+            <div class="status-card" style="border-left-color:#dc3545;"><div class="label">Total Créditos</div><div class="value" id="resumen-creditos">$0</div></div>
+        </div>
+
+        <h4 style="margin-top:20px; color:#1a3c6e;">📝 Asientos registrados</h4>
+        <div id="historial-asientos" style="background:#f8f9fc; border-radius:10px; padding:16px; min-height:100px; border:1px solid #e8ecf1;">
+            <p style="color:#888; text-align:center;">Aún no hay asientos registrados. Completa los ejercicios de las pestañas anteriores.</p>
+        </div>
+
+        <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap;">
+            <button class="btn btn-danger" id="btn-limpiar-todo">🗑️ Limpiar todo</button>
+            <button class="btn btn-success" id="btn-exportar">📥 Exportar resumen</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        🧾 Simulador Microsoft Dynamics • Ejercicio Integrador • Filtros Partmo S.A.S. • Julio 2026
+    </div>
+</div>
+
+<script>
+// ============================================================
+// VARIABLES GLOBALES
+// ============================================================
+let contadorCompras = 0;
+let contadorVentas = 0;
+let contadorProvisiones = 0;
+let contadorConciliaciones = 0;
+let totalDebitos = 0;
+let totalCreditos = 0;
+let historialAsientos = [];
+
+// ============================================================
+// PESTAÑAS
+// ============================================================
+document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(this.dataset.tab).classList.add('active');
+    });
+});
+
+// ============================================================
+// FUNCIÓN: Mostrar mensaje
+// ============================================================
+function mostrarMensaje(id, tipo, texto) {
+    const el = document.getElementById(id);
+    el.className = 'msg show ' + tipo;
+    el.textContent = texto;
+}
+
+// ============================================================
+// FUNCIÓN: Agregar asiento al historial
+// ============================================================
+function agregarAsiento(titulo, debitos, creditos) {
+    let html = `<div style="border-bottom:1px solid #ddd; padding:8px 0; margin-bottom:6px;">
+        <strong>📌 ${titulo}</strong><br>
+        <span style="font-family:'Courier New',monospace;font-size:0.85rem;">`;
+    debitos.forEach(d => { html += `Débito: ${d.cuenta} → $${d.valor.toLocaleString()}<br>`; });
+    creditos.forEach(c => { html += `Crédito: ${c.cuenta} → $${c.valor.toLocaleString()}<br>`; });
+    html += `</span></div>`;
+    
+    const contenedor = document.getElementById('historial-asientos');
+    if (contenedor.querySelector('p')) contenedor.innerHTML = '';
+    contenedor.innerHTML += html;
+
+    // Actualizar totales
+    debitos.forEach(d => totalDebitos += d.valor);
+    creditos.forEach(c => totalCreditos += c.valor);
+    document.getElementById('resumen-debitos').textContent = '$' + totalDebitos.toLocaleString();
+    document.getElementById('resumen-creditos').textContent = '$' + totalCreditos.toLocaleString();
+}
+
+// ============================================================
+// 1. REGISTRAR COMPRA
+// ============================================================
+document.getElementById('btn-registrar-compra').addEventListener('click', function() {
+    const proveedor = document.getElementById('proveedor-compra').value;
+    const numFactura = document.getElementById('num-factura-compra').value;
+    const fecha = document.getElementById('fecha-compra').value;
+    const cuenta = document.getElementById('cuenta-compra').value;
+    const valor = parseFloat(document.getElementById('valor-compra').value);
+    const iva = parseFloat(document.getElementById('iva-compra').value);
+    const retencion = parseFloat(document.getElementById('retencion-compra').value);
+
+    if (!valor || valor <= 0) {
+        mostrarMensaje('msg-compra', 'error', '⚠️ Ingresa un valor válido para la compra.');
+        return;
+    }
+
+    const ivaValor = valor * (iva / 100);
+    const retencionValor = valor * (retencion / 100);
+    const totalProveedor = valor + ivaValor - retencionValor;
+
+    const asiento = {
+        titulo: `Compra ${numFactura} - ${proveedor}`,
+        debitos: [
+            { cuenta: cuenta, valor: valor },
+            { cuenta: '2408 IVA descontable', valor: ivaValor }
+        ],
+        creditos: [
+            { cuenta: '2205 Proveedores', valor: totalProveedor },
+            { cuenta: '2365 Retención por pagar', valor: retencionValor }
+        ]
+    };
+
+    // Mostrar asiento
+    let html = `📌 ASIENTO CONTABLE - COMPRA\n`;
+    html += `─────────────────────────────\n`;
+    html += `Proveedor: ${proveedor}\n`;
+    html += `Factura: ${numFactura} | Fecha: ${fecha}\n\n`;
+    html += `DÉBITO:\n`;
+    html += `  ${cuenta.padEnd(35)} $${valor.toLocaleString()}\n`;
+    html += `  2408 IVA descontable (${iva}%)      $${ivaValor.toLocaleString()}\n\n`;
+    html += `CRÉDITO:\n`;
+    html += `  2205 Proveedores nacionales      $${totalProveedor.toLocaleString()}\n`;
+    html += `  2365 Retención por pagar (${retencion}%) $${retencionValor.toLocaleString()}\n\n`;
+    html += `✅ Total: $${(valor + ivaValor).toLocaleString()} | Neto a pagar: $${totalProveedor.toLocaleString()}`;
+
+    const asientoEl = document.getElementById('asiento-compra');
+    asientoEl.textContent = html;
+    asientoEl.style.display = 'block';
+
+    mostrarMensaje('msg-compra', 'success', '✅ ¡Compra registrada exitosamente en Dynamics!');
+
+    // Actualizar contadores
+    contadorCompras++;
+    document.getElementById('resumen-compras').textContent = contadorCompras;
+    agregarAsiento(asiento.titulo, asiento.debitos, asiento.creditos);
+});
+
+// ============================================================
+// 2. REGISTRAR VENTA
+// ============================================================
+document.getElementById('btn-registrar-venta').addEventListener('click', function() {
+    const cliente = document.getElementById('cliente-venta').value;
+    const numFactura = document.getElementById('num-factura-venta').value;
+    const fecha = document.getElementById('fecha-venta').value;
+    const producto = document.getElementById('producto-venta').value;
+    const cantidad = parseFloat(document.getElementById('cantidad-venta').value);
+    const precio = parseFloat(document.getElementById('precio-unitario').value);
+    const iva = parseFloat(document.getElementById('iva-venta').value);
+    const retencion = parseFloat(document.getElementById('retencion-venta').value);
+
+    if (!cantidad || cantidad <= 0 || !precio || precio <= 0) {
+        mostrarMensaje('msg-venta', 'error', '⚠️ Ingresa cantidad y precio válidos.');
+        return;
+    }
+    const valorSinIVA = cantidad * precio;
+    const ivaValor = valorSinIVA * (iva / 100);
+    const retencionValor = valorSinIVA * (retencion / 100);
+    const totalCliente = valorSinIVA + ivaValor - retencionValor;
+
+    const asiento = {
+        titulo: `Venta ${numFactura} - ${cliente}`,
+        debitos: [
+            { cuenta: '1305 Clientes', valor: totalCliente },
+            { cuenta: '1355 Retención por cobrar', valor: retencionValor }
+        ],
+        creditos: [
+            { cuenta: '4135 Comercio al por mayor', valor: valorSinIVA },
+            { cuenta: '2404 IVA generado', valor: ivaValor }
+        ]
+    };
+
+    // Mostrar asiento
+    let html = `📌 ASIENTO CONTABLE - VENTA\n`;
+    html += `─────────────────────────────\n`;
+    html += `Cliente: ${cliente}\n`;
+    html += `Factura: ${numFactura} | Fecha: ${fecha}\n`;
+    html += `Producto: ${producto} (${cantidad} unid. x $${precio.toLocaleString()})\n\n`;
+    html += `DÉBITO:\n`;
+    html += `  1305 Clientes nacionales          $${totalCliente.toLocaleString()}\n`;
+    if (retencion > 0) {
+        html += `  1355 Retención por cobrar (${retencion}%) $${retencionValor.toLocaleString()}\n`;
+    }
+    html += `\nCRÉDITO:\n`;
+    html += `  4135 Comercio al por mayor        $${valorSinIVA.toLocaleString()}\n`;
+    html += `  2404 IVA generado (${iva}%)          $${ivaValor.toLocaleString()}\n\n`;
+    html += `✅ Total factura: $${(valorSinIVA + ivaValor).toLocaleString()}`;
+
+    const asientoEl = document.getElementById('asiento-venta');
+    asientoEl.textContent = html;
+    asientoEl.style.display = 'block';
+
+    mostrarMensaje('msg-venta', 'success', '✅ ¡Venta registrada exitosamente en Dynamics!');
+    mostrarMensaje('msg-venta', 'info', '📨 Factura electrónica enviada a DIAN - CUFE asignado');
+
+    contadorVentas++;
+    document.getElementById('resumen-ventas').textContent = contadorVentas;
+    agregarAsiento(asiento.titulo, asiento.debitos, asiento.creditos);
+});
+
+// ============================================================
+// 3. PROVISIÓN Y DEPRECIACIÓN
+// ============================================================
+document.getElementById('btn-registrar-provision').addEventListener('click', function() {
+    const concepto = document.getElementById('concepto-provision').value;
+    const cuentaGasto = document.getElementById('cuenta-gasto-provision').value;
+    const valor = parseFloat(document.getElementById('valor-provision').value);
+
+    if (!valor || valor <= 0) {
+        mostrarMensaje('msg-provision', 'error', '⚠️ Ingresa un valor válido para la provisión.');
+        return;
+    }
+
+    const asiento = {
+        titulo: `Provisión - ${concepto}`,
+        debitos: [
+            { cuenta: cuentaGasto, valor: valor }
+        ],
+        creditos: [
+            { cuenta: '2370 Aportes por pagar', valor: valor }
+        ]
+    };
+
+    let html = `📌 ASIENTO CONTABLE - PROVISIÓN\n`;
+    html += `─────────────────────────────\n`;
+    html += `Concepto: ${concepto}\n\n`;
+    html += `DÉBITO:\n`;
+    html += `  ${cuentaGasto.padEnd(35)} $${valor.toLocaleString()}\n\n`;
+    html += `CRÉDITO:\n`;
+    html += `  2370 Aportes por pagar            $${valor.toLocaleString()}\n\n`;
+    html += `✅ Provisión registrada correctamente.`;
+
+    const asientoEl = document.getElementById('asiento-provision');
+    asientoEl.textContent = html;
+    asientoEl.style.display = 'block';
+
+    mostrarMensaje('msg-provision', 'success', '✅ Provisión registrada exitosamente.');
+
+    contadorProvisiones++;
+    document.getElementById('resumen-provisiones').textContent = contadorProvisiones;
+    agregarAsiento(asiento.titulo, asiento.debitos, asiento.creditos);
+});
+
+// ============================================================
+// 4. DEPRECIACIÓN
+// ============================================================
+document.getElementById('btn-calcular-depreciacion').addEventListener('click', function() {
+    const activo = document.getElementById('activo-depreciacion').value;
+    const valorActivo = parseFloat(document.getElementById('valor-activo').value);
+    const valorResidual = parseFloat(document.getElementById('valor-residual').value);
+    const vidaUtil = parseFloat(document.getElementById('vida-util').value);
+    const meses = parseFloat(document.getElementById('meses-transcurridos').value);
+
+    if (!valorActivo || valorActivo <= 0 || !vidaUtil || vidaUtil <= 0) {
+        mostrarMensaje('msg-provision', 'error', '⚠️ Ingresa valores válidos para el activo.');
+        return;
+    }
+
+    const depreciacionAnual = (valorActivo - valorResidual) / vidaUtil;
+    const depreciacionMensual = depreciacionAnual / 12;
+    const depreciacionAcumulada = depreciacionMensual * meses;
+    const valorNeto = valorActivo - depreciacionAcumulada;
+
+    let html = `📊 CÁLCULO DE DEPRECIACIÓN\n`;
+    html += `─────────────────────────────\n`;
+    html += `Activo: ${activo}\n`;
+    html += `Valor del activo: $${valorActivo.toLocaleString()}\n`;
+    html += `Valor residual: $${valorResidual.toLocaleString()}\n`;
+    html += `Vida útil: ${vidaUtil} años\n`;
+    html += `Meses transcurridos: ${meses}\n\n`;
+    html += `📌 Depreciación anual: $${depreciacionAnual.toLocaleString()}\n`;
+    html += `📌 Depreciación mensual: $${depreciacionMensual.toLocaleString()}\n`;
+    html += `📌 Depreciación acumulada: $${depreciacionAcumulada.toLocaleString()}\n`;
+    html += `📌 Valor neto contable: $${valorNeto.toLocaleString()}\n\n`;
+    html += `ASIENTO CONTABLE (este mes):\n`;
+    html += `  Débito: 5160 Depreciación maquinaria  $${depreciacionMensual.toLocaleString()}\n`;
+    html += `  Crédito: 1592 Depreciación acumulada  $${depreciacionMensual.toLocaleString()}`;
+
+    const resultadoEl = document.getElementById('resultado-depreciacion');
+    resultadoEl.textContent = html;
+    resultadoEl.style.display = 'block';
+
+    mostrarMensaje('msg-provision', 'info', '📊 Depreciación calculada correctamente.');
+
+    // Agregar al historial
+    const asiento = {
+        titulo: `Depreciación - ${activo} (Mes ${Math.round(meses % 12) || 12})`,
+        debitos: [
+            { cuenta: '5160 Depreciación maquinaria', valor: depreciacionMensual }
+        ],
+        creditos: [
+            { cuenta: '1592 Depreciación acumulada', valor: depreciacionMensual }
+        ]
+    };
+    agregarAsiento(asiento.titulo, asiento.debitos, asiento.creditos);
+});
+
+// ============================================================
+// 5. CONCILIACIÓN BANCARIA
+// ============================================================
+document.getElementById('btn-conciliar').addEventListener('click', function() {
+    const cuenta = document.getElementById('cuenta-bancaria').value;
+    const saldoContable = parseFloat(document.getElementById('saldo-contable').value);
+    const saldoExtracto = parseFloat(document.getElementById('saldo-extracto').value);
+    const chequesPendientes = parseFloat(document.getElementById('cheques-pendientes').value) || 0;
+    const depositosTransito = parseFloat(document.getElementById('depositos-transito').value) || 0;
+    const comisiones = parseFloat(document.getElementById('comisiones').value) || 0;
+    const intereses = parseFloat(document.getElementById('intereses').value) || 0;
+
+    if (!saldoContable || !saldoExtracto) {
+        mostrarMensaje('msg-conciliacion', 'error', '⚠️ Ingresa los saldos contable y de extracto.');
+        return;
+    }
+
+    // Cálculo de conciliación
+    const saldoAjustado = saldoContable - chequesPendientes + depositosTransito - comisiones + intereses;
+    const diferencia = saldoAjustado - saldoExtracto;
+
+    let html = `🏦 CONCILIACIÓN BANCARIA\n`;
+    html += `─────────────────────────────\n`;
+    html += `Cuenta: ${cuenta}\n`;
+    html += `Fecha: ${new Date().toLocaleDateString()}\n\n`;
+    html += `📌 DATOS INICIALES:\n`;
+    html += `  Saldo contable: $${saldoContable.toLocaleString()}\n`;
+    html += `  Saldo según extracto: $${saldoExtracto.toLocaleString()}\n\n`;
+    html += `📌 AJUSTES:\n`;
+    html += `  - Cheques pendientes: -$${chequesPendientes.toLocaleString()}\n`;
+    html += `  + Depósitos en tránsito: +$${depositosTransito.toLocaleString()}\n`;
+    html += `  - Comisiones bancarias: -$${comisiones.toLocaleString()}\n`;
+    html += `  + Intereses a favor: +$${intereses.toLocaleString()}\n\n`;
+    html += `📌 RESULTADO:\n`;
+    html += `  Saldo ajustado: $${saldoAjustado.toLocaleString()}\n`;
+    html += `  Diferencia: $${diferencia.toLocaleString()}\n`;
+
+    if (Math.abs(diferencia) < 100) {
+        html += `  ✅ ¡CONCILIACIÓN EXITOSA! La diferencia es insignificante.\n`;
+    } else {
+        html += `  ⚠️ REVISAR: Existen diferencias por $${diferencia.toLocaleString()}.\n`;
+        html += `  🔍 Verificar transacciones no registradas o errores en el extracto.\n`;
+    }
+
+    const resultadoEl = document.getElementById('resultado-conciliacion');
+    resultadoEl.innerHTML = `<pre style="font-family:'Courier New',monospace;font-size:0.9rem;background:#f8f9fc;padding:16px;border-radius:8px;border:1px solid #e8ecf1;white-space:pre-wrap;">${html}</pre>`;
+    resultadoEl.style.display = 'block';
+
+    mostrarMensaje('msg-conciliacion', 'success', '✅ Conciliación ejecutada. Revisa los resultados.');
+
+    contadorConciliaciones++;
+    document.getElementById('resumen-conciliaciones').textContent = contadorConciliaciones;
+
+    // Asiento por comisiones e intereses
+    if (comisiones > 0 || intereses > 0) {
+        const debitos = [];
+        const creditos = [];
+        if (comisiones > 0) {
+            debitos.push({ cuenta: '5305 Gastos bancarios', valor: comisiones });
+            creditos.push({ cuenta: '1110 Bancos', valor: comisiones });
+        }
+        if (intereses > 0) {
+            debitos.push({ cuenta: '1110 Bancos', valor: intereses });
+            creditos.push({ cuenta: '4215 Intereses financieros', valor: intereses });
+        }
+        if (debitos.length > 0 || creditos.length > 0) {
+            agregarAsiento('Ajustes conciliación bancaria', debitos, creditos);
+        }
+    }
+});
+
+// ============================================================
+// 6. LIMPIAR TODO
+// ============================================================
+document.getElementById('btn-limpiar-todo').addEventListener('click', function() {
+    if (confirm('¿Estás seguro de que quieres limpiar todo el historial?')) {
+        contadorCompras = 0;
+        contadorVentas = 0;
+        contadorProvisiones = 0;
+        contadorConciliaciones = 0;
+        totalDebitos = 0;
+        totalCreditos = 0;
+        historialAsientos = [];
+
+        document.getElementById('resumen-compras').textContent = '0';
+        document.getElementById('resumen-ventas').textContent = '0';
+        document.getElementById('resumen-provisiones').textContent = '0';
+        document.getElementById('resumen-conciliaciones').textContent = '0';
+        document.getElementById('resumen-debitos').textContent = '$0';
+        document.getElementById('resumen-creditos').textContent = '$0';
+
+        document.getElementById('historial-asientos').innerHTML = '<p style="color:#888;text-align:center;">Aún no hay asientos registrados. Completa los ejercicios de las pestañas anteriores.</p>';
+
+        // Ocultar asientos
+        document.querySelectorAll('.asiento-box').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.msg').forEach(el => el.className = 'msg');
+
+        mostrarMensaje('msg-conciliacion', 'info', '🗑️ Todos los datos han sido limpiados.');
+    }
+});
+
+// ============================================================
+// 7. EXPORTAR RESUMEN
+// ============================================================
+document.getElementById('btn-exportar').addEventListener('click', function() {
+    const historial = document.getElementById('historial-asientos').innerText;
+    const resumen = `=== RESUMEN DEL EJERCICIO INTEGRADOR ===
+Fecha: ${new Date().toLocaleString()}
+Empresa: Filtros Partmo S.A.S.
+
+📊 ESTADÍSTICAS:
+- Compras registradas: ${contadorCompras}
+- Ventas registradas: ${contadorVentas}
+- Provisiones registradas: ${contadorProvisiones}
+- Conciliaciones ejecutadas: ${contadorConciliaciones}
+- Total Débitos: $${totalDebitos.toLocaleString()}
+- Total Créditos: $${totalCreditos.toLocaleString()}
+
+📝 HISTORIAL DE ASIENTOS:
+${historial}
+
+=== FIN DEL REPORTE ===`;
+
+    const blob = new Blob([resumen], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `resumen_ejercicio_integrador_${new Date().toISOString().slice(0,10)}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+
+    mostrarMensaje('msg-conciliacion', 'success', '📥 Resumen exportado correctamente.');
+});
+
+// ============================================================
+// 8. INICIALIZAR VALORES POR DEFECTO
+// ============================================================
+// Ya están pre-cargados con valores de ejemplo en los inputs
+console.log('🧾 Simulador Dynamics cargado correctamente.');
+console.log('📌 Completa cada pestaña para practicar el ciclo contable completo.');
+</script>
+</body>
+</html>
