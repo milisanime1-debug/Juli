@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Práctica en Partmo - Módulo 9</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 25px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.15rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #1a3c6e;
+      font-size: 1.05rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .highlight.green {
+      border-left-color: #28a745;
+      background: #f0faf4;
+    }
+    .highlight.green strong { color: #28a745; }
+    .highlight.orange {
+      border-left-color: #e67e22;
+      background: #fef5e7;
+    }
+    .highlight.orange strong { color: #e67e22; }
+    .highlight.red {
+      border-left-color: #c0392b;
+      background: #fdf0ee;
+    }
+    .highlight.red strong { color: #c0392b; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-size: 0.95rem;
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+    tr.total { font-weight: 700; background: #f4f6fa; }
+
+    .caso {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 16px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .caso .num {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 0.85rem;
+      margin-right: 10px;
+    }
+    .caso h4 {
+      display: inline;
+      color: #1a3c6e;
+      font-size: 1.05rem;
+    }
+    .caso .solucion {
+      background: white;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-top: 12px;
+      border: 1px dashed #1a3c6e;
+      display: none;
+    }
+    .caso .btn-solucion {
+      background: #1a3c6e;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      transition: background 0.2s;
+    }
+    .caso .btn-solucion:hover { background: #0f2a4a; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .badge.excelente { background: #d4edda; color: #155724; }
+    .badge.bueno { background: #cce5ff; color: #004085; }
+    .badge.regular { background: #fff3cd; color: #856404; }
+    .badge.peligro { background: #f8d7da; color: #721c24; }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+      table { font-size: 0.82rem; }
+      .caso { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back">⬅ Volver al índice</a>
+
+  <h1>🏢 Práctica en Filtros Partmo</h1>
+  <div class="subtitle">
+    Módulo 9 • Casos prácticos y tareas diarias para <strong>Filtros Partmo S.A.S.</strong> • 2026
+  </div>
+
+  <!-- ========================================== -->
+  <!-- INTRODUCCIÓN                               -->
+  <!-- ========================================== -->
+  <h2>📌 Introducción</h2>
+  <p>
+    Este módulo está diseñado para que <strong>apliques</strong> todos los conocimientos adquiridos en los módulos anteriores en <strong>situaciones reales</strong> de <strong>Filtros Partmo S.A.S.</strong>
+  </p>
+  <p>
+    Como aprendiz de contabilidad, tus tareas diarias incluirán:
+  </p>
+  <ul>
+    <li>Registro de <strong>facturación electrónica</strong> (ventas y compras).</li>
+    <li><strong>Conciliaciones bancarias</strong> y de cuentas por cobrar/pagar.</li>
+    <li>Registro de <strong>costos de producción</strong> (materia prima, mano de obra, CIF).</li>
+    <li>Liquidación de <strong>nómina</strong> y prestaciones sociales.</li>
+    <li>Preparación de <strong>cierres contables</strong> mensuales.</li>
+    <li>Revisión de <strong>retenciones</strong> e impuestos.</li>
+  </ul>
+  <div class="highlight green">
+    <strong>💡 Objetivo:</strong> Al finalizar este módulo, podrás <strong>resolver</strong> cualquier situación contable del día a día en Partmo con <strong>confianza y precisión</strong>.
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CASO 1: FACTURACIÓN ELECTRÓNICA            -->
+  <!-- ========================================== -->
+  <h2>📄 Caso 1: Facturación Electrónica</h2>
+  <div class="caso">
+    <span class="num">1</span>
+    <h4>Venta de Filtros Industriales</h4>
+    <p>
+      <strong>Datos:</strong> Partmo vende 500 filtros industriales a <strong>Motores S.A.</strong> a $60.000 cada uno (sin IVA). <br>
+      <strong>Condiciones:</strong> Crédito a 30 días. IVA 19%. <br>
+      <strong>Adicional:</strong> Motores S.A. es responsable de la retención en la fuente (compras 2.5%).
+    </p>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es el valor total de la venta (sin IVA)?</li>
+      <li>¿Cuánto es el IVA generado?</li>
+      <li>¿Cuál es el total de la factura?</li>
+      <li>¿Cuánto debe retener Motores S.A. por compras?</li>
+      <li>¿Cuál es el valor neto a recibir por Partmo?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol1')">Ver solución</button>
+    <div class="solucion" id="sol1">
+      <p><strong>✅ Solución:</strong></p>
+      <ol>
+        <li>Venta sin IVA = 500 × $60.000 = <strong>$30.000.000</strong></li>
+        <li>IVA generado = $30.000.000 × 19% = <strong>$5.700.000</strong></li>
+        <li>Total factura = $30.000.000 + $5.700.000 = <strong>$35.700.000</strong></li>
+        <li>Retención compras = $30.000.000 × 2.5% = <strong>$750.000</strong></li>
+        <li>Valor neto a recibir = $35.700.000 - $750.000 = <strong>$34.950.000</strong></li>
+      </ol>
+      <div class="highlight green">
+        <strong>📝 Asiento Contable:</strong><br>
+        Débito: 1105 Caja/Cuentas por cobrar $34.950.000<br>
+        Débito: 2408 IVA descontable $5.700.000<br>
+        Crédito: 4135 Ventas $30.000.000<br>
+        Crédito: 2404 IVA generado $5.700.000<br>
+        Crédito: 2409 Retención en la fuente $750.000
+      </div>
+    </div>
+  </div>
+
+  <div class="caso">
+    <span class="num">2</span>
+    <h4>Compra de Materia Prima</h4>
+    <p>
+      <strong>Datos:</strong> Partmo compra acero a <strong>Aceros S.A.</strong> por $15.000.000 (sin IVA). <br>
+      <strong>Condiciones:</strong> Pago a 45 días. IVA 19%. <br>
+      <strong>Adicional:</strong> Partmo no es responsable de retención en esta compra.
+    </p>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es el valor total de la compra (sin IVA)?</li>
+      <li>¿Cuánto es el IVA descontable?</li>
+      <li>¿Cuál es el total de la factura?</li>
+      <li>¿Cómo se registra contablemente esta compra?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol2')">Ver solución</button>
+    <div class="solucion" id="sol2">
+      <p><strong>✅ Solución:</strong></p>
+      <ol>
+        <li>Compra sin IVA = <strong>$15.000.000</strong></li>
+        <li>IVA descontable = $15.000.000 × 19% = <strong>$2.850.000</strong></li>
+        <li>Total factura = $15.000.000 + $2.850.000 = <strong>$17.850.000</strong></li>
+      </ol>
+      <div class="highlight green">
+        <strong>📝 Asiento Contable:</strong><br>
+        Débito: 1435 Mercancías no fabricadas $15.000.000<br>
+        Débito: 2408 IVA descontable $2.850.000<br>
+        Crédito: 2205 Proveedores $17.850.000
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CASO 2: COSTOS DE PRODUCCIÓN               -->
+  <!-- ========================================== -->
+  <h2>🏭 Caso 2: Costos de Producción</h2>
+  <div class="caso">
+    <span class="num">3</span>
+    <h4>Registro de Costos del Mes</h4>
+    <p>
+      <strong>Datos del mes:</strong> Partmo produjo 2.000 filtros durante el mes de julio.
+    </p>
+    <table>
+      <tr><th>Concepto</th><th>Valor</th></tr>
+      <tr><td>Materia prima consumida</td><td>$25.000.000</td></tr>
+      <tr><td>Mano de obra directa</td><td>$15.000.000</td></tr>
+      <tr><td>Costos indirectos de fabricación (CIF)</td><td>$10.000.000</td></tr>
+    </table>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es el costo total de producción del mes?</li>
+      <li>¿Cuál es el costo unitario por filtro?</li>
+      <li>¿Cómo se registran contablemente estos costos?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol3')">Ver solución</button>
+    <div class="solucion" id="sol3">
+      <p><strong>✅ Solución:</strong></p>
+      <ol>
+        <li>Costo total = $25M + $15M + $10M = <strong>$50.000.000</strong></li>
+        <li>Costo unitario = $50.000.000 / 2.000 = <strong>$25.000 por filtro</strong></li>
+      </ol>
+      <div class="highlight green">
+        <strong>📝 Asientos Contables:</strong><br>
+        <strong>1. Registro de materia prima:</strong><br>
+        Débito: 7101 Materia prima $25.000.000<br>
+        Crédito: 1435 Mercancías no fabricadas $25.000.000<br><br>
+        <strong>2. Registro de mano de obra:</strong><br>
+        Débito: 7201 Mano de obra directa $15.000.000<br>
+        Crédito: 1110 Bancos / 2370 Aportes por pagar $15.000.000<br><br>
+        <strong>3. Registro de CIF:</strong><br>
+        Débito: 7301 Costos indirectos de fabricación $10.000.000<br>
+        Crédito: 1110 Bancos / 2205 Proveedores $10.000.000
+      </div>
+    </div>
+  </div>
+
+  <div class="caso">
+    <span class="num">4</span>
+    <h4>Asignación de CIF</h4>
+    <p>
+      <strong>Datos:</strong> Partmo tiene tres productos: Filtro A, Filtro B y Filtro C. Los CIF totales del mes son <strong>$12.000.000</strong> y se asignan según <strong>horas máquina</strong>.
+    </p>
+    <table>
+      <tr><th>Producto</th><th>Horas Máquina</th></tr>
+      <tr><td>Filtro A</td><td>400 horas</td></tr>
+      <tr><td>Filtro B</td><td>300 horas</td></tr>
+      <tr><td>Filtro C</td><td>500 horas</td></tr>
+      <tr style="font-weight:700; background:#f4f6fa;"><td>Total</td><td>1.200 horas</td></tr>
+    </table>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es la tasa de asignación de CIF por hora máquina?</li>
+      <li>¿Cuánto CIF se asigna a cada producto?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol4')">Ver solución</button>
+    <div class="solucion" id="sol4">
+      <p><strong>✅ Solución:</strong></p>
+      <ol>
+        <li>Tasa = $12.000.000 / 1.200 horas = <strong>$10.000 por hora máquina</strong></li>
+        <li>
+          <strong>Asignación:</strong><br>
+          Filtro A: 400h × $10.000 = <strong>$4.000.000</strong><br>
+          Filtro B: 300h × $10.000 = <strong>$3.000.000</strong><br>
+          Filtro C: 500h × $10.000 = <strong>$5.000.000</strong>
+        </li>
+      </ol>
+      <div class="highlight green">
+        <strong>📝 Asiento Contable:</strong><br>
+        Débito: 7101 Materia prima (Filtro A) $4.000.000<br>
+        Débito: 7101 Materia prima (Filtro B) $3.000.000<br>
+        Débito: 7101 Materia prima (Filtro C) $5.000.000<br>
+        Crédito: 7301 CIF aplicado $12.000.000
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CASO 3: NÓMINA                             -->
+  <!-- ========================================== -->
+  <h2>👨‍🏭 Caso 3: Liquidación de Nómina</h2>
+  <div class="caso">
+    <span class="num">5</span>
+    <h4>Nómina de Operarios de Producción</h4>
+    <p>
+      <strong>Datos:</strong> Un operario de Partmo tiene los siguientes datos mensuales:
+    </p>
+    <table>
+      <tr><td>Salario básico</td><td>$2.500.000</td></tr>
+      <tr><td>Horas extras</td><td>$300.000</td></tr>
+      <tr><td>Bonificación</td><td>$200.000</td></tr>
+      <tr><td>Comisiones</td><td>$150.000</td></tr>
+    </table>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es el total devengado?</li>
+      <li>¿Cuánto es la deducción por salud (4%)?</li>
+      <li>¿Cuánto es la deducción por pensión (4%)?</li>
+      <li>¿Cuál es el neto a pagar?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol5')">Ver solución</button>
+    <div class="solucion" id="sol5">
+      <p><strong>✅ Solución:</strong></p>
+      <ol>
+        <li>Total devengado = $2.500.000 + $300.000 + $200.000 + $150.000 = <strong>$3.150.000</strong></li>
+        <li>Salud = $3.150.000 × 4% = <strong>$126.000</strong></li>
+        <li>Pensión = $3.150.000 × 4% = <strong>$126.000</strong></li>
+        <li>Neto a pagar = $3.150.000 - $126.000 - $126.000 = <strong>$2.898.000</strong></li>
+      </ol>
+      <div class="highlight green">
+        <strong>📝 Asiento Contable:</strong><br>
+        Débito: 5101 Sueldos y salarios $2.500.000<br>
+        Débito: 5102 Horas extras $300.000<br>
+        Débito: 5103 Bonificaciones $200.000<br>
+        Débito: 5104 Comisiones $150.000<br>
+        Crédito: 1110 Bancos $2.898.000<br>
+        Crédito: 2370 Salud por pagar $126.000<br>
+        Crédito: 2370 Pensión por pagar $126.000
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CASO 4: CONCILIACIÓN BANCARIA              -->
+  <!-- ========================================== -->
+  <h2>🏦 Caso 4: Conciliación Bancaria</h2>
+  <div class="caso">
+    <span class="num">6</span>
+    <h4>Conciliación Bancaria - Julio 2026</h4>
+    <p>
+      <strong>Datos:</strong> Partmo tiene una cuenta bancaria con los siguientes saldos:
+    </p>
+    <table>
+      <tr><td>Saldo en libros (contabilidad)</td><td>$12.500.000</td></tr>
+      <tr><td>Saldo en banco (extracto)</td><td>$14.200.000</td></tr>
+      <tr><td>Cheques girados no cobrados</td><td>$2.800.000</td></tr>
+      <tr><td>Consignaciones en tránsito</td><td>$1.500.000</td></tr>
+      <tr><td>Nota débito bancaria (comisiones)</td><td>$200.000</td></tr>
+      <tr><td>Nota crédito bancaria (intereses)</td><td>$800.000</td></tr>
+    </table>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es el saldo ajustado de libros?</li>
+      <li>¿Cuál es el saldo ajustado de banco?</li>
+      <li>¿Coinciden los saldos ajustados?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol6')">Ver solución</button>
+    <div class="solucion" id="sol6">
+      <p><strong>✅ Solución:</strong></p>
+      <p><strong>1. Ajuste de libros:</strong></p>
+      <ul>
+        <li>Saldo en libros: $12.500.000</li>
+        <li>+ Nota crédito (intereses): +$800.000</li>
+        <li>- Nota débito (comisiones): -$200.000</li>
+        <li><strong>Saldo ajustado libros: $13.100.000</strong></li>
+      </ul>
+      <p><strong>2. Ajuste de banco:</strong></p>
+      <ul>
+        <li>Saldo en banco: $14.200.000</li>
+        <li>+ Consignaciones en tránsito: +$1.500.000</li>
+        <li>- Cheques girados no cobrados: -$2.800.000</li>
+        <li><strong>Saldo ajustado banco: $12.900.000</strong></li>
+      </ul>
+      <div class="highlight red">
+        <strong>⚠️ ¡No coinciden!</strong> La diferencia es de <strong>$200.000</strong>. Debes revisar si hay algún error en los registros o si falta algún ajuste.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CASO 5: DEPRECIACIÓN                       -->
+  <!-- ========================================== -->
+  <h2>🔧 Caso 5: Depreciación de Activos</h2>
+  <div class="caso">
+    <span class="num">7</span>
+    <h4>Depreciación de Maquinaria</h4>
+    <p>
+      <strong>Datos:</strong> Partmo adquirió una máquina de filtrado el 1 de enero de 2024 por <strong>$80.000.000</strong>, con valor residual de <strong>$8.000.000</strong> y vida útil de <strong>10 años</strong>.
+    </p>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es la depreciación anual?</li>
+      <li>¿Cuál es la depreciación mensual?</li>
+      <li>¿Cuál es el asiento contable mensual?</li>
+      <li>¿Cuál es el valor en libros al 31 de diciembre de 2025?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol7')">Ver solución</button>
+    <div class="solucion" id="sol7">
+      <p><strong>✅ Solución:</strong></p>
+      <ol>
+        <li>Depreciación anual = ($80M - $8M) / 10 años = <strong>$7.200.000/año</strong></li>
+        <li>Depreciación mensual = $7.200.000 / 12 = <strong>$600.000/mes</strong></li>
+        <li>
+          <strong>Asiento mensual:</strong><br>
+          Débito: 5160 Depreciación $600.000<br>
+          Crédito: 1592 Depreciación acumulada $600.000
+        </li>
+        <li>
+          <strong>Valor en libros (31/12/2025):</strong><br>
+          Costo: $80.000.000<br>
+          (-) Depreciación acumulada (2 años × $7.200.000): ($14.400.000)<br>
+          <strong>Valor en libros: $65.600.000</strong>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CASO 6: CIERRE CONTABLE                    -->
+  <!-- ========================================== -->
+  <h2>🔒 Caso 6: Cierre Contable</h2>
+  <div class="caso">
+    <span class="num">8</span>
+    <h4>Cierre del Mes - Julio 2026</h4>
+    <p>
+      <strong>Datos:</strong> Partmo tiene los siguientes saldos al final del mes:
+    </p>
+    <table>
+      <tr><th>Cuenta</th><th>Saldo</th></tr>
+      <tr><td>4135 Ventas</td><td>$120.000.000 (Crédito)</td></tr>
+      <tr><td>5101 Sueldos y salarios</td><td>$20.000.000 (Débito)</td></tr>
+      <tr><td>5160 Depreciación</td><td>$3.000.000 (Débito)</td></tr>
+      <tr><td>6135 Costo de ventas</td><td>$60.000.000 (Débito)</td></tr>
+      <tr><td>3115 Utilidades retenidas</td><td>$30.000.000 (Crédito)</td></tr>
+    </table>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es la utilidad del mes?</li>
+      <li>Realiza el asiento de cierre de ingresos.</li>
+      <li>Realiza el asiento de cierre de gastos y costos.</li>
+      <li>Realiza el asiento de cierre de Pérdidas y Ganancias.</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol8')">Ver solución</button>
+    <div class="solucion" id="sol8">
+      <p><strong>✅ Solución:</strong></p>
+      <ol>
+        <li>
+          <strong>Utilidad del mes:</strong><br>
+          Ventas: $120.000.000<br>
+          (-) Costo de ventas: ($60.000.000)<br>
+          (-) Gastos: ($23.000.000)<br>
+          <strong>Utilidad Neta: $37.000.000</strong>
+        </li>
+        <li>
+          <strong>Cierre de ingresos:</strong><br>
+          Débito: 4135 Ventas $120.000.000<br>
+          Crédito: 5901 Pérdidas y Ganancias $120.000.000
+        </li>
+        <li>
+          <strong>Cierre de gastos y costos:</strong><br>
+          Débito: 5901 Pérdidas y Ganancias $83.000.000<br>
+          Crédito: 5101 Sueldos $20.000.000<br>
+          Crédito: 5160 Depreciación $3.000.000<br>
+          Crédito: 6135 Costo de ventas $60.000.000
+        </li>
+        <li>
+          <strong>Cierre de Pérdidas y Ganancias:</strong><br>
+          Débito: 5901 Pérdidas y Ganancias $37.000.000<br>
+          Crédito: 3115 Utilidades retenidas $37.000.000
+        </li>
+      </ol>
+      <div class="highlight green">
+        <strong>✅ ¡Ciclo completado!</strong> Partmo inicia el nuevo mes con saldos en cero para todas las cuentas nominales.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CASO 7: IMPUESTOS                          -->
+  <!-- ========================================== -->
+  <h2>💰 Caso 7: Liquidación de Impuestos</h2>
+  <div class="caso">
+    <span class="num">9</span>
+    <h4>Declaración de IVA Bimestral</h4>
+    <p>
+      <strong>Datos:</strong> Partmo debe declarar IVA correspondiente a los meses de <strong>mayo-junio 2026</strong>.
+    </p>
+    <table>
+      <tr><th>Concepto</th><th>Valor</th></tr>
+      <tr><td>Ventas con IVA (19%)</td><td>$95.000.000</td></tr>
+      <tr><td>Compras con IVA (19%)</td><td>$65.000.000</td></tr>
+    </table>
+    <p><strong>Preguntas:</strong></p>
+    <ol>
+      <li>¿Cuál es el IVA generado en ventas?</li>
+      <li>¿Cuál es el IVA descontable en compras?</li>
+      <li>¿Cuánto debe pagar Partmo por IVA (saldo a favor o a pagar)?</li>
+    </ol>
+    <button class="btn-solucion" onclick="toggleSolucion('sol9')">Ver solución</button>
+    <div class="solucion" id="sol9">
+      <p><strong>✅ Solución:</strong></p>
+      <ol>
+        <li>
+          IVA generado = $95.000.000 × 19% = <strong>$18.050.000</strong>
+        </li>
+        <li>
+          IVA descontable = $65.000.000 × 19% = <strong>$12.350.000</strong>
+        </li>
+        <li>
+          <strong>Saldo a pagar:</strong> $18.050.000 - $12.350.000 = <strong>$5.700.000</strong>
+        </li>
+      </ol>
+      <div class="highlight orange">
+        <strong>📝 Asiento Contable:</strong><br>
+        Débito: 2404 IVA generado $18.050.000<br>
+        Crédito: 2408 IVA descontable $12.350.000<br>
+        Crédito: 1110 Bancos $5.700.000
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- RESUMEN DE TAREAS DIARIAS                  -->
+  <!-- ========================================== -->
+  <h2>📋 Resumen de Tareas Diarias en Partmo</h2>
+  <table>
+    <tr><th>Frecuencia</th><th>Tarea</th><th>Descripción</th></tr>
+    <tr><td><strong>Diario</strong></td><td>Facturación electrónica</td><td>Registrar ventas y compras del día.</td></tr>
+    <tr><td><strong>Diario</strong></td><td>Registro de nómina</td><td>Calcular y registrar la nómina diaria/semanal.</td></tr>
+    <tr><td><strong>Semanal</strong></td><td>Conciliaciones bancarias</td><td>Revisar movimientos bancarios vs contabilidad.</td></tr>
+    <tr><td><strong>Mensual</strong></td><td>Cierre contable</td><td>Realizar ajustes, depreciaciones y cierre del mes.</td></tr>
+    <tr><td><strong>Mensual</strong></td><td>Costos de producción</td><td>Registrar y asignar costos (materia prima, mano de obra, CIF).</td></tr>
+    <tr><td><strong>Bimestral</strong></td><td>Declaración de IVA</td><td>Liquidar y presentar IVA ante la DIAN.</td></tr>
+    <tr><td><strong>Mensual</strong></td><td>Retenciones en la fuente</td><td>Calcular y declarar retenciones (compras, honorarios, nómina).</td></tr>
+    <tr><td><strong>Anual</strong></td><td>Declaración de renta</td><td>Preparar y presentar declaración de renta.</td></tr>
+    <tr><td><strong>Anual</strong></td><td>Información exógena</td><td>Reportar información de terceros a la DIAN.</td></tr>
+  </table>
+
+  <!-- ========================================== -->
+  <!-- EJERCICIO INTEGRADOR FINAL                 -->
+  <!-- ========================================== -->
+  <h2>🎯 Ejercicio Integrador Final</h2>
+  <div class="highlight orange">
+    <strong>📌 Caso Completo - Filtros Partmo S.A.S. (Julio 2026)</strong>
+    <p style="margin-top:10px;">
+      <strong>Contexto:</strong> Partmo inicia el mes de julio con la siguiente información:
+    </p>
+    <table style="font-size:0.9rem;">
+      <tr><th colspan="2">Balance Inicial (1 de julio de 2026)</th></tr>
+      <tr><td>Caja y Bancos</td><td>$18.000.000</td></tr>
+      <tr><td>Cuentas por Cobrar</td><td>$22.000.000</td></tr>
+      <tr><td>Inventarios (Materia Prima)</td><td>$35.000.000</td></tr>
+      <tr><td>Inventarios (Producto Terminado)</td><td>$28.000.000</td></tr>
+      <tr><td>Propiedades, Planta y Equipo</td><td>$150.000.000</td></tr>
+      <tr><td>(-) Depreciación Acumulada</td><td>($25.000.000)</td></tr>
+      <tr style="font-weight:700; background:#f4f6fa;"><td>Total Activo</td><td>$228.000.000</td></tr>
+      <tr><td>Proveedores</td><td>$15.000.000</td></tr>
+      <tr><td>Obligaciones Financieras</td><td>$55.000.000</td></tr>
+      <tr style="font-weight:700; background:#f4f6fa;"><td>Total Pasivo</td><td>$70.000.000</td></tr>
+      <tr><td>Patrimonio</td><td>$158.000.000</td></tr>
+      <tr style="font-weight:700; background:#f4f6fa;"><td>Total Pasivo + Patrimonio</td><td>$228.000.000</td></tr>
+    </table>
+
+    <p style="margin-top:15px;">
+      <strong>Transacciones del mes de julio:</strong>
+    </p>
+    <ol>
+      <li><strong>Ventas del mes:</strong> 1.800 filtros a $65.000 cada uno (sin IVA). 70% de contado, 30% a crédito.</li>
+      <li><strong>Compras de materia prima:</strong> $28.000.000 (sin IVA). Pago 40% de contado, 60% a crédito.</li>
+      <li><strong>Nómina del mes:</strong> $18.000.000 (total devengado). Deducciones: salud 4%, pensión 4%, retención en la fuente 2.5%.</li>
+      <li><strong>Gastos operacionales:</strong> $22.000.000 (servicios públicos, arrendamientos, mantenimiento).</li>
+      <li><strong>Depreciación mensual:</strong> $1.200.000.</li>
+      <li><strong>Pago de proveedores:</strong> $10.000.000.</li>
+      <li><strong>Cobro a clientes:</strong> $8.000.000.</li>
+      <li><strong>Pago de obligaciones financieras:</strong> $5.000.000 (capital) + $2.000.000 (intereses).</li>
+    </ol>
+
+    <p style="margin-top:15px;">
+      <strong>Preguntas:</strong>
+    </p>
+    <ol>
+      <li>Registra los asientos contables de cada transacción.</li>
+      <li>Calcula el costo de ventas (asumiendo que cada filtro tiene un costo de producción de $32.000).</li>
+      <li>Elabora el Balance de Comprobación ajustado.</li>
+      <li>Calcula la utilidad neta del mes.</li>
+      <li>Elabora el Balance General al 31 de julio de 2026.</li>
+      <li>Calcula los siguientes ratios: Liquidez Corriente, Endeudamiento, ROA y ROE.</li>
+    </ol>
+  </div>
+
+  <div class="caso" style="border-left-color: #28a745;">
+    <span class="num">💡</span>
+    <h4>¡Intenta resolverlo tú misma!</h4>
+    <p>
+      Este es un ejercicio <strong>completo</strong> que integra todos los temas vistos en los módulos anteriores. Tómate tu tiempo y aplica cada paso del ciclo contable.
+    </p>
+    <button class="btn-solucion" onclick="toggleSolucion('solFinal')">Ver solución paso a paso</button>
+    <div class="solucion" id="solFinal">
+      <p><strong>✅ Solución - Ejercicio Integrador Final</strong></p>
+
+      <h4>📝 Paso 1: Asientos Contables</h4>
+      <p><strong>1. Ventas del mes:</strong></p>
+      <ul>
+        <li>Ventas totales = 1.800 × $65.000 = <strong>$117.000.000</strong></li>
+        <li>IVA = $117.000.000 × 19% = <strong>$22.230.000</strong></li>
+        <li>Valor factura = <strong>$139.230.000</strong></li>
+        <li>Contado (70%) = $139.230.000 × 70% = <strong>$97.461.000</strong></li>
+        <li>Crédito (30%) = $139.230.000 × 30% = <strong>$41.769.000</strong></li>
+      </ul>
+      <div class="highlight green">
+        <strong>Asiento:</strong><br>
+        Débito: 1105 Caja $97.461.000<br>
+        Débito: 1305 Cuentas por cobrar $41.769.000<br>
+        Crédito: 4135 Ventas $117.000.000<br>
+        Crédito: 2404 IVA generado $22.230.000
+      </div>
+
+      <p><strong>2. Compras de materia prima:</strong></p>
+      <ul>
+        <li>Compras sin IVA = <strong>$28.000.000</strong></li>
+        <li>IVA = $28.000.000 × 19% = <strong>$5.320.000</strong></li>
+        <li>Total factura = <strong>$33.320.000</strong></li>
+        <li>Contado (40%) = $33.320.000 × 40% = <strong>$13.328.000</strong></li>
+        <li>Crédito (60%) = $33.320.000 × 60% = <strong>$19.992.000</strong></li>
+      </ul>
+      <div class="highlight green">
+        <strong>Asiento:</strong><br>
+        Débito: 1435 Mercancías no fabricadas $28.000.000<br>
+        Débito: 2408 IVA descontable $5.320.000<br>
+        Crédito: 1105 Caja $13.328.000<br>
+        Crédito: 2205 Proveedores $19.992.000
+      </div>
+
+      <p><strong>3. Nómina del mes:</strong></p>
+      <ul>
+        <li>Total devengado = <strong>$18.000.000</strong></li>
+        <li>Salud (4%) = $720.000</li>
+        <li>Pensión (4%) = $720.000</li>
+        <li>Retención en la fuente (2.5%) = $450.000</li>
+        <li>Neto a pagar = $18.000.000 - $720.000 - $720.000 - $450.000 = <strong>$16.110.000</strong></li>
+      </ul>
+      <div class="highlight green">
+        <strong>Asiento:</strong><br>
+        Débito: 5101 Sueldos y salarios $18.000.000<br>
+        Crédito: 1105 Caja $16.110.000<br>
+        Crédito: 2370 Salud por pagar $720.000<br>
+        Crédito: 2370 Pensión por pagar $720.000<br>
+        Crédito: 2409 Retención en la fuente $450.000
+      </div>
+
+      <p><strong>4. Gastos operacionales:</strong></p>
+      <div class="highlight green">
+        <strong>Asiento:</strong><br>
+        Débito: 5105 Gastos operacionales $22.000.000<br>
+        Crédito: 1105 Caja $22.000.000
+      </div>
+
+      <p><strong>5. Depreciación:</strong></p>
+      <div class="highlight green">
+        <strong>Asiento:</strong><br>
+        Débito: 5160 Depreciación $1.200.000<br>
+        Crédito: 1592 Depreciación acumulada $1.200.000
+      </div>
+
+      <p><strong>6. Pago a proveedores:</strong></p>
+      <div class="highlight green">
+        <strong>Asiento:</strong><br>
+        Débito: 2205 Proveedores $10.000.000<br>
+        Crédito: 1105 Caja $10.000.000
+      </div>
+
+      <p><strong>7. Cobro a clientes:</strong></p>
+      <div class="highlight green">
+        <strong>Asiento:</strong><br>
+        Débito: 1105 Caja $8.000.000<br>
+        Crédito: 1305 Cuentas por cobrar $8.000.000
+      </div>
+
+      <p><strong>8. Pago de obligaciones financieras:</strong></p>
+      <div class="highlight green">
+        <strong>Asiento:</strong><br>
+        Débito: 2105 Obligaciones financieras $5.000.000<br>
+        Débito: 5110 Gastos financieros $2.000.000<br>
+        Crédito: 1105 Caja $7.000.000
+      </div>
+
+      <h4>📊 Paso 2: Costo de Ventas</h4>
+      <ul>
+        <li>Unidades vendidas: 1.800</li>
+        <li>Costo unitario: $32.000</li>
+        <li><strong>Costo de ventas = 1.800 × $32.000 = $57.600.000</strong></li>
+      </ul>
+      <div class="highlight green">
+        <strong>Asiento:</strong><br>
+        Débito: 6135 Costo de ventas $57.600.000<br>
+        Crédito: 1435 Mercancías no fabricadas $57.600.000
+      </div>
+
+      <h4>⚖️ Paso 3: Balance de Comprobación (resumido)</h4>
+      <table>
+        <tr><th>Cuenta</th><th>Débito</th><th>Crédito</th></tr>
+        <tr><td>1105 Caja</td><td>$123.461.000</td><td>$68.438.000</td></tr>
+        <tr><td>1305 Cuentas por cobrar</td><td>$41.769.000</td><td>$8.000.000</td></tr>
+        <tr><td>1435 Mercancías no fabricadas</td><td>$28.000.000</td><td>$57.600.000</td></tr>
+        <tr><td>2205 Proveedores</td><td>$10.000.000</td><td>$19.992.000</td></tr>
+        <tr><td>4135 Ventas</td><td>$0</td><td>$117.000.000</td></tr>
+        <tr><td>5101 Sueldos</td><td>$18.000.000</td><td>$0</td></tr>
+        <tr><td>5105 Gastos operacionales</td><td>$22.000.000</td><td>$0</td></tr>
+        <tr><td>5110 Gastos financieros</td><td>$2.000.000</td><td>$0</td></tr>
+        <tr><td>5160 Depreciación</td><td>$1.200.000</td><td>$0</td></tr>
+        <tr><td>6135 Costo de ventas</td><td>$57.600.000</td><td>$0</td></tr>
+        <tr><td>2404 IVA generado</td><td>$0</td><td>$22.230.000</td></tr>
+        <tr><td>2408 IVA descontable</td><td>$5.320.000</td><td>$0</td></tr>
+      </table>
+
+      <h4>📈 Paso 4: Utilidad del Mes</h4>
+      <table>
+        <tr><td><strong>Ventas</strong></td><td><strong>$117.000.000</strong></td></tr>
+        <tr><td>Costo de ventas</td><td>($57.600.000)</td></tr>
+        <tr style="font-weight:700;"><td>Utilidad Bruta</td><td>$59.400.000</td></tr>
+        <tr><td>Gastos operacionales</td><td>($22.000.000)</td></tr>
+        <tr><td>Gastos financieros</td><td>($2.000.000)</td></tr>
+        <tr><td>Depreciación</td><td>($1.200.000)</td></tr>
+        <tr style="font-weight:700; background:#f4f6fa;"><td>Utilidad Neta</td><td><strong>$34.200.000</strong></td></tr>
+      </table>
+
+      <h4>📋 Paso 5: Balance General (31 de julio de 2026)</h4>
+      <table>
+        <tr><th colspan="2">ACTIVO</th></tr>
+        <tr><td>Caja y Bancos</td><td>$55.023.000</td></tr>
+        <tr><td>Cuentas por Cobrar</td><td>$33.769.000</td></tr>
+        <tr><td>Inventarios</td><td>$5.400.000</td></tr>
+        <tr><td>Total Activo Corriente</td><td>$94.192.000</td></tr>
+        <tr><td>Propiedades, Planta y Equipo</td><td>$150.000.000</td></tr>
+        <tr><td>(-) Depreciación Acumulada</td><td>($26.200.000)</td></tr>
+        <tr><td>Total Activo No Corriente</td><td>$123.800.000</td></tr>
+        <tr style="font-weight:700; background:#f4f6fa;"><td>TOTAL ACTIVO</td><td>$217.992.000</td></tr>
+        <tr><th colspan="2">PASIVO</th></tr>
+        <tr><td>Proveedores</td><td>$24.992.000</td></tr>
+        <tr><td>Obligaciones Financieras</td><td>$50.000.000</td></tr>
+        <tr><td>Salud por pagar</td><td>$720.000</td></tr>
+        <tr><td>Pensión por pagar</td><td>$720.000</td></tr>
+        <tr><td>Retención en la fuente</td><td>$450.000</td></tr>
+        <tr><td>IVA por pagar</td><td>$16.910.000</td></tr>
+        <tr style="font-weight:700; background:#f4f6fa;"><td>TOTAL PASIVO</td><td>$93.792.000</td></tr>
+        <tr><th colspan="2">PATRIMONIO</th></tr>
+        <tr><td>Capital Social</td><td>$90.000.000</td></tr>
+        <tr><td>Utilidades Retenidas</td><td>$34.200.000</td></tr>
+        <tr style="font-weight:700; background:#f4f6fa;"><td>TOTAL PATRIMONIO</td><td>$124.200.000</td></tr>
+        <tr style="font-weight:700; background:#d4edda;"><td>TOTAL PASIVO + PATRIMONIO</td><td>$217.992.000</td></tr>
+      </table>
+
+      <h4>📊 Paso 6: Ratios Financieros</h4>
+      <ul>
+        <li><strong>Liquidez Corriente:</strong> $94.192.000 / $93.792.000 = <strong>1.00</strong></li>
+        <li><strong>Endeudamiento:</strong> $93.792.000 / $217.992.000 = <strong>43.0%</strong></li>
+        <li><strong>ROA:</strong> $34.200.000 / $217.992.000 = <strong>15.7%</strong></li>
+        <li><strong>ROE:</strong> $34.200.000 / $124.200.000 = <strong>27.5%</strong></li>
+      </ul>
+      <div class="highlight green">
+        <strong>✅ Interpretación:</strong> Partmo presenta una excelente rentabilidad (ROE 27.5%), aunque su liquidez está ajustada (1.00), por lo que debe monitorear el flujo de caja.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- HERRAMIENTAS Y RECURSOS                    -->
+  <!-- ========================================== -->
+  <h2>🛠️ Herramientas Recomendadas</h2>
+  <ul>
+    <li><strong>Excel:</strong> Para conciliaciones, análisis de costos y tablas dinámicas.</li>
+    <li><strong>Software contable:</strong> Si Partmo usa SIIGO, Odoo o SAP, familiarízate con el módulo de contabilidad.</li>
+    <li><strong>DIAN:</strong> Portal para facturación electrónica, declaraciones y consultas tributarias.</li>
+    <li><strong>Calendario tributario:</strong> Descarga el calendario DIAN 2026 para no perder fechas.</li>
+  </ul>
+
+  <!-- ========================================== -->
+  <!-- ENLACE AL SIGUIENTE MÓDULO                -->
+  <!-- ========================================== -->
+  <div style="display:flex; justify-content:space-between; margin-top:30px; padding-top:20px; border-top:2px solid #e8ecf1;">
+    <a href="08-analisis-financiero.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">⬅ Módulo 8: Análisis Financiero</a>
+    <a href="index.html" style="color:#1a3c6e; text-decoration:none; font-weight:600;">Volver al índice 📚</a>
+  </div>
+
+  <div class="footer">
+    📌 Módulo 9 • Práctica en Filtros Partmo • <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, 2026
+  </div>
+
+</div>
+
+<script>
+  // Función para mostrar/ocultar soluciones
+  function toggleSolucion(id) {
+    const solucion = document.getElementById(id);
+    if (solucion.style.display === 'none' || solucion.style.display === '') {
+      solucion.style.display = 'block';
+    } else {
+      solucion.style.display = 'none';
+    }
+  }
+
+  // Inicializar todas las soluciones como ocultas
+  document.addEventListener('DOMContentLoaded', function() {
+    const soluciones = document.querySelectorAll('.solucion');
+    soluciones.forEach(function(el) {
+      el.style.display = 'none';
+    });
+  });
+</script>
+
+</body>
+</html>
