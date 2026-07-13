@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microsoft Dynamics - Guía Completa</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 35px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
+
+    h2 {
+      color: #1a3c6e;
+      font-size: 1.6rem;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e8ecf1;
+      padding-bottom: 8px;
+    }
+    h3 {
+      color: #2c3e50;
+      font-size: 1.2rem;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+    h4 {
+      color: #34495e;
+      font-size: 1.05rem;
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    p, li {
+      color: #2d2d2d;
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+    ul, ol {
+      padding-left: 25px;
+      margin: 8px 0 16px 0;
+    }
+    .highlight {
+      background: #eef4ff;
+      border-left: 4px solid #1a3c6e;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .highlight strong { color: #1a3c6e; }
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .warning strong { color: #856404; }
+    .success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 14px 20px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+    .success strong { color: #155724; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e8ecf1;
+    }
+    tr:hover td { background: #f8f9fc; }
+
+    .badge {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.7rem;
+      padding: 2px 12px;
+      border-radius: 20px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+    .badge.orange { background: #e67e22; }
+    .badge.green { background: #28a745; }
+    .badge.red { background: #dc3545; }
+
+    .step-box {
+      background: #f8f9fc;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      border: 1px solid #e8ecf1;
+    }
+    .step-box .step-num {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      text-align: center;
+      line-height: 28px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      margin-right: 10px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    .footer a { color: #1a3c6e; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Botón volver -->
+  <a href="../ejercicios.html" class="back">⬅ Volver a Ejercicios</a>
+
+  <h1>💻 Microsoft Dynamics 365</h1>
+  <div class="subtitle">
+    Guía completa para <strong>Filtros Partmo S.A.S.</strong> • Módulo de Contabilidad y Finanzas • 2026
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 1. INTRODUCCIÓN                              -->
+  <!-- ============================================ -->
+  <h2>1. Introducción a Microsoft Dynamics 365</h2>
+  <p>
+    <strong>Microsoft Dynamics 365 Finance & Operations</strong> es el ERP (Enterprise Resource Planning) que utiliza
+    <strong>Filtros Partmo S.A.S.</strong> para gestionar todas sus operaciones contables, financieras y de producción.
+  </p>
+
+  <div class="highlight">
+    <strong>🎯 Tu rol en Dynamics:</strong> Como aprendiz contable, trabajarás principalmente en los módulos de
+    <strong>Cuentas por Pagar (AP)</strong>, <strong>Cuentas por Cobrar (AR)</strong>, <strong>Contabilidad General (GL)</strong>
+    y <strong>Activos Fijos (FA)</strong>. También apoyarás en la generación de reportes y conciliaciones.
+  </div>
+
+  <h3>📌 Estructura del Sistema</h3>
+  <table>
+    <tr><th>Módulo</th><th>Sigla</th><th>Función Principal</th><th>Uso en Partmo</th></tr>
+    <tr><td>Accounts Payable</td><td>AP</td><td>Gestión de proveedores y pagos</td><td>Registro de compras, facturas proveedores</td></tr>
+    <tr><td>Accounts Receivable</td><td>AR</td><td>Gestión de clientes y cobros</td><td>Registro de ventas, facturas clientes</td></tr>
+    <tr><td>General Ledger</td><td>GL</td><td>Contabilidad general</td><td>Asientos contables, provisiones, cierres</td></tr>
+    <tr><td>Fixed Assets</td><td>FA</td><td>Activos fijos</td><td>Depreciación, bajas, ajustes</td></tr>
+    <tr><td>Inventory Management</td><td>IM</td><td>Inventarios</td><td>Control cuenta 15 (materia prima, producto terminado)</td></tr>
+    <tr><td>Tax</td><td>TAX</td><td>Impuestos</td><td>Retenciones, IVA, declaraciones</td></tr>
+  </table>
+
+  <!-- ============================================ -->
+  <!-- 2. FACTURAS DE COMPRA (AP)                   -->
+  <!-- ============================================ -->
+  <h2>2. Registro de Facturas de Compra (AP)</h2>
+  <p>
+    El registro de facturas de compra en Dynamics es una de las tareas <strong>más frecuentes</strong> en tu día a día.
+    Aquí tienes el paso a paso completo.
+  </p>
+
+  <h3>📥 Paso a paso en Dynamics</h3>
+
+  <div class="step-box">
+    <span class="step-num">1</span> <strong>Acceder al módulo:</strong> Ve a <code>Cuentas por pagar → Facturas de proveedor → Facturas pendientes</code>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span> <strong>Crear nueva factura:</strong> Haz clic en <strong>"Nuevo"</strong> (ícono de +).
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span> <strong>Seleccionar proveedor:</strong> Busca el NIT o nombre del proveedor en el campo <strong>"Cuenta de proveedor"</strong>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span> <strong>Diligenciar datos:</strong>
+    <ul>
+      <li><strong>Número de factura:</strong> El que aparece en el documento físico/PDF.</li>
+      <li><strong>Fecha de factura:</strong> Fecha de emisión del proveedor.</li>
+      <li><strong>Fecha de vencimiento:</strong> Generalmente 30 o 60 días después.</li>
+      <li><strong>Descripción:</strong> Breve descripción del concepto (ej. "Compra de filtros industriales").</li>
+    </ul>
+  </div>
+  <div class="step-box">
+    <span class="step-num">5</span> <strong>Agregar líneas (detalle):</strong>
+    <ul>
+      <li>Selecciona el <strong>ítem</strong> o <strong>cuenta contable</strong>.</li>
+      <li>Ingresa <strong>cantidad</strong> y <strong>precio unitario</strong>.</li>
+      <li>El sistema calculará automáticamente el <strong>subtotal</strong>.</li>
+      <li>Verifica que la <strong>cuenta contable</strong> sea correcta (ej. 1435 Materias primas).</li>
+    </ul>
+  </div>
+  <div class="step-box">
+    <span class="step-num">6</span> <strong>Asignar impuestos:</strong>
+    <ul>
+      <li>Selecciona el <strong>código de IVA</strong> (19% para la mayoría de compras).</li>
+      <li>Verifica que la <strong>retención en la fuente</strong> se calcule automáticamente (2.5% para compras).</li>
+    </ul>
+  </div>
+  <div class="step-box">
+    <span class="step-num">7</span> <strong>Validar y registrar:</strong>
+    <ul>
+      <li>Revisa que el <strong>total</strong> coincida con la factura física.</li>
+      <li>Haz clic en <strong>"Registrar"</strong> o <strong>"Contabilizar"</strong>.</li>
+      <li>El sistema generará automáticamente el <strong>asiento contable</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="success">
+    <strong>✅ Asiento contable generado por Dynamics:</strong><br>
+    <code>Débito: 1435 Mercancías no fabricadas (o 7101 Materia prima) → $10.000.000</code><br>
+    <code>Débito: 2408 IVA descontable (19%) → $1.900.000</code><br>
+    <code>Crédito: 2205 Proveedores nacionales → $11.900.000</code>
+  </div>
+
+  <div class="warning">
+    <strong>⚠️ Atención:</strong> Si la factura es de servicios (no inventariable), la cuenta será del <strong>grupo 5 (Gastos)</strong>
+    en lugar del grupo 7 (Costos). Pregunta siempre a tu supervisor cómo clasificar.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 3. FACTURAS DE VENTA (AR)                    -->
+  <!-- ============================================ -->
+  <h2>3. Registro de Facturas de Venta (AR)</h2>
+  <p>
+    El registro de facturas de venta es igual de importante. Aquí el flujo cambia porque involucra a <strong>clientes</strong>
+    y la <strong>facturación electrónica</strong> con la DIAN.
+  </p>
+
+  <h3>📤 Paso a paso en Dynamics</h3>
+
+  <div class="step-box">
+    <span class="step-num">1</span> <strong>Acceder al módulo:</strong> Ve a <code>Cuentas por cobrar → Facturas de cliente → Todas las facturas</code>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span> <strong>Crear nueva factura:</strong> Haz clic en <strong>"Nuevo"</strong>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span> <strong>Seleccionar cliente:</strong> Busca por NIT o nombre.
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span> <strong>Diligenciar datos:</strong>
+    <ul>
+      <li><strong>Número de factura:</strong> Asignado por el sistema (consecutivo DIAN).</li>
+      <li><strong>Fecha de factura:</strong> Fecha de emisión.</li>
+      <li><strong>Fecha de vencimiento:</strong> Plazo de pago del cliente.</li>
+      <li><strong>Descripción:</strong> "Venta de filtros modelo XYZ".</li>
+    </ul>
+  </div>
+  <div class="step-box">
+    <span class="step-num">5</span> <strong>Agregar líneas (detalle):</strong>
+    <ul>
+      <li>Selecciona el <strong>ítem</strong> (producto terminado).</li>
+      <li>Ingresa <strong>cantidad</strong> y <strong>precio unitario</strong>.</li>
+      <li>Verifica la <strong>cuenta contable</strong> (ej. 4135 Comercio al por mayor).</li>
+    </ul>
+  </div>
+  <div class="step-box">
+    <span class="step-num">6</span> <strong>Asignar impuestos:</strong>
+    <ul>
+      <li><strong>IVA 19%</strong> se aplica automáticamente.</li>
+      <li>Si el cliente es <strong>agente de retención</strong>, el sistema calculará la retención en la fuente.</li>
+    </ul>
+  </div>
+  <div class="step-box">
+    <span class="step-num">7</span> <strong>Validar y registrar:</strong>
+    <ul>
+      <li>Revisa que el total coincida.</li>
+      <li>Haz clic en <strong>"Registrar"</strong>.</li>
+      <li>El sistema enviará automáticamente la <strong>factura electrónica</strong> a la DIAN.</li>
+    </ul>
+  </div>
+
+  <div class="success">
+    <strong>✅ Asiento contable generado por Dynamics:</strong><br>
+    <code>Débito: 1105 Caja o 1305 Clientes → $5.950.000</code><br>
+    <code>Crédito: 4135 Comercio al por mayor → $5.000.000</code><br>
+    <code>Crédito: 2404 IVA generado (19%) → $950.000</code>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 4. EVENTOS DIAN (Facturas ajenas a inventario) -->
+  <!-- ============================================ -->
+  <h2>4. Monitoreo de Eventos DIAN</h2>
+  <p>
+    Dynamics tiene integración con la DIAN para la <strong>facturación electrónica</strong>. Debes monitorear que los
+    <strong>eventos</strong> se generen correctamente, especialmente para facturas <strong>ajenas al inventario</strong>
+    (servicios, gastos, etc.).
+  </p>
+
+  <h3>📌 Tipos de eventos DIAN en Dynamics</h3>
+  <table>
+    <tr><th>Evento</th><th>Descripción</th><th>Acción requerida</th></tr>
+    <tr><td><strong>Factura Electrónica</strong></td><td>Documento fiscal enviado a DIAN</td><td>Verificar que el <strong>CUFE</strong> sea asignado</td></tr>
+    <tr><td><strong>Factura Ajenas a Inventario</strong></td><td>Facturas de servicios/gastos</td><td>Confirmar que la cuenta contable sea de <strong>gasto</strong> (no inventario)</td></tr>
+    <tr><td><strong>Nota Crédito/Débito</strong></td><td>Correcciones a facturas</td><td>Revisar que la DIAN acepte la transacción</td></tr>
+    <tr><td><strong>Recepción de factura electrónica</strong></td><td>Facturas de proveedores</td><td>Validar que se reciban sin errores en AP</td></tr>
+  </table>
+
+  <div class="highlight">
+    <strong>🔍 Cómo monitorear en Dynamics:</strong><br>
+    Ve a <code>Administración de organización → Facturación electrónica → Historial de eventos</code>.
+    Revisa que el <strong>estado</strong> sea <span style="color:#28a745;">"Procesado correctamente"</span>.
+    Si ves errores, copia el código y repórtalo a tu supervisor.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 5. PROVISIONES Y DEPRECIACIÓN                -->
+  <!-- ============================================ -->
+  <h2>5. Provisiones y Depreciación</h2>
+
+  <h3>📊 Provisiones mensuales</h3>
+  <p>
+    Dynamics permite crear <strong>diarios de provisiones</strong> para gastos fijos y variables.
+  </p>
+
+  <h4>🔹 Provisiones fijas (ej. nómina, arrendamiento)</h4>
+  <ul>
+    <li>Ve a <code>Contabilidad general → Diarios → Diarios generales</code>.</li>
+    <li>Crea un nuevo <strong>diario de provisiones</strong>.</li>
+    <li>Línea 1: <code>Débito: 5101 Sueldos (o 5120 Arrendamientos) → $X</code></li>
+    <li>Línea 2: <code>Crédito: 2370 Aportes por pagar (o 2335 Arriendos por pagar) → $X</code></li>
+    <li>Selecciona <strong>"Contabilizar"</strong>.</li>
+  </ul>
+
+  <h4>🔹 Provisiones variables (ej. comisiones, bonos)</h4>
+  <ul>
+    <li>El proceso es similar, pero el monto se calcula según <strong>ventas del mes</strong>.</li>
+    <li>Pregunta a tu supervisor cómo se calculan (ej. % sobre utilidad).</li>
+  </ul>
+
+  <h3>🏭 Depreciación de activos fijos</h3>
+  <p>
+    En Partmo, la depreciación se aplica a <strong>maquinaria industrial, vehículos y equipos de oficina</strong>.
+  </p>
+
+  <h4>📌 Cálculo en Dynamics (método línea recta)</h4>
+  <div class="step-box">
+    <span class="step-num">1</span> Ve a <code>Activos fijos → Depreciación → Propuestas de depreciación</code>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span> Selecciona el <strong>libro de activos</strong> correspondiente (ej. "Libro Fiscal").
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span> Haz clic en <strong>"Crear propuesta"</strong> y selecciona el período (ej. mes actual).
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span> El sistema calculará automáticamente la depreciación de todos los activos activos.
+  </div>
+  <div class="step-box">
+    <span class="step-num">5</span> Revisa los montos y haz clic en <strong>"Registrar"</strong>.
+  </div>
+
+  <div class="success">
+    <strong>✅ Asiento contable generado:</strong><br>
+    <code>Débito: 5160 Depreciación de maquinaria → $4.500.000</code><br>
+    <code>Crédito: 1592 Depreciación acumulada → $4.500.000</code>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 6. CONTROL CUENTA 15 (INVENTARIOS)           -->
+  <!-- ============================================ -->
+  <h2>6. Control de la Cuenta 15 (Inventarios)</h2>
+  <p>
+    Como empresa manufacturera, Partmo maneja <strong>tres tipos de inventario</strong>:
+  </p>
+  <ul>
+    <li><strong>1401</strong> - Materias primas (ej. acero, polímeros).</li>
+    <li><strong>1501</strong> - Productos en proceso (filtros en producción).</li>
+    <li><strong>1601</strong> - Productos terminados (filtros listos para venta).</li>
+  </ul>
+
+  <h3>🔍 ¿Cómo controlarla en Dynamics?</h3>
+  <ul>
+    <li><strong>Consulta de saldos:</strong> Ve a <code>Gestión de inventarios → Consultas → Inventario disponible</code>.</li>
+    <li><strong>Revisar movimientos:</strong> Ve a <code>Gestión de inventarios → Transacciones → Movimientos de inventario</code>.</li>
+    <li><strong>Validar costos:</strong> Ve a <code>Gestión de inventarios → Costos → Costo promedio</code>.</li>
+  </ul>
+  <div class="warning">
+    <strong>⚠️ Importante:</strong> Si ves diferencias entre el sistema y el conteo físico, debes hacer un <strong>ajuste de inventario</strong>
+    (entrada o salida) con la autorización de tu supervisor.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 7. GASTOS POR SERVICIOS PÚBLICOS             -->
+  <!-- ============================================ -->
+  <h2>7. Control de Gastos por Servicios Públicos</h2>
+  <p>
+    Los servicios públicos (agua, luz, gas, internet) son gastos que deben registrarse correctamente en Dynamics.
+  </p>
+
+  <h3>📌 Paso a paso</h3>
+  <ul>
+    <li>Ve a <code>Cuentas por pagar → Facturas de proveedor → Facturas pendientes</code>.</li>
+    <li>Crea una nueva factura para el proveedor correspondiente (ej. ESSA, EPM).</li>
+    <li>En la línea de detalle, selecciona la <strong>cuenta 5135</strong> (Servicios públicos).</li>
+    <li>Asigna el IVA (19%) y registra.</li>
+    <li><strong>Consejo:</strong> Clasifica cada servicio en una subcuenta diferente para mejor control (ej. 513505 - Energía).</li>
+  </ul>
+
+  <!-- ============================================ -->
+  <!-- 8. CONCILIACIONES BANCARIAS                  -->
+  <!-- ============================================ -->
+  <h2>8. Conciliaciones Bancarias en Dynamics</h2>
+  <p>
+    La conciliación bancaria es <strong>esencial</strong> para asegurar que los saldos contables coincidan con los del banco.
+  </p>
+
+  <h3>📌 Paso a paso</h3>
+  <div class="step-box">
+    <span class="step-num">1</span> Ve a <code>Gestión de efectivo y bancos → Conciliación bancaria → Conciliaciones</code>.
+  </div>
+  <div class="step-box">
+    <span class="step-num">2</span> Selecciona la <strong>cuenta bancaria</strong> a conciliar (ej. Bancolombia - 1110).
+  </div>
+  <div class="step-box">
+    <span class="step-num">3</span> Carga el <strong>extracto bancario</strong> en formato electrónico (si está disponible).
+  </div>
+  <div class="step-box">
+    <span class="step-num">4</span> Dynamics hará un <strong>matching automático</strong> de transacciones.
+  </div>
+  <div class="step-box">
+    <span class="step-num">5</span> Revisa las diferencias:
+    <ul>
+      <li><strong>Cheques pendientes:</strong> Registrados pero no cobrados aún.</li>
+      <li><strong>Depósitos en tránsito:</strong> Registrados pero no aparecen en extracto.</li>
+      <li><strong>Notas débito/crédito:</strong> Comisiones bancarias, intereses.</li>
+    </ul>
+  </div>
+  <div class="step-box">
+    <span class="step-num">6</span> Haz clic en <strong>"Contabilizar conciliación"</strong>.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 9. CERTIFICADOS DE RETENCIÓN                 -->
+  <!-- ============================================ -->
+  <h2>9. Envío de Certificados de Retención</h2>
+  <p>
+    Al final de cada mes o año, debes emitir los <strong>certificados de retención</strong> para proveedores y clientes.
+  </p>
+
+  <h3>📌 Cómo hacerlo en Dynamics</h3>
+  <ul>
+    <li>Ve a <code>Impuestos → Retenciones → Certificados de retención</code>.</li>
+    <li>Selecciona el <strong>tercero</strong> (proveedor o cliente).</li>
+    <li>Elige el <strong>período</strong> (mes o año).</li>
+    <li>Haz clic en <strong>"Generar certificado"</strong>.</li>
+    <li>El sistema creará un PDF que puedes <strong>descargar y enviar por correo</strong>.</li>
+  </ul>
+  <div class="highlight">
+    <strong>📧 Envío electrónico:</strong> Si está configurado, Dynamics puede enviar el certificado automáticamente
+    al correo del tercero. Verifica que el correo esté actualizado.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 10. REPORTES Y CONSULTAS                    -->
+  <!-- ============================================ -->
+  <h2>10. Reportes Financieros en Dynamics</h2>
+  <p>
+    Dynamics tiene <strong>múltiples reportes</strong> que te ayudarán a hacer seguimiento de las operaciones.
+  </p>
+
+  <h3>📊 Reportes clave para tu rol</h3>
+  <table>
+    <tr><th>Reporte</th><th>Ruta</th><th>Uso</th></tr>
+    <tr><td>Balance de comprobación</td><td>GL → Consultas → Balance de comprobación</td><td>Revisar saldos de cuentas</td></tr>
+    <tr><td>Mayor analítico</td><td>GL → Consultas → Mayor</td><td>Ver movimientos detallados</td></tr>
+    <tr><td>Lista de facturas pendientes</td><td>AP → Facturas → Pendientes</td><td>Control de proveedores</td></tr>
+    <tr><td>Antigüedad de cartera</td><td>AR → Cobranzas → Antigüedad de saldos</td><td>Control de clientes</td></tr>
+    <tr><td>Depreciación por activo</td><td>FA → Consultas → Detalle de depreciación</td><td>Ver depreciación acumulada</td></tr>
+    <tr><td>Informe de retenciones</td><td>TAX → Retenciones → Informe</td><td>Preparar exógena</td></tr>
+  </table>
+
+  <!-- ============================================ -->
+  <!-- 11. CONSEJOS Y ATAJOS                       -->
+  <!-- ============================================ -->
+  <h2>11. Consejos y Atajos para Dynamics</h2>
+
+  <ul>
+    <li><strong>Ctrl + N:</strong> Crear un nuevo registro (factura, asiento, etc.).</li>
+    <li><strong>Ctrl + S:</strong> Guardar el registro actual.</li>
+    <li><strong>F12:</strong> Abrir el buscador de campos.</li>
+    <li><strong>Alt + Flecha abajo:</strong> Desplegar lista de opciones en un campo.</li>
+    <li><strong>Botón derecho → "Ver transacciones":</strong> Para revisar el origen de un saldo.</li>
+    <li><strong>Favoritos:</strong> Guarda las consultas que más uses en el panel de favoritos.</li>
+  </ul>
+
+  <div class="highlight">
+    <strong>💡 Pro tip:</strong> Siempre verifica que el <strong>período contable</strong> esté abierto antes de contabilizar.
+    Si está cerrado, pide a tu supervisor que lo reabra (con las aprobaciones necesarias).
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 12. GLOSARIO DE TÉRMINOS EN DYNAMICS        -->
+  <!-- ============================================ -->
+  <h2>12. Glosario de Términos en Dynamics</h2>
+  <table>
+    <tr><th>Término</th><th>Significado</th></tr>
+    <tr><td><strong>Voucher</strong></td><td>Número de asiento contable generado por Dynamics.</td></tr>
+    <tr><td><strong>Journal</strong></td><td>Diario contable (ej. General, AP, AR).</td></tr>
+    <tr><td><strong>Posting</strong></td><td>Acción de contabilizar o registrar un documento.</td></tr>
+    <tr><td><strong>Workflow</strong></td><td>Flujo de aprobación de documentos (ej. aprobación de facturas).</td></tr>
+    <tr><td><strong>Legal Entity</strong></td><td>Entidad legal (en Partmo, FILTROS PARTMO S.A.S.).</td></tr>
+    <tr><td><strong>Fiscal Period</strong></td><td>Período contable (ej. Julio 2026).</td></tr>
+    <tr><td><strong>Batch Number</strong></td><td>Número de lote para procesos en lote (ej. depreciación).</td></tr>
+    <tr><td><strong>Dimension</strong></td><td>Dimensiones financieras (ej. Centro de costo, Proyecto).</td></tr>
+  </table>
+
+  <!-- ============================================ -->
+  <!-- 13. PREGUNTAS FRECUENTES EN LA PRÁCTICA     -->
+  <!-- ============================================ -->
+  <h2>13. Preguntas Frecuentes (FAQ)</h2>
+
+  <h4>❓ ¿Qué hago si no encuentro un proveedor en el sistema?</h4>
+  <p>Ve a <code>AP → Proveedores → Todos los proveedores</code> y verifica que esté activo. Si no existe, solicita a tu supervisor que lo cree con la información completa (NIT, régimen, dirección).</p>
+
+  <h4>❓ ¿Por qué no se contabiliza mi factura?</h4>
+  <p>Puede ser porque:
+    <ul>
+      <li>El período contable está cerrado.</li>
+      <li>Faltan datos obligatorios (ej. número de factura, fecha).</li>
+      <li>La cuenta contable no es válida para el tipo de transacción.</li>
+    </ul>
+  </p>
+
+  <!-- Continuación del archivo dynamics.html -->
+
+  <h4>❓ ¿Cómo sé si la retención se calculó correctamente?</h4>
+  <p>
+    Revisa el campo <strong>"Retención"</strong> en la factura. Debe coincidir con la tarifa aplicable:
+  </p>
+  <ul>
+    <li><strong>Compras:</strong> 2.5% (desde julio 2026).</li>
+    <li><strong>Honorarios (persona jurídica):</strong> 11%.</li>
+    <li><strong>Consultoría:</strong> 3.5%.</li>
+  </ul>
+  <p>Si no coincide, verifica que el <strong>código de retención</strong> asignado al proveedor sea el correcto.</p>
+
+  <h4>❓ ¿Cómo hago un ajuste de inventario?</h4>
+  <p>
+    Ve a <code>Gestión de inventarios → Diarios → Ajuste de inventario</code>.
+    Crea un nuevo diario, selecciona el ítem, ingresa la cantidad de ajuste (positiva o negativa) y la razón.
+    Contabiliza con la autorización de tu supervisor.
+  </p>
+
+  <h4>❓ ¿Qué hago si el sistema no envía la factura electrónica a la DIAN?</h4>
+  <p>
+    Revisa el <strong>historial de eventos</strong> en 
+    <code>Administración de organización → Facturación electrónica → Historial de eventos</code>.
+    Busca el código de error y repórtalo al área de TI o a tu supervisor.
+  </p>
+
+  <h4>❓ ¿Cómo verifico que una conciliación bancaria quedó bien?</h4>
+  <p>
+    Después de contabilizar la conciliación, revisa que el <strong>saldo contable</strong> de la cuenta bancaria
+    coincida con el <strong>saldo del extracto</strong>. Si hay diferencias, revisa transacciones sin conciliar.
+  </p>
+
+  <div class="warning">
+    <strong>⚠️ Regla de oro:</strong> Si algo no cuadra, <strong>NO LO CONTABILICES</strong>.
+    Consulta siempre con tu supervisor antes de registrar ajustes.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 14. EJERCICIO PRÁCTICO EN DYNAMICS          -->
+  <!-- ============================================ -->
+  <h2>14. 🧪 Ejercicio Práctico Guiado</h2>
+  <p>
+    Este es un ejercicio completo para que practiques en Dynamics. Simula el registro de una <strong>compra</strong>,
+    una <strong>venta</strong>, una <strong>provisión</strong> y una <strong>conciliación bancaria</strong>.
+  </p>
+
+  <div style="background: #f8f9fc; border-radius: 12px; padding: 20px 24px; border: 2px dashed #1a3c6e; margin: 20px 0;">
+    <h4 style="margin-top: 0; color: #1a3c6e;">📋 Ejercicio: Ciclo Contable en Dynamics</h4>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Paso 1: Compra</strong></p>
+      <p><em>Datos:</em> Compra de acero a "Metales del Oriente S.A.S." por $15.000.000 + IVA (19%).</p>
+      <ul>
+        <li>Proveedor: Metales del Oriente S.A.S. (NIT: 890.123.456-7).</li>
+        <li>Cuenta contable: 1435 Mercancías no fabricadas.</li>
+        <li>Retención: 2.5% (aplica desde julio 2026).</li>
+        <li>Fecha de vencimiento: 30 días.</li>
+      </ul>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver asiento contable</summary>
+        <div class="success" style="margin-top: 8px;">
+          <code>Débito: 1435 Mercancías no fabricadas → $15.000.000</code><br>
+          <code>Débito: 2408 IVA descontable (19%) → $2.850.000</code><br>
+          <code>Crédito: 2205 Proveedores nacionales → $17.475.000</code><br>
+          <code>Crédito: 2365 Retención en la fuente por pagar (2.5%) → $375.000</code>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Paso 2: Venta</strong></p>
+      <p><em>Datos:</em> Venta de 200 filtros modelo "F-2000" a "Autopartes del Norte S.A.S." por $8.500.000 + IVA.</p>
+      <ul>
+        <li>Cliente: Autopartes del Norte (NIT: 900.123.456-0).</li>
+        <li>Cuenta contable: 4135 Comercio al por mayor.</li>
+        <li>El cliente es agente de retención (aplica 3.5% sobre el valor).</li>
+        <li>Plazo: 15 días.</li>
+      </ul>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver asiento contable</summary>
+        <div class="success" style="margin-top: 8px;">
+          <code>Débito: 1305 Clientes nacionales → $9.917.500</code><br>
+          <code>Crédito: 4135 Comercio al por mayor → $8.500.000</code><br>
+          <code>Crédito: 2404 IVA generado (19%) → $1.615.000</code><br>
+          <code>Débito: 1355 Retención en la fuente por cobrar (3.5%) → $297.500</code>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Paso 3: Provisión de nómina</strong></p>
+      <p><em>Datos:</em> Nómina mensual de producción por $12.000.000.</p>
+      <ul>
+        <li>Cuenta de gasto: 7201 Mano de obra directa.</li>
+        <li>Cuenta de pasivo: 2370 Aportes por pagar.</li>
+        <li>Los aportes parafiscales y de seguridad social ya están configurados en el sistema.</li>
+      </ul>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver asiento contable</summary>
+        <div class="success" style="margin-top: 8px;">
+          <code>Débito: 7201 Mano de obra directa → $12.000.000</code><br>
+          <code>Crédito: 2370 Aportes por pagar → $12.000.000</code>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin: 16px 0; background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);">
+      <p><strong>Paso 4: Conciliación bancaria</strong></p>
+      <p><em>Datos:</em> Extracto Bancolombia - Cuenta corriente #12345678.</p>
+      <ul>
+        <li>Saldo contable al 31/07/2026: $25.800.000.</li>
+        <li>Saldo según extracto: $24.200.000.</li>
+        <li>Diferencias: Cheques pendientes por $2.100.000, comisión bancaria por $50.000, intereses a favor por $30.000.</li>
+      </ul>
+      <details>
+        <summary style="cursor: pointer; color: #1a3c6e; font-weight: 600;">🔽 Ver ajustes a realizar</summary>
+        <div class="success" style="margin-top: 8px;">
+          <strong>Cheques pendientes (no afectan contabilidad, solo conciliación):</strong><br>
+          <em>Se dejan como "en tránsito" en la conciliación.</em><br><br>
+          <strong>Comisión bancaria:</strong><br>
+          <code>Débito: 5305 Gastos bancarios → $50.000</code><br>
+          <code>Crédito: 1110 Bancos → $50.000</code><br><br>
+          <strong>Intereses a favor:</strong><br>
+          <code>Débito: 1110 Bancos → $30.000</code><br>
+          <code>Crédito: 4215 Intereses financieros → $30.000</code>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 15. CHECKLIST DE TAREAS DIARIAS             -->
+  <!-- ============================================ -->
+  <h2>15. ✅ Checklist de Tareas en Dynamics</h2>
+  <p>Usa esta lista para asegurarte de que no olvidas nada en tu día a día:</p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0;">
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #28a745;">
+      <strong>📅 Diario</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Registrar facturas de compra</li>
+        <li>☐ Registrar facturas de venta</li>
+        <li>☐ Revisar eventos DIAN</li>
+        <li>☐ Confirmar facturas recibidas</li>
+      </ul>
+    </div>
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #1a3c6e;">
+      <strong>📆 Semanal</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Circularización de proveedores</li>
+        <li>☐ Revisión de cuentas por pagar</li>
+        <li>☐ Control de gastos servicios públicos</li>
+      </ul>
+    </div>
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #e67e22;">
+      <strong>📊 Mensual</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Conciliaciones bancarias</li>
+        <li>☐ Provisiones (fijas y variables)</li>
+        <li>☐ Depreciación de activos</li>
+        <li>☐ Envío certificados de retención</li>
+        <li>☐ Control cuenta 15 (inventarios)</li>
+      </ul>
+    </div>
+    <div style="background: #f8f9fc; border-radius: 10px; padding: 16px; border-left: 4px solid #dc3545;">
+      <strong>📌 Bimestral/Anual</strong>
+      <ul style="margin-top: 6px; list-style: none; padding-left: 0;">
+        <li>☐ Declaraciones de IVA</li>
+        <li>☐ Preparación exógena</li>
+        <li>☐ Cierre fiscal anual</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- 16. RECURSOS Y AYUDA EN DYNAMICS            -->
+  <!-- ============================================ -->
+  <h2>16. 📚 Recursos de Ayuda en Dynamics</h2>
+
+  <ul>
+    <li>
+      <strong>Ayuda integrada (F1):</strong> En cualquier pantalla de Dynamics, presiona <strong>F1</strong> para abrir la documentación contextual.
+    </li>
+    <li>
+      <strong>Task Guides:</strong> Ve a <code>Administración del sistema → Tareas → Guías de tareas</code> para ver tutoriales paso a paso.
+    </li>
+    <li>
+      <strong>Microsoft Learn:</strong> El sitio oficial de Microsoft tiene cursos gratis de Dynamics 365 Finance.
+      <a href="https://learn.microsoft.com/es-es/training/dynamics365/" target="_blank" style="color: #1a3c6e;">Ver aquí</a>
+    </li>
+    <li>
+      <strong>Comunidad interna:</strong> Pregunta a tus compañeros si tienen un <strong>OneNote</strong> o <strong>SharePoint</strong> con procedimientos internos.
+    </li>
+  </ul>
+
+  <div class="highlight">
+    <strong>💡 Pro tip final:</strong> Crea tus propios <strong>"macros" mentales</strong>. Por ejemplo, antes de registrar cualquier factura, hazte estas 3 preguntas:
+    <ol style="margin-top: 6px;">
+      <li>¿El proveedor/cliente es el correcto?</li>
+      <li>¿La cuenta contable es la adecuada?</li>
+      <li>¿Los impuestos y retenciones son los que aplican?</li>
+    </ol>
+    Esto te ahorrará errores y tiempo.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FOOTER                                      -->
+  <!-- ============================================ -->
+  <div class="footer">
+    📌 Guía completa de Microsoft Dynamics para Filtros Partmo S.A.S.<br>
+    Actualizado: Julio 2026 • Bucaramanga, Santander<br>
+    <a href="https://learn.microsoft.com/es-es/training/dynamics365/" target="_blank">Documentación oficial de Microsoft</a>
+  </div>
+
+</div>
+</body>
+</html>
