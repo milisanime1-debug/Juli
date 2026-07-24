@@ -49,6 +49,73 @@
     }
     .subtitle strong { color: #1a3c6e; }
 
+    /* ===== SECCIÓN DE CLASIFICACIÓN ===== */
+    .seccion-clasificacion {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 30px;
+      border: 1px solid #e8ecf1;
+    }
+    .seccion-clasificacion h2 {
+      color: #1a3c6e;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .grid-clasificacion {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card-clasificacion {
+      background: white;
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-left: 4px solid #1a3c6e;
+    }
+    .card-clasificacion h3 {
+      font-size: 1rem;
+      color: #1a3c6e;
+      margin-bottom: 8px;
+    }
+    .card-clasificacion table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .card-clasificacion table td {
+      padding: 4px 6px;
+      border-bottom: 1px solid #eee;
+    }
+    .card-clasificacion table td:first-child {
+      font-weight: 600;
+      color: #333;
+      width: 40%;
+    }
+    .card-clasificacion table td:last-child {
+      color: #555;
+    }
+    .badge-clasificacion {
+      display: inline-block;
+      background: #1a3c6e;
+      color: white;
+      font-size: 0.6rem;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+    .badge-clasificacion.sas { background: #1a3c6e; }
+    .badge-clasificacion.ltda { background: #2e7d32; }
+    .badge-clasificacion.esal { background: #b9632b; }
+    .badge-clasificacion.publica { background: #6c2b7d; }
+    .badge-clasificacion.natural { background: #00796b; }
+    .badge-clasificacion.gran { background: #c62828; }
+
     /* ===== FILTROS ===== */
     .filtros {
       background: #f8f9fc;
@@ -66,11 +133,11 @@
       flex-direction: column;
       gap: 4px;
       flex: 1;
-      min-width: 160px;
+      min-width: 140px;
     }
     .filtros .grupo label {
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #1a3c6e;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -79,7 +146,7 @@
       padding: 8px 12px;
       border-radius: 8px;
       border: 1px solid #ccc;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       background: white;
       cursor: pointer;
     }
@@ -136,7 +203,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       min-width: 1100px;
     }
     thead th {
@@ -145,7 +212,7 @@
       padding: 10px 8px;
       text-align: left;
       font-weight: 600;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.3px;
       white-space: nowrap;
@@ -194,7 +261,8 @@
       h1 { font-size: 1.4rem; }
       .filtros { flex-direction: column; gap: 10px; }
       .filtros .grupo { min-width: 100%; }
-      table { font-size: 0.75rem; min-width: 900px; }
+      table { font-size: 0.7rem; min-width: 900px; }
+      .grid-clasificacion { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -208,7 +276,75 @@
     Guía enfocada en <strong>Filtros Partmo S.A.S.</strong> • Fabricación de filtros industriales • Bucaramanga, Santander
   </div>
 
-  <!-- ===== FILTROS ===== -->
+  <!-- ============================================================ -->
+  <!-- SECCIÓN DE CLASIFICACIÓN (NUEVA) -->
+  <!-- ============================================================ -->
+  <div class="seccion-clasificacion">
+    <h2>📋 Clasificación de Empresas y Régimen Tributario</h2>
+    <div class="grid-clasificacion">
+
+      <!-- Tarjeta 1: Filtros Partmo S.A.S. -->
+      <div class="card-clasificacion">
+        <h3>🏢 Filtros Partmo S.A.S. <span class="badge-clasificacion sas">SAS</span></h3>
+        <table>
+          <tr><td>Razón Social</td><td>Filtros Partmo S.A.S.</td></tr>
+          <tr><td>Tipo de Sociedad</td><td><strong>SAS</strong> (Sociedad por Acciones Simplificada)</td></tr>
+          <tr><td>NIT</td><td>900.994.125-1</td></tr>
+          <tr><td>CIIU</td><td>2819 - Fabricación de maquinaria</td></tr>
+          <tr><td>Tamaño</td><td><strong>Grande</strong> (~349 empleados)</td></tr>
+          <tr><td>Régimen Tributario</td><td><strong>Régimen Ordinario</strong></td></tr>
+          <tr><td>Grupo NIIF</td><td><strong>Grupo 1</strong> (NIIF Plenas)</td></tr>
+          <tr><td>Responsabilidad IVA</td><td><strong>Responsable de IVA</strong></td></tr>
+          <tr><td>Agente de Retención</td><td><strong>Sí</strong> (Gran Contribuyente)</td></tr>
+          <tr><td>Clasificación DIAN</td><td><strong>Gran Contribuyente</strong></td></tr>
+          <tr><td>Obligaciones</td><td>Facturación Electrónica, Nómina Electrónica, Información Exógena</td></tr>
+        </table>
+      </div>
+
+      <!-- Tarjeta 2: Tipos de Sociedad -->
+      <div class="card-clasificacion">
+        <h3>🏛️ Tipos de Sociedad (Clientes/Proveedores)</h3>
+        <table>
+          <tr><td><strong>SAS</strong></td><td>Sociedad por Acciones Simplificada <span class="badge-clasificacion sas">SAS</span></td></tr>
+          <tr><td><strong>Ltda.</strong></td><td>Sociedad de Responsabilidad Limitada <span class="badge-clasificacion ltda">Ltda.</span></td></tr>
+          <tr><td><strong>S.A.</strong></td><td>Sociedad Anónima <span class="badge-clasificacion">SA</span></td></tr>
+          <tr><td><strong>ESAL</strong></td><td>Entidad Sin Ánimo de Lucro <span class="badge-clasificacion esal">ESAL</span></td></tr>
+          <tr><td><strong>Entidad Pública</strong></td><td>Estado o entidades gubernamentales <span class="badge-clasificacion publica">Pública</span></td></tr>
+          <tr><td><strong>Persona Natural</strong></td><td>Comerciante o profesional independiente <span class="badge-clasificacion natural">Natural</span></td></tr>
+          <tr><td><strong>Gran Contribuyente</strong></td><td>Empresas con ingresos > 3.300.000 UVT <span class="badge-clasificacion gran">Gran</span></td></tr>
+          <tr><td><strong>Sucursal Extranjera</strong></td><td>Filial de empresa extranjera</td></tr>
+        </table>
+      </div>
+
+      <!-- Tarjeta 3: Régimen Tributario -->
+      <div class="card-clasificacion">
+        <h3>📜 Régimen Tributario</h3>
+        <table>
+          <tr><td><strong>Régimen Ordinario</strong></td><td>Declara Renta, IVA, Retenciones. Aplica a Partmo.</td></tr>
+          <tr><td><strong>Régimen Simple (SIMPLE)</strong></td><td>Régimen simplificado para PYMES (unifica impuestos).</td></tr>
+          <tr><td><strong>Régimen Tributario Especial (RTE)</strong></td><td>Para ESAL y entidades sin ánimo de lucro.</td></tr>
+        </table>
+      </div>
+
+      <!-- Tarjeta 4: Responsabilidades RUT -->
+      <div class="card-clasificacion">
+        <h3>📌 Responsabilidades en el RUT</h3>
+        <table>
+          <tr><td><strong>Responsable de IVA</strong></td><td>Debe cobrar y declarar IVA. Partmo: ✅ Sí</td></tr>
+          <tr><td><strong>No responsable de IVA</strong></td><td>No cobra IVA.</td></tr>
+          <tr><td><strong>Agente de Retención</strong></td><td>Debe practicar retenciones. Partmo: ✅ Sí</td></tr>
+          <tr><td><strong>Autorretenedor</strong></td><td>Se autorretiene impuestos. Partmo: ✅ Sí</td></tr>
+          <tr><td><strong>Gran Contribuyente</strong></td><td>Obligaciones especiales. Partmo: ✅ Sí</td></tr>
+          <tr><td><strong>Obligado a Facturar Electrónicamente</strong></td><td>Debe emitir factura electrónica. Partmo: ✅ Sí</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- FILTROS (actualizados con tipo de sociedad y régimen) -->
+  <!-- ============================================================ -->
   <div class="filtros">
     <div class="grupo">
       <label for="tipoTransaccion">📌 Tipo de transacción</label>
@@ -224,15 +360,26 @@
       </select>
     </div>
     <div class="grupo">
-      <label for="tipoCliente">🏢 Tipo de cliente/proveedor</label>
-      <select id="tipoCliente">
+      <label for="tipoSociedad">🏛️ Tipo de sociedad</label>
+      <select id="tipoSociedad">
         <option value="todos">Todos</option>
-        <option value="persona-juridica">Persona Jurídica</option>
+        <option value="sas">SAS</option>
+        <option value="ltda">Ltda.</option>
+        <option value="sa">S.A.</option>
+        <option value="esal">ESAL</option>
+        <option value="entidad-publica">Entidad Pública</option>
         <option value="persona-natural">Persona Natural</option>
         <option value="gran-contribuyente">Gran Contribuyente</option>
-        <option value="entidad-publica">Entidad Pública</option>
-        <option value="no-residente">No Residente</option>
-        <option value="exportacion">Exportación</option>
+        <option value="sucursal-extranjera">Sucursal Extranjera</option>
+      </select>
+    </div>
+    <div class="grupo">
+      <label for="regimen">📋 Régimen tributario</label>
+      <select id="regimen">
+        <option value="todos">Todos</option>
+        <option value="ordinario">Régimen Ordinario</option>
+        <option value="simple">Régimen Simple (SIMPLE)</option>
+        <option value="especial">Régimen Tributario Especial (RTE)</option>
       </select>
     </div>
     <div class="grupo">
@@ -260,7 +407,9 @@
     <ul id="listaImpuestosAplican"></ul>
   </div>
 
-  <!-- ===== TABLA ===== -->
+  <!-- ============================================================ -->
+  <!-- TABLA DE IMPUESTOS -->
+  <!-- ============================================================ -->
   <div class="tabla-wrapper">
     <table>
       <thead>
@@ -283,7 +432,8 @@
           <th style="min-width:160px;">Ejemplo práctico (Partmo)</th>
           <!-- Atributos para filtros -->
           <th style="display:none;">transaccion</th>
-          <th style="display:none;">cliente</th>
+          <th style="display:none;">sociedad</th>
+          <th style="display:none;">regimen</th>
           <th style="display:none;">rete</th>
           <th style="display:none;">iva</th>
         </tr>
@@ -291,16 +441,16 @@
       <tbody id="cuerpoTabla">
 
         <!-- ========================================================== -->
-        <!-- 1. RENTA - Persona Jurídica -->
+        <!-- 1. RENTA - Persona Jurídica (SAS, Ltda., SA, Gran Contribuyente) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="persona-juridica,gran-contribuyente" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="todos" data-sociedad="sas,ltda,sa,gran-contribuyente,sucursal-extranjera" data-regimen="ordinario" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto nacional">Nacional</span> <strong>Renta (Personas Jurídicas)</strong></td>
           <td>Nacional</td>
           <td>Impuesto sobre utilidades de la empresa.</td>
           <td>Financiar el Estado.</td>
           <td>Partmo S.A.S.</td>
           <td>DIAN</td>
-          <td>Personas jurídicas, grandes contribuyentes.</td>
+          <td>SAS, Ltda., SA, Gran Contribuyente</td>
           <td>Cuando hay utilidad fiscal (> $0).</td>
           <td>$0</td>
           <td>Utilidad fiscal (ingresos - costos - deducciones)</td>
@@ -311,15 +461,43 @@
           <td>ET Art. 240</td>
           <td>Utilidad $200M → $70M de impuesto</td>
           <td style="display:none;">todos</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente</td>
+          <td style="display:none;">sas,ltda,sa,gran-contribuyente,sucursal-extranjera</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 2. IVA 19% - Venta de filtros -->
+        <!-- 2. RENTA - Persona Natural -->
         <!-- ========================================================== -->
-        <tr data-transaccion="venta" data-cliente="todos" data-rete="todos" data-iva="responsable">
+        <tr data-transaccion="todos" data-sociedad="persona-natural" data-regimen="ordinario" data-rete="todos" data-iva="todos">
+          <td><span class="badge-impuesto nacional">Nacional</span> <strong>Renta (Personas Naturales)</strong></td>
+          <td>Nacional</td>
+          <td>Impuesto sobre ingresos de personas naturales.</td>
+          <td>Financiar el Estado.</td>
+          <td>Persona natural</td>
+          <td>DIAN</td>
+          <td>Personas naturales con ingresos > 1.490 UVT</td>
+          <td>Cuando los ingresos superan el límite.</td>
+          <td>1.490 UVT (~$78M)</td>
+          <td>Ingresos - deducciones</td>
+          <td><span class="porcentaje-destacado">0% a 39%</span></td>
+          <td>Tabla progresiva</td>
+          <td>Persona natural</td>
+          <td>Anual</td>
+          <td>ET Art. 241</td>
+          <td>Base $80M → 19% → $15.2M</td>
+          <td style="display:none;">todos</td>
+          <td style="display:none;">persona-natural</td>
+          <td style="display:none;">ordinario</td>
+          <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
+        </tr>
+
+        <!-- ========================================================== -->
+        <!-- 3. IVA 19% - Venta de filtros -->
+        <!-- ========================================================== -->
+        <tr data-transaccion="venta" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="responsable">
           <td><span class="badge-impuesto nacional">Nacional</span> <strong>IVA (19%)</strong></td>
           <td>Nacional</td>
           <td>Impuesto sobre ventas de filtros.</td>
@@ -339,13 +517,14 @@
           <td style="display:none;">venta</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
           <td style="display:none;">responsable</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 3. IVA 0% - Exportaciones -->
+        <!-- 4. IVA 0% - Exportaciones -->
         <!-- ========================================================== -->
-        <tr data-transaccion="exportacion" data-cliente="exportacion" data-rete="todos" data-iva="responsable">
+        <tr data-transaccion="exportacion" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="responsable">
           <td><span class="badge-impuesto nacional">Nacional</span> <strong>IVA (0% - Exportación)</strong></td>
           <td>Nacional</td>
           <td>IVA exento para exportaciones.</td>
@@ -357,21 +536,22 @@
           <td>$0</td>
           <td>Valor FOB de la exportación</td>
           <td><span class="porcentaje-destacado">0%</span></td>
-          <td>No se cobra IVA. Se puede solicitar devolución del IVA pagado en compras.</td>
+          <td>No se cobra IVA. Se puede solicitar devolución.</td>
           <td>Partmo (declara)</td>
           <td>Bimestral</td>
           <td>ET Art. 477</td>
-          <td>Exportación $100M → IVA $0 (solicita devolución)</td>
+          <td>Exportación $100M → IVA $0</td>
           <td style="display:none;">exportacion</td>
-          <td style="display:none;">exportacion</td>
+          <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">responsable</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 4. IVA DESCONTABLE - Compra de materia prima -->
+        <!-- 5. IVA DESCONTABLE - Compra de materia prima -->
         <!-- ========================================================== -->
-        <tr data-transaccion="compra" data-cliente="todos" data-rete="todos" data-iva="responsable">
+        <tr data-transaccion="compra" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="responsable">
           <td><span class="badge-impuesto nacional">Nacional</span> <strong>IVA Descontable (19%)</strong></td>
           <td>Nacional</td>
           <td>IVA pagado en compras que puede ser descontado.</td>
@@ -383,7 +563,7 @@
           <td>$0</td>
           <td>Valor de la compra (IVA incluido)</td>
           <td><span class="porcentaje-destacado">19%</span></td>
-          <td>IVA pagado = valor compra × 19% (se resta del IVA generado en ventas)</td>
+          <td>IVA pagado = valor compra × 19% (se resta del IVA generado)</td>
           <td>Partmo (lo declara)</td>
           <td>Bimestral</td>
           <td>ET Art. 485</td>
@@ -391,20 +571,21 @@
           <td style="display:none;">compra</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
           <td style="display:none;">responsable</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 5. RETENCIÓN COMPRAS 2.5% -->
+        <!-- 6. RETENCIÓN COMPRAS 2.5% (aplica a SAS, Ltda., SA, Gran Contribuyente) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="compra" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-rete="si" data-iva="todos">
+        <tr data-transaccion="compra" data-sociedad="sas,ltda,sa,gran-contribuyente,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
           <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Compras (2.5%)</strong></td>
           <td>Retención</td>
           <td>Retención de renta en compras.</td>
           <td>Anticipar el impuesto de renta del proveedor.</td>
           <td>Proveedor</td>
           <td>DIAN</td>
-          <td>Proveedores persona jurídica o gran contribuyente.</td>
+          <td>Proveedores SAS, Ltda., SA, Gran Contribuyente</td>
           <td>Compras de materia prima, insumos, activos fijos.</td>
           <td>$0</td>
           <td>Valor de la compra (sin IVA)</td>
@@ -415,15 +596,16 @@
           <td>ET Art. 368</td>
           <td>Compra $20M → Retención $500.000</td>
           <td style="display:none;">compra</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">sas,ltda,sa,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">si</td>
           <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 6. RETEIVA 15% -->
+        <!-- 7. RETEIVA 15% (aplica a SAS, Ltda., SA, Gran Contribuyente) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="compra" data-cliente="persona-juridica,gran-contribuyente" data-rete="si" data-iva="responsable">
+        <tr data-transaccion="compra" data-sociedad="sas,ltda,sa,gran-contribuyente" data-regimen="ordinario" data-rete="si" data-iva="responsable">
           <td><span class="badge-impuesto retencion">Retención</span> <strong>RETEIVA (15%)</strong></td>
           <td>Retención</td>
           <td>Retención del IVA en compras.</td>
@@ -441,22 +623,23 @@
           <td>ET Art. 437-2</td>
           <td>Compra $20M (IVA $3.8M) → RETEIVA $570.000</td>
           <td style="display:none;">compra</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente</td>
+          <td style="display:none;">sas,ltda,sa,gran-contribuyente</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">si</td>
           <td style="display:none;">responsable</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 7. RETENCIÓN HONORARIOS 11% -->
+        <!-- 8. RETENCIÓN HONORARIOS 11% (aplica a SAS, Ltda., SA, Gran Contribuyente) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="servicio" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-rete="si" data-iva="todos">
-          <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Honorarios (11%)</strong></td>
+        <tr data-transaccion="servicio" data-sociedad="sas,ltda,sa,gran-contribuyente,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
+                    <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Honorarios (11%)</strong></td>
           <td>Retención</td>
           <td>Retención sobre servicios profesionales.</td>
           <td>Anticipar el impuesto de renta.</td>
           <td>Proveedor del servicio</td>
           <td>DIAN</td>
-          <td>Contratistas persona jurídica.</td>
+          <td>Contratistas SAS, Ltda., SA, Gran Contribuyente</td>
           <td>Pagos por servicios de consultoría, asesoría, auditoría, legales, etc.</td>
           <td>$0</td>
           <td>Valor del servicio (sin IVA)</td>
@@ -467,15 +650,16 @@
           <td>ET Art. 391</td>
           <td>Consultoría $10M → Retención $1.1M</td>
           <td style="display:none;">servicio</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">sas,ltda,sa,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">si</td>
           <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 8. RETENCIÓN CONSULTORÍA 3.5% -->
+        <!-- 9. RETENCIÓN CONSULTORÍA 3.5% (aplica a SAS, Ltda., SA, Gran Contribuyente) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="servicio" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-rete="si" data-iva="todos">
+        <tr data-transaccion="servicio" data-sociedad="sas,ltda,sa,gran-contribuyente,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
           <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Consultoría (3.5%)</strong></td>
           <td>Retención</td>
           <td>Retención sobre servicios de consultoría y software.</td>
@@ -493,22 +677,23 @@
           <td>ET Art. 393</td>
           <td>Software $15M → Retención $525.000</td>
           <td style="display:none;">servicio</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">sas,ltda,sa,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">si</td>
           <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 9. RETENCIÓN ARRENDAMIENTOS 3.5% - 10% -->
+        <!-- 10. RETENCIÓN ARRENDAMIENTOS 3.5% - 10% -->
         <!-- ========================================================== -->
-        <tr data-transaccion="arriendo" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-rete="si" data-iva="todos">
+        <tr data-transaccion="arriendo" data-sociedad="sas,ltda,sa,gran-contribuyente,entidad-publica,persona-natural" data-regimen="ordinario" data-rete="si" data-iva="todos">
           <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Arrendamientos (3.5% - 10%)</strong></td>
           <td>Retención</td>
           <td>Retención sobre arrendamiento de inmuebles.</td>
           <td>Anticipar el impuesto de renta.</td>
           <td>Arrendador</td>
           <td>DIAN</td>
-          <td>Arrendadores de inmuebles.</td>
+          <td>Arrendadores de inmuebles (personas naturales o jurídicas).</td>
           <td>Pagos por arrendamiento de bodegas, oficinas, plantas.</td>
           <td>$0</td>
           <td>Valor del arrendamiento (sin IVA)</td>
@@ -519,15 +704,16 @@
           <td>ET Art. 382</td>
           <td>Arriendo $15M → 3.5% → $525.000</td>
           <td style="display:none;">arriendo</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">sas,ltda,sa,gran-contribuyente,entidad-publica,persona-natural</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">si</td>
           <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 10. RETENCIÓN NÓMINA (19% - 39%) -->
+        <!-- 11. RETENCIÓN NÓMINA (19% - 39%) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="nomina" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="nomina" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Nómina (19% - 39%)</strong></td>
           <td>Retención</td>
           <td>Retención en la fuente sobre ingresos laborales.</td>
@@ -548,12 +734,13 @@
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 11. APORTES PARAFISCALES (SENA, ICBF, Cajas de Compensación) -->
+        <!-- 12. APORTES PARAFISCALES (SENA, ICBF, Cajas de Compensación) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="nomina" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="nomina" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto nacional">Nacional</span> <strong>Aportes Parafiscales (SENA, ICBF, CC)</strong></td>
           <td>Nacional</td>
           <td>Aportes para SENA, ICBF y Caja de Compensación.</td>
@@ -574,12 +761,13 @@
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 12. SEGURIDAD SOCIAL (Salud, Pensión, ARL) -->
+        <!-- 13. SEGURIDAD SOCIAL (Salud, Pensión, ARL) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="nomina" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="nomina" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto nacional">Nacional</span> <strong>Seguridad Social (Salud, Pensión, ARL)</strong></td>
           <td>Nacional</td>
           <td>Aportes para salud, pensión y riesgos laborales.</td>
@@ -600,12 +788,13 @@
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 13. ICA (Industria y Comercio) - 2.5‰ -->
+        <!-- 14. ICA (Industria y Comercio) - 2.5‰ -->
         <!-- ========================================================== -->
-        <tr data-transaccion="venta,compra,todos" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="venta,compra,todos" data-sociedad="todos" data-regimen="ordinario" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto territorial">Territorial</span> <strong>ICA (Industria) - 2.5‰</strong></td>
           <td>Municipal</td>
           <td>Impuesto sobre la actividad industrial.</td>
@@ -622,16 +811,17 @@
           <td>Mensual o Bimestral</td>
           <td>Acuerdo Municipal de Bucaramanga</td>
           <td>Ventas $500M → ICA $1.25M</td>
-                    <td style="display:none;">venta,compra,todos</td>
+          <td style="display:none;">venta,compra,todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 14. RETEICA (1% - 2% según actividad) -->
+        <!-- 15. RETEICA (1% - 2% según actividad) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="compra,servicio" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-rete="si" data-iva="todos">
+        <tr data-transaccion="compra,servicio" data-sociedad="sas,ltda,sa,gran-contribuyente,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
           <td><span class="badge-impuesto retencion">Retención</span> <strong>RETEICA (1% - 2%)</strong></td>
           <td>Municipal</td>
           <td>Retención del ICA que se aplica sobre pagos a contratistas y proveedores.</td>
@@ -649,15 +839,16 @@
           <td>Acuerdo Municipal de Bucaramanga</td>
           <td>Pago a proveedor industrial $20M → RETEICA $200.000</td>
           <td style="display:none;">compra,servicio</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">sas,ltda,sa,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">si</td>
           <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 15. GMF (4×1000) -->
+        <!-- 16. GMF (4×1000) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="todos" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto nacional">Nacional</span> <strong>GMF (4×1000)</strong></td>
           <td>Nacional</td>
           <td>Gravamen a los Movimientos Financieros.</td>
@@ -678,12 +869,13 @@
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 16. IMPUESTO AL PATRIMONIO -->
+        <!-- 17. IMPUESTO AL PATRIMONIO -->
         <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="todos" data-sociedad="sas,ltda,sa,gran-contribuyente,persona-natural" data-regimen="ordinario" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto nacional">Nacional</span> <strong>Impuesto al Patrimonio</strong></td>
           <td>Nacional</td>
           <td>Impuesto sobre el patrimonio neto de la empresa.</td>
@@ -701,15 +893,16 @@
           <td>ET Arts. 295-303</td>
           <td>Patrimonio $5.000M → tarifa 1% → $50M</td>
           <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
+          <td style="display:none;">sas,ltda,sa,gran-contribuyente,persona-natural</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 17. IMPUESTO DE TIMBRE NACIONAL -->
+        <!-- 18. IMPUESTO DE TIMBRE NACIONAL -->
         <!-- ========================================================== -->
-        <tr data-transaccion="compra,activo-fijo" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="compra,activo-fijo" data-sociedad="sas,ltda,sa,gran-contribuyente,entidad-publica" data-regimen="ordinario" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto nacional">Nacional</span> <strong>Impuesto de Timbre Nacional</strong></td>
           <td>Nacional</td>
           <td>Impuesto sobre documentos y contratos de alto valor.</td>
@@ -727,15 +920,16 @@
           <td>ET Arts. 519 a 535</td>
           <td>Contrato de compra de maquinaria $100M → Timbre $1.5M</td>
           <td style="display:none;">compra,activo-fijo</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">sas,ltda,sa,gran-contribuyente,entidad-publica</td>
+          <td style="display:none;">ordinario</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 18. IMPUESTO PREDIAL (si Partmo tiene propiedades) -->
+        <!-- 19. IMPUESTO PREDIAL (si Partmo tiene propiedades) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="todos" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto Predial</strong></td>
           <td>Municipal</td>
           <td>Impuesto sobre la propiedad inmobiliaria de Partmo.</td>
@@ -756,12 +950,13 @@
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 19. IMPUESTO DE VEHÍCULOS (si Partmo tiene flota) -->
+        <!-- 20. IMPUESTO DE VEHÍCULOS (si Partmo tiene flota) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="todos" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto de Vehículos</strong></td>
           <td>Departamental</td>
           <td>Impuesto sobre la propiedad de vehículos automotores.</td>
@@ -782,12 +977,13 @@
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 20. IMPUESTO DE ALUMBRADO PÚBLICO -->
+        <!-- 21. IMPUESTO DE ALUMBRADO PÚBLICO -->
         <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="todos" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto de Alumbrado Público</strong></td>
           <td>Municipal</td>
           <td>Impuesto sobre el servicio de alumbrado público en Bucaramanga.</td>
@@ -808,12 +1004,13 @@
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 21. SOBRETASA BOMBERIL -->
+        <!-- 22. SOBRETASA BOMBERIL -->
         <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="todos" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto territorial">Territorial</span> <strong>Sobretasa Bomberil</strong></td>
           <td>Municipal</td>
           <td>Sobretasa para financiar el cuerpo de bomberos de Bucaramanga.</td>
@@ -834,12 +1031,13 @@
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
         </tr>
 
         <!-- ========================================================== -->
-        <!-- 22. IMPUESTO DE AVISOS Y TABLEROS (si Partmo tiene avisos) -->
+        <!-- 23. IMPUESTO DE AVISOS Y TABLEROS (si Partmo tiene avisos) -->
         <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-rete="todos" data-iva="todos">
+        <tr data-transaccion="todos" data-sociedad="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
           <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto de Avisos y Tableros</strong></td>
           <td>Municipal</td>
           <td>Impuesto sobre avisos y carteles publicitarios en Bucaramanga.</td>
@@ -860,6 +1058,7 @@
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
           <td style="display:none;">todos</td>
+          <td style="display:none;">todos</td>
         </tr>
 
       </tbody>
@@ -875,12 +1074,13 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- JAVASCRIPT PARA FILTROS -->
+<!-- JAVASCRIPT PARA FILTROS (actualizado con sociedad y régimen) -->
 <!-- ============================================================ -->
 <script>
   // ===== Obtener referencias =====
   const selectTransaccion = document.getElementById('tipoTransaccion');
-  const selectCliente = document.getElementById('tipoCliente');
+  const selectSociedad = document.getElementById('tipoSociedad');
+  const selectRegimen = document.getElementById('regimen');
   const selectRete = document.getElementById('reteFuente');
   const selectIva = document.getElementById('responsabilidadIVA');
   const filas = document.querySelectorAll('#cuerpoTabla tr');
@@ -890,7 +1090,8 @@
   // ===== Función para aplicar filtros =====
   function aplicarFiltros() {
     const transaccionVal = selectTransaccion.value;
-    const clienteVal = selectCliente.value;
+    const sociedadVal = selectSociedad.value;
+    const regimenVal = selectRegimen.value;
     const reteVal = selectRete.value;
     const ivaVal = selectIva.value;
 
@@ -898,21 +1099,24 @@
 
     filas.forEach(fila => {
       const transaccionData = fila.getAttribute('data-transaccion') || 'todos';
-      const clienteData = fila.getAttribute('data-cliente') || 'todos';
+      const sociedadData = fila.getAttribute('data-sociedad') || 'todos';
+      const regimenData = fila.getAttribute('data-regimen') || 'todos';
       const reteData = fila.getAttribute('data-rete') || 'todos';
       const ivaData = fila.getAttribute('data-iva') || 'todos';
 
       const transacciones = transaccionData.split(',');
-      const clientes = clienteData.split(',');
+      const sociedades = sociedadData.split(',');
+      const regimenes = regimenData.split(',');
       const retes = reteData.split(',');
       const ivas = ivaData.split(',');
 
       let transaccionOk = (transaccionVal === 'todos') || transacciones.includes('todos') || transacciones.includes(transaccionVal);
-      let clienteOk = (clienteVal === 'todos') || clientes.includes('todos') || clientes.includes(clienteVal);
+      let sociedadOk = (sociedadVal === 'todos') || sociedades.includes('todos') || sociedades.includes(sociedadVal);
+      let regimenOk = (regimenVal === 'todos') || regimenes.includes('todos') || regimenes.includes(regimenVal);
       let reteOk = (reteVal === 'todos') || retes.includes('todos') || retes.includes(reteVal);
       let ivaOk = (ivaVal === 'todos') || ivas.includes('todos') || ivas.includes(ivaVal);
 
-      if (transaccionOk && clienteOk && reteOk && ivaOk) {
+      if (transaccionOk && sociedadOk && regimenOk && reteOk && ivaOk) {
         fila.classList.remove('fila-oculta');
         fila.classList.add('fila-visible');
         const nombreImpuesto = fila.querySelector('td:first-child')?.textContent?.trim() || 'Sin nombre';
@@ -936,7 +1140,8 @@
   // ===== Función para resetear filtros =====
   function resetFiltros() {
     selectTransaccion.value = 'todos';
-    selectCliente.value = 'todos';
+    selectSociedad.value = 'todos';
+    selectRegimen.value = 'todos';
     selectRete.value = 'todos';
     selectIva.value = 'todos';
     aplicarFiltros();
@@ -944,7 +1149,8 @@
 
   // ===== Event listeners =====
   selectTransaccion.addEventListener('change', aplicarFiltros);
-  selectCliente.addEventListener('change', aplicarFiltros);
+  selectSociedad.addEventListener('change', aplicarFiltros);
+  selectRegimen.addEventListener('change', aplicarFiltros);
   selectRete.addEventListener('change', aplicarFiltros);
   selectIva.addEventListener('change', aplicarFiltros);
 
@@ -953,4 +1159,4 @@
 </script>
 
 </body>
-  </html>
+</html>
