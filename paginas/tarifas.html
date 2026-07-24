@@ -1,312 +1,679 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tarifas 2026 - Mi Hub Contable</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f9fafc;
-      padding: 30px 20px;
-    }
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 16px;
-      padding: 35px 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    }
-    .back {
-      display: inline-block;
-      margin-bottom: 25px;
-      background: #1a3c6e;
-      color: white;
-      padding: 8px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: background 0.2s;
-    }
-    .back:hover { background: #0f2a4a; }
-    h1 {
-      color: #1a3c6e;
-      font-size: 2.2rem;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .subtitle {
-      color: #555;
-      margin-bottom: 30px;
-      font-size: 1rem;
-      border-left: 4px solid #1a3c6e;
-      padding-left: 16px;
-    }
-    .subtitle strong { color: #1a3c6e; }
-    h2 {
-      color: #1a3c6e;
-      font-size: 1.5rem;
-      margin-top: 35px;
-      margin-bottom: 12px;
-      border-bottom: 2px solid #e8ecf1;
-      padding-bottom: 8px;
-    }
-    h3 {
-      color: #2c3e50;
-      font-size: 1.1rem;
-      margin-top: 20px;
-      margin-bottom: 8px;
-    }
-    p, li {
-      color: #2d2d2d;
-      line-height: 1.7;
-      font-size: 0.98rem;
-    }
-    ul, ol {
-      padding-left: 25px;
-      margin: 8px 0 16px 0;
-    }
-    .highlight {
-      background: #eef4ff;
-      border-left: 4px solid #1a3c6e;
-      padding: 12px 18px;
-      border-radius: 6px;
-      margin: 14px 0;
-    }
-    .highlight strong { color: #1a3c6e; }
-    .highlight.warning {
-      background: #fff8e1;
-      border-left-color: #f9a825;
-    }
-    .highlight.warning strong { color: #e65100; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0 20px 0;
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    th {
-      background: #1a3c6e;
-      color: white;
-      padding: 10px 14px;
-      text-align: left;
-      font-weight: 600;
-    }
-    td {
-      padding: 10px 14px;
-      border-bottom: 1px solid #e8ecf1;
-    }
-    tr:hover td { background: #f8f9fc; }
-    .badge {
-      display: inline-block;
-      background: #1a3c6e;
-      color: white;
-      font-size: 0.7rem;
-      padding: 2px 10px;
-      border-radius: 20px;
-      margin-left: 8px;
-      font-weight: 600;
-    }
-    .badge.orange { background: #e65100; }
-    .badge.green { background: #2e7d32; }
-    .footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #888;
-      border-top: 1px solid #eee;
-      padding-top: 20px;
-    }
-    .footer a { color: #1a3c6e; text-decoration: none; }
-    .footer a:hover { text-decoration: underline; }
-    @media (max-width: 600px) {
-      .container { padding: 20px; }
-      h1 { font-size: 1.6rem; }
-      table { font-size: 0.85rem; }
-      th, td { padding: 6px 10px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifas y Retenciones 2026 - Hub Contable</title>
+    <style>
+        /* --- Estilos Generales --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* Botón volver */
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            background: #1a3c6e;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .back:hover {
+            background: #0f2a4a;
+        }
+
+        h1 {
+            color: #1a3c6e;
+            font-size: 2.2rem;
+            margin-bottom: 4px;
+        }
+        .subtitle {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1rem;
+            border-left: 4px solid #1a3c6e;
+            padding-left: 16px;
+        }
+
+        /* --- Panel de Filtros (Opciones) --- */
+        .filter-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px 30px;
+            border: 1px solid #e8ecf1;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .filter-group label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1a3c6e;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .filter-group select {
+            padding: 10px 12px;
+            border: 2px solid #dde1e7;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: white;
+            transition: border 0.2s;
+            color: #1a1a1a;
+            cursor: pointer;
+        }
+        .filter-group select:focus {
+            border-color: #1a3c6e;
+            outline: none;
+        }
+        .filter-group .hint {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* --- Resumen de Clasificación --- */
+        .clasificacion-badge {
+            background: #eef4ff;
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 30px;
+            border-left: 5px solid #1a3c6e;
+        }
+        .clasificacion-badge span {
+            font-size: 0.95rem;
+        }
+        .clasificacion-badge strong {
+            color: #1a3c6e;
+        }
+
+        /* --- Tabla de Resultados --- */
+        .result-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e8ecf1;
+            overflow-x: auto;
+        }
+        .result-section h2 {
+            color: #1a3c6e;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .result-section h2 small {
+            font-size: 0.8rem;
+            font-weight: normal;
+            color: #666;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            min-width: 700px;
+        }
+        th {
+            background: #1a3c6e;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eef2f7;
+            vertical-align: top;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background: #f8faff;
+        }
+        .categoria-nacional {
+            border-left: 4px solid #1a3c6e;
+        }
+        .categoria-retencion {
+            border-left: 4px solid #e67e22;
+        }
+        .categoria-municipal {
+            border-left: 4px solid #27ae60;
+        }
+        .categoria-especial {
+            border-left: 4px solid #8e44ad;
+        }
+
+        .badge-tax {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-nacional {
+            background: #dbeafe;
+            color: #1a3c6e;
+        }
+        .badge-retencion {
+            background: #fdebd0;
+            color: #a04000;
+        }
+        .badge-municipal {
+            background: #d5f5e3;
+            color: #145a32;
+        }
+        .badge-especial {
+            background: #ebdef0;
+            color: #6c3483;
+        }
+
+        .porcentaje {
+            font-weight: 700;
+            color: #1a3c6e;
+            font-size: 1.05rem;
+        }
+        .porcentaje .detalle {
+            font-weight: 400;
+            color: #555;
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .base-calculo {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        .base-calculo .detalle {
+            font-weight: 400;
+            color: #666;
+            font-size: 0.8rem;
+            display: block;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .filter-panel {
+                grid-template-columns: 1fr 1fr;
+                padding: 15px;
+            }
+            .container {
+                padding: 0 5px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
+    <div class="container">
 
-  <!-- Botón volver -->
-  <a href="../index.html" class="back">⬅ Volver al inicio</a>
+        <!-- Volver al inicio -->
+        <a href="../index.html" class="back">⬅ Volver al inicio</a>
 
-  <h1>💰 Tarifas 2026</h1>
-  <div class="subtitle">
-    Valores y porcentajes clave para <strong>Filtros Partmo S.A.S.</strong> • Vigencia 2026
-  </div>
+        <h1>💰 Tabla de Impuestos, Retenciones y Contribuciones</h1>
+        <div class="subtitle">
+            <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, Santander • Vigencia 2026
+            <br>Selecciona las características del <strong>comprador / contratante</strong> para ver qué impuestos aplican en la facturación.
+        </div>
 
-  <!-- ========================================== -->
-  <!-- 1. UVT - UNIDAD DE VALOR TRIBUTARIO        -->
-  <!-- ========================================== -->
-  <h2>1. UVT - Unidad de Valor Tributario</h2>
-  <div class="highlight" style="text-align:center; font-size:1.4rem; font-weight:bold;">
-    UVT 2026 = <span style="color:#1a3c6e;">$52.374</span>
-  </div>
-  <p>
-    La <strong>UVT</strong> es la base para calcular sanciones, multas y límites en varios impuestos.
-    Fue actualizada mediante <strong>Resolución DIAN 238 de 2025</strong>.
-  </p>
+        <!-- PANEL DE FILTROS -->
+        <div class="filter-panel">
+            <div class="filter-group">
+                <label for="regimen">Régimen del Comprador</label>
+                <select id="regimen">
+                    <option value="ordinario">Ordinario (Persona Jurídica)</option>
+                    <option value="simple">Régimen Simple de Tributación (SIMPLE)</option>
+                    <option value="persona_natural">Persona Natural (Rég. Simplificado)</option>
+                </select>
+                <span class="hint">Define obligaciones de IVA y ReteICA.</span>
+            </div>
 
-  <h3>📌 Límites en UVT (para referencia)</h3>
-  <table>
-    <tr><th>Concepto</th><th>Valor en UVT</th><th>Valor en COP</th></tr>
-    <tr><td>Límite para declarar renta (personas naturales)</td><td>1.400 UVT</td><td>$73.323.600</td></tr>
-    <tr><td>Límite para facturar electrónicamente</td><td>100 UVT</td><td>$5.237.400</td></tr>
-    <tr><td>Base mínima Impuesto al Patrimonio</td><td>40.000 UVT</td><td>$2.094.960.000</td></tr>
-    <tr><td>Límite para Régimen Simple</td><td>100.000 UVT</td><td>$5.237.400.000</td></tr>
-  </table>
+            <div class="filter-group">
+                <label for="gran_contribuyente">¿Es Gran Contribuyente?</label>
+                <select id="gran_contribuyente">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+                <span class="hint">Afecta tarifas de ReteIVA y algunas retenciones.</span>
+            </div>
 
-  <!-- ========================================== -->
-  <!-- 2. IMPUESTO DE RENTA                       -->
-  <!-- ========================================== -->
-  <h2>2. Impuesto de Renta (Personas Jurídicas)</h2>
+            <div class="filter-group">
+                <label for="autorretenedor_iva">¿Es Autorretenedor de IVA?</label>
+                <select id="autorretenedor_iva">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+                <span class="hint">Aplica ReteIVA (se autorretiene el IVA).</span>
+            </div>
 
-  <h3>📌 Tarifa general</h3>
-  <div class="highlight" style="text-align:center; font-size:1.3rem; font-weight:bold;">
-    Tarifa Renta 2026 = <span style="color:#1a3c6e;">35%</span>
-  </div>
-  <p>
-    Aplica para la mayoría de personas jurídicas, incluyendo <strong>Filtros Partmo S.A.S.</strong>
-  </p>
+            <div class="filter-group">
+                <label for="agente_retencion">¿Es Agente de Retención en la Fuente?</label>
+                <select id="agente_retencion">
+                    <option value="no">No</option>
+                    <option value="si">Sí</option>
+                </select>
+                <span class="hint">Debe practicar retención en compras/servicios.</span>
+            </div>
 
-  <h3>📌 Tarifas especiales</h3>
-  <table>
-    <tr><th>Sector / Actividad</th><th>Tarifa</th><th>Observación</th></tr>
-    <tr><td>Hoteles, ecoturismo, editoriales</td><td>15%</td><td>No aplica a Partmo</td></tr>
-    <tr><td>Sector financiero (sobretasa)</td><td>~50%</td><td>No aplica a Partmo</td></tr>
-    <tr><td>Zona Franca (usuarios)</td><td>20%</td><td>No aplica a Partmo</td></tr>
-  </table>
+            <div class="filter-group">
+                <label for="tipo_operacion">Tipo de Operación</label>
+                <select id="tipo_operacion">
+                    <option value="bienes">Compra de Bienes (Materia prima, filtros)</option>
+                    <option value="servicios">Prestación de Servicios (Mantenimiento, logística)</option>
+                    <option value="honorarios">Honorarios (Consultoría, asesorías)</option>
+                    <option value="arrendamiento">Arrendamiento (Inmuebles, maquinaria)</option>
+                    <option value="financiero">Intereses / Operaciones Financieras</option>
+                </select>
+                <span class="hint">Define la tarifa de retención en la fuente.</span>
+            </div>
+        </div>
 
-  <div class="highlight warning">
-    <strong>📌 Importante:</strong> Partmo tributa al <strong>35%</strong> por ser una empresa industrial grande.
-  </div>
+        <!-- CLASIFICACIÓN RESUMEN -->
+        <div class="clasificacion-badge" id="resumenClasificacion">
+            <span>📌 <strong>Régimen:</strong> <span id="resRegimen">Ordinario</span></span>
+            <span>🏛️ <strong>Gran Contribuyente:</strong> <span id="resGran">No</span></span>
+            <span>✍️ <strong>Autorretenedor IVA:</strong> <span id="resAutor">No</span></span>
+            <span>🔁 <strong>Agente Retención:</strong> <span id="resAgente">No</span></span>
+            <span>📦 <strong>Operación:</strong> <span id="resOperacion">Compra de Bienes</span></span>
+        </div>
 
-  <!-- ========================================== -->
-  <!-- 3. IVA - IMPUESTO SOBRE LAS VENTAS        -->
-  <!-- ========================================== -->
-  <h2>3. IVA - Impuesto sobre las Ventas</h2>
+        <!-- RESULTADOS: TABLA DE IMPUESTOS -->
+        <div class="result-section">
+            <h2>
+                🧾 Impuestos y Retenciones Aplicables
+                <small>Basado en la selección del comprador</small>
+            </h2>
+            <div id="tablaResultados">
+                <!-- Aquí se inyecta la tabla con JavaScript -->
+                <div class="no-data">Selecciona las opciones para ver el detalle.</div>
+            </div>
+        </div>
 
-  <h3>📌 Tarifa general</h3>
-  <div class="highlight" style="text-align:center; font-size:1.3rem; font-weight:bold;">
-    IVA General 2026 = <span style="color:#1a3c6e;">19%</span>
-  </div>
+        <div class="footer">
+            📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
+            <br>Fuentes: DIAN, Decreto 572 de 2025, Estatuto Tributario, Acuerdo Municipal de Bucaramanga.
+        </div>
+    </div>
 
-  <h3>📌 Tarifas diferenciales</h3>
-  <table>
-    <tr><th>Producto / Servicio</th><th>Tarifa</th></tr>
-    <tr><td>Servicios hoteleros, tiquetes aéreos, productos de higiene</td><td>5%</td></tr>
-    <tr><td>Licores, cervezas</td><td>19%</td></tr>
-    <tr><td>Bienes exentos (alimentos, libros, medicamentos)</td><td>0%</td></tr>
-  </table>
+    <script>
+        // ============================================================
+        //  BASE DE DATOS DE IMPUESTOS (Extensa y detallada)
+        // ============================================================
+        const impuestosDB = {
 
-  <div class="highlight">
-    <strong>📌 Para Partmo:</strong> Como fabricante de filtros, aplica <strong>19%</strong> en la mayoría de sus ventas. Revisar si algún producto tiene tarifa especial.
-  </div>
+            // -------------------- IMPUESTOS NACIONALES --------------------
+            iva: {
+                id: 'iva',
+                nombre: 'IVA (Impuesto sobre las Ventas)',
+                categoria: 'Nacional',
+                badge: 'badge-nacional',
+                clase: 'categoria-nacional',
+                base: 'Valor total de la operación (excluye otros impuestos)',
+                descripcion: 'Impuesto al consumo. Debe ser facturado por Partmo al comprador. Aplica a la venta de bienes y servicios.',
+                siempreAplica: true,
+                condicion: (filtros) => {
+                    // Si el comprador es persona natural régimen simplificado, NO facturamos IVA (no son responsables de IVA, pero es una venta, Partmo sí debe facturar IVA? 
+                    // En Colombia, el responsable de IVA es el vendedor (Partmo). Independientemente del comprador, Partmo DEBE facturar IVA si es responsable.
+                    // Pero si el comprador es régimen simple, igual se factura IVA, solo que ellos lo manejan distinto.
+                    // La única excepción es si la operación está exenta. Asumimos que no.
+                    return true; // Siempre se factura IVA.
+                },
+                porcentaje: '19%',
+                detallePorcentaje: 'Tarifa general establecida en el Estatuto Tributario para 2026.'
+            },
 
-  <!-- ========================================== -->
-  <!-- 4. RETENCIÓN EN LA FUENTE                  -->
-  <!-- ========================================== -->
-  <h2>4. Retención en la Fuente</h2>
-  <div class="highlight warning">
-    <strong>⚠️ ATENCIÓN:</strong> El <strong>Decreto 572 de 2025</strong> estuvo suspendido temporalmente, pero <strong>a partir del 1 de julio de 2026</strong> vuelve a regir con las siguientes tarifas:
-  </div>
+            // -------------------- RETENCIONES NACIONALES (ReteFuente) --------------------
+            retefuente_bienes: {
+                id: 'retefuente_bienes',
+                nombre: 'Retención en la Fuente – Compras (Bienes)',
+                categoria: 'Retención Nacional',
+                badge: 'badge-retencion',
+                clase: 'categoria-retencion',
+                base: 'Valor de la compra (sin IVA)',
+                descripcion: 'El comprador (agente retenedor) debe retener y consignar a la DIAN este valor. Aplica solo si es Agente de Retención.',
+                siempreAplica: false,
+                condicion: (filtros) => {
+                    return (filtros.agente === 'si' && filtros.operacion === 'bienes');
+                },
+                porcentaje: '2.5%',
+                detallePorcentaje: 'Decreto 572 de 2025 (vigencia desde julio 2026). Sin base mínima en UVT.'
+            },
+            retefuente_servicios: {
+                id: 'retefuente_servicios',
+                nombre: 'Retención en la Fuente – Servicios (Persona Jurídica)',
+                categoria: 'Retención Nacional',
+                badge: 'badge-retencion',
+                clase: 'categoria-retencion',
+                base: 'Valor del servicio (sin IVA)',
+                descripcion: 'Aplica para servicios prestados por empresas (personas jurídicas). El agente retenedor debe practicarla.',
+                siempreAplica: false,
+                condicion: (filtros) => {
+                    return (filtros.agente === 'si' && filtros.operacion === 'servicios');
+                },
+                porcentaje: '11%',
+                detallePorcentaje: 'Decreto 572 de 2025. Para servicios de consultoría, mantenimiento, logística, etc.'
+            },
+            retefuente_honorarios: {
+                id: 'retefuente_honorarios',
+                nombre: 'Retención en la Fuente – Honorarios (Persona Jurídica)',
+                categoria: 'Retención Nacional',
+                badge: 'badge-retencion',
+                clase: 'categoria-retencion',
+                base: 'Valor de los honorarios (sin IVA)',
+                descripcion: 'Aplica para contratos de consultoría, asesoría, servicios profesionales independientes (jurídicos).',
+                siempreAplica: false,
+                condicion: (filtros) => {
+                    return (filtros.agente === 'si' && filtros.operacion === 'honorarios');
+                },
+                porcentaje: '11%',
+                detallePorcentaje: 'Decreto 572 de 2025. Tarifa unificada para servicios profesionales de personas jurídicas.'
+            },
+            retefuente_arrendamiento: {
+                id: 'retefuente_arrendamiento',
+                nombre: 'Retención en la Fuente – Arrendamientos',
+                categoria: 'Retención Nacional',
+                badge: 'badge-retencion',
+                clase: 'categoria-retencion',
+                base: 'Valor del cánon de arrendamiento (sin IVA)',
+                descripcion: 'Aplica para arrendamiento de bienes muebles e inmuebles. El agente retenedor debe aplicarla.',
+                siempreAplica: false,
+                condicion: (filtros) => {
+                    return (filtros.agente === 'si' && filtros.operacion === 'arrendamiento');
+                },
+                porcentaje: '10%',
+                detallePorcentaje: 'Tarifa fija del 10% sobre el valor del cánon para personas jurídicas.'
+            },
+            retefuente_financiero: {
+                id: 'retefuente_financiero',
+                nombre: 'Retención en la Fuente – Intereses Financieros',
+                categoria: 'Retención Nacional',
+                badge: 'badge-retencion',
+                clase: 'categoria-retencion',
+                base: 'Valor de los intereses',
+                descripcion: 'Aplica sobre intereses pagados a entidades financieras o personas jurídicas.',
+                siempreAplica: false,
+                condicion: (filtros) => {
+                    return (filtros.agente === 'si' && filtros.operacion === 'financiero');
+                },
+                porcentaje: '4%',
+                detallePorcentaje: 'Artículo 383 del Estatuto Tributario. Tarifa del 4% sobre intereses.'
+            },
 
-  <h3>📌 Tarifas vigentes desde julio 2026</h3>
-  <table>
-    <tr><th>Concepto</th><th>Tarifa</th><th>Base (UVT)</th></tr>
-    <tr><td><strong>Compras generales</strong></td><td>2.5%</td><td>Sin base mínima</td></tr>
-    <tr><td><strong>Honorarios (a persona jurídica)</strong></td><td>11%</td><td>Sin base mínima</td></tr>
-    <tr><td><strong>Honorarios (a persona natural)</strong></td><td>10%</td><td>Desde 95 UVT</td></tr>
-    <tr><td><strong>Consultoría y software</strong></td><td>3.5%</td><td>Sin base mínima</td></tr>
-    <tr><td><strong>Arrendamientos</strong></td><td>3.5% - 10%</td><td>Variable según valor</td></tr>
-    <tr><td><strong>Ingresos laborales (nómina)</strong></td><td>19% - 39%</td><td>Progresivo desde 95 UVT mensuales</td></tr>
-  </table>
+            // -------------------- RETENCIÓN DE IVA (ReteIVA) --------------------
+            reteiva: {
+                id: 'reteiva',
+                nombre: 'Retención de IVA (ReteIVA)',
+                categoria: 'Retención Nacional',
+                badge: 'badge-retencion',
+                clase: 'categoria-retencion',
+                base: 'Valor del IVA facturado (19% de la operación)',
+                descripcion: 'El comprador se autorretiene el IVA en lugar de pagarlo a Partmo. Aplica si es autorretenedor.',
+                siempreAplica: false,
+                condicion: (filtros) => {
+                    return (filtros.autorretenedor === 'si');
+                },
+                porcentaje: '15%',
+                detallePorcentaje: 'Tarifa general para autorretenedores no gran contribuyente. Se calcula sobre el valor del IVA (ej. si IVA es $1.900.000, se retiene $285.000).',
+                porcentajeEspecial: (filtros) => {
+                    if (filtros.gran_contribuyente === 'si') {
+                        return '20%';
+                    }
+                    return '15%';
+                },
+                detalleEspecial: (filtros) => {
+                    if (filtros.gran_contribuyente === 'si') {
+                        return 'Si es Gran Contribuyente, la tarifa de ReteIVA sube al 20%.';
+                    }
+                    return 'Tarifa estándar del 15% para autorretenedores.';
+                }
+            },
 
-  <h3>📌 Ejemplos de liquidación para Partmo</h3>
-  <div class="highlight">
-    <strong>Compra de materia prima: $10.000.000</strong><br>
-    Retención = $10.000.000 × 2.5% = <strong>$250.000</strong>
-  </div>
-  <div class="highlight">
-    <strong>Pago de consultoría: $5.000.000</strong><br>
-    Retención = $5.000.000 × 3.5% = <strong>$175.000</strong>
-  </div>
+            // -------------------- IMPUESTO MUNICIPAL (ICA y ReteICA) --------------------
+            ica_industria: {
+                id: 'ica_industria',
+                nombre: 'ICA – Industria (Bucaramanga)',
+                categoria: 'Municipal',
+                badge: 'badge-municipal',
+                clase: 'categoria-municipal',
+                base: 'Ingresos brutos totales de la empresa (no aplica en la factura al comprador, es un impuesto que paga el vendedor)',
+                descripcion: 'Impuesto de Industria y Comercio. Lo paga Partmo a la alcaldía de Bucaramanga. No se factura al comprador, pero afecta el costo.',
+                siempreAplica: true,
+                condicion: (filtros) => {
+                    return true; // Siempre aplica para la empresa (Partmo) por su actividad en Bucaramanga.
+                },
+                porcentaje: '2.5 por mil (0.25%)',
+                detallePorcentaje: 'Tarifa para el sector industrial (CIIU 2819) en el municipio de Bucaramanga, según el Acuerdo Municipal vigente.'
+            },
+            reteica: {
+                id: 'reteica',
+                nombre: 'RETEICA (Retención en la Fuente del ICA)',
+                categoria: 'Retención Municipal',
+                badge: 'badge-municipal',
+                clase: 'categoria-municipal',
+                base: 'Valor total de la operación (sin IVA)',
+                descripcion: 'El comprador (si es agente retenedor de ICA en Bucaramanga) debe retener este valor y consignarlo a la Alcaldía de Bucaramanga.',
+                siempreAplica: false,
+                condicion: (filtros) => {
+                    // Aplica si el comprador es agente de retención (generalmente todas las grandes empresas en Bucaramanga)
+                    // y si la operación está sujeta a ICA (industria/comercio). 
+                    // Nota: Las personas naturales y régimen simple normalmente NO son agentes de ReteICA.
+                    return (filtros.agente === 'si' && filtros.regimen !== 'simple' && filtros.regimen !== 'persona_natural');
+                },
+                porcentaje: '2.5 por mil (0.25%)',
+                detallePorcentaje: 'Misma tarifa del ICA industrial para Bucaramanga (2.5‰). Se aplica sobre el valor de la venta o servicio.'
+            },
 
-  <!-- ========================================== -->
-  <!-- 5. ICA - IMPUESTO DE INDUSTRIA Y COMERCIO  -->
-  <!-- ========================================== -->
-  <h2>5. ICA - Impuesto de Industria y Comercio</h2>
+            // -------------------- CONTRIBUCIONES ESPECIALES --------------------
+            sobretasa_bomberil: {
+                id: 'sobretasa_bomberil',
+                nombre: 'Sobretasa Bomberil (Bucaramanga)',
+                categoria: 'Especial Municipal',
+                badge: 'badge-especial',
+                clase: 'categoria-especial',
+                base: 'Valor del impuesto de ICA liquidado en el periodo.',
+                descripcion: 'Contribución destinada al cuerpo de bomberos. Se calcula sobre el ICA causado en el municipio.',
+                siempreAplica: true,
+                condicion: (filtros) => {
+                    return true; // Aplica para todas las empresas que pagan ICA en Bucaramanga (Partmo).
+                },
+                porcentaje: '10%',
+                detallePorcentaje: 'Sobre el valor del ICA (ej. si ICA es $1.000.000, la sobretasa es $100.000). No es una retención, la declara y paga Partmo.'
+            },
+            aportes_parafiscales: {
+                id: 'parafiscales',
+                nombre: 'Aportes Parafiscales (SENA, ICBF, CCF)',
+                categoria: 'Especial Nacional',
+                badge: 'badge-especial',
+                clase: 'categoria-especial',
+                base: 'Nómina de la empresa (pago de nómina)',
+                descripcion: 'No aplica directamente en la factura al comprador, pero es un costo importante para Partmo. Afecta la estructura de costos.',
+                siempreAplica: true,
+                condicion: (filtros) => {
+                    return true;
+                },
+                porcentaje: '9%',
+                detallePorcentaje: 'Aportes: 2% SENA, 3% ICBF, 4% Caja de Compensación (sobre nómina).'
+            }
+        };
 
-  <h3>📌 Tarifa en Bucaramanga</h3>
-  <div class="highlight" style="text-align:center; font-size:1.2rem; font-weight:bold;">
-    ICA para industria (CIIU 2819) = <span style="color:#1a3c6e;">~2.5 por mil (2.5‰)</span>
-  </div>
-  <p>
-    Se aplica sobre <strong>ingresos brutos</strong> de la empresa en el municipio de Bucaramanga.
-  </p>
+        // ============================================================
+        //  LÓGICA DE FILTRADO Y RENDERIZADO
+        // ============================================================
+        function obtenerFiltros() {
+            return {
+                regimen: document.getElementById('regimen').value,
+                gran_contribuyente: document.getElementById('gran_contribuyente').value,
+                autorretenedor: document.getElementById('autorretenedor_iva').value,
+                agente: document.getElementById('agente_retencion').value,
+                operacion: document.getElementById('tipo_operacion').value
+            };
+        }
 
-  <h3>📌 Fechas clave ICA 2026 (Bucaramanga)</h3>
-  <table>
-    <tr><th>Concepto</th><th>Fecha límite</th></tr>
-    <tr><td>Primera cuota (régimen preferencial)</td><td>27 de febrero de 2026</td></tr>
-    <tr><td>Segunda cuota (régimen preferencial)</td><td>27 de mayo de 2026</td></tr>
-    <tr><td>Régimen común (seguún dígito NIT)</td><td>Marzo - Abril 2026</td></tr>
-  </table>
+        function actualizarResumen(filtros) {
+            const mapRegimen = { ordinario: 'Ordinario (Jurídica)', simple: 'Régimen Simple', persona_natural: 'Persona Natural' };
+            const mapSiNo = { si: 'Sí', no: 'No' };
+            const mapOperacion = {
+                bienes: 'Compra de Bienes',
+                servicios: 'Servicios',
+                honorarios: 'Honorarios',
+                arrendamiento: 'Arrendamiento',
+                financiero: 'Operaciones Financieras'
+            };
 
-  <div class="highlight">
-    <strong>📌 Importante:</strong> Partmo también debe liquidar y declarar el <strong>RETEICA</strong> (retención del ICA) en Bucaramanga.
-  </div>
+            document.getElementById('resRegimen').textContent = mapRegimen[filtros.regimen] || 'Ordinario';
+            document.getElementById('resGran').textContent = mapSiNo[filtros.gran_contribuyente] || 'No';
+            document.getElementById('resAutor').textContent = mapSiNo[filtros.autorretenedor] || 'No';
+            document.getElementById('resAgente').textContent = mapSiNo[filtros.agente] || 'No';
+            document.getElementById('resOperacion').textContent = mapOperacion[filtros.operacion] || 'Compra de Bienes';
+        }
 
-  <!-- ========================================== -->
-  <!-- 6. IMPUESTO AL PATRIMONIO                  -->
-  <!-- ========================================== -->
-  <h2>6. Impuesto al Patrimonio</h2>
+        function renderizarTabla() {
+            const filtros = obtenerFiltros();
+            actualizarResumen(filtros);
 
-  <h3>📌 Tarifas 2026</h3>
-  <table>
-    <tr><th>Base (UVT)</th><th>Tarifa</th></tr>
-    <tr><td>Desde 40.000 UVT</td><td>0.5%</td></tr>
-    <tr><td>Más de 60.000 UVT</td><td>1.0%</td></tr>
-    <tr><td>Más de 80.000 UVT</td><td>2.0%</td></tr>
-    <tr><td>Más de 100.000 UVT</td><td>3.0%</td></tr>
-    <tr><td>Más de 120.000 UVT</td><td>4.0%</td></tr>
-    <tr><td>Más de 140.000 UVT</td><td>5.0%</td></tr>
-  </table>
-  <div class="highlight warning">
-    <strong>⚠️ Nota:</strong> La base mínima bajó de <strong>72.000 a 40.000 UVT</strong> para 2026.
-  </div>
+            // Filtrar impuestos
+            const resultados = [];
+            for (const key in impuestosDB) {
+                const imp = impuestosDB[key];
+                try {
+                    if (imp.condicion(filtros)) {
+                        resultados.push(imp);
+                    }
+                } catch (e) {
+                    console.warn('Error en condición de', imp.nombre, e);
+                }
+            }
 
-  <!-- ========================================== -->
-  <!-- 7. RESUMEN PARA PARTMO                     -->
-  <!-- ========================================== -->
-  <h2>7. 📌 Resumen para Partmo</h2>
-  <table>
-    <tr><th>Concepto</th><th>Tarifa / Valor</th><th>Aplica a Partmo</th></tr>
-    <tr><td>UVT 2026</td><td>$52.374</td><td>✅ Sí (base de sanciones y límites)</td></tr>
-    <tr><td>Renta</td><td>35%</td><td>✅ Sí</td></tr>
-    <tr><td>IVA</td><td>19%</td><td>✅ Sí</td></tr>
-    <tr><td>Retención compras</td><td>2.5%</td><td>✅ Sí (desde julio 2026)</td></tr>
-    <tr><td>Retención honorarios</td><td>11%</td><td>✅ Sí (desde julio 2026)</td></tr>
-    <tr><td>ICA Bucaramanga</td><td>~2.5‰</td><td>✅ Sí</td></tr>
-    <tr><td>Impuesto al Patrimonio</td><td>0.5% - 5%</td><td>✅ Sí (si supera 40.000 UVT)</td></tr>
-  </table>
+            const container = document.getElementById('tablaResultados');
 
-  <div class="footer">
-    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander<br>
-    <a href="https://github.com/tu-usuario/tu-usuario.github.io" target="_blank">Ver código en GitHub</a>
-  </div>
+            if (resultados.length === 0) {
+                container.innerHTML = `<div class="no-data">⚠️ No hay impuestos aplicables con las condiciones seleccionadas. Revisa los filtros.</div>`;
+                return;
+            }
 
-</div>
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>🏷️ Impuesto / Retención</th>
+                            <th>📐 Base de Cálculo</th>
+                            <th>📊 Tarifa / Porcentaje</th>
+                            <th>📖 Descripción y Condiciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            resultados.forEach(imp => {
+                let porcentajeMostrar = imp.porcentaje;
+                let detalleMostrar = imp.detallePorcentaje || '';
+
+                // Si tiene porcentaje especial por Gran Contribuyente
+                if (imp.porcentajeEspecial) {
+                    porcentajeMostrar = imp.porcentajeEspecial(filtros);
+                }
+                if (imp.detalleEspecial) {
+                    detalleMostrar = imp.detalleEspecial(filtros);
+                }
+
+                // Si es ReteIVA y no autorretenedor, mostramos condicional
+                if (imp.id === 'reteiva' && filtros.autorretenedor === 'no') {
+                    // No debería llegar aquí porque la condición lo filtra, pero por seguridad
+                }
+
+                html += `
+                    <tr class="${imp.clase || ''}">
+                        <td>
+                            <strong>${imp.nombre}</strong><br>
+                            <span class="badge-tax ${imp.badge || 'badge-nacional'}">${imp.categoria || 'General'}</span>
+                        </td>
+                        <td class="base-calculo">
+                            ${imp.base}
+                            <span class="detalle">Aplica sobre el valor antes de impuestos, salvo indicación.</span>
+                        </td>
+                        <td>
+                            <span class="porcentaje">${porcentajeMostrar}</span>
+                            <span class="detalle">${detalleMostrar}</span>
+                        </td>
+                        <td style="font-size:0.9rem; color:#333;">
+                            ${imp.descripcion}
+                            <br><small style="color:#888;">${imp.siempreAplica ? '✅ Aplica siempre' : '🔁 Aplica condicionado a los filtros'}</small>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table>`;
+            html += `<p style="margin-top:16px; font-size:0.85rem; color:#888; background:#f8f9fc; padding:10px; border-radius:8px;">
+                📌 <strong>Nota:</strong> Estas tarifas aplican para el año 2026 según el Decreto 572 de 2025 y la normativa vigente en Bucaramanga.
+                El <strong>IVA</strong> siempre lo factura Partmo. Las <strong>retenciones</strong> las practica el comprador si cumple las condiciones.
+            </p>`;
+
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        //  EVENTOS Y CARGA INICIAL
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Asignar eventos a todos los selects
+            const selects = document.querySelectorAll('.filter-group select');
+            selects.forEach(select => {
+                select.addEventListener('change', renderizarTabla);
+            });
+
+            // Renderizar con valores iniciales
+            renderizarTabla();
+        });
+    </script>
+
 </body>
 </html>
