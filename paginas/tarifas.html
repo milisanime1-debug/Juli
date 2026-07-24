@@ -1,679 +1,582 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarifas y Retenciones 2026 - Hub Contable</title>
-    <style>
-        /* --- Estilos Generales --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f6f9;
-            padding: 30px 20px;
-        }
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarifas 2026 - Mi Hub Contable</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px 20px;
+    }
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 30px 35px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      background: #1a3c6e;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+    .back:hover { background: #0f2a4a; }
+    h1 {
+      color: #1a3c6e;
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .subtitle {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 1rem;
+      border-left: 4px solid #1a3c6e;
+      padding-left: 16px;
+    }
+    .subtitle strong { color: #1a3c6e; }
 
-        /* Botón volver */
-        .back {
-            display: inline-block;
-            margin-bottom: 20px;
-            background: #1a3c6e;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-        .back:hover {
-            background: #0f2a4a;
-        }
+    /* --- FILTROS --- */
+    .filtros {
+      background: #f8f9fc;
+      border-radius: 12px;
+      padding: 20px 25px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 30px;
+      align-items: center;
+      border: 1px solid #e0e4ea;
+    }
+    .filtros label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1a3c6e;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .filtros select {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 0.95rem;
+      background: white;
+      min-width: 160px;
+      cursor: pointer;
+    }
+    .filtros select:focus {
+      outline: 2px solid #1a3c6e;
+      border-color: transparent;
+    }
+    .filtros .btn-filtrar {
+      background: #1a3c6e;
+      color: white;
+      border: none;
+      padding: 8px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 18px;
+    }
+    .filtros .btn-filtrar:hover { background: #0f2a4a; }
+    .filtros .resultado-badge {
+      margin-left: auto;
+      background: #e8ecf1;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #333;
+    }
 
-        h1 {
-            color: #1a3c6e;
-            font-size: 2.2rem;
-            margin-bottom: 4px;
-        }
-        .subtitle {
-            color: #555;
-            margin-bottom: 25px;
-            font-size: 1rem;
-            border-left: 4px solid #1a3c6e;
-            padding-left: 16px;
-        }
+    /* --- TABLA --- */
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 1100px;
+    }
+    th {
+      background: #1a3c6e;
+      color: white;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      white-space: nowrap;
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e8ecf1;
+      vertical-align: top;
+    }
+    tr:hover td { background: #f8f9fc; }
+    .fila-aplica-no { background: #fef6f6 !important; }
+    .fila-aplica-no td { color: #999; }
+    .fila-aplica-si { background: #f0f7ff !important; }
+    .fila-aplica-si td { color: #1a2a4a; }
 
-        /* --- Panel de Filtros (Opciones) --- */
-        .filter-panel {
-            background: white;
-            border-radius: 16px;
-            padding: 25px 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            margin-bottom: 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px 30px;
-            border: 1px solid #e8ecf1;
-        }
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-        }
-        .filter-group label {
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #1a3c6e;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .filter-group select {
-            padding: 10px 12px;
-            border: 2px solid #dde1e7;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            background: white;
-            transition: border 0.2s;
-            color: #1a1a1a;
-            cursor: pointer;
-        }
-        .filter-group select:focus {
-            border-color: #1a3c6e;
-            outline: none;
-        }
-        .filter-group .hint {
-            font-size: 0.7rem;
-            color: #888;
-            margin-top: 4px;
-        }
+    .badge-si {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .badge-no {
+      display: inline-block;
+      background: #dc3545;
+      color: white;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .badge-info {
+      display: inline-block;
+      background: #17a2b8;
+      color: white;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
 
-        /* --- Resumen de Clasificación --- */
-        .clasificacion-badge {
-            background: #eef4ff;
-            border-radius: 12px;
-            padding: 12px 20px;
-            margin-bottom: 25px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px 30px;
-            border-left: 5px solid #1a3c6e;
-        }
-        .clasificacion-badge span {
-            font-size: 0.95rem;
-        }
-        .clasificacion-badge strong {
-            color: #1a3c6e;
-        }
+    .tooltip {
+      border-bottom: 1px dashed #1a3c6e;
+      cursor: help;
+    }
 
-        /* --- Tabla de Resultados --- */
-        .result-section {
-            background: white;
-            border-radius: 16px;
-            padding: 20px 25px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e8ecf1;
-            overflow-x: auto;
-        }
-        .result-section h2 {
-            color: #1a3c6e;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .result-section h2 small {
-            font-size: 0.8rem;
-            font-weight: normal;
-            color: #666;
-        }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-            min-width: 700px;
-        }
-        th {
-            background: #1a3c6e;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eef2f7;
-            vertical-align: top;
-        }
-        tr:last-child td {
-            border-bottom: none;
-        }
-        tr:hover td {
-            background: #f8faff;
-        }
-        .categoria-nacional {
-            border-left: 4px solid #1a3c6e;
-        }
-        .categoria-retencion {
-            border-left: 4px solid #e67e22;
-        }
-        .categoria-municipal {
-            border-left: 4px solid #27ae60;
-        }
-        .categoria-especial {
-            border-left: 4px solid #8e44ad;
-        }
-
-        .badge-tax {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .badge-nacional {
-            background: #dbeafe;
-            color: #1a3c6e;
-        }
-        .badge-retencion {
-            background: #fdebd0;
-            color: #a04000;
-        }
-        .badge-municipal {
-            background: #d5f5e3;
-            color: #145a32;
-        }
-        .badge-especial {
-            background: #ebdef0;
-            color: #6c3483;
-        }
-
-        .porcentaje {
-            font-weight: 700;
-            color: #1a3c6e;
-            font-size: 1.05rem;
-        }
-        .porcentaje .detalle {
-            font-weight: 400;
-            color: #555;
-            font-size: 0.8rem;
-            display: block;
-        }
-
-        .base-calculo {
-            font-weight: 500;
-            color: #2c3e50;
-        }
-        .base-calculo .detalle {
-            font-weight: 400;
-            color: #666;
-            font-size: 0.8rem;
-            display: block;
-        }
-
-        .no-data {
-            text-align: center;
-            padding: 40px 20px;
-            color: #888;
-            font-size: 1.1rem;
-        }
-
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #888;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .filter-panel {
-                grid-template-columns: 1fr 1fr;
-                padding: 15px;
-            }
-            .container {
-                padding: 0 5px;
-            }
-            h1 {
-                font-size: 1.6rem;
-            }
-        }
-    </style>
+    @media (max-width: 700px) {
+      .container { padding: 18px; }
+      .filtros { flex-direction: column; align-items: stretch; }
+      .filtros label { width: 100%; }
+      .filtros select { width: 100%; }
+      .filtros .btn-filtrar { width: 100%; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
-        <!-- Volver al inicio -->
-        <a href="../index.html" class="back">⬅ Volver al inicio</a>
+  <a href="../index.html" class="back">⬅ Volver al inicio</a>
 
-        <h1>💰 Tabla de Impuestos, Retenciones y Contribuciones</h1>
-        <div class="subtitle">
-            <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga, Santander • Vigencia 2026
-            <br>Selecciona las características del <strong>comprador / contratante</strong> para ver qué impuestos aplican en la facturación.
-        </div>
+  <h1>💰 Tarifas y Obligaciones 2026</h1>
+  <div class="subtitle">
+    Guía completa para facturación y liquidación de impuestos • <strong>Filtros Partmo S.A.S.</strong> • Bucaramanga
+  </div>
 
-        <!-- PANEL DE FILTROS -->
-        <div class="filter-panel">
-            <div class="filter-group">
-                <label for="regimen">Régimen del Comprador</label>
-                <select id="regimen">
-                    <option value="ordinario">Ordinario (Persona Jurídica)</option>
-                    <option value="simple">Régimen Simple de Tributación (SIMPLE)</option>
-                    <option value="persona_natural">Persona Natural (Rég. Simplificado)</option>
-                </select>
-                <span class="hint">Define obligaciones de IVA y ReteICA.</span>
-            </div>
+  <!-- FILTROS -->
+  <div class="filtros">
+    <label>
+      Tipo de contribuyente
+      <select id="tipoContribuyente">
+        <option value="juridica">Persona Jurídica (SAS)</option>
+        <option value="gran">Gran Contribuyente</option>
+        <option value="natural">Persona Natural</option>
+        <option value="esal">ESAL / Sin Ánimo de Lucro</option>
+        <option value="publica">Entidad Pública</option>
+        <option value="noResidente">No residente / Sucursal extranjera</option>
+      </select>
+    </label>
+    <label>
+      Régimen tributario
+      <select id="regimen">
+        <option value="ordinario">Ordinario</option>
+        <option value="simple">Simple (SIMPLE)</option>
+        <option value="rte">Régimen Tributario Especial (RTE)</option>
+      </select>
+    </label>
+    <label>
+      Calidad frente a IVA
+      <select id="calidadIVA">
+        <option value="responsable">Responsable de IVA</option>
+        <option value="noResponsable">No responsable de IVA</option>
+      </select>
+    </label>
+    <label>
+      Calidad frente a retenciones
+      <select id="calidadRetencion">
+        <option value="agente">Agente de retención</option>
+        <option value="autorretenedor">Autorretenedor</option>
+        <option value="noAgente">No agente de retención</option>
+      </select>
+    </label>
+    <button class="btn-filtrar" onclick="filtrarTabla()">🔍 Filtrar</button>
+    <span class="resultado-badge" id="contadorMostrados">Mostrando 0 de 0</span>
+  </div>
 
-            <div class="filter-group">
-                <label for="gran_contribuyente">¿Es Gran Contribuyente?</label>
-                <select id="gran_contribuyente">
-                    <option value="no">No</option>
-                    <option value="si">Sí</option>
-                </select>
-                <span class="hint">Afecta tarifas de ReteIVA y algunas retenciones.</span>
-            </div>
+  <!-- TABLA -->
+  <div class="table-wrapper">
+    <table id="tablaImpuestos">
+      <thead>
+        <tr>
+          <th>Impuesto / Retención</th>
+          <th>¿Qué es?</th>
+          <th>¿Para qué sirve?</th>
+          <th>¿Quién lo paga?</th>
+          <th>¿Quién lo recauda?</th>
+          <th>¿Quién lo practica?</th>
+          <th>¿A quién se aplica?</th>
+          <th>¿Cuándo aplica?</th>
+          <th>¿Cuándo NO aplica?</th>
+          <th>Base mínima</th>
+          <th>Base gravable</th>
+          <th>Tarifa</th>
+          <th>Cómo se calcula</th>
+          <th>Quién declara</th>
+          <th>Periodicidad</th>
+          <th>Norma</th>
+          <th>Ejemplo</th>
+          <th>Aplica</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpoTabla">
+        <!-- Los datos se inyectan con JavaScript -->
+      </tbody>
+    </table>
+  </div>
 
-            <div class="filter-group">
-                <label for="autorretenedor_iva">¿Es Autorretenedor de IVA?</label>
-                <select id="autorretenedor_iva">
-                    <option value="no">No</option>
-                    <option value="si">Sí</option>
-                </select>
-                <span class="hint">Aplica ReteIVA (se autorretiene el IVA).</span>
-            </div>
+  <div class="footer">
+    📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
+  </div>
+</div>
 
-            <div class="filter-group">
-                <label for="agente_retencion">¿Es Agente de Retención en la Fuente?</label>
-                <select id="agente_retencion">
-                    <option value="no">No</option>
-                    <option value="si">Sí</option>
-                </select>
-                <span class="hint">Debe practicar retención en compras/servicios.</span>
-            </div>
+<script>
+// ============================================================
+// 1. DEFINICIÓN DE TODOS LOS IMPUESTOS (DATOS MAESTROS)
+// ============================================================
+const impuestosData = [
+  {
+    id: 'iva',
+    nombre: 'IVA (19%)',
+    queEs: 'Impuesto al valor agregado que grava la venta de bienes y servicios.',
+    paraQue: 'Financiar el gasto público social (salud, educación, etc.).',
+    quienPaga: 'El consumidor final (se traslada en el precio).',
+    quienRecauda: 'DIAN (a través de los responsables de IVA).',
+    quienPractica: 'El vendedor (responsable de IVA) lo cobra al comprador.',
+    aQuien: 'Todos los consumidores finales, pero el responsable de IVA es quien declara.',
+    cuandoAplica: 'En la venta de bienes y servicios gravados con tarifa general del 19% o diferenciales.',
+    cuandoNo: 'En operaciones excluidas o exentas (ej. educación, salud, transporte público).',
+    baseMinima: 'No tiene base mínima; se aplica sobre el valor total de la operación.',
+    baseGrave: 'Valor total de la operación (precio de venta).',
+    tarifa: '19% (general) / 5% (algunos productos) / 0% (exportaciones).',
+    calculo: 'Valor de la operación × 19% (o tarifa correspondiente).',
+    quienDeclara: 'El responsable de IVA (vendedor).',
+    periodicidad: 'Bimestral (para responsables con ingresos > 92.000 UVT) o Cuatrimestral (menores).',
+    norma: 'Arts. 420 a 437 del Estatuto Tributario.',
+    ejemplo: 'Venta de filtros por $10M → IVA = $1.900.000.',
+    aplica: { juridica:true, gran:true, natural:true, esal:true, publica:false, noResidente:false },
+    regimen: { ordinario:true, simple:true, rte:true },
+    iva: { responsable:true, noResponsable:false },
+    retencion: { agente:true, autorretenedor:true, noAgente:true }
+  },
+  {
+    id: 'renta',
+    nombre: 'Impuesto de Renta (35%)',
+    queEs: 'Grava la utilidad o ganancia obtenida por personas jurídicas y naturales en el año.',
+    paraQue: 'Financiar el gasto público.',
+    quienPaga: 'Las personas jurídicas y naturales con ingresos que superen los topes.',
+    quienRecauda: 'DIAN.',
+    quienPractica: 'No aplica (se autoliquida).',
+    aQuien: 'Contribuyentes del impuesto de renta.',
+    cuandoAplica: 'Cuando se obtienen ingresos gravados y se superan las bases mínimas.',
+    cuandoNo: 'Cuando los ingresos son inferiores a 1.400 UVT anuales (para naturales).',
+    baseMinima: '1.400 UVT anuales (~$73.3M) para naturales.',
+    baseGrave: 'Ingresos brutos menos costos y deducciones (utilidad).',
+    tarifa: '35% para personas jurídicas; para naturales: progresiva de 0% a 39%.',
+    calculo: 'Utilidad gravable × 35% (o tarifa progresiva según tabla).',
+    quienDeclara: 'El contribuyente.',
+    periodicidad: 'Anual (año gravable).',
+    norma: 'Arts. 240 y siguientes del Estatuto Tributario.',
+    ejemplo: 'Utilidad de $100M → Renta = $35M.',
+    aplica: { juridica:true, gran:true, natural:true, esal:false, publica:false, noResidente:false },
+    regimen: { ordinario:true, simple:false, rte:false },
+    iva: { responsable:true, noResponsable:true },
+    retencion: { agente:true, autorretenedor:true, noAgente:true }
+  },
+  {
+    id: 'ica',
+    nombre: 'ICA (2.5‰)',
+    queEs: 'Impuesto de Industria y Comercio, municipal, por el ejercicio de actividades comerciales, industriales o de servicios.',
+    paraQue: 'Financiar obras y servicios públicos municipales.',
+    quienPaga: 'El contribuyente que realiza la actividad gravada (persona natural o jurídica).',
+    quienRecauda: 'Alcaldía municipal (en Bucaramanga, la Secretaría de Hacienda).',
+    quienPractica: 'El contribuyente lo autoliquida y paga.',
+    aQuien: 'Todas las personas que ejerzan actividades gravadas en el municipio.',
+    cuandoAplica: 'Durante todo el año, se declara según el calendario municipal.',
+    cuandoNo: 'Actividades exentas (educación, salud, etc.) o cuando no se tiene establecimiento permanente.',
+    baseMinima: 'No tiene base mínima, se aplica sobre ingresos brutos.',
+    baseGrave: 'Ingresos brutos del período.',
+    tarifa: 'Variable por actividad: industria ~2.5‰; comercio ~5‰; servicios ~7‰.',
+    calculo: 'Ingresos brutos × tarifa (ej. 0.0025 para industria).',
+    quienDeclara: 'El contribuyente.',
+    periodicidad: 'Mensual, bimestral o anual según el municipio (en Bucaramanga es bimestral).',
+    norma: 'Acuerdo municipal (ej. Acuerdo 003 de 1999 para Bucaramanga).',
+    ejemplo: 'Ingresos de $50M → ICA = $50M × 0.0025 = $125.000.',
+    aplica: { juridica:true, gran:true, natural:true, esal:true, publica:false, noResidente:false },
+    regimen: { ordinario:true, simple:true, rte:true },
+    iva: { responsable:true, noResponsable:true },
+    retencion: { agente:true, autorretenedor:true, noAgente:true }
+  },
+  {
+    id: 'gmf',
+    nombre: 'GMF (4x1000)',
+    queEs: 'Gravamen a los Movimientos Financieros, impuesto a las transacciones bancarias.',
+    paraQue: 'Financiar el presupuesto nacional.',
+    quienPaga: 'El titular de la cuenta o quien realiza el retiro.',
+    quienRecauda: 'DIAN (a través de los bancos).',
+    quienPractica: 'El banco retiene automáticamente al momento del retiro.',
+    aQuien: 'Todas las personas que realicen retiros en efectivo o transferencias.',
+    cuandoAplica: 'En retiros de cuentas de ahorro, corriente, cheques, etc.',
+    cuandoNo: 'Cuentas exentas (ej. cuentas de nómina hasta 350 UVT mensuales).',
+    baseMinima: 'No tiene, se aplica sobre el valor retirado.',
+    baseGrave: 'Valor total del retiro.',
+    tarifa: '4 por mil (0.4%).',
+    calculo: 'Valor retirado × 0.004.',
+    quienDeclara: 'El banco lo declara y paga a la DIAN.',
+    periodicidad: 'Mensual (el banco declara).',
+    norma: 'Arts. 871 a 883 del Estatuto Tributario.',
+    ejemplo: 'Retiro de $10M → GMF = $40.000.',
+    aplica: { juridica:true, gran:true, natural:true, esal:true, publica:true, noResidente:true },
+    regimen: { ordinario:true, simple:true, rte:true },
+    iva: { responsable:true, noResponsable:true },
+    retencion: { agente:true, autorretenedor:true, noAgente:true }
+  },
+  {
+    id: 'retefuente',
+    nombre: 'Retención en la Fuente (Renta)',
+    queEs: 'Mecanismo de recaudo anticipado del impuesto de renta, aplicado sobre pagos a terceros.',
+    paraQue: 'Recaudar anticipadamente el impuesto de renta.',
+    quienPaga: 'El beneficiario del pago (sujeto pasivo).',
+    quienRecauda: 'DIAN (a través del agente retenedor).',
+    quienPractica: 'El agente de retención (quien paga).',
+    aQuien: 'A personas naturales y jurídicas, según tarifas y tablas.',
+    cuandoAplica: 'Cuando el pago supera las bases mínimas establecidas.',
+    cuandoNo: 'Pagos inferiores a la base mínima, o conceptos exentos.',
+    baseMinima: 'Depende del concepto (ej. honorarios: 3.500 UVT anuales para personas jurídicas).',
+    baseGrave: 'Valor total del pago (sin IVA).',
+    tarifa: 'Varía según concepto: compras 2.5%, honorarios 11%, arrendamientos 3.5%-10%, etc.',
+    calculo: 'Base gravable × tarifa correspondiente.',
+    quienDeclara: 'El agente de retención (quien paga).',
+    periodicidad: 'Mensual (se declara y paga cada mes).',
+    norma: 'Arts. 366 a 384 del Estatuto Tributario. Decreto 572 de 2025 (vigente desde jul 2026).',
+    ejemplo: 'Honorarios de $5M → ReteFuente = $5M × 11% = $550.000.',
+    aplica: { juridica:true, gran:true, natural:true, esal:true, publica:true, noResidente:true },
+    regimen: { ordinario:true, simple:true, rte:true },
+    iva: { responsable:true, noResponsable:true },
+    retencion: { agente:true, autorretenedor:false, noAgente:false }
+  },
+  {
+    id: 'reteiva',
+    nombre: 'Retención de IVA (ReteIVA)',
+    queEs: 'Mecanismo de retención del IVA en la compra de bienes y servicios gravados.',
+    paraQue: 'Recaudar anticipadamente el IVA.',
+    quienPaga: 'El vendedor (quien factura con IVA).',
+    quienRecauda: 'DIAN.',
+    quienPractica: 'El comprador (agente de retención de IVA).',
+    aQuien: 'A responsables de IVA que venden bienes o servicios.',
+    cuandoAplica: 'Cuando el comprador es agente de retención de IVA y la operación supera la base.',
+    cuandoNo: 'Cuando el comprador no es agente, o la venta es exenta/excluida.',
+    baseMinima: 'Depende de la tarifa: para el 19% la base es 4.000 UVT (~$209M) en el año.',
+    baseGrave: 'Valor total del IVA a pagar.',
+    tarifa: '15% del IVA (sobre el valor del IVA).',
+    calculo: 'IVA facturado × 15% (o 10% según caso).',
+    quienDeclara: 'El agente de retención de IVA (comprador).',
+    periodicidad: 'Mensual (con la declaración de retención).',
+    norma: 'Arts. 437-2 y siguientes del Estatuto Tributario.',
+    ejemplo: 'Compra de $10M + IVA 19% ($1.9M) → ReteIVA = $1.9M × 15% = $285.000.',
+    aplica: { juridica:true, gran:true, natural:false, esal:false, publica:false, noResidente:false },
+    regimen: { ordinario:true, simple:false, rte:false },
+    iva: { responsable:true, noResponsable:false },
+    retencion: { agente:true, autorretenedor:false, noAgente:false }
+  },
+  {
+    id: 'reteica',
+    nombre: 'Retención de ICA (ReteICA)',
+    queEs: 'Retención del impuesto de Industria y Comercio en la fuente, aplicada por municipios.',
+    paraQue: 'Recaudar anticipadamente el ICA.',
+    quienPaga: 'El contribuyente del ICA (vendedor o prestador del servicio).',
+    quienRecauda: 'Municipio (Alcaldía).',
+    quienPractica: 'El comprador (agente retenedor de ICA).',
+    aQuien: 'A quienes realizan actividades gravadas con ICA y son sujetos de retención.',
+    cuandoAplica: 'Cuando el comprador es agente retenedor de ICA y el vendedor tiene actividad gravada.',
+    cuandoNo: 'Cuando el vendedor no está obligado a declarar ICA, o es una actividad exenta.',
+    baseMinima: 'Depende del municipio; en Bucaramanga aplica desde el primer peso.',
+    baseGrave: 'Valor total de la operación (ingresos brutos).',
+    tarifa: 'Variable según actividad (ej. industria 0.25%, comercio 0.5%, servicios 0.7%).',
+    calculo: 'Valor operación × tarifa ReteICA (ej. 0.0025 para industria).',
+    quienDeclara: 'El agente retenedor (comprador).',
+    periodicidad: 'Mensual (según calendario municipal).',
+    norma: 'Acuerdo municipal de cada ciudad.',
+    ejemplo: 'Compra de $10M a un industrial → ReteICA = $10M × 0.0025 = $25.000.',
+    aplica: { juridica:true, gran:true, natural:false, esal:false, publica:false, noResidente:false },
+    regimen: { ordinario:true, simple:false, rte:false },
+    iva: { responsable:true, noResponsable:true },
+    retencion: { agente:true, autorretenedor:false, noAgente:false }
+  },
+  {
+    id: 'consumo',
+    nombre: 'Impuesto al Consumo (8% / 4%)',
+    queEs: 'Impuesto al consumo de bienes y servicios como licores, cervezas, cigarrillos, y también para servicios de restaurantes y hoteles (IVA diferencial).',
+    paraQue: 'Financiar la salud y el deporte.',
+    quienPaga: 'El consumidor final.',
+    quienRecauda: 'DIAN (y en algunos casos municipios).',
+    quienPractica: 'El vendedor (responsable del impuesto).',
+    aQuien: 'Consumidores de bienes y servicios gravados.',
+    cuandoAplica: 'En la venta de bienes y servicios gravados con consumo (licores, cervezas, etc.) y en servicios de restaurante/hotel con tarifa del 8% (o 4% para algunos).',
+    cuandoNo: 'En bienes y servicios no gravados con este impuesto.',
+    baseMinima: 'No tiene.',
+    baseGrave: 'Valor total de la operación.',
+    tarifa: '8% para restaurantes y hoteles (IVA diferencial); 4% para algunos productos; hasta 20% para licores.',
+    calculo: 'Valor operación × tarifa correspondiente.',
+    quienDeclara: 'El responsable del impuesto (vendedor).',
+    periodicidad: 'Bimestral o mensual, según el tipo.',
+    norma: 'Arts. 512-1 a 512-15 del Estatuto Tributario.',
+    ejemplo: 'Restaurante por $100.000 → Impuesto consumo = $8.000.',
+    aplica: { juridica:true, gran:true, natural:true, esal:true, publica:false, noResidente:false },
+    regimen: { ordinario:true, simple:true, rte:true },
+    iva: { responsable:true, noResponsable:false },
+    retencion: { agente:true, autorretenedor:true, noAgente:true }
+  },
+  {
+    id: 'patrimonio',
+    nombre: 'Impuesto al Patrimonio (0.5% - 5%)',
+    queEs: 'Impuesto anual sobre el patrimonio de personas naturales y jurídicas, vigente desde 2026 con base mínima de 40.000 UVT.',
+    paraQue: 'Financiar el gasto público.',
+    quienPaga: 'Las personas naturales y jurídicas cuyo patrimonio supere la base mínima.',
+    quienRecauda: 'DIAN.',
+    quienPractica: 'El contribuyente lo autoliquida.',
+    aQuien: 'Personas naturales y jurídicas con patrimonio superior a 40.000 UVT (~$2.095M).',
+    cuandoAplica: 'Año gravable, se declara en 2026 con base en el patrimonio al 1 de enero de 2026.',
+    cuandoNo: 'Cuando el patrimonio es inferior a 40.000 UVT.',
+    baseMinima: '40.000 UVT (~$2.095M).',
+    baseGrave: 'Patrimonio líquido (activos - pasivos) que excede la base mínima.',
+    tarifa: '0.5% a 5% progresivo según el monto del patrimonio.',
+    calculo: 'Patrimonio gravable × tarifa según tabla.',
+    quienDeclara: 'El contribuyente.',
+    periodicidad: 'Anual (solo por el año 2026, según la ley).',
+    norma: 'Arts. 292 a 296 del Estatuto Tributario (modificados por la Ley de Financiamiento).',
+    ejemplo: 'Patrimonio de $3.000M → base gravable $904.4M → tarifa 1.5% → impuesto $13.5M.',
+    aplica: { juridica:true, gran:true, natural:true, esal:false, publica:false, noResidente:false },
+    regimen: { ordinario:true, simple:false, rte:false },
+    iva: { responsable:true, noResponsable:true },
+    retencion: { agente:true, autorretenedor:true, noAgente:true }
+  }
+];
 
-            <div class="filter-group">
-                <label for="tipo_operacion">Tipo de Operación</label>
-                <select id="tipo_operacion">
-                    <option value="bienes">Compra de Bienes (Materia prima, filtros)</option>
-                    <option value="servicios">Prestación de Servicios (Mantenimiento, logística)</option>
-                    <option value="honorarios">Honorarios (Consultoría, asesorías)</option>
-                    <option value="arrendamiento">Arrendamiento (Inmuebles, maquinaria)</option>
-                    <option value="financiero">Intereses / Operaciones Financieras</option>
-                </select>
-                <span class="hint">Define la tarifa de retención en la fuente.</span>
-            </div>
-        </div>
+// ============================================================
+// 2. FUNCIÓN PARA PINTAR LA TABLA
+// ============================================================
+function pintarTabla(impuestosFiltrados) {
+  const tbody = document.getElementById('cuerpoTabla');
+  tbody.innerHTML = '';
 
-        <!-- CLASIFICACIÓN RESUMEN -->
-        <div class="clasificacion-badge" id="resumenClasificacion">
-            <span>📌 <strong>Régimen:</strong> <span id="resRegimen">Ordinario</span></span>
-            <span>🏛️ <strong>Gran Contribuyente:</strong> <span id="resGran">No</span></span>
-            <span>✍️ <strong>Autorretenedor IVA:</strong> <span id="resAutor">No</span></span>
-            <span>🔁 <strong>Agente Retención:</strong> <span id="resAgente">No</span></span>
-            <span>📦 <strong>Operación:</strong> <span id="resOperacion">Compra de Bienes</span></span>
-        </div>
+  if (impuestosFiltrados.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="18" style="text-align:center; padding:30px; color:#888;">No hay impuestos que apliquen para este perfil.</td></tr>`;
+    document.getElementById('contadorMostrados').textContent = 'Mostrando 0 de 0';
+    return;
+  }
 
-        <!-- RESULTADOS: TABLA DE IMPUESTOS -->
-        <div class="result-section">
-            <h2>
-                🧾 Impuestos y Retenciones Aplicables
-                <small>Basado en la selección del comprador</small>
-            </h2>
-            <div id="tablaResultados">
-                <!-- Aquí se inyecta la tabla con JavaScript -->
-                <div class="no-data">Selecciona las opciones para ver el detalle.</div>
-            </div>
-        </div>
+  let html = '';
+  impuestosFiltrados.forEach(item => {
+    const aplicaSi = (item.aplicaFiltro === true);
+    const claseFila = aplicaSi ? 'fila-aplica-si' : 'fila-aplica-no';
+    const badge = aplicaSi ? '<span class="badge-si">Sí</span>' : '<span class="badge-no">No</span>';
 
-        <div class="footer">
-            📌 Creado para estudio personal • Actualizado: Julio 2026 • Bucaramanga, Santander
-            <br>Fuentes: DIAN, Decreto 572 de 2025, Estatuto Tributario, Acuerdo Municipal de Bucaramanga.
-        </div>
-    </div>
+    html += `<tr class="${claseFila}">
+      <td><strong>${item.nombre}</strong></td>
+      <td>${item.queEs}</td>
+      <td>${item.paraQue}</td>
+      <td>${item.quienPaga}</td>
+      <td>${item.quienRecauda}</td>
+      <td>${item.quienPractica}</td>
+      <td>${item.aQuien}</td>
+      <td>${item.cuandoAplica}</td>
+      <td>${item.cuandoNo}</td>
+      <td>${item.baseMinima}</td>
+      <td>${item.baseGrave}</td>
+      <td><span class="tooltip" title="Ver descripción ampliada">${item.tarifa}</span></td>
+      <td>${item.calculo}</td>
+      <td>${item.quienDeclara}</td>
+      <td>${item.periodicidad}</td>
+      <td>${item.norma}</td>
+      <td>${item.ejemplo}</td>
+      <td>${badge}</td>
+    </tr>`;
+  });
 
-    <script>
-        // ============================================================
-        //  BASE DE DATOS DE IMPUESTOS (Extensa y detallada)
-        // ============================================================
-        const impuestosDB = {
+  tbody.innerHTML = html;
+  document.getElementById('contadorMostrados').textContent = `Mostrando ${impuestosFiltrados.length} de ${impuestosData.length}`;
+}
 
-            // -------------------- IMPUESTOS NACIONALES --------------------
-            iva: {
-                id: 'iva',
-                nombre: 'IVA (Impuesto sobre las Ventas)',
-                categoria: 'Nacional',
-                badge: 'badge-nacional',
-                clase: 'categoria-nacional',
-                base: 'Valor total de la operación (excluye otros impuestos)',
-                descripcion: 'Impuesto al consumo. Debe ser facturado por Partmo al comprador. Aplica a la venta de bienes y servicios.',
-                siempreAplica: true,
-                condicion: (filtros) => {
-                    // Si el comprador es persona natural régimen simplificado, NO facturamos IVA (no son responsables de IVA, pero es una venta, Partmo sí debe facturar IVA? 
-                    // En Colombia, el responsable de IVA es el vendedor (Partmo). Independientemente del comprador, Partmo DEBE facturar IVA si es responsable.
-                    // Pero si el comprador es régimen simple, igual se factura IVA, solo que ellos lo manejan distinto.
-                    // La única excepción es si la operación está exenta. Asumimos que no.
-                    return true; // Siempre se factura IVA.
-                },
-                porcentaje: '19%',
-                detallePorcentaje: 'Tarifa general establecida en el Estatuto Tributario para 2026.'
-            },
+// ============================================================
+// 3. FUNCIÓN DE FILTRADO
+// ============================================================
+function filtrarTabla() {
+  const tipo = document.getElementById('tipoContribuyente').value;
+  const regimen = document.getElementById('regimen').value;
+  const calidadIVA = document.getElementById('calidadIVA').value;
+  const calidadRetencion = document.getElementById('calidadRetencion').value;
 
-            // -------------------- RETENCIONES NACIONALES (ReteFuente) --------------------
-            retefuente_bienes: {
-                id: 'retefuente_bienes',
-                nombre: 'Retención en la Fuente – Compras (Bienes)',
-                categoria: 'Retención Nacional',
-                badge: 'badge-retencion',
-                clase: 'categoria-retencion',
-                base: 'Valor de la compra (sin IVA)',
-                descripcion: 'El comprador (agente retenedor) debe retener y consignar a la DIAN este valor. Aplica solo si es Agente de Retención.',
-                siempreAplica: false,
-                condicion: (filtros) => {
-                    return (filtros.agente === 'si' && filtros.operacion === 'bienes');
-                },
-                porcentaje: '2.5%',
-                detallePorcentaje: 'Decreto 572 de 2025 (vigencia desde julio 2026). Sin base mínima en UVT.'
-            },
-            retefuente_servicios: {
-                id: 'retefuente_servicios',
-                nombre: 'Retención en la Fuente – Servicios (Persona Jurídica)',
-                categoria: 'Retención Nacional',
-                badge: 'badge-retencion',
-                clase: 'categoria-retencion',
-                base: 'Valor del servicio (sin IVA)',
-                descripcion: 'Aplica para servicios prestados por empresas (personas jurídicas). El agente retenedor debe practicarla.',
-                siempreAplica: false,
-                condicion: (filtros) => {
-                    return (filtros.agente === 'si' && filtros.operacion === 'servicios');
-                },
-                porcentaje: '11%',
-                detallePorcentaje: 'Decreto 572 de 2025. Para servicios de consultoría, mantenimiento, logística, etc.'
-            },
-            retefuente_honorarios: {
-                id: 'retefuente_honorarios',
-                nombre: 'Retención en la Fuente – Honorarios (Persona Jurídica)',
-                categoria: 'Retención Nacional',
-                badge: 'badge-retencion',
-                clase: 'categoria-retencion',
-                base: 'Valor de los honorarios (sin IVA)',
-                descripcion: 'Aplica para contratos de consultoría, asesoría, servicios profesionales independientes (jurídicos).',
-                siempreAplica: false,
-                condicion: (filtros) => {
-                    return (filtros.agente === 'si' && filtros.operacion === 'honorarios');
-                },
-                porcentaje: '11%',
-                detallePorcentaje: 'Decreto 572 de 2025. Tarifa unificada para servicios profesionales de personas jurídicas.'
-            },
-            retefuente_arrendamiento: {
-                id: 'retefuente_arrendamiento',
-                nombre: 'Retención en la Fuente – Arrendamientos',
-                categoria: 'Retención Nacional',
-                badge: 'badge-retencion',
-                clase: 'categoria-retencion',
-                base: 'Valor del cánon de arrendamiento (sin IVA)',
-                descripcion: 'Aplica para arrendamiento de bienes muebles e inmuebles. El agente retenedor debe aplicarla.',
-                siempreAplica: false,
-                condicion: (filtros) => {
-                    return (filtros.agente === 'si' && filtros.operacion === 'arrendamiento');
-                },
-                porcentaje: '10%',
-                detallePorcentaje: 'Tarifa fija del 10% sobre el valor del cánon para personas jurídicas.'
-            },
-            retefuente_financiero: {
-                id: 'retefuente_financiero',
-                nombre: 'Retención en la Fuente – Intereses Financieros',
-                categoria: 'Retención Nacional',
-                badge: 'badge-retencion',
-                clase: 'categoria-retencion',
-                base: 'Valor de los intereses',
-                descripcion: 'Aplica sobre intereses pagados a entidades financieras o personas jurídicas.',
-                siempreAplica: false,
-                condicion: (filtros) => {
-                    return (filtros.agente === 'si' && filtros.operacion === 'financiero');
-                },
-                porcentaje: '4%',
-                detallePorcentaje: 'Artículo 383 del Estatuto Tributario. Tarifa del 4% sobre intereses.'
-            },
+  const filtrados = impuestosData.map(item => {
+    // Evaluar condiciones
+    const aplicaTipo = item.aplica[tipo] === true;
+    const aplicaRegimen = item.regimen[regimen] === true;
+    const aplicaIVA = item.iva[calidadIVA] === true;
+    const aplicaRetencion = item.retencion[calidadRetencion] === true;
 
-            // -------------------- RETENCIÓN DE IVA (ReteIVA) --------------------
-            reteiva: {
-                id: 'reteiva',
-                nombre: 'Retención de IVA (ReteIVA)',
-                categoria: 'Retención Nacional',
-                badge: 'badge-retencion',
-                clase: 'categoria-retencion',
-                base: 'Valor del IVA facturado (19% de la operación)',
-                descripcion: 'El comprador se autorretiene el IVA en lugar de pagarlo a Partmo. Aplica si es autorretenedor.',
-                siempreAplica: false,
-                condicion: (filtros) => {
-                    return (filtros.autorretenedor === 'si');
-                },
-                porcentaje: '15%',
-                detallePorcentaje: 'Tarifa general para autorretenedores no gran contribuyente. Se calcula sobre el valor del IVA (ej. si IVA es $1.900.000, se retiene $285.000).',
-                porcentajeEspecial: (filtros) => {
-                    if (filtros.gran_contribuyente === 'si') {
-                        return '20%';
-                    }
-                    return '15%';
-                },
-                detalleEspecial: (filtros) => {
-                    if (filtros.gran_contribuyente === 'si') {
-                        return 'Si es Gran Contribuyente, la tarifa de ReteIVA sube al 20%.';
-                    }
-                    return 'Tarifa estándar del 15% para autorretenedores.';
-                }
-            },
+    const aplicaTotal = aplicaTipo && aplicaRegimen && aplicaIVA && aplicaRetencion;
 
-            // -------------------- IMPUESTO MUNICIPAL (ICA y ReteICA) --------------------
-            ica_industria: {
-                id: 'ica_industria',
-                nombre: 'ICA – Industria (Bucaramanga)',
-                categoria: 'Municipal',
-                badge: 'badge-municipal',
-                clase: 'categoria-municipal',
-                base: 'Ingresos brutos totales de la empresa (no aplica en la factura al comprador, es un impuesto que paga el vendedor)',
-                descripcion: 'Impuesto de Industria y Comercio. Lo paga Partmo a la alcaldía de Bucaramanga. No se factura al comprador, pero afecta el costo.',
-                siempreAplica: true,
-                condicion: (filtros) => {
-                    return true; // Siempre aplica para la empresa (Partmo) por su actividad en Bucaramanga.
-                },
-                porcentaje: '2.5 por mil (0.25%)',
-                detallePorcentaje: 'Tarifa para el sector industrial (CIIU 2819) en el municipio de Bucaramanga, según el Acuerdo Municipal vigente.'
-            },
-            reteica: {
-                id: 'reteica',
-                nombre: 'RETEICA (Retención en la Fuente del ICA)',
-                categoria: 'Retención Municipal',
-                badge: 'badge-municipal',
-                clase: 'categoria-municipal',
-                base: 'Valor total de la operación (sin IVA)',
-                descripcion: 'El comprador (si es agente retenedor de ICA en Bucaramanga) debe retener este valor y consignarlo a la Alcaldía de Bucaramanga.',
-                siempreAplica: false,
-                condicion: (filtros) => {
-                    // Aplica si el comprador es agente de retención (generalmente todas las grandes empresas en Bucaramanga)
-                    // y si la operación está sujeta a ICA (industria/comercio). 
-                    // Nota: Las personas naturales y régimen simple normalmente NO son agentes de ReteICA.
-                    return (filtros.agente === 'si' && filtros.regimen !== 'simple' && filtros.regimen !== 'persona_natural');
-                },
-                porcentaje: '2.5 por mil (0.25%)',
-                detallePorcentaje: 'Misma tarifa del ICA industrial para Bucaramanga (2.5‰). Se aplica sobre el valor de la venta o servicio.'
-            },
+    // Devolvemos el objeto con una propiedad extra para pintar
+    return { ...item, aplicaFiltro: aplicaTotal };
+  });
 
-            // -------------------- CONTRIBUCIONES ESPECIALES --------------------
-            sobretasa_bomberil: {
-                id: 'sobretasa_bomberil',
-                nombre: 'Sobretasa Bomberil (Bucaramanga)',
-                categoria: 'Especial Municipal',
-                badge: 'badge-especial',
-                clase: 'categoria-especial',
-                base: 'Valor del impuesto de ICA liquidado en el periodo.',
-                descripcion: 'Contribución destinada al cuerpo de bomberos. Se calcula sobre el ICA causado en el municipio.',
-                siempreAplica: true,
-                condicion: (filtros) => {
-                    return true; // Aplica para todas las empresas que pagan ICA en Bucaramanga (Partmo).
-                },
-                porcentaje: '10%',
-                detallePorcentaje: 'Sobre el valor del ICA (ej. si ICA es $1.000.000, la sobretasa es $100.000). No es una retención, la declara y paga Partmo.'
-            },
-            aportes_parafiscales: {
-                id: 'parafiscales',
-                nombre: 'Aportes Parafiscales (SENA, ICBF, CCF)',
-                categoria: 'Especial Nacional',
-                badge: 'badge-especial',
-                clase: 'categoria-especial',
-                base: 'Nómina de la empresa (pago de nómina)',
-                descripcion: 'No aplica directamente en la factura al comprador, pero es un costo importante para Partmo. Afecta la estructura de costos.',
-                siempreAplica: true,
-                condicion: (filtros) => {
-                    return true;
-                },
-                porcentaje: '9%',
-                detallePorcentaje: 'Aportes: 2% SENA, 3% ICBF, 4% Caja de Compensación (sobre nómina).'
-            }
-        };
+  // Ordenar: primero los que aplican, luego los que no (para mejor visualización)
+  filtrados.sort((a, b) => (a.aplicaFiltro === b.aplicaFiltro) ? 0 : a.aplicaFiltro ? -1 : 1);
 
-        // ============================================================
-        //  LÓGICA DE FILTRADO Y RENDERIZADO
-        // ============================================================
-        function obtenerFiltros() {
-            return {
-                regimen: document.getElementById('regimen').value,
-                gran_contribuyente: document.getElementById('gran_contribuyente').value,
-                autorretenedor: document.getElementById('autorretenedor_iva').value,
-                agente: document.getElementById('agente_retencion').value,
-                operacion: document.getElementById('tipo_operacion').value
-            };
-        }
+  pintarTabla(filtrados);
+}
 
-        function actualizarResumen(filtros) {
-            const mapRegimen = { ordinario: 'Ordinario (Jurídica)', simple: 'Régimen Simple', persona_natural: 'Persona Natural' };
-            const mapSiNo = { si: 'Sí', no: 'No' };
-            const mapOperacion = {
-                bienes: 'Compra de Bienes',
-                servicios: 'Servicios',
-                honorarios: 'Honorarios',
-                arrendamiento: 'Arrendamiento',
-                financiero: 'Operaciones Financieras'
-            };
-
-            document.getElementById('resRegimen').textContent = mapRegimen[filtros.regimen] || 'Ordinario';
-            document.getElementById('resGran').textContent = mapSiNo[filtros.gran_contribuyente] || 'No';
-            document.getElementById('resAutor').textContent = mapSiNo[filtros.autorretenedor] || 'No';
-            document.getElementById('resAgente').textContent = mapSiNo[filtros.agente] || 'No';
-            document.getElementById('resOperacion').textContent = mapOperacion[filtros.operacion] || 'Compra de Bienes';
-        }
-
-        function renderizarTabla() {
-            const filtros = obtenerFiltros();
-            actualizarResumen(filtros);
-
-            // Filtrar impuestos
-            const resultados = [];
-            for (const key in impuestosDB) {
-                const imp = impuestosDB[key];
-                try {
-                    if (imp.condicion(filtros)) {
-                        resultados.push(imp);
-                    }
-                } catch (e) {
-                    console.warn('Error en condición de', imp.nombre, e);
-                }
-            }
-
-            const container = document.getElementById('tablaResultados');
-
-            if (resultados.length === 0) {
-                container.innerHTML = `<div class="no-data">⚠️ No hay impuestos aplicables con las condiciones seleccionadas. Revisa los filtros.</div>`;
-                return;
-            }
-
-            let html = `
-                <table>
-                    <thead>
-                        <tr>
-                            <th>🏷️ Impuesto / Retención</th>
-                            <th>📐 Base de Cálculo</th>
-                            <th>📊 Tarifa / Porcentaje</th>
-                            <th>📖 Descripción y Condiciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
-            resultados.forEach(imp => {
-                let porcentajeMostrar = imp.porcentaje;
-                let detalleMostrar = imp.detallePorcentaje || '';
-
-                // Si tiene porcentaje especial por Gran Contribuyente
-                if (imp.porcentajeEspecial) {
-                    porcentajeMostrar = imp.porcentajeEspecial(filtros);
-                }
-                if (imp.detalleEspecial) {
-                    detalleMostrar = imp.detalleEspecial(filtros);
-                }
-
-                // Si es ReteIVA y no autorretenedor, mostramos condicional
-                if (imp.id === 'reteiva' && filtros.autorretenedor === 'no') {
-                    // No debería llegar aquí porque la condición lo filtra, pero por seguridad
-                }
-
-                html += `
-                    <tr class="${imp.clase || ''}">
-                        <td>
-                            <strong>${imp.nombre}</strong><br>
-                            <span class="badge-tax ${imp.badge || 'badge-nacional'}">${imp.categoria || 'General'}</span>
-                        </td>
-                        <td class="base-calculo">
-                            ${imp.base}
-                            <span class="detalle">Aplica sobre el valor antes de impuestos, salvo indicación.</span>
-                        </td>
-                        <td>
-                            <span class="porcentaje">${porcentajeMostrar}</span>
-                            <span class="detalle">${detalleMostrar}</span>
-                        </td>
-                        <td style="font-size:0.9rem; color:#333;">
-                            ${imp.descripcion}
-                            <br><small style="color:#888;">${imp.siempreAplica ? '✅ Aplica siempre' : '🔁 Aplica condicionado a los filtros'}</small>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            html += `</tbody></table>`;
-            html += `<p style="margin-top:16px; font-size:0.85rem; color:#888; background:#f8f9fc; padding:10px; border-radius:8px;">
-                📌 <strong>Nota:</strong> Estas tarifas aplican para el año 2026 según el Decreto 572 de 2025 y la normativa vigente en Bucaramanga.
-                El <strong>IVA</strong> siempre lo factura Partmo. Las <strong>retenciones</strong> las practica el comprador si cumple las condiciones.
-            </p>`;
-
-            container.innerHTML = html;
-        }
-
-        // ============================================================
-        //  EVENTOS Y CARGA INICIAL
-        // ============================================================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Asignar eventos a todos los selects
-            const selects = document.querySelectorAll('.filter-group select');
-            selects.forEach(select => {
-                select.addEventListener('change', renderizarTabla);
-            });
-
-            // Renderizar con valores iniciales
-            renderizarTabla();
-        });
-    </script>
+// ============================================================
+// 4. INICIALIZAR AL CARGAR LA PÁGINA
+// ============================================================
+window.onload = function() {
+  filtrarTabla();
+};
+</script>
 
 </body>
 </html>
