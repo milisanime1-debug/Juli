@@ -189,6 +189,22 @@
       padding-top: 20px;
     }
 
+    .seccion-tabla {
+      margin-top: 40px;
+      border-top: 3px solid #1a3c6e;
+      padding-top: 30px;
+    }
+    .seccion-tabla h2 {
+      color: #1a3c6e;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .seccion-tabla .descripcion {
+      color: #555;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
     @media (max-width: 768px) {
       .container { padding: 20px; }
       h1 { font-size: 1.4rem; }
@@ -216,13 +232,12 @@
       <select id="tipoTransaccion">
         <option value="todos">Todos</option>
         <option value="compra">Compra de insumos/materia prima</option>
-        <option value="venta">Venta de filtros (mercado nacional)</option>
-        <option value="exportacion">Exportación</option>
+        <option value="venta">Venta de filtros</option>
         <option value="servicio">Servicios (consultoría, mantenimiento)</option>
         <option value="nomina">Nómina</option>
-        <option value="activo-fijo">Compra de activos fijos (maquinaria)</option>
+        <option value="activo-fijo">Compra de activos fijos</option>
         <option value="arriendo">Arrendamiento</option>
-        <option value="banco">Movimientos bancarios</option>
+        <option value="gasto">Gastos operativos (energía, vehículos, etc.)</option>
       </select>
     </div>
     <div class="grupo">
@@ -233,7 +248,6 @@
         <option value="persona-natural">Persona Natural</option>
         <option value="gran-contribuyente">Gran Contribuyente</option>
         <option value="entidad-publica">Entidad Pública</option>
-        <option value="no-residente">No Residente</option>
       </select>
     </div>
     <div class="grupo">
@@ -282,656 +296,609 @@
     <ul id="listaImpuestosAplican"></ul>
   </div>
 
-  <!-- ===== TABLA ===== -->
-  <div class="tabla-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th style="min-width:170px;">Impuesto / Retención</th>
-          <th style="min-width:80px;">Categoría</th>
-          <th style="min-width:90px;">¿Qué es?</th>
-          <th style="min-width:90px;">¿Para qué sirve?</th>
-          <th style="min-width:90px;">¿Quién lo paga?</th>
-          <th style="min-width:90px;">¿Quién lo recauda?</th>
-          <th style="min-width:110px;">¿A quién se aplica?</th>
-          <th style="min-width:120px;">¿Cuándo aplica?</th>
-          <th style="min-width:100px;">Base mínima</th>
-          <th style="min-width:110px;">Base gravable</th>
-          <th style="min-width:80px;">Tarifa</th>
-          <th style="min-width:120px;">Cómo se calcula</th>
-          <th style="min-width:100px;">Quién declara</th>
-          <th style="min-width:90px;">Periodicidad</th>
-          <th style="min-width:100px;">Norma</th>
-          <th style="min-width:160px;">Ejemplo práctico (Partmo)</th>
-          <!-- Atributos para filtros -->
-          <th style="display:none;">transaccion</th>
-          <th style="display:none;">cliente</th>
-          <th style="display:none;">tipo_empresa</th>
-          <th style="display:none;">regimen</th>
-          <th style="display:none;">rete</th>
-          <th style="display:none;">iva</th>
-        </tr>
-      </thead>
-      <tbody id="cuerpoTabla">
+  <!-- ============================================================ -->
+  <!-- SECCIÓN 1: RETENCIONES QUE PARTOMO PRACTICA A PROVEEDORES  -->
+  <!-- ============================================================ -->
+  <div class="seccion-tabla">
+    <h2>🔁 Retenciones que Partmo practica a proveedores</h2>
+    <div class="descripcion">
+      <strong>Importante:</strong> Estos impuestos <strong>se descuentan</strong> del valor a pagar al proveedor. 
+      Partmo los consigna a la DIAN o al municipio. <strong>NO son gastos de Partmo</strong>, son anticipos del impuesto del proveedor.
+    </div>
 
-        <!-- ========================================================== -->
-        <!-- 1. RENTA - Persona Jurídica (Partmo como contribuyente) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-tipo_empresa="todos" data-regimen="ordinario" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto nacional">Nacional</span> <strong>Renta (Personas Jurídicas)</strong></td>
-          <td>Nacional</td>
-          <td>Impuesto sobre utilidades de la empresa.</td>
-          <td>Financiar el Estado.</td>
-          <td><strong>Partmo S.A.S.</strong></td>
-          <td>DIAN</td>
-          <td>Personas jurídicas (SAS, LTDA, SA, etc.)</td>
-          <td>Cuando hay utilidad fiscal (> $0).</td>
-          <td>$0</td>
-          <td>Utilidad fiscal (ingresos - costos - deducciones)</td>
-          <td><span class="porcentaje-destacado">35%</span></td>
-          <td>Utilidad × 35%</td>
-          <td>Partmo</td>
-          <td>Anual</td>
-          <td>ET Art. 240</td>
-          <td>Utilidad $200M → $70M de impuesto</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">ordinario</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+    <div class="tabla-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th style="min-width:180px;">Impuesto / Retención</th>
+            <th style="min-width:80px;">Categoría</th>
+            <th style="min-width:100px;">¿Qué es?</th>
+            <th style="min-width:90px;">¿Quién lo paga?</th>
+            <th style="min-width:110px;">¿A quién se aplica?</th>
+            <th style="min-width:120px;">¿Cuándo aplica?</th>
+            <th style="min-width:110px;">Base mínima</th>
+            <th style="min-width:120px;">Base gravable</th>
+            <th style="min-width:90px;">Tarifa</th>
+            <th style="min-width:120px;">Cómo se calcula</th>
+            <th style="min-width:100px;">Quién declara</th>
+            <th style="min-width:90px;">Periodicidad</th>
+            <th style="min-width:100px;">Norma</th>
+            <th style="min-width:180px;">Ejemplo práctico (Partmo)</th>
+            <th style="display:none;">transaccion</th>
+            <th style="display:none;">cliente</th>
+            <th style="display:none;">tipo_empresa</th>
+            <th style="display:none;">regimen</th>
+            <th style="display:none;">rete</th>
+            <th style="display:none;">iva</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoTablaRetenciones">
+          <!-- ========================================================== -->
+          <!-- RETENCIÓN COMPRAS 2.5% -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="compra,activo-fijo" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
+            <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Compras (2.5%)</strong></td>
+            <td>Retención</td>
+            <td>Retención de renta en compras <strong>que Partmo practica</strong>.</td>
+            <td>El proveedor (se descuenta de su pago)</td>
+            <td>Proveedores persona jurídica o gran contribuyente.</td>
+            <td>Compras de materia prima, insumos, activos fijos.</td>
+            <td>$0</td>
+            <td>Valor de la compra (sin IVA)</td>
+            <td><span class="porcentaje-destacado">2.5%</span></td>
+            <td>Valor compra × 2.5%</td>
+            <td><strong>Partmo</strong> (agente retenedor)</td>
+            <td>Mensual</td>
+            <td>ET Art. 368</td>
+            <td>Compra $20M → Partmo retiene $500.000</td>
+            <td style="display:none;">compra,activo-fijo</td>
+            <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+            <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
+            <td style="display:none;">ordinario</td>
+            <td style="display:none;">si</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 2. IVA 19% - Venta de filtros (Partmo lo cobra) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="venta" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="responsable">
-          <td><span class="badge-impuesto nacional">Nacional</span> <strong>IVA (19%)</strong></td>
-          <td>Nacional</td>
-          <td>Impuesto sobre ventas de filtros.</td>
-          <td>Gravar consumo final.</td>
-          <td>Cliente (comprador)</td>
-          <td>DIAN</td>
-          <td>Clientes responsables de IVA.</td>
-          <td>Ventas de filtros en el mercado nacional.</td>
-          <td>$0</td>
-          <td>Valor de la venta (sin IVA)</td>
-          <td><span class="porcentaje-destacado">19%</span></td>
-          <td>Valor venta × 19%</td>
-          <td><strong>Partmo lo declara</strong></td>
-          <td>Bimestral</td>
-          <td>ET Art. 420</td>
-          <td>Venta $50M → IVA $9.5M (Partmo lo cobra y declara)</td>
-          <td style="display:none;">venta</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">responsable</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- RETEIVA 15% -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="compra,activo-fijo" data-cliente="persona-juridica,gran-contribuyente" data-tipo_empresa="sas,ltda,sociedad-anonima" data-regimen="ordinario" data-rete="si" data-iva="responsable">
+            <td><span class="badge-impuesto retencion">Retención</span> <strong>RETEIVA (15%)</strong></td>
+            <td>Retención</td>
+            <td>Retención del IVA en compras <strong>que Partmo practica</strong>.</td>
+            <td>El proveedor (se descuenta de su pago)</td>
+            <td>Proveedores responsables de IVA.</td>
+            <td>Compras a proveedores que cobran IVA.</td>
+            <td>$0</td>
+            <td>Valor del IVA facturado (19% de la venta)</td>
+            <td><span class="porcentaje-destacado">15%</span> sobre el IVA</td>
+            <td>IVA facturado × 15%</td>
+            <td><strong>Partmo</strong> (agente retenedor)</td>
+            <td>Mensual</td>
+            <td>ET Art. 437-2</td>
+            <td>Compra $20M (IVA $3.8M) → Partmo retiene $570.000</td>
+            <td style="display:none;">compra,activo-fijo</td>
+            <td style="display:none;">persona-juridica,gran-contribuyente</td>
+            <td style="display:none;">sas,ltda,sociedad-anonima</td>
+            <td style="display:none;">ordinario</td>
+            <td style="display:none;">si</td>
+            <td style="display:none;">responsable</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 3. IVA DESCONTABLE - Compra de materia prima (Partmo lo descuenta) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="compra" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="responsable">
-          <td><span class="badge-impuesto nacional">Nacional</span> <strong>IVA Descontable (19%)</strong></td>
-          <td>Nacional</td>
-          <td>IVA pagado en compras que <strong>Partmo puede descontar</strong>.</td>
-          <td>Reducir el IVA a pagar en ventas.</td>
-          <td><strong>Partmo</strong> (como comprador)</td>
-          <td>DIAN</td>
-          <td>Partmo como responsable de IVA.</td>
-          <td>Compras de materia prima, insumos, activos fijos.</td>
-          <td>$0</td>
-          <td>Valor de la compra (IVA incluido)</td>
-          <td><span class="porcentaje-destacado">19%</span></td>
-          <td>IVA pagado = valor compra × 19% (se resta del IVA generado en ventas)</td>
-          <td><strong>Partmo lo declara</strong></td>
-          <td>Bimestral</td>
-          <td>ET Art. 485</td>
-          <td>Compra $20M → IVA $3.8M (Partmo lo descuenta)</td>
-          <td style="display:none;">compra</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">responsable</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- RETEICA -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="compra,servicio,activo-fijo" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
+            <td><span class="badge-impuesto retencion">Retención</span> <strong>RETEICA (1% - 2%)</strong></td>
+            <td>Retención</td>
+            <td>Retención del ICA <strong>que Partmo practica</strong>.</td>
+            <td>El proveedor (se descuenta de su pago)</td>
+            <td>Proveedores y contratistas en Bucaramanga.</td>
+            <td>Pagos a proveedores por compras o servicios.</td>
+            <td>$0</td>
+            <td>Valor del pago (sin IVA).</td>
+            <td><span class="porcentaje-destacado">1%</span> (industrial) / <span class="porcentaje-destacado">1.5%</span> (servicios)</td>
+            <td>Valor pago × tarifa según actividad del proveedor</td>
+            <td><strong>Partmo</strong> (agente retenedor)</td>
+            <td>Mensual</td>
+            <td>Acuerdo Municipal de Bucaramanga</td>
+            <td>Pago $20M (industrial) → Partmo retiene $200.000</td>
+            <td style="display:none;">compra,servicio,activo-fijo</td>
+            <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+            <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
+            <td style="display:none;">ordinario</td>
+            <td style="display:none;">si</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 4. RETENCIÓN COMPRAS 2.5% (Partmo retiene a proveedores PJ) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="compra,activo-fijo" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
-          <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Compras (2.5%)</strong></td>
-          <td>Retención</td>
-          <td>Retención de renta en compras <strong>que Partmo practica</strong>.</td>
-          <td>Anticipar el impuesto de renta del proveedor.</td>
-          <td>Proveedor</td>
-          <td>DIAN</td>
-          <td>Proveedores persona jurídica (SAS, LTDA, SA) o gran contribuyente.</td>
-          <td>Compras de materia prima, insumos, activos fijos.</td>
-          <td>$0</td>
-          <td>Valor de la compra (sin IVA)</td>
-          <td><span class="porcentaje-destacado">2.5%</span></td>
-          <td>Valor compra × 2.5%</td>
-          <td><strong>Partmo (agente retenedor)</strong></td>
-          <td>Mensual</td>
-          <td>ET Art. 368</td>
-          <td>Compra $20M → Partmo retiene $500.000</td>
-          <td style="display:none;">compra,activo-fijo</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
-          <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
-          <td style="display:none;">ordinario</td>
-          <td style="display:none;">si</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- RETENCIÓN HONORARIOS 11% -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="servicio" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
+            <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Honorarios (11%)</strong></td>
+            <td>Retención</td>
+            <td>Retención sobre servicios profesionales <strong>que Partmo practica</strong>.</td>
+            <td>El proveedor del servicio (se descuenta de su pago)</td>
+            <td>Contratistas persona jurídica (SAS, LTDA, SA).</td>
+            <td>Pagos por servicios de consultoría, asesoría, auditoría, legales, etc.</td>
+            <td>$0</td>
+            <td>Valor del servicio (sin IVA)</td>
+            <td><span class="porcentaje-destacado">11%</span></td>
+            <td>Valor servicio × 11%</td>
+            <td><strong>Partmo</strong> (agente retenedor)</td>
+            <td>Mensual</td>
+            <td>ET Art. 391</td>
+            <td>Consultoría $10M → Partmo retiene $1.1M</td>
+            <td style="display:none;">servicio</td>
+            <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+            <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
+            <td style="display:none;">ordinario</td>
+            <td style="display:none;">si</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 5. RETEIVA 15% (Partmo retiene a proveedores responsables de IVA) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="compra,activo-fijo" data-cliente="persona-juridica,gran-contribuyente" data-tipo_empresa="sas,ltda,sociedad-anonima" data-regimen="ordinario" data-rete="si" data-iva="responsable">
-          <td><span class="badge-impuesto retencion">Retención</span> <strong>RETEIVA (15%)</strong></td>
-          <td>Retención</td>
-          <td>Retención del IVA en compras <strong>que Partmo practica</strong>.</td>
-          <td>Anticipar el IVA del proveedor.</td>
-          <td>Proveedor</td>
-          <td>DIAN</td>
-          <td>Proveedores responsables de IVA.</td>
-          <td>Compras a proveedores que cobran IVA.</td>
-          <td>$0</td>
-          <td>Valor del IVA facturado (19% de la venta)</td>
-          <td><span class="porcentaje-destacado">15%</span> sobre el IVA</td>
-          <td>IVA facturado × 15%</td>
-          <td><strong>Partmo (agente retenedor)</strong></td>
-          <td>Mensual</td>
-          <td>ET Art. 437-2</td>
-          <td>Compra $20M (IVA $3.8M) → Partmo retiene $570.000</td>
-          <td style="display:none;">compra,activo-fijo</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente</td>
-          <td style="display:none;">sas,ltda,sociedad-anonima</td>
-          <td style="display:none;">ordinario</td>
-          <td style="display:none;">si</td>
-          <td style="display:none;">responsable</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- RETENCIÓN CONSULTORÍA 3.5% -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="servicio" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
+            <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Consultoría (3.5%)</strong></td>
+            <td>Retención</td>
+            <td>Retención sobre servicios de consultoría y software <strong>que Partmo practica</strong>.</td>
+            <td>El proveedor del servicio (se descuenta de su pago)</td>
+            <td>Proveedores de consultoría, software, asesorías técnicas.</td>
+            <td>Pagos por servicios de consultoría, software, sistemas.</td>
+            <td>$0</td>
+            <td>Valor del servicio (sin IVA)</td>
+            <td><span class="porcentaje-destacado">3.5%</span></td>
+            <td>Valor servicio × 3.5%</td>
+            <td><strong>Partmo</strong> (agente retenedor)</td>
+            <td>Mensual</td>
+            <td>ET Art. 393</td>
+            <td>Software $15M → Partmo retiene $525.000</td>
+            <td style="display:none;">servicio</td>
+            <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+            <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
+            <td style="display:none;">ordinario</td>
+            <td style="display:none;">si</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 6. RETENCIÓN HONORARIOS 11% (Partmo retiene a contratistas PJ) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="servicio" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
-          <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Honorarios (11%)</strong></td>
-          <td>Retención</td>
-          <td>Retención sobre servicios profesionales <strong>que Partmo practica</strong>.</td>
-          <td>Anticipar el impuesto de renta.</td>
-          <td>Proveedor del servicio</td>
-          <td>DIAN</td>
-          <td>Contratistas persona jurídica (SAS, LTDA, SA).</td>
-          <td>Pagos por servicios de consultoría, asesoría, auditoría, legales, etc.</td>
-          <td>$0</td>
-          <td>Valor del servicio (sin IVA)</td>
-          <td><span class="porcentaje-destacado">11%</span></td>
-          <td>Valor servicio × 11%</td>
-          <td><strong>Partmo (agente retenedor)</strong></td>
-          <td>Mensual</td>
-          <td>ET Art. 391</td>
-          <td>Consultoría $10M → Partmo retiene $1.1M</td>
-          <td style="display:none;">servicio</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
-          <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
-          <td style="display:none;">ordinario</td>
-          <td style="display:none;">si</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- RETENCIÓN ARRENDAMIENTOS -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="arriendo" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
+            <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Arrendamientos (3.5% - 10%)</strong></td>
+            <td>Retención</td>
+            <td>Retención sobre arrendamiento de inmuebles <strong>que Partmo practica</strong>.</td>
+            <td>El arrendador (se descuenta de su pago)</td>
+            <td>Arrendadores de inmuebles (personas jurídicas).</td>
+            <td>Pagos por arrendamiento de bodegas, oficinas, plantas.</td>
+            <td>$0</td>
+            <td>Valor del arrendamiento (sin IVA)</td>
+            <td><span class="porcentaje-destacado">3.5%</span> o <span class="porcentaje-destacado">10%</span></td>
+            <td>Si arriendo ≤ 1.000 UVT → 3.5% // > 1.000 UVT → 10%</td>
+            <td><strong>Partmo</strong> (agente retenedor)</td>
+            <td>Mensual</td>
+            <td>ET Art. 382</td>
+            <td>Arriendo $15M → 3.5% → Partmo retiene $525.000</td>
+            <td style="display:none;">arriendo</td>
+            <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
+            <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
+            <td style="display:none;">ordinario</td>
+            <td style="display:none;">si</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 7. RETENCIÓN CONSULTORÍA 3.5% (Partmo retiene a contratistas PJ) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="servicio" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
-          <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Consultoría (3.5%)</strong></td>
-          <td>Retención</td>
-          <td>Retención sobre servicios de consultoría y software <strong>que Partmo practica</strong>.</td>
-          <td>Anticipar el impuesto de renta.</td>
-          <td>Proveedor del servicio</td>
-          <td>DIAN</td>
-          <td>Proveedores de consultoría, software, asesorías técnicas.</td>
-          <td>Pagos por servicios de consultoría, software, sistemas.</td>
-          <td>$0</td>
-          <td>Valor del servicio (sin IVA)</td>
-          <td><span class="porcentaje-destacado">3.5%</span></td>
-          <td>Valor servicio × 3.5%</td>
-          <td><strong>Partmo (agente retenedor)</strong></td>
-          <td>Mensual</td>
-          <td>ET Art. 393</td>
-          <td>Software $15M → Partmo retiene $525.000</td>
-          <td style="display:none;">servicio</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
-          <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
-          <td style="display:none;">ordinario</td>
-          <td style="display:none;">si</td>
-          <td style="display:none;">todos</td>
-        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-        <!-- ========================================================== -->
-        <!-- 8. RETENCIÓN ARRENDAMIENTOS (Partmo retiene a arrendadores PJ) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="arriendo" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
-          <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Arrendamientos (3.5% - 10%)</strong></td>
-          <td>Retención</td>
-          <td>Retención sobre arrendamiento de inmuebles <strong>que Partmo practica</strong>.</td>
-          <td>Anticipar el impuesto de renta.</td>
-          <td>Arrendador</td>
-          <td>DIAN</td>
-          <td>Arrendadores de inmuebles (personas jurídicas).</td>
-          <td>Pagos por arrendamiento de bodegas, oficinas, plantas.</td>
-          <td>$0</td>
-          <td>Valor del arrendamiento (sin IVA)</td>
-          <td><span class="porcentaje-destacado">3.5%</span> o <span class="porcentaje-destacado">10%</span></td>
-          <td>Si arriendo ≤ 1.000 UVT → 3.5% // > 1.000 UVT → 10%</td>
-          <td><strong>Partmo (agente retenedor)</strong></td>
-          <td>Mensual</td>
-          <td>ET Art. 382</td>
-          <td>Arriendo $15M → 3.5% → Partmo retiene $525.000</td>
-          <td style="display:none;">arriendo</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
-          <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
-          <td style="display:none;">ordinario</td>
-          <td style="display:none;">si</td>
-          <td style="display:none;">todos</td>
-        </tr>
+  <!-- ============================================================ -->
+  <!-- SECCIÓN 2: IMPUESTOS QUE PARTOMO PAGA (NO descuenta a proveedores) -->
+  <!-- ============================================================ -->
+  <div class="seccion-tabla">
+    <h2>🏢 Impuestos que Partmo paga (NO aplican en compras)</h2>
+    <div class="descripcion">
+      <strong>Importante:</strong> Estos impuestos <strong>NO se descuentan</strong> de los pagos a proveedores. 
+      Son obligaciones directas de Partmo como empresa. Aparecen en gastos operativos o en la declaración anual.
+    </div>
 
-        <!-- ========================================================== -->
-        <!-- 9. RETENCIÓN NÓMINA (Partmo retiene a sus empleados) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="nomina" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Nómina (19% - 39%)</strong></td>
-          <td>Retención</td>
-          <td>Retención en la fuente sobre ingresos laborales <strong>que Partmo practica</strong>.</td>
-          <td>Anticipar el impuesto de renta de los empleados.</td>
-          <td>Empleado</td>
-          <td>DIAN</td>
-          <td>Empleados de Partmo con ingresos > 95 UVT mensuales.</td>
-          <td>Pagos de nómina a empleados.</td>
-          <td>95 UVT (~$4.97M mensuales)</td>
-          <td>Ingreso laboral (sueldo, bonificaciones, comisiones)</td>
-          <td><span class="porcentaje-destacado">0% a 39%</span> (progresivo)</td>
-          <td>Tabla según ingresos: 0% (0-95 UVT), 19%, 28%, 33%, 35%, 37%, 39%</td>
-          <td><strong>Partmo (agente retenedor)</strong></td>
-          <td>Mensual</td>
-          <td>ET Art. 383</td>
-          <td>Sueldo $8M → Partmo retiene $1.52M</td>
-          <td style="display:none;">nomina</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+    <div class="tabla-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th style="min-width:180px;">Impuesto</th>
+            <th style="min-width:80px;">Categoría</th>
+            <th style="min-width:100px;">¿Qué es?</th>
+            <th style="min-width:90px;">¿Quién lo paga?</th>
+            <th style="min-width:110px;">¿Cuándo aplica?</th>
+            <th style="min-width:120px;">Base gravable</th>
+            <th style="min-width:90px;">Tarifa</th>
+            <th style="min-width:120px;">Cómo se calcula</th>
+            <th style="min-width:100px;">Quién declara</th>
+            <th style="min-width:90px;">Periodicidad</th>
+            <th style="min-width:180px;">Ejemplo práctico (Partmo)</th>
+            <th style="display:none;">transaccion</th>
+            <th style="display:none;">cliente</th>
+            <th style="display:none;">tipo_empresa</th>
+            <th style="display:none;">regimen</th>
+            <th style="display:none;">rete</th>
+            <th style="display:none;">iva</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoTablaPropios">
+          <!-- ========================================================== -->
+          <!-- RENTA -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="todos" data-cliente="todos" data-tipo_empresa="todos" data-regimen="ordinario" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto nacional">Nacional</span> <strong>Renta (35%)</strong></td>
+            <td>Nacional</td>
+            <td>Impuesto sobre utilidades de la empresa.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Cuando hay utilidad fiscal (> $0).</td>
+            <td>Utilidad fiscal (ingresos - costos - deducciones)</td>
+            <td><span class="porcentaje-destacado">35%</span></td>
+            <td>Utilidad × 35%</td>
+            <td><strong>Partmo</strong></td>
+            <td>Anual</td>
+            <td>Utilidad $200M → Partmo paga $70M</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">ordinario</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 10. APORTES PARAFISCALES (Partmo los paga como empleador) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="nomina" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto nacional">Nacional</span> <strong>Aportes Parafiscales (SENA, ICBF, CC)</strong></td>
-          <td>Nacional</td>
-          <td>Aportes para SENA, ICBF y Caja de Compensación <strong>que Partmo paga</strong>.</td>
-          <td>Financiar educación, bienestar social.</td>
-          <td><strong>Partmo</strong> (empleador)</td>
-          <td>DIAN / UGPP</td>
-          <td>Empleados de Partmo.</td>
-          <td>Pagos de nómina.</td>
-          <td>$0</td>
-          <td>Valor de la nómina (base)</td>
-          <td><span class="porcentaje-destacado">9%</span> (SENA 2%, ICBF 3%, CC 4%)</td>
-          <td>Nómina × 9%</td>
-          <td><strong>Partmo</strong> (declara y paga)</td>
-          <td>Mensual</td>
-          <td>Ley 21 de 1982, Ley 50 de 1990</td>
-                    <td>Nómina $50M → Partmo paga $4.5M</td>
-          <td style="display:none;">nomina</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- IVA 19% - VENTAS (Partmo lo cobra y declara) -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="venta" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="responsable">
+            <td><span class="badge-impuesto nacional">Nacional</span> <strong>IVA (19%)</strong></td>
+            <td>Nacional</td>
+            <td>Impuesto sobre ventas <strong>que Partmo cobra y declara</strong>.</td>
+            <td>El cliente (Partmo lo recauda)</td>
+            <td>Ventas de filtros en el mercado nacional.</td>
+            <td>Valor de la venta (sin IVA)</td>
+            <td><span class="porcentaje-destacado">19%</span></td>
+            <td>Valor venta × 19%</td>
+            <td><strong>Partmo</strong></td>
+            <td>Bimestral</td>
+            <td>Venta $50M → Partmo cobra $9.5M y lo declara</td>
+            <td style="display:none;">venta</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">responsable</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 11. SEGURIDAD SOCIAL (Partmo paga la parte del empleador) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="nomina" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto nacional">Nacional</span> <strong>Seguridad Social (Salud, Pensión, ARL)</strong></td>
-          <td>Nacional</td>
-          <td>Aportes para salud, pensión y riesgos laborales <strong>que Partmo paga</strong>.</td>
-          <td>Financiar sistema de seguridad social.</td>
-          <td><strong>Partmo</strong> y empleado (carga compartida)</td>
-          <td>EPS, AFP, ARL</td>
-          <td>Empleados de Partmo.</td>
-          <td>Pagos de nómina.</td>
-          <td>$0</td>
-          <td>Valor de la nómina (base)</td>
-          <td><span class="porcentaje-destacado">12%</span> (Salud 4%, Pensión 4%, ARL 0.5%-6%)</td>
-          <td>Nómina × tarifa según cada aporte</td>
-          <td><strong>Partmo</strong> (paga directamente)</td>
-          <td>Mensual</td>
-          <td>Ley 100 de 1993</td>
-          <td>Nómina $50M → Partmo paga ~$6M</td>
-          <td style="display:none;">nomina</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- IVA DESCONTABLE - COMPRAS (Partmo lo descuenta) -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="compra,activo-fijo" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="responsable">
+            <td><span class="badge-impuesto nacional">Nacional</span> <strong>IVA Descontable (19%)</strong></td>
+            <td>Nacional</td>
+            <td>IVA pagado en compras <strong>que Partmo descuenta</strong>.</td>
+            <td><strong>Partmo</strong> (paga al proveedor, pero lo descuenta)</td>
+            <td>Compras de materia prima, insumos, activos fijos.</td>
+            <td>Valor de la compra (IVA incluido)</td>
+            <td><span class="porcentaje-destacado">19%</span></td>
+            <td>IVA pagado = valor compra × 19% (se resta del IVA generado en ventas)</td>
+            <td><strong>Partmo</strong></td>
+            <td>Bimestral</td>
+            <td>Compra $20M → IVA $3.8M (Partmo lo descuenta)</td>
+            <td style="display:none;">compra,activo-fijo</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">responsable</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 12. ICA (Partmo lo paga al municipio de Bucaramanga) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="venta" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto territorial">Territorial</span> <strong>ICA (Industria) - 2.5‰</strong></td>
-          <td>Municipal</td>
-          <td>Impuesto sobre la actividad industrial <strong>que Partmo paga</strong>.</td>
-          <td>Financiar el municipio de Bucaramanga.</td>
-          <td><strong>Partmo</strong></td>
-          <td>Municipio de Bucaramanga</td>
-          <td>Partmo (actividad industrial - CIIU 2819)</td>
-          <td>Ingresos brutos por ventas de filtros.</td>
-          <td>$0</td>
-          <td>Ingresos brutos (ventas)</td>
-          <td><span class="porcentaje-destacado">2.5‰ (0.25%)</span></td>
-          <td>Ingresos brutos × 2.5‰</td>
-          <td><strong>Partmo</strong></td>
-          <td>Mensual o Bimestral</td>
-          <td>Acuerdo Municipal de Bucaramanga</td>
-          <td>Ventas $500M → Partmo paga $1.25M</td>
-          <td style="display:none;">venta</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- ICA -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="venta" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+                        <td><span class="badge-impuesto territorial">Territorial</span> <strong>ICA (Industria) - 2.5‰</strong></td>
+            <td>Municipal</td>
+            <td>Impuesto sobre la actividad industrial <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Ingresos brutos por ventas de filtros.</td>
+            <td>Ingresos brutos (ventas)</td>
+            <td><span class="porcentaje-destacado">2.5‰ (0.25%)</span></td>
+            <td>Ingresos brutos × 2.5‰</td>
+            <td><strong>Partmo</strong></td>
+            <td>Mensual o Bimestral</td>
+            <td>Ventas $500M → Partmo paga $1.25M</td>
+            <td style="display:none;">venta</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 13. RETEICA (Partmo retiene a proveedores y contratistas) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="compra,servicio,activo-fijo" data-cliente="persona-juridica,gran-contribuyente,entidad-publica" data-tipo_empresa="sas,ltda,sociedad-anonima,entidad-publica" data-regimen="ordinario" data-rete="si" data-iva="todos">
-          <td><span class="badge-impuesto retencion">Retención</span> <strong>RETEICA (1% - 2%)</strong></td>
-          <td>Municipal</td>
-          <td>Retención del ICA <strong>que Partmo practica</strong> sobre pagos a contratistas y proveedores.</td>
-          <td>Anticipar el pago del ICA al municipio.</td>
-          <td>El contratista o proveedor (quien recibe el pago).</td>
-          <td>Municipio de Bucaramanga</td>
-          <td><strong>Partmo</strong> (agente retenedor)</td>
-          <td>Pagos a contratistas y proveedores por servicios o compras.</td>
-          <td>$0</td>
-          <td>Valor del pago (sin IVA).</td>
-          <td><span class="porcentaje-destacado">1%</span> (industrial) / <span class="porcentaje-destacado">1.5%</span> (servicios)</td>
-          <td>Valor pago × tarifa según actividad del proveedor</td>
-          <td><strong>Partmo</strong> (declara y paga)</td>
-          <td>Mensual</td>
-          <td>Acuerdo Municipal de Bucaramanga</td>
-          <td>Pago a proveedor industrial $20M → Partmo retiene $200.000</td>
-          <td style="display:none;">compra,servicio,activo-fijo</td>
-          <td style="display:none;">persona-juridica,gran-contribuyente,entidad-publica</td>
-          <td style="display:none;">sas,ltda,sociedad-anonima,entidad-publica</td>
-          <td style="display:none;">ordinario</td>
-          <td style="display:none;">si</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- IMPUESTO AL PATRIMONIO -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="todos" data-cliente="todos" data-tipo_empresa="todos" data-regimen="ordinario" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto nacional">Nacional</span> <strong>Impuesto al Patrimonio</strong></td>
+            <td>Nacional</td>
+            <td>Impuesto sobre el patrimonio neto <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Cuando el patrimonio supera 40.000 UVT (~$2.095M).</td>
+            <td>Patrimonio líquido total de Partmo.</td>
+            <td><span class="porcentaje-destacado">0.5% a 5%</span> (progresivo)</td>
+            <td>Tabla de tarifas según el patrimonio.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Anual</td>
+            <td>Patrimonio $5.000M → tarifa 1% → Partmo paga $50M</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">ordinario</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 14. GMF (4×1000) - Partmo lo paga en cada transacción bancaria -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="banco" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto nacional">Nacional</span> <strong>GMF (4×1000)</strong></td>
-          <td>Nacional</td>
-          <td>Gravamen a los Movimientos Financieros <strong>que Partmo paga</strong>.</td>
-          <td>Gravar las transacciones bancarias.</td>
-          <td><strong>Partmo</strong> (quien realiza el movimiento)</td>
-          <td>DIAN</td>
-          <td>Partmo y todos los que hagan movimientos bancarios.</td>
-          <td>Retiros en efectivo, transferencias, cheques, etc.</td>
-          <td>No aplica (se cobra sobre el monto de la transacción)</td>
-          <td>Valor de la transacción.</td>
-          <td><span class="porcentaje-destacado">0.4%</span> (4×1000)</td>
-          <td>Valor transacción × 0.4%</td>
-          <td>El banco lo retiene (no lo declara Partmo)</td>
-          <td>En cada transacción</td>
-          <td>ET Arts. 871-879</td>
-          <td>Transferencia $50M → Partmo paga $200.000</td>
-          <td style="display:none;">banco</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- IMPUESTO DE TIMBRE NACIONAL -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="compra,activo-fijo" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto nacional">Nacional</span> <strong>Impuesto de Timbre Nacional</strong></td>
+            <td>Nacional</td>
+            <td>Impuesto sobre documentos y contratos de alto valor <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Cuando el valor del documento o contrato supera 74.000 UVT (~$3.875M).</td>
+            <td>Valor del documento o contrato.</td>
+            <td><span class="porcentaje-destacado">1.5%</span></td>
+            <td>Valor documento × 1.5%</td>
+            <td><strong>Partmo</strong></td>
+            <td>Por cada documento</td>
+            <td>Contrato de compra de maquinaria $100M → Partmo paga $1.5M</td>
+            <td style="display:none;">compra,activo-fijo</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 15. IMPUESTO AL PATRIMONIO (Partmo lo paga si aplica) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-tipo_empresa="todos" data-regimen="ordinario" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto nacional">Nacional</span> <strong>Impuesto al Patrimonio</strong></td>
-          <td>Nacional</td>
-          <td>Impuesto sobre el patrimonio neto de la empresa <strong>que Partmo paga</strong>.</td>
-          <td>Gravar la riqueza acumulada.</td>
-          <td><strong>Partmo</strong></td>
-          <td>DIAN</td>
-          <td>Empresas con patrimonio > 40.000 UVT (~$2.095M).</td>
-          <td>Cuando el patrimonio supera el límite.</td>
-          <td>40.000 UVT (~$2.095M)</td>
-          <td>Patrimonio líquido total de Partmo.</td>
-          <td><span class="porcentaje-destacado">0.5% a 5%</span> (progresivo)</td>
-          <td>Tabla de tarifas según el patrimonio (0.5%, 1%, 2%, 3%, 5%).</td>
-          <td><strong>Partmo</strong></td>
-          <td>Anual</td>
-          <td>ET Arts. 295-303</td>
-          <td>Patrimonio $5.000M → tarifa 1% → Partmo paga $50M</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">ordinario</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- RETENCIÓN NÓMINA -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="nomina" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto retencion">Retención</span> <strong>Retención Nómina (19% - 39%)</strong></td>
+            <td>Retención</td>
+            <td>Retención en la fuente sobre ingresos laborales <strong>que Partmo practica</strong>.</td>
+            <td>El empleado (se descuenta de su salario)</td>
+            <td>Empleados de Partmo con ingresos > 95 UVT mensuales.</td>
+            <td>Ingreso laboral (sueldo, bonificaciones, comisiones)</td>
+            <td><span class="porcentaje-destacado">0% a 39%</span> (progresivo)</td>
+            <td>Tabla según ingresos: 0% (0-95 UVT), 19%, 28%, 33%, 35%, 37%, 39%</td>
+            <td><strong>Partmo</strong> (agente retenedor)</td>
+            <td>Mensual</td>
+            <td>Sueldo $8M → Partmo retiene $1.52M</td>
+            <td style="display:none;">nomina</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 16. IMPUESTO DE TIMBRE NACIONAL (Partmo lo paga en contratos > 74.000 UVT) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="compra,activo-fijo" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto nacional">Nacional</span> <strong>Impuesto de Timbre Nacional</strong></td>
-          <td>Nacional</td>
-          <td>Impuesto sobre documentos y contratos de alto valor <strong>que Partmo paga</strong>.</td>
-          <td>Gravar actos jurídicos y documentos.</td>
-          <td><strong>Partmo</strong> (quien suscribe el documento)</td>
-          <td>DIAN</td>
-          <td>Contratos y documentos con valor > 74.000 UVT (~$3.875M).</td>
-          <td>Cuando el valor del documento o contrato supera el límite.</td>
-          <td>74.000 UVT (~$3.875M)</td>
-          <td>Valor del documento o contrato.</td>
-          <td><span class="porcentaje-destacado">1.5%</span></td>
-          <td>Valor documento × 1.5%</td>
-          <td><strong>Partmo</strong> o agente retenedor</td>
-          <td>Por cada documento</td>
-          <td>ET Arts. 519 a 535</td>
-          <td>Contrato de compra de maquinaria $100M → Partmo paga $1.5M</td>
-          <td style="display:none;">compra,activo-fijo</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- APORTES PARAFISCALES -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="nomina" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto nacional">Nacional</span> <strong>Aportes Parafiscales (SENA, ICBF, CC)</strong></td>
+            <td>Nacional</td>
+            <td>Aportes para SENA, ICBF y Caja de Compensación <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong> (empleador)</td>
+            <td>Pagos de nómina.</td>
+            <td>Valor de la nómina (base)</td>
+            <td><span class="porcentaje-destacado">9%</span> (SENA 2%, ICBF 3%, CC 4%)</td>
+            <td>Nómina × 9%</td>
+            <td><strong>Partmo</strong></td>
+            <td>Mensual</td>
+            <td>Nómina $50M → Partmo paga $4.5M</td>
+            <td style="display:none;">nomina</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 17. IMPUESTO PREDIAL (si Partmo tiene propiedades en Bucaramanga) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto Predial</strong></td>
-          <td>Municipal</td>
-          <td>Impuesto sobre la propiedad inmobiliaria <strong>que Partmo paga</strong>.</td>
-          <td>Financiar el municipio de Bucaramanga.</td>
-          <td><strong>Partmo</strong> (propietario del inmueble)</td>
-          <td>Municipio de Bucaramanga</td>
-          <td>Partmo si tiene propiedades en Bucaramanga.</td>
-          <td>Cuando se tiene propiedad inmobiliaria en el municipio.</td>
-          <td>Según el municipio</td>
-          <td>Valor catastral del inmueble.</td>
-          <td><span class="porcentaje-destacado">0.5% a 3%</span> según uso</td>
-          <td>Valor catastral × tarifa</td>
-          <td><strong>Partmo</strong></td>
-          <td>Anual</td>
-          <td>Ley 44 de 1990</td>
-          <td>Inmueble $500M → 1% → Partmo paga $5M</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- SEGURIDAD SOCIAL -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="nomina" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto nacional">Nacional</span> <strong>Seguridad Social (Salud, Pensión, ARL)</strong></td>
+            <td>Nacional</td>
+            <td>Aportes para salud, pensión y riesgos laborales <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong> y empleado (carga compartida)</td>
+            <td>Pagos de nómina.</td>
+            <td>Valor de la nómina (base)</td>
+            <td><span class="porcentaje-destacado">12%</span> (Salud 4%, Pensión 4%, ARL 0.5%-6%)</td>
+            <td>Nómina × tarifa según cada aporte</td>
+            <td><strong>Partmo</strong></td>
+            <td>Mensual</td>
+            <td>Nómina $50M → Partmo paga ~$6M</td>
+            <td style="display:none;">nomina</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 18. IMPUESTO DE VEHÍCULOS (si Partmo tiene flota) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto de Vehículos</strong></td>
-          <td>Departamental</td>
-          <td>Impuesto sobre la propiedad de vehículos automotores <strong>que Partmo paga</strong>.</td>
-          <td>Financiar el departamento de Santander.</td>
-          <td><strong>Partmo</strong> (propietario del vehículo)</td>
-          <td>Departamento de Santander</td>
-          <td>Partmo si tiene vehículos matriculados en Santander.</td>
-          <td>Cuando se tiene vehículo matriculado en Santander.</td>
-          <td>No aplica</td>
-          <td>Valor comercial del vehículo.</td>
-          <td><span class="porcentaje-destacado">1.5%</span> general</td>
-          <td>Valor comercial × 1.5%</td>
-          <td><strong>Partmo</strong></td>
-          <td>Anual</td>
-          <td>Ley 488 de 1998</td>
-          <td>Vehículo $80M → 1.5% → Partmo paga $1.2M</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- GMF (4×1000) -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="gasto" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto nacional">Nacional</span> <strong>GMF (4×1000)</strong></td>
+            <td>Nacional</td>
+            <td>Gravamen a los Movimientos Financieros <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Retiros en efectivo, transferencias, cheques, etc.</td>
+            <td>Valor de la transacción.</td>
+            <td><span class="porcentaje-destacado">0.4%</span> (4×1000)</td>
+            <td>Valor transacción × 0.4%</td>
+            <td>El banco lo retiene (no lo declara Partmo)</td>
+            <td>En cada transacción</td>
+            <td>Transferencia $50M → Partmo paga $200.000</td>
+            <td style="display:none;">gasto</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 19. IMPUESTO DE ALUMBRADO PÚBLICO (Partmo lo paga en factura de energía) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto de Alumbrado Público</strong></td>
-          <td>Municipal</td>
-          <td>Impuesto sobre el servicio de alumbrado público en Bucaramanga <strong>que Partmo paga</strong>.</td>
-          <td>Financiar el alumbrado público en el municipio.</td>
-          <td><strong>Partmo</strong> (usuario del servicio)</td>
-          <td>Municipio de Bucaramanga</td>
-          <td>Partmo como usuario del servicio de energía eléctrica.</td>
-          <td>En la factura de energía eléctrica.</td>
-          <td>No aplica</td>
-          <td>Valor del consumo de energía.</td>
-          <td><span class="porcentaje-destacado">6%</span> (aprox.)</td>
-          <td>Valor consumo × 6%</td>
-          <td>La empresa de energía (lo cobra en la factura)</td>
-          <td>Mensual</td>
-          <td>Acuerdo Municipal</td>
-          <td>Factura energía $500.000 → Partmo paga $30.000</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- IMPUESTO PREDIAL -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="gasto" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto Predial</strong></td>
+            <td>Municipal</td>
+            <td>Impuesto sobre la propiedad inmobiliaria <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Si Partmo tiene propiedades en Bucaramanga.</td>
+            <td>Valor catastral del inmueble.</td>
+            <td><span class="porcentaje-destacado">0.5% a 3%</span> según uso</td>
+            <td>Valor catastral × tarifa</td>
+            <td><strong>Partmo</strong></td>
+            <td>Anual</td>
+            <td>Inmueble $500M → 1% → Partmo paga $5M</td>
+            <td style="display:none;">gasto</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 20. SOBRETASA BOMBERIL (Partmo la paga por actividad industrial) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto territorial">Territorial</span> <strong>Sobretasa Bomberil</strong></td>
-          <td>Municipal</td>
-          <td>Sobretasa para financiar el cuerpo de bomberos de Bucaramanga <strong>que Partmo paga</strong>.</td>
-          <td>Financiar los bomberos.</td>
-          <td><strong>Partmo</strong> (establecimiento industrial)</td>
-          <td>Municipio de Bucaramanga</td>
-          <td>Empresas y establecimientos comerciales e industriales.</td>
-          <td>Cuando se ejerce actividad industrial/comercial.</td>
-          <td>Según el municipio</td>
-          <td>Ingresos brutos (o valor del establecimiento)</td>
-          <td><span class="porcentaje-destacado">0.5‰ a 1‰</span></td>
-          <td>Ingresos brutos × tarifa</td>
-          <td><strong>Partmo</strong></td>
-          <td>Anual</td>
-          <td>Acuerdo Municipal</td>
-          <td>Ingresos $500M → 0.5‰ → Partmo paga $250.000</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- IMPUESTO DE VEHÍCULOS -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="gasto" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto de Vehículos</strong></td>
+            <td>Departamental</td>
+            <td>Impuesto sobre la propiedad de vehículos automotores <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Si Partmo tiene vehículos matriculados en Santander.</td>
+            <td>Valor comercial del vehículo.</td>
+            <td><span class="porcentaje-destacado">1.5%</span> general</td>
+            <td>Valor comercial × 1.5%</td>
+            <td><strong>Partmo</strong></td>
+            <td>Anual</td>
+            <td>Vehículo $80M → 1.5% → Partmo paga $1.2M</td>
+            <td style="display:none;">gasto</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 21. IMPUESTO DE AVISOS Y TABLEROS (si Partmo tiene avisos) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="todos" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
-          <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto de Avisos y Tableros</strong></td>
-          <td>Municipal</td>
-          <td>Impuesto sobre avisos y carteles publicitarios en Bucaramanga <strong>que Partmo paga</strong>.</td>
-          <td>Gravar la publicidad exterior.</td>
-          <td><strong>Partmo</strong> (empresa con avisos)</td>
-          <td>Municipio de Bucaramanga</td>
-          <td>Partmo si tiene avisos o tableros en el municipio.</td>
-          <td>Cuando se instalan avisos o tableros en el municipio.</td>
-          <td>Según el municipio</td>
-          <td>Valor del aviso o tablero.</td>
-          <td><span class="porcentaje-destacado">1% a 3%</span></td>
-          <td>Valor aviso × tarifa</td>
-          <td><strong>Partmo</strong></td>
-          <td>Anual</td>
-          <td>Acuerdo Municipal</td>
-          <td>Aviso $5M → 2% → Partmo paga $100.000</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- IMPUESTO DE ALUMBRADO PÚBLICO -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="gasto" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto de Alumbrado Público</strong></td>
+            <td>Municipal</td>
+            <td>Impuesto sobre el servicio de alumbrado público <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong></td>
+            <td>En la factura de energía eléctrica.</td>
+            <td>Valor del consumo de energía.</td>
+            <td><span class="porcentaje-destacado">6%</span> (aprox.)</td>
+            <td>Valor consumo × 6%</td>
+            <td>La empresa de energía (lo cobra en la factura)</td>
+            <td>Mensual</td>
+            <td>Factura energía $500.000 → Partmo paga $30.000</td>
+            <td style="display:none;">gasto</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-        <!-- ========================================================== -->
-        <!-- 22. AUTORRETENCIÓN (si Partmo es autorretenedor - opcional) -->
-        <!-- ========================================================== -->
-        <tr data-transaccion="venta" data-cliente="todos" data-tipo_empresa="todos" data-regimen="ordinario" data-rete="si" data-iva="todos">
-          <td><span class="badge-impuesto retencion">Retención</span> <strong>Autorretención en Renta</strong></td>
-          <td>Retención</td>
-          <td>Retención que <strong>Partmo se aplica a sí mismo</strong> sobre sus propios ingresos.</td>
-          <td>Anticipar el pago del impuesto de renta.</td>
-          <td><strong>Partmo</strong> (quien se autorretiene)</td>
-          <td>DIAN</td>
-          <td>Partmo si está autorizado como autorretenedor.</td>
-          <td>Cuando Partmo está autorizado como autorretenedor.</td>
-          <td>$0</td>
-          <td>Valor de la factura o ingreso.</td>
-          <td><span class="porcentaje-destacado">1% a 3%</span> según actividad</td>
-          <td>Valor ingreso × tarifa (según actividad).</td>
-          <td><strong>Partmo</strong> (declara y paga)</td>
-          <td>Mensual</td>
-          <td>ET Arts. 401 a 409</td>
-          <td>Ingreso $50M → 2.5% → Partmo autorretiene $1.25M</td>
-          <td style="display:none;">venta</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">todos</td>
-          <td style="display:none;">ordinario</td>
-          <td style="display:none;">si</td>
-          <td style="display:none;">todos</td>
-        </tr>
+          <!-- ========================================================== -->
+          <!-- SOBRETASA BOMBERIL -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="gasto" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto territorial">Territorial</span> <strong>Sobretasa Bomberil</strong></td>
+            <td>Municipal</td>
+            <td>Sobretasa para financiar el cuerpo de bomberos <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Por ejercer actividad industrial en Bucaramanga.</td>
+            <td>Ingresos brutos (o valor del establecimiento)</td>
+            <td><span class="porcentaje-destacado">0.5‰ a 1‰</span></td>
+            <td>Ingresos brutos × tarifa</td>
+            <td><strong>Partmo</strong></td>
+            <td>Anual</td>
+            <td>Ingresos $500M → 0.5‰ → Partmo paga $250.000</td>
+            <td style="display:none;">gasto</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
 
-      </tbody>
-    </table>
+          <!-- ========================================================== -->
+          <!-- IMPUESTO DE AVISOS Y TABLEROS -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="gasto" data-cliente="todos" data-tipo_empresa="todos" data-regimen="todos" data-rete="todos" data-iva="todos">
+            <td><span class="badge-impuesto territorial">Territorial</span> <strong>Impuesto de Avisos y Tableros</strong></td>
+            <td>Municipal</td>
+            <td>Impuesto sobre avisos y carteles publicitarios <strong>que Partmo paga</strong>.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Si Partmo tiene avisos o tableros en Bucaramanga.</td>
+            <td>Valor del aviso o tablero.</td>
+            <td><span class="porcentaje-destacado">1% a 3%</span></td>
+            <td>Valor aviso × tarifa</td>
+            <td><strong>Partmo</strong></td>
+            <td>Anual</td>
+            <td>Aviso $5M → 2% → Partmo paga $100.000</td>
+            <td style="display:none;">gasto</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+          </tr>
+
+          <!-- ========================================================== -->
+          <!-- AUTORRETENCIÓN (opcional) -->
+          <!-- ========================================================== -->
+          <tr data-transaccion="venta" data-cliente="todos" data-tipo_empresa="todos" data-regimen="ordinario" data-rete="si" data-iva="todos">
+            <td><span class="badge-impuesto retencion">Retención</span> <strong>Autorretención en Renta</strong></td>
+            <td>Retención</td>
+            <td>Retención que <strong>Partmo se aplica a sí mismo</strong> sobre sus propios ingresos.</td>
+            <td><strong>Partmo</strong></td>
+            <td>Si Partmo está autorizado como autorretenedor.</td>
+            <td>Valor de la factura o ingreso.</td>
+            <td><span class="porcentaje-destacado">1% a 3%</span> según actividad</td>
+            <td>Valor ingreso × tarifa (según actividad).</td>
+            <td><strong>Partmo</strong></td>
+            <td>Mensual</td>
+            <td>Ingreso $50M → 2.5% → Partmo autorretiene $1.25M</td>
+            <td style="display:none;">venta</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">todos</td>
+            <td style="display:none;">ordinario</td>
+            <td style="display:none;">si</td>
+            <td style="display:none;">todos</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- ===== FOOTER ===== -->
@@ -957,7 +924,12 @@
   const selectRegimen = document.getElementById('regimen');
   const selectRete = document.getElementById('reteFuente');
   const selectIva = document.getElementById('responsabilidadIVA');
-  const filas = document.querySelectorAll('#cuerpoTabla tr');
+  
+  // Unir todas las filas de ambas tablas
+  const filasRetenciones = document.querySelectorAll('#cuerpoTablaRetenciones tr');
+  const filasPropios = document.querySelectorAll('#cuerpoTablaPropios tr');
+  const todasLasFilas = [...filasRetenciones, ...filasPropios];
+  
   const resultadoDiv = document.getElementById('resultadoFiltro');
   const listaImpuestos = document.getElementById('listaImpuestosAplican');
 
@@ -972,7 +944,7 @@
 
     let impuestosAplican = [];
 
-    filas.forEach(fila => {
+    todasLasFilas.forEach(fila => {
       const transaccionData = fila.getAttribute('data-transaccion') || 'todos';
       const clienteData = fila.getAttribute('data-cliente') || 'todos';
       const tipoEmpresaData = fila.getAttribute('data-tipo_empresa') || 'todos';
